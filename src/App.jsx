@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 
 const TELEGRAM_LINK = "https://t.me/Date020888_bot"
+const APP_LINK = "https://telegram-dating-app-three.vercel.app"
 
 const translations = {
   ru: {
@@ -27,10 +28,14 @@ const translations = {
     allDistances: "Любая",
     emptyTitle: "Анкеты не найдены",
     emptyText: "Попробуй изменить локацию или выбрать большую дальность.",
-    cityLabel: "Город",
     miles: "миль",
-    age: "лет",
-    language: "Язык"
+    language: "Язык",
+    browserTitle: "Вход через Google в Telegram может не работать",
+    browserText:
+      "Google часто блокирует вход во встроенном окне Telegram. Для авторизации через Google лучше открыть сайт во внешнем браузере.",
+    openBrowser: "Открыть в браузере",
+    continueWithoutGoogle: "Продолжить без Google",
+    cityDistance: "Локация"
   },
   en: {
     brand: "Telegram Dating",
@@ -56,10 +61,14 @@ const translations = {
     allDistances: "Any",
     emptyTitle: "No profiles found",
     emptyText: "Try changing the location or selecting a larger distance.",
-    cityLabel: "City",
     miles: "miles",
-    age: "years old",
-    language: "Language"
+    language: "Language",
+    browserTitle: "Google sign-in may not work inside Telegram",
+    browserText:
+      "Google often blocks sign-in inside Telegram's built-in browser. For Google login, open the site in an external browser.",
+    openBrowser: "Open in Browser",
+    continueWithoutGoogle: "Continue without Google",
+    cityDistance: "Location"
   }
 }
 
@@ -358,6 +367,88 @@ export default function App() {
             <p style={{ marginBottom: 0, lineHeight: "1.5", color: "#555" }}>
               {t.step3Text}
             </p>
+          </div>
+        </section>
+
+        <section
+          style={{
+            marginTop: "34px",
+            maxWidth: "980px",
+            marginLeft: "auto",
+            marginRight: "auto"
+          }}
+        >
+          <div
+            style={{
+              background: "linear-gradient(135deg, #111827, #1f2937)",
+              color: "#fff",
+              borderRadius: "24px",
+              padding: "22px",
+              boxShadow: "0 18px 40px rgba(0,0,0,0.16)"
+            }}
+          >
+            <h3
+              style={{
+                marginTop: 0,
+                marginBottom: "10px",
+                fontSize: "28px",
+                fontWeight: "800"
+              }}
+            >
+              {t.browserTitle}
+            </h3>
+
+            <p
+              style={{
+                margin: "0 0 18px",
+                color: "rgba(255,255,255,0.85)",
+                fontSize: "17px",
+                lineHeight: "1.5"
+              }}
+            >
+              {t.browserText}
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+                flexWrap: "wrap"
+              }}
+            >
+              <a
+                href={APP_LINK}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  background: "#fff",
+                  color: "#111",
+                  textDecoration: "none",
+                  padding: "14px 18px",
+                  borderRadius: "14px",
+                  fontWeight: "800"
+                }}
+              >
+                {t.openBrowser}
+              </a>
+
+              <a
+                href={TELEGRAM_LINK}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  background: "rgba(255,255,255,0.12)",
+                  color: "#fff",
+                  textDecoration: "none",
+                  padding: "14px 18px",
+                  borderRadius: "14px",
+                  fontWeight: "800",
+                  border: "1px solid rgba(255,255,255,0.15)"
+                }}
+              >
+                {t.continueWithoutGoogle}
+              </a>
+            </div>
           </div>
         </section>
 
@@ -725,26 +816,51 @@ export default function App() {
                       </button>
                     </div>
 
-                    <a
-                      href={TELEGRAM_LINK}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        display: "block",
-                        width: "100%",
-                        boxSizing: "border-box",
-                        textAlign: "center",
-                        background: "#111",
-                        color: "#fff",
-                        textDecoration: "none",
-                        padding: "16px",
-                        borderRadius: "16px",
-                        fontSize: "17px",
-                        fontWeight: "800"
-                      }}
-                    >
-                      {t.openTelegram}
-                    </a>
+                    <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                      <a
+                        href={TELEGRAM_LINK}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          display: "block",
+                          flex: 1,
+                          minWidth: "180px",
+                          boxSizing: "border-box",
+                          textAlign: "center",
+                          background: "#111",
+                          color: "#fff",
+                          textDecoration: "none",
+                          padding: "16px",
+                          borderRadius: "16px",
+                          fontSize: "17px",
+                          fontWeight: "800"
+                        }}
+                      >
+                        {t.openTelegram}
+                      </a>
+
+                      <a
+                        href={APP_LINK}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          display: "block",
+                          flex: 1,
+                          minWidth: "180px",
+                          boxSizing: "border-box",
+                          textAlign: "center",
+                          background: "#eef0f4",
+                          color: "#111",
+                          textDecoration: "none",
+                          padding: "16px",
+                          borderRadius: "16px",
+                          fontSize: "17px",
+                          fontWeight: "800"
+                        }}
+                      >
+                        {t.openBrowser}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
