@@ -6,28 +6,28 @@ id:1,
 name:"Anna",
 age:26,
 city:"Los Angeles",
-photo:"https://thispersondoesnotexist.com"
+photo:"https://randomuser.me/api/portraits/women/44.jpg"
 },
 {
 id:2,
 name:"Sofia",
 age:24,
 city:"Santa Monica",
-photo:"https://thispersondoesnotexist.com"
+photo:"https://randomuser.me/api/portraits/women/65.jpg"
 },
 {
 id:3,
 name:"Emma",
 age:27,
 city:"Burbank",
-photo:"https://thispersondoesnotexist.com"
+photo:"https://randomuser.me/api/portraits/women/68.jpg"
 },
 {
 id:4,
 name:"Luna",
 age:25,
 city:"West Hollywood",
-photo:"https://thispersondoesnotexist.com"
+photo:"https://randomuser.me/api/portraits/women/33.jpg"
 }
 ]
 
