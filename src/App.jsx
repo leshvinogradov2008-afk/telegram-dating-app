@@ -2,7 +2,7 @@ export default function App() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', background: '#fff7fb', minHeight: '100vh', color: '#222' }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 40px', background: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-        <h1 style={{ margin: 0, color: '#e91e63' }}>LoveLink</h1>
+        <h1 style={{ margin: 0, color: '#e91e63' }}>Telegram Dating</h1>
         <a
           href="https://t.me/Date020888_bot"
           style={{ background: '#e91e63', color: '#fff', padding: '10px 18px', borderRadius: '10px', textDecoration: 'none', fontWeight: 'bold' }}
@@ -14,11 +14,11 @@ export default function App() {
       <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '60px 20px' }}>
         <section style={{ textAlign: 'center', padding: '60px 20px' }}>
           <h2 style={{ fontSize: '48px', marginBottom: '20px' }}>
-            Знакомства через Telegram
+            Найди новые знакомства в Telegram
           </h2>
           <p style={{ fontSize: '20px', color: '#555', maxWidth: '700px', margin: '0 auto 30px' }}>
-            Простой и удобный сервис, где можно быстро начать общение,
-            перейти в Telegram и познакомиться с новыми людьми.
+            Удобная площадка для знакомств, общения и новых встреч. 
+Переходи в Telegram и начинай общение уже сейчас.
           </p>
           <a
             href="https://t.me/Date020888_bot"
