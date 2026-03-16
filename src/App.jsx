@@ -1,10 +1,34 @@
 import { useState } from "react"
 
 const profiles = [
-  { id: 1, name: "Anna", age: 26, city: "Los Angeles" },
-  { id: 2, name: "Sofia", age: 24, city: "Santa Monica" },
-  { id: 3, name: "Emma", age: 27, city: "Burbank" },
-  { id: 4, name: "Luna", age: 25, city: "West Hollywood" }
+{
+id:1,
+name:"Anna",
+age:26,
+city:"Los Angeles",
+photo:"https://thispersondoesnotexist.com"
+},
+{
+id:2,
+name:"Sofia",
+age:24,
+city:"Santa Monica",
+photo:"https://thispersondoesnotexist.com"
+},
+{
+id:3,
+name:"Emma",
+age:27,
+city:"Burbank",
+photo:"https://thispersondoesnotexist.com"
+},
+{
+id:4,
+name:"Luna",
+age:25,
+city:"West Hollywood",
+photo:"https://thispersondoesnotexist.com"
+}
 ]
 
 export default function App() {
@@ -139,19 +163,14 @@ export default function App() {
                 boxShadow: "0 10px 30px rgba(0,0,0,0.08)"
               }}
             >
-              <div
-                style={{
-                  height: "340px",
-                  background: "linear-gradient(135deg, #f8a5c2, #f78fb3)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "100px",
-                  color: "#fff"
-                }}
-              >
-                👩
-              </div>
+              <img
+src={currentProfile.photo}
+style={{
+width:"100%",
+height:"340px",
+objectFit:"cover"
+}}
+/>
 
               <div style={{ padding: "24px" }}>
                 <h4 style={{ margin: "0 0 10px", fontSize: "30px" }}>
