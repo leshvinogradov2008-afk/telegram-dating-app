@@ -3,35 +3,46 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 const translations = {
   ru: {
     brand: "Telegram Dating",
+
     navHome: "Главная",
-    navProfiles: "Анкеты",
-    navLikes: "Симпатии",
+    navSearch: "Поиск",
+    navLikes: "Игра симпатии",
+    navLikedYou: "Кому я понравился",
     navMessages: "Сообщения",
+    navGuests: "Гости",
     navProfile: "Профиль",
     navSettings: "Настройки",
+    navHelp: "Помощь",
 
     heroTitle: "Найди новые знакомства в Telegram",
     heroText:
-      "Смотри анкеты, свайпай, добавляй в избранное, используй поиск по странам и городам и общайся после взаимной симпатии.",
-    heroPrimary: "Смотреть анкеты",
+      "Смотри анкеты, используй поиск по странам и городам, добавляй людей в избранное и общайся после взаимной симпатии.",
+    heroPrimary: "Начать поиск",
     heroSecondary: "Открыть сообщения",
 
-    quick1: "Быстрый старт",
-    quick1Text: "Открываешь сайт и сразу смотришь анкеты.",
-    quick2: "Удобный поиск",
-    quick2Text: "Выбирай страны, города и дистанцию.",
-    quick3: "Общение после мэтча",
-    quick3Text: "После взаимной симпатии появляется чат.",
+    homeCard1: "Быстрый старт",
+    homeCard1Text: "Открывай приложение и сразу переходи к поиску и игре симпатии.",
+    homeCard2: "Удобные фильтры",
+    homeCard2Text: "Выбирай страну, город, единицы измерения и нужную дистанцию.",
+    homeCard3: "Общение после мэтча",
+    homeCard3Text: "После взаимной симпатии можно сразу начать диалог.",
 
-    profilesTitle: "Анкеты",
-    profilesText: "Свайпай, открывай профиль и добавляй в избранное.",
-    likesTitle: "Симпатии и избранное",
-    likesText: "Здесь отображаются мэтчи и люди, которых ты отметил звездой.",
+    searchTitle: "Поиск",
+    searchText: "Настрой фильтры и смотри подходящие анкеты.",
+    likesTitle: "Игра симпатии",
+    likesText: "Ставь лайки, добавляй в избранное и находи взаимные симпатии.",
+    likedYouTitle: "Кому я понравился",
+    likedYouText: "Здесь отображаются люди, которым понравилась твоя анкета.",
     messagesTitle: "Сообщения",
-    messagesText: "После взаимной симпатии здесь появляется чат.",
+    messagesText: "Общайся после взаимной симпатии.",
+    guestsTitle: "Гости",
+    guestsText: "Здесь видно, кто заходил в твой профиль.",
     profileTitle: "Профиль",
-    settingsTitle: "Настройки и поиск",
+    settingsTitle: "Настройки",
+    helpTitle: "Помощь",
+    helpText: "Ответы на частые вопросы и полезные подсказки.",
 
+    searchMode: "Режим поиска",
     nearby: "Люди рядом",
     allPeople: "Все",
     country: "Страна",
@@ -40,79 +51,109 @@ const translations = {
     unit: "Единицы",
     miles: "мили",
     km: "км",
-    reset: "Сбросить",
+    locationAll: "Все локации",
     apply: "Применить",
+    reset: "Сбросить",
+
     favorites: "Избранное",
     matches: "Взаимные симпатии",
-    openChat: "Открыть чат",
     like: "Нравится",
-    nope: "Пропустить",
-    superLike: "В избранное",
+    skip: "Пропустить",
+    addFavorite: "В избранное",
+    openChat: "Открыть чат",
     online: "Онлайн",
+    offline: "Не в сети",
     send: "Отправить",
     messagePlaceholder: "Напиши сообщение...",
     noMessages: "Пока нет сообщений.",
-    noFavorites: "Пока никто не добавлен в избранное.",
+    noFavorites: "Пока нет избранных.",
     noMatches: "Пока нет взаимных симпатий.",
-    locationAll: "Все локации",
-    addPhotoLater: "Можно добавить больше фото позже",
+    noLikedYou: "Пока никто не отметил твою анкету.",
+    noGuests: "Пока гостей нет.",
+    noProfiles: "Подходящие анкеты не найдены.",
+    noProfilesText: "Попробуй изменить фильтры поиска.",
+    emptyDeck: "Анкеты закончились",
+    emptyDeckText: "Измени поиск или начни просмотр заново.",
+    restartDeck: "Начать заново",
+
     profileAbout: "О себе",
-    ageLabel: "Возраст",
-    cityLabel: "Город",
-    countryLabel: "Страна",
-    searchMode: "Режим поиска",
-    appearance: "Вид приложения",
-    compactMode: "Компактный режим",
-    softMotion: "Эффекты движения",
-    darkCards: "Более контрастные карточки",
-    phoneHint: "Сайт адаптирован под телефон и компьютер",
+    myProfileAge: "37 лет",
+    editProfile: "Редактировать профиль",
+    saveProfile: "Сохранить профиль",
+    cancel: "Отмена",
+    addPhoto: "Добавить фото",
+    name: "Имя",
+    age: "Возраст",
+    bio: "Информация о себе",
+    zodiac: "Знак зодиака",
+    verified: "Верифицированная анкета",
+    verifiedSelfie: "Селфи подтверждено",
+    photos: "Фотографии",
+    mainPhoto: "Главное фото",
+    profileSaved: "Профиль сохранён",
+
+    wallet: "Кошелек",
+    dailyPrizes: "Ежедневные призы",
+    likedByMe: "Кому я понравился",
+    guestsMenu: "Гости",
+    helpMenu: "Помощь",
+    searchMenu: "Поиск",
+    gameMenu: "Игра симпатии",
+
     mutualTitle: "Взаимная симпатия!",
     mutualText: "Теперь вы можете начать общение.",
     startChat: "Начать чат",
-    continueSwipe: "Продолжить смотреть",
-    emptyDeck: "Анкеты закончились",
-    emptyDeckText: "Сбрось поиск или начни просмотр сначала.",
-    restartDeck: "Начать заново",
-    myProfileName: "Алекс",
-    myProfileBio:
-      "Люблю живое общение, красивые места, музыку и интересные знакомства.",
-    saveSettings: "Сохранить настройки",
-    settingsSaved: "Настройки сохранены",
-    onePhoto: "1 фото",
-    manyPhotos: "фото",
-    starred: "В избранном",
+    continueSwipe: "Продолжить",
+
+    help1: "Как работает поиск?",
+    help1Text: "Ты выбираешь страну, город и дистанцию, после чего видишь подходящие анкеты.",
+    help2: "Что такое взаимная симпатия?",
+    help2Text: "Если вы понравились друг другу, автоматически открывается возможность переписки.",
+    help3: "Можно ли редактировать профиль?",
+    help3Text: "Да, в разделе профиля можно изменить имя, возраст, описание, знак зодиака и фото.",
   },
   en: {
     brand: "Telegram Dating",
+
     navHome: "Home",
-    navProfiles: "Profiles",
-    navLikes: "Likes",
+    navSearch: "Search",
+    navLikes: "Match Game",
+    navLikedYou: "Liked You",
     navMessages: "Messages",
+    navGuests: "Guests",
     navProfile: "Profile",
     navSettings: "Settings",
+    navHelp: "Help",
 
     heroTitle: "Find new connections in Telegram",
     heroText:
-      "Browse profiles, swipe, add favorites, use country and city search, and chat after a mutual match.",
-    heroPrimary: "Browse profiles",
+      "Browse profiles, use country and city search, add favorites and chat after a mutual match.",
+    heroPrimary: "Start search",
     heroSecondary: "Open messages",
 
-    quick1: "Fast start",
-    quick1Text: "Open the site and instantly browse profiles.",
-    quick2: "Smart search",
-    quick2Text: "Choose countries, cities and distance.",
-    quick3: "Chat after match",
-    quick3Text: "A chat appears after mutual interest.",
+    homeCard1: "Quick start",
+    homeCard1Text: "Open the app and instantly jump into search and match game.",
+    homeCard2: "Convenient filters",
+    homeCard2Text: "Choose country, city, measurement units and distance.",
+    homeCard3: "Chat after match",
+    homeCard3Text: "After a mutual match you can start chatting right away.",
 
-    profilesTitle: "Profiles",
-    profilesText: "Swipe, open profiles and add favorites.",
-    likesTitle: "Likes and Favorites",
-    likesText: "This section shows matches and starred people.",
+    searchTitle: "Search",
+    searchText: "Set filters and browse matching profiles.",
+    likesTitle: "Match Game",
+    likesText: "Like profiles, add favorites and find mutual matches.",
+    likedYouTitle: "Liked You",
+    likedYouText: "People who liked your profile appear here.",
     messagesTitle: "Messages",
-    messagesText: "Your chat appears here after a mutual match.",
+    messagesText: "Chat after a mutual match.",
+    guestsTitle: "Guests",
+    guestsText: "See who visited your profile.",
     profileTitle: "Profile",
-    settingsTitle: "Settings and search",
+    settingsTitle: "Settings",
+    helpTitle: "Help",
+    helpText: "Answers to common questions and useful tips.",
 
+    searchMode: "Search mode",
     nearby: "Nearby",
     allPeople: "All",
     country: "Country",
@@ -121,51 +162,70 @@ const translations = {
     unit: "Units",
     miles: "miles",
     km: "km",
-    reset: "Reset",
+    locationAll: "All locations",
     apply: "Apply",
+    reset: "Reset",
+
     favorites: "Favorites",
     matches: "Matches",
-    openChat: "Open chat",
     like: "Like",
-    nope: "Skip",
-    superLike: "Favorite",
+    skip: "Skip",
+    addFavorite: "Favorite",
+    openChat: "Open chat",
     online: "Online",
+    offline: "Offline",
     send: "Send",
     messagePlaceholder: "Write a message...",
     noMessages: "No messages yet.",
     noFavorites: "No favorites yet.",
     noMatches: "No matches yet.",
-    locationAll: "All locations",
-    addPhotoLater: "More photos can be added later",
+    noLikedYou: "Nobody liked your profile yet.",
+    noGuests: "No guests yet.",
+    noProfiles: "No matching profiles found.",
+    noProfilesText: "Try changing your search filters.",
+    emptyDeck: "No more profiles",
+    emptyDeckText: "Change search filters or restart browsing.",
+    restartDeck: "Start again",
+
     profileAbout: "About",
-    ageLabel: "Age",
-    cityLabel: "City",
-    countryLabel: "Country",
-    searchMode: "Search mode",
-    appearance: "App appearance",
-    compactMode: "Compact mode",
-    softMotion: "Motion effects",
-    darkCards: "Higher contrast cards",
-    phoneHint: "Optimized for phone and desktop",
+    myProfileAge: "37 years old",
+    editProfile: "Edit profile",
+    saveProfile: "Save profile",
+    cancel: "Cancel",
+    addPhoto: "Add photo",
+    name: "Name",
+    age: "Age",
+    bio: "About yourself",
+    zodiac: "Zodiac sign",
+    verified: "Verified profile",
+    verifiedSelfie: "Selfie confirmed",
+    photos: "Photos",
+    mainPhoto: "Main photo",
+    profileSaved: "Profile saved",
+
+    wallet: "Wallet",
+    dailyPrizes: "Daily prizes",
+    likedByMe: "Liked You",
+    guestsMenu: "Guests",
+    helpMenu: "Help",
+    searchMenu: "Search",
+    gameMenu: "Match Game",
+
     mutualTitle: "It's a match!",
     mutualText: "Now you can start chatting.",
     startChat: "Start chat",
-    continueSwipe: "Keep browsing",
-    emptyDeck: "No more profiles",
-    emptyDeckText: "Reset search or start browsing again.",
-    restartDeck: "Start again",
-    myProfileName: "Alex",
-    myProfileBio:
-      "I like real conversations, beautiful places, music and interesting connections.",
-    saveSettings: "Save settings",
-    settingsSaved: "Settings saved",
-    onePhoto: "1 photo",
-    manyPhotos: "photos",
-    starred: "Starred",
+    continueSwipe: "Continue",
+
+    help1: "How does search work?",
+    help1Text: "Choose country, city and distance, then view matching profiles.",
+    help2: "What is a mutual match?",
+    help2Text: "If you like each other, messaging becomes available automatically.",
+    help3: "Can I edit my profile?",
+    help3Text: "Yes, in the profile section you can change your name, age, bio, zodiac and photos.",
   },
 };
 
-const profilesData = [
+const initialProfiles = [
   {
     id: 1,
     name: "Anna",
@@ -173,13 +233,16 @@ const profilesData = [
     gender: "female",
     city: "Los Angeles",
     country: "USA",
-    distanceMi: 12,
+    distanceMi: 4,
     online: true,
     bio: "Люблю красивые места, музыку и лёгкое общение.",
+    zodiac: "♎",
+    verified: true,
     avatar:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessages: [
       "Привет 😊 Рада взаимной симпатии.",
@@ -193,13 +256,16 @@ const profilesData = [
     gender: "female",
     city: "Miami",
     country: "USA",
-    distanceMi: 278,
+    distanceMi: 12,
     online: true,
     bio: "Люблю прогулки у океана, кофе и тёплые разговоры.",
+    zodiac: "♌",
+    verified: false,
     avatar:
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessages: ["Очень приятно 😊", "Ты больше любишь город или природу?"],
   },
@@ -210,13 +276,16 @@ const profilesData = [
     gender: "male",
     city: "New York",
     country: "USA",
-    distanceMi: 120,
+    distanceMi: 7,
     online: true,
     bio: "Ценю юмор, активную жизнь и настоящие эмоции.",
+    zodiac: "♐",
+    verified: true,
     avatar:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessages: ["Привет! Рад мэтчу.", "Чем любишь заниматься в свободное время?"],
   },
@@ -227,20 +296,23 @@ const profilesData = [
     gender: "male",
     city: "Chicago",
     country: "USA",
-    distanceMi: 320,
+    distanceMi: 18,
     online: false,
     bio: "Люблю путешествия, спорт и хорошие разговоры без лишнего шума.",
+    zodiac: "♒",
+    verified: false,
     avatar:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessages: ["Привет 👋", "Какой у тебя идеальный выходной?"],
   },
 ];
 
 const countriesMap = {
-  USA: ["Los Angeles", "Miami", "New York", "Chicago"],
+  USA: ["Los Angeles", "Miami", "New York", "Chicago", "San Diego", "San Francisco"],
   Canada: ["Toronto", "Vancouver", "Montreal"],
   UK: ["London", "Manchester", "Birmingham"],
   Germany: ["Berlin", "Munich", "Hamburg"],
@@ -257,34 +329,64 @@ const countriesMap = {
   Japan: ["Tokyo", "Osaka", "Kyoto"],
 };
 
+const zodiacOptions = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
+
+function VerificationBadge() {
+  return (
+    <span
+      title="Verified"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 22,
+        height: 22,
+        marginLeft: 8,
+        borderRadius: "50%",
+        background: "#3ea6ff",
+        color: "#fff",
+        fontSize: 13,
+        fontWeight: 900,
+        boxShadow: "0 6px 14px rgba(62,166,255,0.28)",
+        flexShrink: 0,
+      }}
+    >
+      ✓
+    </span>
+  );
+}
+
 function App() {
   const [lang, setLang] = useState("ru");
   const t = translations[lang];
 
   const [tab, setTab] = useState("home");
-  const [profiles, setProfiles] = useState(profilesData);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [profiles] = useState(initialProfiles);
+
   const [favorites, setFavorites] = useState([2]);
   const [likedIds, setLikedIds] = useState([1]);
   const [matches, setMatches] = useState([1]);
-  const [selectedChatId, setSelectedChatId] = useState(1);
-  const [showMatch, setShowMatch] = useState(false);
-  const [matchedProfile, setMatchedProfile] = useState(null);
-  const [savedLabel, setSavedLabel] = useState(false);
+  const [likedYouIds] = useState([2, 4]);
+  const [guestsIds] = useState([3, 1]);
 
   const [settings, setSettings] = useState({
-    searchMode: "all",
+    searchMode: "nearby",
     country: "All",
     city: "All",
-    maxDistance: 500,
+    maxDistance: 5,
     unit: "mi",
-    compactMode: false,
-    softMotion: true,
-    darkCards: false,
   });
 
-  const [chatDraft, setChatDraft] = useState("");
+  const [draftSettings, setDraftSettings] = useState({
+    searchMode: "nearby",
+    country: "All",
+    city: "All",
+    maxDistance: 5,
+    unit: "mi",
+  });
 
+  const [selectedChatId, setSelectedChatId] = useState(1);
+  const [chatDraft, setChatDraft] = useState("");
   const [messages, setMessages] = useState({
     1: [
       { from: "them", text: "Привет 😊 Рада взаимной симпатии." },
@@ -292,7 +394,38 @@ function App() {
     ],
   });
 
-  const currentProfile = profiles[currentIndex] || null;
+  const [swipedIds, setSwipedIds] = useState([]);
+  const [showMatch, setShowMatch] = useState(false);
+  const [matchedProfile, setMatchedProfile] = useState(null);
+  const [savedProfileLabel, setSavedProfileLabel] = useState(false);
+
+  const [myProfile, setMyProfile] = useState({
+    name: "Aleksei",
+    age: 37,
+    city: "Лос-Анджелес",
+    country: "США",
+    zodiac: "♌",
+    verified: true,
+    bio: "Люблю живое общение, красивые места, музыку и интересные знакомства.",
+    photos: [
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    ],
+  });
+
+  const [editProfile, setEditProfile] = useState(false);
+  const [profileDraft, setProfileDraft] = useState({
+    name: "Aleksei",
+    age: 37,
+    city: "Лос-Анджелес",
+    country: "США",
+    zodiac: "♌",
+    verified: true,
+    bio: "Люблю живое общение, красивые места, музыку и интересные знакомства.",
+    photos: [
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    ],
+  });
+
   const cardRef = useRef(null);
   const dragRef = useRef({
     active: false,
@@ -300,52 +433,46 @@ function App() {
     startY: 0,
     dx: 0,
     dy: 0,
-    moved: false,
   });
 
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
   const cityOptions = useMemo(() => {
-    if (settings.country === "All") return ["All"];
-    return ["All", ...(countriesMap[settings.country] || [])];
-  }, [settings.country]);
+    if (draftSettings.country === "All") return ["All"];
+    return ["All", ...(countriesMap[draftSettings.country] || [])];
+  }, [draftSettings.country]);
 
   const filteredProfiles = useMemo(() => {
-    return profiles.filter((p) => {
+    return profiles.filter((profile) => {
       const distanceValue =
-        settings.unit === "mi" ? p.distanceMi : Math.round(p.distanceMi * 1.60934);
+        settings.unit === "mi"
+          ? profile.distanceMi
+          : Math.round(profile.distanceMi * 1.60934);
 
       if (settings.searchMode === "nearby" && distanceValue > settings.maxDistance) {
         return false;
       }
 
-      if (settings.country !== "All" && p.country !== settings.country) return false;
-      if (settings.city !== "All" && p.city !== settings.city) return false;
+      if (settings.country !== "All" && profile.country !== settings.country) return false;
+      if (settings.city !== "All" && profile.city !== settings.city) return false;
 
       return true;
     });
   }, [profiles, settings]);
 
-  const visibleDeck = filteredProfiles.filter((p) => !likedIds.includes(p.id) || matches.includes(p.id));
-  const activeDeckProfile = visibleDeck[currentIndex] || null;
+  const deckProfiles = useMemo(() => {
+    return filteredProfiles.filter((profile) => !swipedIds.includes(profile.id));
+  }, [filteredProfiles, swipedIds]);
+
+  const activeDeckProfile = deckProfiles[0] || null;
+
+  const selectedChatProfile =
+    profiles.find((profile) => profile.id === selectedChatId) || null;
 
   useEffect(() => {
-    setCurrentIndex(0);
-  }, [settings.searchMode, settings.country, settings.city, settings.maxDistance, settings.unit]);
-
-  useEffect(() => {
-    if (selectedChatId && !matches.includes(selectedChatId)) {
-      const firstMatch = matches[0] || null;
-      setSelectedChatId(firstMatch);
+    if (matches.length && !matches.includes(selectedChatId)) {
+      setSelectedChatId(matches[0]);
     }
   }, [matches, selectedChatId]);
-
-  const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
-
-  const toggleFavorite = (id) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
-  };
 
   const ensureMessages = (profile) => {
     setMessages((prev) => {
@@ -357,11 +484,23 @@ function App() {
     });
   };
 
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const markSwiped = (id) => {
+    setSwipedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  };
+
   const handleLike = (profile) => {
     if (!profile) return;
-    setLikedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
 
-    const makeMatch = profile.id === 1 || profile.id === 3 || profile.id === 2;
+    setLikedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
+    markSwiped(profile.id);
+
+    const makeMatch = [1, 2, 3].includes(profile.id);
     if (makeMatch) {
       setMatches((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
       ensureMessages(profile);
@@ -369,51 +508,40 @@ function App() {
       setShowMatch(true);
       setSelectedChatId(profile.id);
     }
-    goNextCard();
   };
 
-  const handleSkip = () => {
-    goNextCard();
-  };
-
-  const goNextCard = () => {
-    setCurrentIndex((prev) => {
-      const next = prev + 1;
-      return next >= visibleDeck.length ? prev + 1 : next;
-    });
+  const handleSkip = (profile) => {
+    if (!profile) return;
+    markSwiped(profile.id);
   };
 
   const restartDeck = () => {
-    setCurrentIndex(0);
-    setLikedIds([]);
-  };
-
-  const sendMessage = () => {
-    if (!selectedChatId || !chatDraft.trim()) return;
-    setMessages((prev) => ({
-      ...prev,
-      [selectedChatId]: [...(prev[selectedChatId] || []), { from: "me", text: chatDraft.trim() }],
-    }));
-    setChatDraft("");
+    setSwipedIds([]);
   };
 
   const animateOut = (direction) => {
     const el = cardRef.current;
-    if (!el) return;
-    el.style.transition = "transform 0.35s ease, opacity 0.35s ease";
-    el.style.transform = `translateX(${direction === "right" ? 420 : -420}px) rotate(${
+    if (!el || !activeDeckProfile) return;
+
+    el.style.transition = "transform 0.34s ease, opacity 0.34s ease";
+    el.style.transform = `translateX(${direction === "right" ? 460 : -460}px) rotate(${
       direction === "right" ? 16 : -16
     }deg)`;
     el.style.opacity = "0";
+
     setTimeout(() => {
-      if (direction === "right" && activeDeckProfile) handleLike(activeDeckProfile);
-      if (direction === "left") handleSkip();
+      if (direction === "right") {
+        handleLike(activeDeckProfile);
+      } else {
+        handleSkip(activeDeckProfile);
+      }
+
       if (cardRef.current) {
         cardRef.current.style.transition = "none";
         cardRef.current.style.transform = "translateX(0px) translateY(0px) rotate(0deg)";
         cardRef.current.style.opacity = "1";
       }
-    }, 320);
+    }, 300);
   };
 
   const pointerDown = (clientX, clientY) => {
@@ -423,7 +551,6 @@ function App() {
       startY: clientY,
       dx: 0,
       dy: 0,
-      moved: false,
     };
     if (cardRef.current) {
       cardRef.current.style.transition = "none";
@@ -435,19 +562,14 @@ function App() {
 
     const dx = clientX - dragRef.current.startX;
     const dy = clientY - dragRef.current.startY;
-
     dragRef.current.dx = dx;
     dragRef.current.dy = dy;
 
-    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
-      dragRef.current.moved = true;
-    }
-
     if (Math.abs(dx) > Math.abs(dy)) {
       const rotate = dx / 18;
-      cardRef.current.style.transform = `translateX(${dx}px) translateY(${Math.min(
-        Math.max(dy, -20),
-        20
+      cardRef.current.style.transform = `translateX(${dx}px) translateY(${Math.max(
+        -20,
+        Math.min(20, dy)
       )}px) rotate(${rotate}deg)`;
     }
   };
@@ -472,81 +594,130 @@ function App() {
     cardRef.current.style.transform = "translateX(0px) translateY(0px) rotate(0deg)";
   };
 
-  const onMouseDown = (e) => pointerDown(e.clientX, e.clientY);
-  const onMouseMove = (e) => pointerMove(e.clientX, e.clientY);
-  const onMouseUp = () => pointerUp();
-  const onTouchStart = (e) => {
-    const touch = e.touches[0];
-    pointerDown(touch.clientX, touch.clientY);
-  };
-  const onTouchMove = (e) => {
-    const touch = e.touches[0];
-    pointerMove(touch.clientX, touch.clientY);
-  };
-  const onTouchEnd = () => pointerUp();
+  const sendMessage = () => {
+    if (!selectedChatId || !chatDraft.trim()) return;
 
-  const saveSettings = () => {
-    setSavedLabel(true);
-    setTimeout(() => setSavedLabel(false), 1600);
+    setMessages((prev) => ({
+      ...prev,
+      [selectedChatId]: [...(prev[selectedChatId] || []), { from: "me", text: chatDraft.trim() }],
+    }));
+    setChatDraft("");
   };
 
-  const sectionClass = settings.darkCards ? "panel panel-dark" : "panel";
+  const handleApplySettings = () => {
+    setSettings(draftSettings);
+    setSwipedIds([]);
+    setTab("search");
+  };
+
+  const handleResetSettings = () => {
+    const resetValues = {
+      searchMode: "nearby",
+      country: "All",
+      city: "All",
+      maxDistance: 5,
+      unit: "mi",
+    };
+    setDraftSettings(resetValues);
+    setSettings(resetValues);
+    setSwipedIds([]);
+  };
+
+  const handleProfilePhotoUpload = (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+
+    const objectUrls = files.map((file) => URL.createObjectURL(file));
+    setProfileDraft((prev) => ({
+      ...prev,
+      photos: [...prev.photos, ...objectUrls],
+    }));
+  };
+
+  const saveProfile = () => {
+    setMyProfile(profileDraft);
+    setEditProfile(false);
+    setSavedProfileLabel(true);
+    setTimeout(() => setSavedProfileLabel(false), 1500);
+  };
+
+  const openChatFromProfile = (id) => {
+    setSelectedChatId(id);
+    setTab("messages");
+  };
+
+  const renderProfileMeta = (profile) => (
+    <>
+      <span>
+        {profile.city}, {profile.country}
+      </span>
+      <span> • </span>
+      <span>{profile.online ? t.online : t.offline}</span>
+    </>
+  );
 
   return (
-    <div className={`app-shell ${settings.softMotion ? "soft-motion" : ""}`}>
+    <div className="app-shell soft-motion">
       <style>{`
         * { box-sizing: border-box; }
+
         html, body, #root {
           margin: 0;
           padding: 0;
           min-height: 100%;
           font-family: Inter, Arial, sans-serif;
           background:
-            radial-gradient(circle at top left, rgba(255,97,141,0.10), transparent 24%),
-            radial-gradient(circle at top right, rgba(255,175,189,0.16), transparent 28%),
-            linear-gradient(180deg, #fff8fb 0%, #f8f6fb 100%);
+            radial-gradient(circle at top left, rgba(255, 105, 145, 0.12), transparent 24%),
+            radial-gradient(circle at top right, rgba(255, 186, 190, 0.14), transparent 28%),
+            linear-gradient(180deg, #fff8fb 0%, #f8f5fb 100%);
           color: #231b2e;
         }
+
         body {
           overflow-x: hidden;
         }
+
         .app-shell {
           min-height: 100vh;
           position: relative;
         }
+
         .soft-motion::before,
         .soft-motion::after {
           content: "";
           position: fixed;
-          width: 340px;
-          height: 340px;
+          width: 330px;
+          height: 330px;
           border-radius: 50%;
           filter: blur(60px);
-          opacity: 0.22;
           z-index: 0;
           pointer-events: none;
-          animation: floatBlob 10s ease-in-out infinite;
+          opacity: 0.2;
+          animation: floatBlob 11s ease-in-out infinite;
         }
+
         .soft-motion::before {
-          background: #ff8dad;
-          top: -60px;
+          background: #ff8fb0;
           left: -80px;
+          top: -80px;
         }
+
         .soft-motion::after {
-          background: #c9b8ff;
+          background: #c9b7ff;
           right: -90px;
-          top: 140px;
+          top: 120px;
           animation-delay: -4s;
         }
+
         @keyframes floatBlob {
-          0%,100% { transform: translateY(0px) translateX(0px) scale(1); }
-          50% { transform: translateY(24px) translateX(18px) scale(1.05); }
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(18px, 24px) scale(1.05); }
         }
 
         .page {
-          max-width: 1360px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 20px 18px 36px;
+          padding: 20px 18px 110px;
           position: relative;
           z-index: 1;
         }
@@ -555,16 +726,16 @@ function App() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 16px;
+          gap: 14px;
           padding: 14px 18px;
           border-radius: 24px;
-          background: rgba(255,255,255,0.82);
+          background: rgba(255,255,255,0.84);
           backdrop-filter: blur(14px);
-          box-shadow: 0 10px 30px rgba(36, 20, 48, 0.06);
-          margin-bottom: 20px;
+          box-shadow: 0 10px 30px rgba(36,20,48,0.06);
+          margin-bottom: 18px;
           position: sticky;
           top: 10px;
-          z-index: 40;
+          z-index: 50;
         }
 
         .brand-wrap {
@@ -572,13 +743,15 @@ function App() {
           align-items: center;
           gap: 14px;
           flex-wrap: wrap;
+          min-width: 0;
         }
 
         .brand {
           font-size: 22px;
-          font-weight: 800;
-          letter-spacing: -0.5px;
+          font-weight: 900;
           color: #ff5f8f;
+          letter-spacing: -0.5px;
+          white-space: nowrap;
         }
 
         .lang-switch {
@@ -590,17 +763,18 @@ function App() {
           border: none;
           border-radius: 999px;
           padding: 10px 14px;
-          font-weight: 700;
+          background: #f1edf4;
+          color: #2b2335;
           cursor: pointer;
-          background: #f0edf3;
-          color: #2a2331;
+          font-weight: 800;
           transition: 0.2s ease;
+          white-space: nowrap;
         }
 
         .chip-btn.active {
           background: linear-gradient(135deg, #ff5f8f, #ff8a6b);
           color: white;
-          box-shadow: 0 10px 20px rgba(255,95,143,0.22);
+          box-shadow: 0 10px 20px rgba(255,95,143,0.24);
         }
 
         .nav {
@@ -612,25 +786,30 @@ function App() {
 
         .nav-btn {
           border: none;
-          padding: 13px 20px;
+          padding: 13px 18px;
           border-radius: 999px;
           background: #f5f3f7;
           color: #2b2235;
-          font-weight: 700;
+          font-weight: 800;
           font-size: 15px;
           cursor: pointer;
           transition: 0.2s ease;
+          white-space: nowrap;
         }
 
         .nav-btn.active {
-          color: white;
           background: linear-gradient(135deg, #ff5f8f, #ff8d6b);
+          color: white;
           box-shadow: 0 12px 22px rgba(255,95,143,0.24);
+        }
+
+        .mobile-scroll-tabs {
+          display: none;
         }
 
         .hero {
           display: grid;
-          grid-template-columns: 1.2fr 0.95fr;
+          grid-template-columns: 1.15fr 0.95fr;
           gap: 22px;
           align-items: stretch;
           margin-bottom: 24px;
@@ -638,32 +817,26 @@ function App() {
 
         .hero-left,
         .panel {
-          background: rgba(255,255,255,0.78);
+          background: rgba(255,255,255,0.82);
           backdrop-filter: blur(12px);
           border-radius: 28px;
           padding: 26px;
-          box-shadow: 0 16px 34px rgba(36, 20, 48, 0.06);
-        }
-
-        .panel-dark {
-          background: rgba(255,255,255,0.92);
-          box-shadow: 0 20px 40px rgba(26, 10, 44, 0.10);
+          box-shadow: 0 16px 34px rgba(36,20,48,0.06);
         }
 
         .hero-title {
-          font-size: clamp(38px, 5vw, 74px);
+          font-size: clamp(38px, 5vw, 72px);
           line-height: 0.95;
           letter-spacing: -2px;
-          margin: 0 0 18px;
           font-weight: 900;
+          margin: 0 0 18px;
         }
 
-        .hero-text {
+        .hero-text,
+        .section-subtitle {
           font-size: 18px;
           line-height: 1.6;
-          color: #5c5168;
-          max-width: 780px;
-          margin-bottom: 22px;
+          color: #655a70;
         }
 
         .hero-actions {
@@ -677,33 +850,32 @@ function App() {
         .ghost-btn {
           border: none;
           border-radius: 18px;
-          padding: 16px 24px;
+          padding: 15px 22px;
           font-size: 16px;
-          font-weight: 800;
+          font-weight: 900;
           cursor: pointer;
           transition: 0.2s ease;
         }
 
         .primary-btn {
-          color: white;
           background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
           box-shadow: 0 14px 24px rgba(255,95,143,0.24);
         }
 
         .secondary-btn {
-          background: #f2eef4;
-          color: #2b2235;
+          background: #f1edf4;
+          color: #2a2331;
         }
 
         .ghost-btn {
-          background: rgba(255,255,255,0.75);
-          color: #2b2235;
-          border: 1px solid rgba(80,60,100,0.08);
+          background: rgba(255,255,255,0.78);
+          color: #2a2331;
+          border: 1px solid rgba(80,60,100,0.1);
         }
 
         .hero-right {
           display: flex;
-          align-items: stretch;
         }
 
         .preview-card {
@@ -712,8 +884,8 @@ function App() {
           border-radius: 34px;
           overflow: hidden;
           position: relative;
-          background: #eee;
-          box-shadow: 0 24px 40px rgba(22, 11, 30, 0.10);
+          box-shadow: 0 24px 40px rgba(22,11,30,0.12);
+          background: #ece8ef;
         }
 
         .preview-card img {
@@ -731,17 +903,16 @@ function App() {
           justify-content: flex-end;
           padding: 24px;
           color: white;
-          background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.62));
+          background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.64));
         }
 
         .preview-badge {
           align-self: flex-start;
           padding: 8px 14px;
           border-radius: 999px;
-          background: rgba(255,255,255,0.22);
-          font-weight: 700;
-          font-size: 14px;
+          background: rgba(255,255,255,0.2);
           backdrop-filter: blur(10px);
+          font-weight: 800;
           margin-bottom: 14px;
         }
 
@@ -753,9 +924,9 @@ function App() {
 
         .preview-bio {
           margin: 0;
+          max-width: 88%;
           font-size: 18px;
           line-height: 1.45;
-          max-width: 85%;
         }
 
         .hero-mini-actions {
@@ -780,7 +951,7 @@ function App() {
         }
 
         .hero-mini-actions .light {
-          background: rgba(255,255,255,0.90);
+          background: rgba(255,255,255,0.92);
           color: #2b2235;
         }
 
@@ -788,11 +959,10 @@ function App() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 18px;
-          margin-top: 10px;
         }
 
         .quick-box {
-          min-height: 220px;
+          min-height: 210px;
         }
 
         .quick-num {
@@ -810,49 +980,49 @@ function App() {
 
         .section-title {
           margin: 0 0 8px;
-          font-size: clamp(30px, 4vw, 64px);
+          font-size: clamp(30px, 4vw, 62px);
           font-weight: 900;
           letter-spacing: -1.6px;
         }
 
         .section-subtitle {
-          margin: 0 0 24px;
-          font-size: 18px;
-          color: #665b70;
+          margin: 0 0 22px;
         }
 
-        .profiles-layout,
-        .messages-layout,
+        .search-layout,
         .likes-layout,
+        .messages-layout,
+        .profile-layout,
         .settings-layout,
-        .profile-layout {
+        .two-column-grid {
           display: grid;
           gap: 18px;
         }
 
-        .profiles-layout {
-          grid-template-columns: 380px minmax(0, 1fr);
-          align-items: start;
-        }
-
+        .search-layout,
         .settings-layout {
           grid-template-columns: 360px minmax(0, 1fr);
         }
 
         .likes-layout {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: 390px minmax(0, 1fr);
         }
 
         .messages-layout {
-          grid-template-columns: 320px minmax(0, 1fr);
-          min-height: 640px;
+          grid-template-columns: 220px minmax(0, 1fr);
+          min-height: 620px;
         }
 
         .profile-layout {
           grid-template-columns: 340px minmax(0, 1fr);
         }
 
-        .settings-group {
+        .two-column-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .settings-group,
+        .field-group {
           display: grid;
           gap: 14px;
         }
@@ -863,13 +1033,14 @@ function App() {
         }
 
         .field label {
-          font-weight: 700;
           font-size: 14px;
+          font-weight: 800;
           color: #544a60;
         }
 
+        .field input,
         .field select,
-        .field input {
+        .field textarea {
           width: 100%;
           border-radius: 16px;
           border: 1px solid rgba(95, 80, 110, 0.12);
@@ -877,63 +1048,49 @@ function App() {
           padding: 14px 15px;
           font-size: 15px;
           outline: none;
+          font-family: inherit;
+        }
+
+        .field textarea {
+          resize: vertical;
+          min-height: 120px;
         }
 
         .range-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 12px;
-          font-weight: 800;
+          font-weight: 900;
         }
 
-        .toggle-row {
+        .range-note {
+          color: #6a6076;
+          font-size: 14px;
+        }
+
+        .filter-actions {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 12px;
-          padding: 14px 0;
-          border-bottom: 1px solid rgba(100, 80, 120, 0.08);
-        }
-
-        .toggle-row:last-child {
-          border-bottom: none;
-        }
-
-        .toggle-row input {
-          width: 22px;
-          height: 22px;
-        }
-
-        .save-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(70, 199, 121, 0.12);
-          color: #159552;
-          padding: 10px 14px;
-          border-radius: 999px;
-          font-weight: 800;
-          margin-top: 8px;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-top: 4px;
         }
 
         .deck-wrap {
-          position: relative;
-          min-height: 720px;
           display: flex;
-          align-items: flex-start;
           justify-content: center;
+          align-items: flex-start;
+          min-height: 720px;
         }
 
         .swipe-card {
           width: 100%;
-          max-width: 520px;
+          max-width: 530px;
           height: 720px;
           border-radius: 34px;
           overflow: hidden;
-          background: #f0edf3;
-          box-shadow: 0 30px 50px rgba(25, 10, 38, 0.14);
           position: relative;
+          background: #ece8ef;
+          box-shadow: 0 30px 50px rgba(25,10,38,0.14);
           user-select: none;
           touch-action: pan-y;
           cursor: grab;
@@ -960,34 +1117,34 @@ function App() {
           justify-content: space-between;
           align-items: center;
           z-index: 3;
+          gap: 10px;
         }
 
         .photo-count,
-        .star-btn,
-        .distance-pill {
-          background: rgba(255,255,255,0.18);
-          backdrop-filter: blur(10px);
+        .distance-pill,
+        .star-btn {
+          background: rgba(255,255,255,0.2);
           color: white;
-          border: none;
           border-radius: 999px;
+          backdrop-filter: blur(10px);
+          font-weight: 900;
           padding: 10px 14px;
-          font-size: 14px;
-          font-weight: 800;
+          border: none;
         }
 
         .star-btn {
-          cursor: pointer;
-          font-size: 18px;
           width: 46px;
           height: 46px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          font-size: 18px;
+          cursor: pointer;
         }
 
         .star-btn.active {
           background: linear-gradient(135deg, #ffd64d, #ffb300);
-          color: #3a2800;
+          color: #3b2800;
         }
 
         .card-overlay {
@@ -997,30 +1154,24 @@ function App() {
           flex-direction: column;
           justify-content: flex-end;
           padding: 22px;
-          background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.64));
+          background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.66));
           color: white;
         }
 
-        .profile-line {
-          display: flex;
-          align-items: end;
-          justify-content: space-between;
-          gap: 12px;
-          margin-bottom: 8px;
-        }
-
         .profile-name {
-          font-size: clamp(28px, 4vw, 42px);
+          margin: 0 0 8px;
+          font-size: clamp(30px, 4vw, 42px);
           font-weight: 900;
-          margin: 0;
-          letter-spacing: -1px;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
         }
 
         .profile-meta {
+          margin: 0 0 10px;
           font-size: 14px;
+          font-weight: 800;
           opacity: 0.95;
-          font-weight: 700;
-          margin-bottom: 8px;
         }
 
         .profile-bio {
@@ -1044,17 +1195,12 @@ function App() {
           cursor: pointer;
           font-size: 22px;
           font-weight: 900;
-          box-shadow: 0 14px 28px rgba(20, 10, 28, 0.20);
+          box-shadow: 0 14px 28px rgba(20,10,28,0.2);
         }
 
         .round-action.skip {
-          background: rgba(255,255,255,0.90);
+          background: rgba(255,255,255,0.92);
           color: #5d5168;
-        }
-
-        .round-action.like {
-          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
-          color: white;
         }
 
         .round-action.favorite {
@@ -1062,47 +1208,48 @@ function App() {
           color: #3b2800;
         }
 
-        .card-side-info {
-          display: grid;
-          gap: 14px;
+        .round-action.like {
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
         }
 
-        .mini-profile-list,
-        .match-list,
-        .favorite-list {
+        .empty-state {
+          min-height: 320px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          text-align: center;
+          color: #665b70;
+          gap: 10px;
+        }
+
+        .list-grid {
           display: grid;
           gap: 12px;
         }
 
-        .mini-profile-item,
-        .chat-list-item,
-        .favorite-item,
-        .match-item {
+        .list-item,
+        .chat-list-item {
           display: flex;
           align-items: center;
           gap: 12px;
           padding: 12px;
           border-radius: 20px;
-          background: rgba(248, 245, 250, 0.95);
+          background: rgba(248,245,250,0.96);
           transition: 0.2s ease;
         }
 
-        .mini-profile-item:hover,
-        .chat-list-item:hover,
-        .favorite-item:hover,
-        .match-item:hover {
+        .list-item:hover,
+        .chat-list-item:hover {
           transform: translateY(-1px);
-          box-shadow: 0 10px 20px rgba(34, 19, 46, 0.06);
+          box-shadow: 0 10px 20px rgba(34,19,46,0.06);
         }
 
-        .mini-profile-item img,
-        .chat-list-item img,
-        .favorite-item img,
-        .match-item img,
-        .profile-avatar img {
+        .list-item img {
           width: 58px;
           height: 58px;
-          border-radius: 50%;
+          border-radius: 18px;
           object-fit: cover;
           flex-shrink: 0;
         }
@@ -1112,37 +1259,37 @@ function App() {
         }
 
         .chat-list-item.active {
-          background: linear-gradient(135deg, rgba(255,95,143,0.12), rgba(255,139,110,0.12));
-          border: 1px solid rgba(255,95,143,0.14);
+          background: linear-gradient(135deg, rgba(255,95,143,0.11), rgba(255,139,110,0.11));
+          border: 1px solid rgba(255,95,143,0.12);
+        }
+
+        .chat-list-item img {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          object-fit: cover;
+          flex-shrink: 0;
         }
 
         .item-title {
-          font-weight: 800;
-          font-size: 18px;
+          font-size: 17px;
+          font-weight: 900;
           margin: 0 0 2px;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
         }
 
         .item-sub {
-          color: #685d73;
+          color: #6a6076;
           font-size: 14px;
           margin: 0;
-        }
-
-        .empty-state {
-          min-height: 320px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          gap: 10px;
-          color: #655b70;
         }
 
         .message-panel {
           display: grid;
           grid-template-rows: auto 1fr auto;
-          min-height: 640px;
+          min-height: 620px;
         }
 
         .message-header {
@@ -1161,7 +1308,7 @@ function App() {
         }
 
         .message-body {
-          padding: 18px 4px 18px 0;
+          padding: 18px 2px 18px 0;
           overflow: auto;
           display: flex;
           flex-direction: column;
@@ -1205,10 +1352,119 @@ function App() {
           background: #fcfbfd;
         }
 
+        .profile-page-grid {
+          display: grid;
+          grid-template-columns: 340px minmax(0, 1fr);
+          gap: 18px;
+        }
+
+        .profile-avatar {
+          text-align: center;
+        }
+
+        .profile-avatar img {
+          width: 180px;
+          height: 180px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 16px;
+        }
+
+        .profile-age-line {
+          margin: 8px 0 10px;
+          font-weight: 800;
+          color: #3b3147;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+          margin-top: 18px;
+        }
+
+        .stat-box {
+          border-radius: 20px;
+          background: #faf7fc;
+          padding: 18px;
+          text-align: center;
+        }
+
+        .stat-num {
+          font-size: 28px;
+          font-weight: 900;
+          margin-bottom: 4px;
+        }
+
+        .profile-photos-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          gap: 12px;
+          margin-top: 12px;
+        }
+
+        .profile-photos-grid img {
+          width: 100%;
+          height: 180px;
+          object-fit: cover;
+          border-radius: 18px;
+        }
+
+        .menu-cards {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          margin-top: 18px;
+        }
+
+        .menu-card-btn {
+          border: none;
+          background: #faf7fc;
+          border-radius: 18px;
+          padding: 16px;
+          text-align: left;
+          cursor: pointer;
+          font-weight: 800;
+          color: #2b2235;
+        }
+
+        .menu-card-btn span {
+          display: block;
+          margin-top: 4px;
+          color: #6b6177;
+          font-weight: 600;
+          font-size: 14px;
+        }
+
+        .info-list {
+          display: grid;
+          gap: 12px;
+          margin-top: 16px;
+        }
+
+        .info-row {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 14px 0;
+          border-bottom: 1px solid rgba(100,80,120,0.08);
+        }
+
+        .help-grid {
+          display: grid;
+          gap: 14px;
+        }
+
+        .help-item {
+          padding: 18px;
+          border-radius: 20px;
+          background: #faf7fc;
+        }
+
         .mutual-modal {
           position: fixed;
           inset: 0;
-          background: rgba(20, 8, 30, 0.45);
+          background: rgba(20,8,30,0.45);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1230,9 +1486,8 @@ function App() {
             radial-gradient(circle at top center, rgba(255,255,255,0.18), transparent 35%),
             linear-gradient(135deg, #ff5f8f 0%, #ff8b6e 100%);
           color: white;
-          box-shadow: 0 24px 50px rgba(25, 10, 35, 0.26);
+          box-shadow: 0 24px 50px rgba(25,10,35,0.26);
           text-align: center;
-          transform: scale(1);
           animation: popIn 0.26s ease;
         }
 
@@ -1268,59 +1523,24 @@ function App() {
           50% { transform: scale(1.18); }
         }
 
-        .profile-page-grid {
-          display: grid;
-          grid-template-columns: 320px 1fr;
-          gap: 18px;
-        }
-
-        .profile-avatar {
-          text-align: center;
-        }
-
-        .profile-avatar img {
-          width: 180px;
-          height: 180px;
-          border-radius: 50%;
-          margin-bottom: 16px;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 12px;
-          margin-top: 18px;
-        }
-
-        .stat-box {
-          border-radius: 20px;
-          background: #faf7fc;
-          padding: 18px;
-          text-align: center;
-        }
-
-        .stat-num {
-          font-size: 28px;
-          font-weight: 900;
-          margin-bottom: 4px;
-        }
-
         .phone-bottom-nav {
           display: none;
         }
 
-        @media (max-width: 1080px) {
-          .hero {
-            grid-template-columns: 1fr;
-          }
-          .profiles-layout,
+        @media (max-width: 1120px) {
+          .hero,
+          .search-layout,
+          .likes-layout,
           .settings-layout,
-          .messages-layout,
-          .profile-layout,
           .profile-page-grid,
-          .likes-layout {
+          .two-column-grid {
             grid-template-columns: 1fr;
           }
+
+          .messages-layout {
+            grid-template-columns: 180px minmax(0, 1fr);
+          }
+
           .quick-grid {
             grid-template-columns: 1fr;
           }
@@ -1328,102 +1548,170 @@ function App() {
 
         @media (max-width: 760px) {
           .page {
-            padding: 12px 12px 96px;
+            padding: 12px 12px 108px;
           }
+
           .topbar {
             position: static;
             border-radius: 22px;
             padding: 14px;
+            align-items: flex-start;
+            flex-direction: column;
           }
+
           .nav {
             display: none;
           }
-          .brand {
-            font-size: 20px;
+
+          .mobile-scroll-tabs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 2px 2px 4px;
+            margin-bottom: 14px;
+            scrollbar-width: none;
           }
-          .hero-left, .panel {
+
+          .mobile-scroll-tabs::-webkit-scrollbar {
+            display: none;
+          }
+
+          .mobile-scroll-tabs .nav-btn {
+            flex: 0 0 auto;
+          }
+
+          .hero-left,
+          .panel {
             border-radius: 24px;
             padding: 18px;
           }
+
           .hero-title,
           .section-title {
             letter-spacing: -1.2px;
           }
+
           .hero-text,
           .section-subtitle {
             font-size: 16px;
           }
+
           .preview-card {
             min-height: 440px;
             border-radius: 28px;
           }
+
           .preview-name {
             font-size: 34px;
           }
-          .profiles-layout {
-            gap: 14px;
-          }
-          .deck-wrap {
-            min-height: auto;
-          }
-          .swipe-card {
-            max-width: 100%;
-            width: 100%;
-            height: min(78vh, 640px);
-            border-radius: 28px;
-          }
-          .card-overlay {
-            padding: 18px;
-          }
-          .profile-name {
-            font-size: 32px;
-          }
-          .profile-bio {
-            max-width: 100%;
-            font-size: 15px;
-          }
-          .round-action {
-            width: 58px;
-            height: 58px;
-          }
+
           .messages-layout {
-            min-height: auto;
+            grid-template-columns: 112px minmax(0, 1fr);
+            gap: 12px;
           }
+
+          .chat-list-item {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px 6px;
+            border-radius: 18px;
+            gap: 8px;
+          }
+
+          .chat-list-item img {
+            width: 38px;
+            height: 38px;
+          }
+
+          .chat-list-item .item-title {
+            font-size: 12px;
+            justify-content: center;
+          }
+
+          .chat-list-item .item-sub {
+            font-size: 11px;
+          }
+
+          .message-header img {
+            width: 52px;
+            height: 52px;
+          }
+
           .message-panel {
             min-height: 72vh;
           }
+
           .message-body {
             max-height: 46vh;
           }
+
           .bubble {
             max-width: 88%;
             font-size: 15px;
           }
+
+          .swipe-card {
+            max-width: 100%;
+            width: 100%;
+            height: min(76vh, 640px);
+            border-radius: 28px;
+          }
+
+          .card-overlay {
+            padding: 18px;
+          }
+
+          .profile-name {
+            font-size: 32px;
+          }
+
+          .profile-bio {
+            max-width: 100%;
+            font-size: 15px;
+          }
+
+          .round-action {
+            width: 56px;
+            height: 56px;
+          }
+
+          .menu-cards {
+            grid-template-columns: 1fr;
+          }
+
+          .stats-grid {
+            grid-template-columns: 1fr;
+          }
+
           .phone-bottom-nav {
             position: fixed;
             left: 10px;
             right: 10px;
             bottom: 10px;
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 8px;
             padding: 8px;
             border-radius: 22px;
-            background: rgba(255,255,255,0.88);
+            background: rgba(255,255,255,0.9);
             backdrop-filter: blur(14px);
-            box-shadow: 0 16px 34px rgba(29, 14, 40, 0.12);
+            box-shadow: 0 16px 34px rgba(29,14,40,0.12);
             z-index: 60;
           }
+
           .phone-tab-btn {
             border: none;
             background: transparent;
-            padding: 10px 6px;
+            padding: 9px 4px;
             border-radius: 16px;
             font-size: 11px;
-            font-weight: 800;
+            font-weight: 900;
             color: #5b5066;
             cursor: pointer;
+            line-height: 1.15;
           }
+
           .phone-tab-btn.active {
             background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
             color: white;
@@ -1455,14 +1743,20 @@ function App() {
             <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
               {t.navHome}
             </button>
-            <button className={`nav-btn ${tab === "profiles" ? "active" : ""}`} onClick={() => setTab("profiles")}>
-              {t.navProfiles}
+            <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
+              {t.navSearch}
             </button>
             <button className={`nav-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
               {t.navLikes}
             </button>
+            <button className={`nav-btn ${tab === "likedYou" ? "active" : ""}`} onClick={() => setTab("likedYou")}>
+              {t.navLikedYou}
+            </button>
             <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
               {t.navMessages}
+            </button>
+            <button className={`nav-btn ${tab === "guests" ? "active" : ""}`} onClick={() => setTab("guests")}>
+              {t.navGuests}
             </button>
             <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
               {t.navProfile}
@@ -1470,8 +1764,41 @@ function App() {
             <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
               {t.navSettings}
             </button>
+            <button className={`nav-btn ${tab === "help" ? "active" : ""}`} onClick={() => setTab("help")}>
+              {t.navHelp}
+            </button>
           </nav>
         </header>
+
+        <div className="mobile-scroll-tabs">
+          <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+            {t.navHome}
+          </button>
+          <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
+            {t.navSearch}
+          </button>
+          <button className={`nav-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
+            {t.navLikes}
+          </button>
+          <button className={`nav-btn ${tab === "likedYou" ? "active" : ""}`} onClick={() => setTab("likedYou")}>
+            {t.navLikedYou}
+          </button>
+          <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+            {t.navMessages}
+          </button>
+          <button className={`nav-btn ${tab === "guests" ? "active" : ""}`} onClick={() => setTab("guests")}>
+            {t.navGuests}
+          </button>
+          <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+            {t.navProfile}
+          </button>
+          <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
+            {t.navSettings}
+          </button>
+          <button className={`nav-btn ${tab === "help" ? "active" : ""}`} onClick={() => setTab("help")}>
+            {t.navHelp}
+          </button>
+        </div>
 
         {tab === "home" && (
           <>
@@ -1480,7 +1807,7 @@ function App() {
                 <h1 className="hero-title">{t.heroTitle}</h1>
                 <p className="hero-text">{t.heroText}</p>
                 <div className="hero-actions">
-                  <button className="primary-btn" onClick={() => setTab("profiles")}>
+                  <button className="primary-btn" onClick={() => setTab("search")}>
                     {t.heroPrimary}
                   </button>
                   <button className="secondary-btn" onClick={() => setTab("messages")}>
@@ -1497,12 +1824,13 @@ function App() {
                       {profiles[0].city} • {profiles[0].distanceMi} {t.miles}
                     </div>
                     <h2 className="preview-name">
-                      {profiles[0].name}, {profiles[0].age}
+                      {profiles[0].name}, {profiles[0].age} {profiles[0].zodiac}
+                      {profiles[0].verified && <VerificationBadge />}
                     </h2>
                     <p className="preview-bio">{profiles[0].bio}</p>
                     <div className="hero-mini-actions">
-                      <button className="pink" onClick={() => setTab("profiles")}>
-                        {t.heroPrimary}
+                      <button className="pink" onClick={() => setTab("likes")}>
+                        {t.navLikes}
                       </button>
                       <button className="light" onClick={() => setTab("profile")}>
                         {t.navProfile}
@@ -1514,40 +1842,39 @@ function App() {
             </section>
 
             <section className="quick-grid">
-              <div className={sectionClass + " quick-box"}>
+              <div className="panel quick-box">
                 <div className="quick-num">1</div>
-                <h3>{t.quick1}</h3>
-                <p>{t.quick1Text}</p>
+                <h3>{t.homeCard1}</h3>
+                <p>{t.homeCard1Text}</p>
               </div>
-              <div className={sectionClass + " quick-box"}>
+              <div className="panel quick-box">
                 <div className="quick-num">2</div>
-                <h3>{t.quick2}</h3>
-                <p>{t.quick2Text}</p>
+                <h3>{t.homeCard2}</h3>
+                <p>{t.homeCard2Text}</p>
               </div>
-              <div className={sectionClass + " quick-box"}>
+              <div className="panel quick-box">
                 <div className="quick-num">3</div>
-                <h3>{t.quick3}</h3>
-                <p>{t.quick3Text}</p>
+                <h3>{t.homeCard3}</h3>
+                <p>{t.homeCard3Text}</p>
               </div>
             </section>
           </>
         )}
 
-        {tab === "profiles" && (
+        {tab === "search" && (
           <>
-            <h2 className="section-title">{t.profilesTitle}</h2>
-            <p className="section-subtitle">{t.profilesText}</p>
+            <h2 className="section-title">{t.searchTitle}</h2>
+            <p className="section-subtitle">{t.searchText}</p>
 
-            <section className="profiles-layout">
-              <div className={sectionClass}>
-                <h3 style={{ marginTop: 0 }}>{t.navSettings}</h3>
+            <section className="search-layout">
+              <div className="panel">
                 <div className="settings-group">
                   <div className="field">
                     <label>{t.searchMode}</label>
                     <select
-                      value={settings.searchMode}
+                      value={draftSettings.searchMode}
                       onChange={(e) =>
-                        setSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                        setDraftSettings((prev) => ({ ...prev, searchMode: e.target.value }))
                       }
                     >
                       <option value="nearby">{t.nearby}</option>
@@ -1558,9 +1885,9 @@ function App() {
                   <div className="field">
                     <label>{t.country}</label>
                     <select
-                      value={settings.country}
+                      value={draftSettings.country}
                       onChange={(e) =>
-                        setSettings((prev) => ({
+                        setDraftSettings((prev) => ({
                           ...prev,
                           country: e.target.value,
                           city: "All",
@@ -1578,9 +1905,9 @@ function App() {
                   <div className="field">
                     <label>{t.city}</label>
                     <select
-                      value={settings.city}
+                      value={draftSettings.city}
                       onChange={(e) =>
-                        setSettings((prev) => ({ ...prev, city: e.target.value }))
+                        setDraftSettings((prev) => ({ ...prev, city: e.target.value }))
                       }
                     >
                       {cityOptions.map((city) => (
@@ -1594,9 +1921,9 @@ function App() {
                   <div className="field">
                     <label>{t.unit}</label>
                     <select
-                      value={settings.unit}
+                      value={draftSettings.unit}
                       onChange={(e) =>
-                        setSettings((prev) => ({ ...prev, unit: e.target.value }))
+                        setDraftSettings((prev) => ({ ...prev, unit: e.target.value }))
                       }
                     >
                       <option value="mi">{t.miles}</option>
@@ -1608,16 +1935,156 @@ function App() {
                     <label>{t.distance}</label>
                     <div className="range-row">
                       <span>
-                        {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
+                        {draftSettings.maxDistance}{" "}
+                        {draftSettings.unit === "mi" ? t.miles : t.km}
                       </span>
                     </div>
                     <input
                       type="range"
                       min="1"
                       max="5000"
-                      value={settings.maxDistance}
+                      value={draftSettings.maxDistance}
                       onChange={(e) =>
-                        setSettings((prev) => ({
+                        setDraftSettings((prev) => ({
+                          ...prev,
+                          maxDistance: Number(e.target.value),
+                        }))
+                      }
+                    />
+                    <div className="range-note">1 — 5000</div>
+                  </div>
+
+                  <div className="filter-actions">
+                    <button className="primary-btn" onClick={handleApplySettings}>
+                      {t.apply}
+                    </button>
+                    <button className="secondary-btn" onClick={handleResetSettings}>
+                      {t.reset}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="panel">
+                {filteredProfiles.length ? (
+                  <div className="list-grid">
+                    {filteredProfiles.map((profile) => (
+                      <div key={profile.id} className="list-item">
+                        <img src={profile.avatar} alt={profile.name} />
+                        <div style={{ flex: 1 }}>
+                          <div className="item-title">
+                            {profile.name}, {profile.age} {profile.zodiac}
+                            {profile.verified && <VerificationBadge />}
+                          </div>
+                          <p className="item-sub">
+                            {profile.city}, {profile.country} •{" "}
+                            {settings.unit === "mi"
+                              ? `${profile.distanceMi} ${t.miles}`
+                              : `${Math.round(profile.distanceMi * 1.60934)} ${t.km}`}
+                          </p>
+                        </div>
+                        <button className="chip-btn" onClick={() => toggleFavorite(profile.id)}>
+                          {favorites.includes(profile.id) ? "★" : "☆"}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">
+                    <h3>{t.noProfiles}</h3>
+                    <p>{t.noProfilesText}</p>
+                  </div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "likes" && (
+          <>
+            <h2 className="section-title">{t.likesTitle}</h2>
+            <p className="section-subtitle">{t.likesText}</p>
+
+            <section className="likes-layout">
+              <div className="panel">
+                <div className="settings-group">
+                  <div className="field">
+                    <label>{t.searchMode}</label>
+                    <select
+                      value={draftSettings.searchMode}
+                      onChange={(e) =>
+                        setDraftSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                      }
+                    >
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.allPeople}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select
+                      value={draftSettings.country}
+                      onChange={(e) =>
+                        setDraftSettings((prev) => ({
+                          ...prev,
+                          country: e.target.value,
+                          city: "All",
+                        }))
+                      }
+                    >
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.locationAll : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select
+                      value={draftSettings.city}
+                      onChange={(e) =>
+                        setDraftSettings((prev) => ({ ...prev, city: e.target.value }))
+                      }
+                    >
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.locationAll : city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select
+                      value={draftSettings.unit}
+                      onChange={(e) =>
+                        setDraftSettings((prev) => ({ ...prev, unit: e.target.value }))
+                      }
+                    >
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <div className="range-row">
+                      <span>
+                        {draftSettings.maxDistance}{" "}
+                        {draftSettings.unit === "mi" ? t.miles : t.km}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={draftSettings.maxDistance}
+                      onChange={(e) =>
+                        setDraftSettings((prev) => ({
                           ...prev,
                           maxDistance: Number(e.target.value),
                         }))
@@ -1625,96 +2092,41 @@ function App() {
                     />
                   </div>
 
-                  <div className="toggle-row">
-                    <span>{t.compactMode}</span>
-                    <input
-                      type="checkbox"
-                      checked={settings.compactMode}
-                      onChange={(e) =>
-                        setSettings((prev) => ({
-                          ...prev,
-                          compactMode: e.target.checked,
-                        }))
-                      }
-                    />
+                  <div className="filter-actions">
+                    <button className="primary-btn" onClick={handleApplySettings}>
+                      {t.apply}
+                    </button>
+                    <button className="secondary-btn" onClick={handleResetSettings}>
+                      {t.reset}
+                    </button>
                   </div>
-
-                  <div className="toggle-row">
-                    <span>{t.softMotion}</span>
-                    <input
-                      type="checkbox"
-                      checked={settings.softMotion}
-                      onChange={(e) =>
-                        setSettings((prev) => ({
-                          ...prev,
-                          softMotion: e.target.checked,
-                        }))
-                      }
-                    />
-                  </div>
-
-                  <div className="toggle-row">
-                    <span>{t.darkCards}</span>
-                    <input
-                      type="checkbox"
-                      checked={settings.darkCards}
-                      onChange={(e) =>
-                        setSettings((prev) => ({
-                          ...prev,
-                          darkCards: e.target.checked,
-                        }))
-                      }
-                    />
-                  </div>
-
-                  <button className="primary-btn" onClick={saveSettings}>
-                    {t.apply}
-                  </button>
-                  <button
-                    className="secondary-btn"
-                    onClick={() =>
-                      setSettings((prev) => ({
-                        ...prev,
-                        searchMode: "all",
-                        country: "All",
-                        city: "All",
-                        maxDistance: 500,
-                        unit: "mi",
-                      }))
-                    }
-                  >
-                    {t.reset}
-                  </button>
-
-                  {savedLabel && <div className="save-badge">{t.settingsSaved}</div>}
                 </div>
               </div>
 
-              <div className={sectionClass}>
+              <div className="panel">
                 {activeDeckProfile ? (
                   <div className="deck-wrap">
                     <div
                       ref={cardRef}
                       className="swipe-card"
-                      onMouseDown={onMouseDown}
-                      onMouseMove={onMouseMove}
-                      onMouseUp={onMouseUp}
-                      onMouseLeave={onMouseUp}
-                      onTouchStart={onTouchStart}
-                      onTouchMove={onTouchMove}
-                      onTouchEnd={onTouchEnd}
+                      onMouseDown={(e) => pointerDown(e.clientX, e.clientY)}
+                      onMouseMove={(e) => pointerMove(e.clientX, e.clientY)}
+                      onMouseUp={pointerUp}
+                      onMouseLeave={pointerUp}
+                      onTouchStart={(e) => {
+                        const touch = e.touches[0];
+                        pointerDown(touch.clientX, touch.clientY);
+                      }}
+                      onTouchMove={(e) => {
+                        const touch = e.touches[0];
+                        pointerMove(touch.clientX, touch.clientY);
+                      }}
+                      onTouchEnd={pointerUp}
                     >
-                      <img
-                        src={activeDeckProfile.photos[0]}
-                        alt={activeDeckProfile.name}
-                        draggable="false"
-                      />
+                      <img src={activeDeckProfile.photos[0]} alt={activeDeckProfile.name} />
 
                       <div className="card-topbar">
-                        <div className="photo-count">
-                          {activeDeckProfile.photos.length}{" "}
-                          {activeDeckProfile.photos.length === 1 ? t.onePhoto : t.manyPhotos}
-                        </div>
+                        <div className="photo-count">{activeDeckProfile.photos.length} фото</div>
                         <div className="distance-pill">
                           {settings.unit === "mi"
                             ? `${activeDeckProfile.distanceMi} ${t.miles}`
@@ -1734,28 +2146,33 @@ function App() {
                       </div>
 
                       <div className="card-overlay">
-                        <div className="profile-line">
-                          <h3 className="profile-name">
-                            {activeDeckProfile.name}, {activeDeckProfile.age}
-                          </h3>
-                        </div>
-                        <div className="profile-meta">
-                          {activeDeckProfile.city}, {activeDeckProfile.country} •{" "}
-                          {activeDeckProfile.online ? t.online : "Offline"}
-                        </div>
+                        <h3 className="profile-name">
+                          {activeDeckProfile.name}, {activeDeckProfile.age} {activeDeckProfile.zodiac}
+                          {activeDeckProfile.verified && <VerificationBadge />}
+                        </h3>
+                        <p className="profile-meta">{renderProfileMeta(activeDeckProfile)}</p>
                         <p className="profile-bio">{activeDeckProfile.bio}</p>
 
                         <div className="card-action-row">
-                          <button className="round-action skip" onClick={() => animateOut("left")}>
+                          <button
+                            className="round-action skip"
+                            onClick={() => animateOut("left")}
+                            title={t.skip}
+                          >
                             ✕
                           </button>
                           <button
                             className="round-action favorite"
                             onClick={() => toggleFavorite(activeDeckProfile.id)}
+                            title={t.addFavorite}
                           >
                             ★
                           </button>
-                          <button className="round-action like" onClick={() => animateOut("right")}>
+                          <button
+                            className="round-action like"
+                            onClick={() => animateOut("right")}
+                            title={t.like}
+                          >
                             ♥
                           </button>
                         </div>
@@ -1776,61 +2193,34 @@ function App() {
           </>
         )}
 
-        {tab === "likes" && (
+        {tab === "likedYou" && (
           <>
-            <h2 className="section-title">{t.likesTitle}</h2>
-            <p className="section-subtitle">{t.likesText}</p>
+            <h2 className="section-title">{t.likedYouTitle}</h2>
+            <p className="section-subtitle">{t.likedYouText}</p>
 
-            <section className="likes-layout">
-              <div className={sectionClass}>
-                <h3 style={{ marginTop: 0 }}>{t.favorites}</h3>
-                {favorites.length ? (
-                  <div className="favorite-list">
+            <section className="two-column-grid">
+              <div className="panel">
+                {likedYouIds.length ? (
+                  <div className="list-grid">
                     {profiles
-                      .filter((p) => favorites.includes(p.id))
-                      .map((p) => (
-                        <div className="favorite-item" key={p.id}>
-                          <img src={p.avatar} alt={p.name} />
+                      .filter((profile) => likedYouIds.includes(profile.id))
+                      .map((profile) => (
+                        <div key={profile.id} className="list-item">
+                          <img src={profile.avatar} alt={profile.name} />
                           <div style={{ flex: 1 }}>
                             <div className="item-title">
-                              {p.name}, {p.age}
+                              {profile.name}, {profile.age} {profile.zodiac}
+                              {profile.verified && <VerificationBadge />}
                             </div>
-                            <div className="item-sub">
-                              {p.city}, {p.country}
-                            </div>
-                          </div>
-                          <button className="chip-btn active" onClick={() => setTab("profiles")}>
-                            ★
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div className="empty-state">{t.noFavorites}</div>
-                )}
-              </div>
-
-              <div className={sectionClass}>
-                <h3 style={{ marginTop: 0 }}>{t.matches}</h3>
-                {matches.length ? (
-                  <div className="match-list">
-                    {profiles
-                      .filter((p) => matches.includes(p.id))
-                      .map((p) => (
-                        <div className="match-item" key={p.id}>
-                          <img src={p.avatar} alt={p.name} />
-                          <div style={{ flex: 1 }}>
-                            <div className="item-title">
-                              {p.name}, {p.age}
-                            </div>
-                            <div className="item-sub">
-                              {p.city}, {p.country}
-                            </div>
+                            <p className="item-sub">
+                              {profile.city}, {profile.country}
+                            </p>
                           </div>
                           <button
                             className="primary-btn"
                             onClick={() => {
-                              setSelectedChatId(p.id);
+                              ensureMessages(profile);
+                              setSelectedChatId(profile.id);
                               setTab("messages");
                             }}
                           >
@@ -1840,7 +2230,33 @@ function App() {
                       ))}
                   </div>
                 ) : (
-                  <div className="empty-state">{t.noMatches}</div>
+                  <div className="empty-state">{t.noLikedYou}</div>
+                )}
+              </div>
+
+              <div className="panel">
+                <h3 style={{ marginTop: 0 }}>{t.favorites}</h3>
+                {favorites.length ? (
+                  <div className="list-grid">
+                    {profiles
+                      .filter((profile) => favorites.includes(profile.id))
+                      .map((profile) => (
+                        <div key={profile.id} className="list-item">
+                          <img src={profile.avatar} alt={profile.name} />
+                          <div style={{ flex: 1 }}>
+                            <div className="item-title">
+                              {profile.name}, {profile.age} {profile.zodiac}
+                              {profile.verified && <VerificationBadge />}
+                            </div>
+                            <p className="item-sub">
+                              {profile.city}, {profile.country}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noFavorites}</div>
                 )}
               </div>
             </section>
@@ -1853,21 +2269,24 @@ function App() {
             <p className="section-subtitle">{t.messagesText}</p>
 
             <section className="messages-layout">
-              <div className={sectionClass}>
+              <div className="panel">
                 {matches.length ? (
-                  <div className="mini-profile-list">
+                  <div className="list-grid">
                     {profiles
-                      .filter((p) => matches.includes(p.id))
-                      .map((p) => (
+                      .filter((profile) => matches.includes(profile.id))
+                      .map((profile) => (
                         <div
-                          key={p.id}
-                          className={`chat-list-item ${selectedChatId === p.id ? "active" : ""}`}
-                          onClick={() => setSelectedChatId(p.id)}
+                          key={profile.id}
+                          className={`chat-list-item ${selectedChatId === profile.id ? "active" : ""}`}
+                          onClick={() => setSelectedChatId(profile.id)}
                         >
-                          <img src={p.avatar} alt={p.name} />
+                          <img src={profile.avatar} alt={profile.name} />
                           <div>
-                            <div className="item-title">{p.name}</div>
-                            <div className="item-sub">{p.online ? t.online : "Offline"}</div>
+                            <div className="item-title">
+                              {profile.name}
+                              {profile.verified && <VerificationBadge />}
+                            </div>
+                            <p className="item-sub">{profile.online ? t.online : t.offline}</p>
                           </div>
                         </div>
                       ))}
@@ -1877,17 +2296,21 @@ function App() {
                 )}
               </div>
 
-              <div className={sectionClass}>
+              <div className="panel">
                 {selectedChatProfile ? (
                   <div className="message-panel">
                     <div className="message-header">
                       <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
                       <div>
-                        <div className="item-title">{selectedChatProfile.name}</div>
-                        <div className="item-sub">
-                          {selectedChatProfile.online ? t.online : "Offline"} •{" "}
-                          {selectedChatProfile.city}
+                        <div className="item-title">
+                          {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
+                          {selectedChatProfile.zodiac}
+                          {selectedChatProfile.verified && <VerificationBadge />}
                         </div>
+                        <p className="item-sub">
+                          {selectedChatProfile.online ? t.online : t.offline} •{" "}
+                          {selectedChatProfile.city}
+                        </p>
                       </div>
                     </div>
 
@@ -1918,29 +2341,79 @@ function App() {
           </>
         )}
 
+        {tab === "guests" && (
+          <>
+            <h2 className="section-title">{t.guestsTitle}</h2>
+            <p className="section-subtitle">{t.guestsText}</p>
+
+            <section className="panel">
+              {guestsIds.length ? (
+                <div className="list-grid">
+                  {profiles
+                    .filter((profile) => guestsIds.includes(profile.id))
+                    .map((profile) => (
+                      <div key={profile.id} className="list-item">
+                        <img src={profile.avatar} alt={profile.name} />
+                        <div style={{ flex: 1 }}>
+                          <div className="item-title">
+                            {profile.name}, {profile.age} {profile.zodiac}
+                            {profile.verified && <VerificationBadge />}
+                          </div>
+                          <p className="item-sub">
+                            {profile.city}, {profile.country}
+                          </p>
+                        </div>
+                        <button
+                          className="secondary-btn"
+                          onClick={() => openChatFromProfile(profile.id)}
+                        >
+                          {t.openChat}
+                        </button>
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <div className="empty-state">{t.noGuests}</div>
+              )}
+            </section>
+          </>
+        )}
+
         {tab === "profile" && (
           <>
             <h2 className="section-title">{t.profileTitle}</h2>
-            <p className="section-subtitle">{t.phoneHint}</p>
 
             <section className="profile-page-grid">
-              <div className={sectionClass}>
+              <div className="panel">
                 <div className="profile-avatar">
-                  <img
-                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"
-                    alt={t.myProfileName}
-                  />
-                  <h3 style={{ margin: 0 }}>{t.myProfileName}</h3>
-                  <p style={{ color: "#655b70" }}>{t.myProfileBio}</p>
+                  <img src={myProfile.photos[0]} alt={myProfile.name} />
+                  <h3
+                    style={{
+                      margin: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 6,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {myProfile.name}
+                    {myProfile.verified && <VerificationBadge />}
+                  </h3>
+                  <p className="profile-age-line">
+                    {myProfile.age} • {myProfile.zodiac}
+                  </p>
+                  <p style={{ color: "#655b70", marginBottom: 0 }}>{myProfile.bio}</p>
                 </div>
               </div>
 
-              <div className={sectionClass}>
+              <div className="panel">
                 <h3 style={{ marginTop: 0 }}>{t.profileAbout}</h3>
+
                 <div className="stats-grid">
                   <div className="stat-box">
                     <div className="stat-num">{profiles.length}</div>
-                    <div>{t.navProfiles}</div>
+                    <div>{t.navSearch}</div>
                   </div>
                   <div className="stat-box">
                     <div className="stat-num">{favorites.length}</div>
@@ -1951,25 +2424,240 @@ function App() {
                     <div>{t.matches}</div>
                   </div>
                 </div>
+
+                <div className="info-list">
+                  <div className="info-row">
+                    <strong>{t.age}</strong>
+                    <span>{myProfile.age}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.city}</strong>
+                    <span>{myProfile.city}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.country}</strong>
+                    <span>{myProfile.country}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.zodiac}</strong>
+                    <span>{myProfile.zodiac}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.verified}</strong>
+                    <span>{myProfile.verified ? t.verifiedSelfie : "—"}</span>
+                  </div>
+                </div>
+
+                <div className="menu-cards">
+                  <button className="menu-card-btn" onClick={() => setTab("search")}>
+                    {t.searchMenu}
+                    <span>{t.searchText}</span>
+                  </button>
+                  <button className="menu-card-btn" onClick={() => setTab("likes")}>
+                    {t.gameMenu}
+                    <span>{t.likesText}</span>
+                  </button>
+                  <button className="menu-card-btn" onClick={() => setTab("likedYou")}>
+                    {t.likedByMe}
+                    <span>{t.likedYouText}</span>
+                  </button>
+                  <button className="menu-card-btn" onClick={() => setTab("guests")}>
+                    {t.guestsMenu}
+                    <span>{t.guestsText}</span>
+                  </button>
+                  <button className="menu-card-btn" onClick={() => setTab("settings")}>
+                    {t.navSettings}
+                    <span>{t.searchText}</span>
+                  </button>
+                  <button className="menu-card-btn" onClick={() => setTab("help")}>
+                    {t.helpMenu}
+                    <span>{t.helpText}</span>
+                  </button>
+                </div>
+
+                <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  {!editProfile ? (
+                    <button className="primary-btn" onClick={() => setEditProfile(true)}>
+                      {t.editProfile}
+                    </button>
+                  ) : (
+                    <>
+                      <button className="primary-btn" onClick={saveProfile}>
+                        {t.saveProfile}
+                      </button>
+                      <button
+                        className="secondary-btn"
+                        onClick={() => {
+                          setProfileDraft(myProfile);
+                          setEditProfile(false);
+                        }}
+                      >
+                        {t.cancel}
+                      </button>
+                    </>
+                  )}
+
+                  {savedProfileLabel && (
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "10px 14px",
+                        borderRadius: 999,
+                        background: "rgba(70,199,121,0.12)",
+                        color: "#169453",
+                        fontWeight: 800,
+                      }}
+                    >
+                      {t.profileSaved}
+                    </div>
+                  )}
+                </div>
               </div>
             </section>
+
+            {editProfile && (
+              <section className="panel" style={{ marginTop: 18 }}>
+                <h3 style={{ marginTop: 0 }}>{t.editProfile}</h3>
+
+                <div className="field-group">
+                  <div className="two-column-grid">
+                    <div className="field">
+                      <label>{t.name}</label>
+                      <input
+                        value={profileDraft.name}
+                        onChange={(e) =>
+                          setProfileDraft((prev) => ({ ...prev, name: e.target.value }))
+                        }
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label>{t.age}</label>
+                      <input
+                        type="number"
+                        value={profileDraft.age}
+                        onChange={(e) =>
+                          setProfileDraft((prev) => ({
+                            ...prev,
+                            age: Number(e.target.value || 0),
+                          }))
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="two-column-grid">
+                    <div className="field">
+                      <label>{t.city}</label>
+                      <input
+                        value={profileDraft.city}
+                        onChange={(e) =>
+                          setProfileDraft((prev) => ({ ...prev, city: e.target.value }))
+                        }
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label>{t.country}</label>
+                      <input
+                        value={profileDraft.country}
+                        onChange={(e) =>
+                          setProfileDraft((prev) => ({ ...prev, country: e.target.value }))
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="two-column-grid">
+                    <div className="field">
+                      <label>{t.zodiac}</label>
+                      <select
+                        value={profileDraft.zodiac}
+                        onChange={(e) =>
+                          setProfileDraft((prev) => ({ ...prev, zodiac: e.target.value }))
+                        }
+                      >
+                        {zodiacOptions.map((item) => (
+                          <option key={item} value={item}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="field">
+                      <label>{t.verified}</label>
+                      <select
+                        value={profileDraft.verified ? "yes" : "no"}
+                        onChange={(e) =>
+                          setProfileDraft((prev) => ({
+                            ...prev,
+                            verified: e.target.value === "yes",
+                          }))
+                        }
+                      >
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.bio}</label>
+                    <textarea
+                      value={profileDraft.bio}
+                      onChange={(e) =>
+                        setProfileDraft((prev) => ({ ...prev, bio: e.target.value }))
+                      }
+                    />
+                  </div>
+
+                  <div className="field">
+                    <label>{t.addPhoto}</label>
+                    <input type="file" accept="image/*" multiple onChange={handleProfilePhotoUpload} />
+                  </div>
+                </div>
+
+                <h4 style={{ marginBottom: 10 }}>{t.photos}</h4>
+                <div className="profile-photos-grid">
+                  {profileDraft.photos.map((photo, index) => (
+                    <div key={index}>
+                      <img src={photo} alt={`Profile ${index + 1}`} />
+                      {index === 0 && (
+                        <div
+                          style={{
+                            marginTop: 8,
+                            fontSize: 13,
+                            fontWeight: 800,
+                            color: "#6b6177",
+                          }}
+                        >
+                          {t.mainPhoto}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </>
         )}
 
         {tab === "settings" && (
           <>
             <h2 className="section-title">{t.settingsTitle}</h2>
-            <p className="section-subtitle">{t.phoneHint}</p>
+            <p className="section-subtitle">{t.searchText}</p>
 
             <section className="settings-layout">
-              <div className={sectionClass}>
+              <div className="panel">
                 <div className="settings-group">
                   <div className="field">
                     <label>{t.searchMode}</label>
                     <select
-                      value={settings.searchMode}
+                      value={draftSettings.searchMode}
                       onChange={(e) =>
-                        setSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                        setDraftSettings((prev) => ({ ...prev, searchMode: e.target.value }))
                       }
                     >
                       <option value="nearby">{t.nearby}</option>
@@ -1980,9 +2668,9 @@ function App() {
                   <div className="field">
                     <label>{t.country}</label>
                     <select
-                      value={settings.country}
+                      value={draftSettings.country}
                       onChange={(e) =>
-                        setSettings((prev) => ({
+                        setDraftSettings((prev) => ({
                           ...prev,
                           country: e.target.value,
                           city: "All",
@@ -2000,9 +2688,9 @@ function App() {
                   <div className="field">
                     <label>{t.city}</label>
                     <select
-                      value={settings.city}
+                      value={draftSettings.city}
                       onChange={(e) =>
-                        setSettings((prev) => ({ ...prev, city: e.target.value }))
+                        setDraftSettings((prev) => ({ ...prev, city: e.target.value }))
                       }
                     >
                       {cityOptions.map((city) => (
@@ -2016,9 +2704,9 @@ function App() {
                   <div className="field">
                     <label>{t.unit}</label>
                     <select
-                      value={settings.unit}
+                      value={draftSettings.unit}
                       onChange={(e) =>
-                        setSettings((prev) => ({ ...prev, unit: e.target.value }))
+                        setDraftSettings((prev) => ({ ...prev, unit: e.target.value }))
                       }
                     >
                       <option value="mi">{t.miles}</option>
@@ -2030,73 +2718,84 @@ function App() {
                     <label>{t.distance}</label>
                     <div className="range-row">
                       <span>
-                        {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
+                        {draftSettings.maxDistance}{" "}
+                        {draftSettings.unit === "mi" ? t.miles : t.km}
                       </span>
                     </div>
                     <input
                       type="range"
                       min="1"
                       max="5000"
-                      value={settings.maxDistance}
+                      value={draftSettings.maxDistance}
                       onChange={(e) =>
-                        setSettings((prev) => ({
+                        setDraftSettings((prev) => ({
                           ...prev,
                           maxDistance: Number(e.target.value),
                         }))
                       }
                     />
                   </div>
+
+                  <div className="filter-actions">
+                    <button className="primary-btn" onClick={handleApplySettings}>
+                      {t.apply}
+                    </button>
+                    <button className="secondary-btn" onClick={handleResetSettings}>
+                      {t.reset}
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className={sectionClass}>
-                <div className="settings-group">
-                  <div className="toggle-row">
-                    <span>{t.compactMode}</span>
-                    <input
-                      type="checkbox"
-                      checked={settings.compactMode}
-                      onChange={(e) =>
-                        setSettings((prev) => ({
-                          ...prev,
-                          compactMode: e.target.checked,
-                        }))
-                      }
-                    />
+              <div className="panel">
+                <h3 style={{ marginTop: 0 }}>{t.searchText}</h3>
+                <div className="info-list">
+                  <div className="info-row">
+                    <strong>{t.searchMode}</strong>
+                    <span>
+                      {settings.searchMode === "nearby" ? t.nearby : t.allPeople}
+                    </span>
                   </div>
-
-                  <div className="toggle-row">
-                    <span>{t.softMotion}</span>
-                    <input
-                      type="checkbox"
-                      checked={settings.softMotion}
-                      onChange={(e) =>
-                        setSettings((prev) => ({
-                          ...prev,
-                          softMotion: e.target.checked,
-                        }))
-                      }
-                    />
+                  <div className="info-row">
+                    <strong>{t.country}</strong>
+                    <span>
+                      {settings.country === "All" ? t.locationAll : settings.country}
+                    </span>
                   </div>
-
-                  <div className="toggle-row">
-                    <span>{t.darkCards}</span>
-                    <input
-                      type="checkbox"
-                      checked={settings.darkCards}
-                      onChange={(e) =>
-                        setSettings((prev) => ({
-                          ...prev,
-                          darkCards: e.target.checked,
-                        }))
-                      }
-                    />
+                  <div className="info-row">
+                    <strong>{t.city}</strong>
+                    <span>{settings.city === "All" ? t.locationAll : settings.city}</span>
                   </div>
+                  <div className="info-row">
+                    <strong>{t.distance}</strong>
+                    <span>
+                      {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
 
-                  <button className="primary-btn" onClick={saveSettings}>
-                    {t.saveSettings}
-                  </button>
-                  {savedLabel && <div className="save-badge">{t.settingsSaved}</div>}
+        {tab === "help" && (
+          <>
+            <h2 className="section-title">{t.helpTitle}</h2>
+            <p className="section-subtitle">{t.helpText}</p>
+
+            <section className="panel">
+              <div className="help-grid">
+                <div className="help-item">
+                  <h3 style={{ marginTop: 0 }}>{t.help1}</h3>
+                  <p style={{ marginBottom: 0 }}>{t.help1Text}</p>
+                </div>
+                <div className="help-item">
+                  <h3 style={{ marginTop: 0 }}>{t.help2}</h3>
+                  <p style={{ marginBottom: 0 }}>{t.help2Text}</p>
+                </div>
+                <div className="help-item">
+                  <h3 style={{ marginTop: 0 }}>{t.help3}</h3>
+                  <p style={{ marginBottom: 0 }}>{t.help3Text}</p>
                 </div>
               </div>
             </section>
@@ -2105,23 +2804,35 @@ function App() {
       </div>
 
       <div className="phone-bottom-nav">
-        <button className={`phone-tab-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
-          {t.navHome}
+        <button
+          className={`phone-tab-btn ${tab === "search" ? "active" : ""}`}
+          onClick={() => setTab("search")}
+        >
+          Поиск
         </button>
-        <button className={`phone-tab-btn ${tab === "profiles" ? "active" : ""}`} onClick={() => setTab("profiles")}>
-          {t.navProfiles}
+        <button
+          className={`phone-tab-btn ${tab === "likes" ? "active" : ""}`}
+          onClick={() => setTab("likes")}
+        >
+          Игра
         </button>
-        <button className={`phone-tab-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
-          {t.navLikes}
+        <button
+          className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`}
+          onClick={() => setTab("messages")}
+        >
+          Чаты
         </button>
-        <button className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
-          {t.navMessages}
+        <button
+          className={`phone-tab-btn ${tab === "guests" ? "active" : ""}`}
+          onClick={() => setTab("guests")}
+        >
+          Гости
         </button>
-        <button className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
-          {t.navProfile}
-        </button>
-        <button className={`phone-tab-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
-          {t.navSettings}
+        <button
+          className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`}
+          onClick={() => setTab("profile")}
+        >
+          Профиль
         </button>
       </div>
 
@@ -2132,10 +2843,7 @@ function App() {
             <p style={{ fontSize: 18, marginBottom: 0 }}>{t.mutualText}</p>
 
             <div className="mutual-avatars">
-              <img
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"
-                alt="Me"
-              />
+              <img src={myProfile.photos[0]} alt={myProfile.name} />
               <div className="heart">♥</div>
               <img src={matchedProfile.avatar} alt={matchedProfile.name} />
             </div>
@@ -2145,7 +2853,7 @@ function App() {
                 className="secondary-btn"
                 onClick={() => {
                   setShowMatch(false);
-                  setTab("profiles");
+                  setTab("likes");
                 }}
               >
                 {t.continueSwipe}
@@ -2154,6 +2862,7 @@ function App() {
                 className="ghost-btn"
                 onClick={() => {
                   setShowMatch(false);
+                  ensureMessages(matchedProfile);
                   setSelectedChatId(matchedProfile.id);
                   setTab("messages");
                 }}
