@@ -14,16 +14,23 @@ body,
   color: #fff;
 }
 
-button,
-input,
-textarea {
-  font: inherit;
+/* -------- КНОПКИ -------- */
+.pressable {
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.18s ease,
+    opacity 0.18s ease;
 }
 
-button {
-  cursor: pointer;
+.pressable:hover {
+  transform: scale(1.03);
 }
 
+.pressable:active {
+  transform: scale(0.96);
+}
+
+/* -------- ОБЩАЯ ОБОЛОЧКА -------- */
 .app-shell {
   min-height: 100vh;
   padding: 18px 14px 100px;
@@ -37,22 +44,15 @@ button {
   overflow: hidden;
   background: rgba(8, 11, 18, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(18px);
 }
 
+/* -------- HEADER -------- */
 .topbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 16px 18px;
+  padding: 16px;
   background: rgba(12, 16, 26, 0.92);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
 }
 
 .topbar-tabs {
@@ -61,13 +61,11 @@ button {
 }
 
 .topbar-tab {
-  border: 0;
+  padding: 8px 12px;
   border-radius: 999px;
-  padding: 10px 14px;
   background: rgba(255, 255, 255, 0.06);
-  color: #d6d9e2;
-  font-size: 13px;
-  font-weight: 700;
+  color: #ccc;
+  border: 0;
 }
 
 .topbar-tab.active {
@@ -75,41 +73,24 @@ button {
   color: white;
 }
 
-.app-content {
-  padding: 18px;
-}
-
+/* -------- SWIPE CARD -------- */
 .swipe-card {
-  max-width: 400px;
+  max-width: 420px;
   margin: auto;
   border-radius: 24px;
   overflow: hidden;
   background: #111;
 }
 
+.swipe-card-photo-wrap {
+  position: relative;
+  height: 520px;
+}
+
 .swipe-card-photo {
   width: 100%;
-  height: 500px;
+  height: 100%;
   object-fit: cover;
-}
-
-.swipe-card-body {
-  padding: 16px;
-}
-
-.action-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 0;
-}
-
-.action-btn.like {
-  background: #ff5b87;
-}
-
-.action-btn.dislike {
-  background: #444;
 }
 
 .like-burst {
@@ -118,29 +99,100 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 34px;
+  font-weight: bold;
   color: white;
+  animation: like 0.6s ease;
 }
 
+@keyframes like {
+  0% { transform: scale(0.4); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* -------- КНОПКИ ДЕЙСТВИЙ -------- */
+.action-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 0;
+}
+
+.action-btn.like {
+  background: linear-gradient(135deg, #ff5b87, #ff7ca6);
+}
+
+.action-btn.dislike {
+  background: rgba(255,255,255,0.1);
+}
+
+/* -------- ЧАТ -------- */
+.chat-row {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.chat-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.chat-name {
+  font-weight: bold;
+}
+
+.chat-status {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+}
+
+.your-turn-badge {
+  background: white;
+  color: black;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+/* -------- НАСТРОЙКИ -------- */
+.settings-item {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* -------- FAQ -------- */
+.faq-question {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.faq-answer {
+  padding: 0 16px 16px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* -------- НИЖНЕЕ МЕНЮ -------- */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background: #111;
-  padding: 10px 0;
+  background: rgba(10, 13, 20, 0.95);
+  padding: 10px;
 }
 
 .bottom-nav-item {
-  color: white;
+  color: #aaa;
   font-size: 12px;
 }
 
-.pressable {
-  transition: transform 0.1s;
-}
-
-.pressable:active {
-  transform: scale(0.95);
+.bottom-nav-item.active {
+  color: white;
 }
