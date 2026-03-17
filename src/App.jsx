@@ -1,2054 +1,2171 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const translations = {
   ru: {
     brand: "Telegram Dating",
     navHome: "Главная",
-    navFeed: "Анкеты",
+    navProfiles: "Анкеты",
     navLikes: "Симпатии",
     navMessages: "Сообщения",
     navProfile: "Профиль",
+    navSettings: "Настройки",
 
-    heroBadge: "Новый формат знакомств",
     heroTitle: "Найди новые знакомства в Telegram",
     heroText:
-      "Смотри анкеты, переключай фото, используй фильтры, ставь симпатии и общайся после взаимного интереса.",
+      "Смотри анкеты, свайпай, добавляй в избранное, используй поиск по странам и городам и общайся после взаимной симпатии.",
     heroPrimary: "Смотреть анкеты",
     heroSecondary: "Открыть сообщения",
 
-    step1Title: "1. Быстрый старт",
-    step1Text: "Открываешь сайт и сразу смотришь анкеты.",
-    step2Title: "2. Удобные фильтры",
-    step2Text: "Выбираешь локацию, возраст, пол и интересы.",
-    step3Title: "3. Общение после мэтча",
-    step3Text: "После взаимной симпатии появляется чат внутри сайта.",
+    quick1: "Быстрый старт",
+    quick1Text: "Открываешь сайт и сразу смотришь анкеты.",
+    quick2: "Удобный поиск",
+    quick2Text: "Выбирай страны, города и дистанцию.",
+    quick3: "Общение после мэтча",
+    quick3Text: "После взаимной симпатии появляется чат.",
 
-    feedTitle: "Популярные анкеты",
-    feedText: "Потяни карточку мышкой влево или вправо. Или используй кнопки ниже.",
-    likesTitle: "Мои симпатии",
-    likesText: "Здесь хранятся анкеты, которые ты лайкнул.",
+    profilesTitle: "Анкеты",
+    profilesText: "Свайпай, открывай профиль и добавляй в избранное.",
+    likesTitle: "Симпатии и избранное",
+    likesText: "Здесь отображаются мэтчи и люди, которых ты отметил звездой.",
     messagesTitle: "Сообщения",
     messagesText: "После взаимной симпатии здесь появляется чат.",
-    profileTitle: "Мой профиль",
-    profileText: "Здесь позже будет полноценная анкета пользователя.",
+    profileTitle: "Профиль",
+    settingsTitle: "Настройки и поиск",
 
-    like: "❤️ Нравится",
-    next: "Дальше",
-    clearLikes: "Очистить симпатии",
-    noLikes: "Пока нет лайкнутых анкет",
-    noLikesText: "Перейди в анкеты и добавь несколько симпатий.",
-    noProfiles: "Анкеты не найдены",
-    noProfilesText: "Попробуй изменить фильтры.",
-    noMessages: "Пока нет сообщений",
-    noMessagesText: "Когда случится взаимная симпатия, здесь появится чат.",
-
-    language: "Язык",
-    location: "Локация",
-    distance: "Дальность",
-    gender: "Пол",
-    interest: "Интересы",
-    ageFrom: "Возраст от",
-    ageTo: "Возраст до",
-
-    allLocations: "Все локации",
-    allDistances: "Любая",
-    allGenders: "Любой",
-    allInterests: "Любые",
-    female: "Девушки",
-    male: "Мужчины",
-
-    verified: "Проверено",
+    nearby: "Люди рядом",
+    allPeople: "Все",
+    country: "Страна",
+    city: "Город",
+    distance: "Дистанция",
+    unit: "Единицы",
+    miles: "мили",
+    km: "км",
+    reset: "Сбросить",
+    apply: "Применить",
+    favorites: "Избранное",
+    matches: "Взаимные симпатии",
+    openChat: "Открыть чат",
+    like: "Нравится",
+    nope: "Пропустить",
+    superLike: "В избранное",
     online: "Онлайн",
-    miles: "миль",
-
-    profileName: "Имя",
-    profileAge: "Возраст",
-    profileCity: "Город",
-    profileAbout: "О себе",
-    profileInterests: "Интересы",
-    editProfile: "Редактировать позже",
-
-    mutualTitle: "Взаимная симпатия!",
-    mutualText: "Теперь вы можете общаться в разделе «Сообщения».",
-    openMessages: "Открыть сообщения",
-    close: "Закрыть",
-
-    photo1: "Фото 1",
-    photo2: "Фото 2",
     send: "Отправить",
-    writeMessage: "Написать сообщение...",
-    selectChat: "Выбери чат слева, чтобы открыть переписку."
+    messagePlaceholder: "Напиши сообщение...",
+    noMessages: "Пока нет сообщений.",
+    noFavorites: "Пока никто не добавлен в избранное.",
+    noMatches: "Пока нет взаимных симпатий.",
+    locationAll: "Все локации",
+    addPhotoLater: "Можно добавить больше фото позже",
+    profileAbout: "О себе",
+    ageLabel: "Возраст",
+    cityLabel: "Город",
+    countryLabel: "Страна",
+    searchMode: "Режим поиска",
+    appearance: "Вид приложения",
+    compactMode: "Компактный режим",
+    softMotion: "Эффекты движения",
+    darkCards: "Более контрастные карточки",
+    phoneHint: "Сайт адаптирован под телефон и компьютер",
+    mutualTitle: "Взаимная симпатия!",
+    mutualText: "Теперь вы можете начать общение.",
+    startChat: "Начать чат",
+    continueSwipe: "Продолжить смотреть",
+    emptyDeck: "Анкеты закончились",
+    emptyDeckText: "Сбрось поиск или начни просмотр сначала.",
+    restartDeck: "Начать заново",
+    myProfileName: "Алекс",
+    myProfileBio:
+      "Люблю живое общение, красивые места, музыку и интересные знакомства.",
+    saveSettings: "Сохранить настройки",
+    settingsSaved: "Настройки сохранены",
+    onePhoto: "1 фото",
+    manyPhotos: "фото",
+    starred: "В избранном",
   },
   en: {
     brand: "Telegram Dating",
     navHome: "Home",
-    navFeed: "Profiles",
+    navProfiles: "Profiles",
     navLikes: "Likes",
     navMessages: "Messages",
     navProfile: "Profile",
+    navSettings: "Settings",
 
-    heroBadge: "New dating format",
-    heroTitle: "Find new connections on Telegram",
+    heroTitle: "Find new connections in Telegram",
     heroText:
-      "Browse profiles, switch photos, use filters, like profiles, and chat after a mutual match.",
-    heroPrimary: "Browse Profiles",
-    heroSecondary: "Open Messages",
+      "Browse profiles, swipe, add favorites, use country and city search, and chat after a mutual match.",
+    heroPrimary: "Browse profiles",
+    heroSecondary: "Open messages",
 
-    step1Title: "1. Fast start",
-    step1Text: "Open the site and start browsing profiles right away.",
-    step2Title: "2. Smart filters",
-    step2Text: "Choose location, age, gender, and interests.",
-    step3Title: "3. Chat after a match",
-    step3Text: "After a mutual like, a chat appears inside the site.",
+    quick1: "Fast start",
+    quick1Text: "Open the site and instantly browse profiles.",
+    quick2: "Smart search",
+    quick2Text: "Choose countries, cities and distance.",
+    quick3: "Chat after match",
+    quick3Text: "A chat appears after mutual interest.",
 
-    feedTitle: "Popular profiles",
-    feedText: "Drag the card left or right with your mouse, or use the buttons below.",
-    likesTitle: "My Likes",
-    likesText: "Profiles you liked are stored here.",
+    profilesTitle: "Profiles",
+    profilesText: "Swipe, open profiles and add favorites.",
+    likesTitle: "Likes and Favorites",
+    likesText: "This section shows matches and starred people.",
     messagesTitle: "Messages",
-    messagesText: "After a mutual match, your chat appears here.",
-    profileTitle: "My Profile",
-    profileText: "A full user profile page will appear here later.",
+    messagesText: "Your chat appears here after a mutual match.",
+    profileTitle: "Profile",
+    settingsTitle: "Settings and search",
 
-    like: "❤️ Like",
-    next: "Next",
-    clearLikes: "Clear Likes",
-    noLikes: "No liked profiles yet",
-    noLikesText: "Go to profiles and add a few likes.",
-    noProfiles: "No profiles found",
-    noProfilesText: "Try changing your filters.",
-    noMessages: "No messages yet",
-    noMessagesText: "When a mutual match happens, a chat will appear here.",
-
-    language: "Language",
-    location: "Location",
+    nearby: "Nearby",
+    allPeople: "All",
+    country: "Country",
+    city: "City",
     distance: "Distance",
-    gender: "Gender",
-    interest: "Interests",
-    ageFrom: "Age from",
-    ageTo: "Age to",
-
-    allLocations: "All locations",
-    allDistances: "Any",
-    allGenders: "Any",
-    allInterests: "Any",
-    female: "Women",
-    male: "Men",
-
-    verified: "Verified",
-    online: "Online",
+    unit: "Units",
     miles: "miles",
-
-    profileName: "Name",
-    profileAge: "Age",
-    profileCity: "City",
-    profileAbout: "About",
-    profileInterests: "Interests",
-    editProfile: "Edit later",
-
-    mutualTitle: "It's a match!",
-    mutualText: "Now you can chat in the Messages section.",
-    openMessages: "Open Messages",
-    close: "Close",
-
-    photo1: "Photo 1",
-    photo2: "Photo 2",
+    km: "km",
+    reset: "Reset",
+    apply: "Apply",
+    favorites: "Favorites",
+    matches: "Matches",
+    openChat: "Open chat",
+    like: "Like",
+    nope: "Skip",
+    superLike: "Favorite",
+    online: "Online",
     send: "Send",
-    writeMessage: "Write a message...",
-    selectChat: "Choose a chat on the left to open the conversation."
-  }
-}
+    messagePlaceholder: "Write a message...",
+    noMessages: "No messages yet.",
+    noFavorites: "No favorites yet.",
+    noMatches: "No matches yet.",
+    locationAll: "All locations",
+    addPhotoLater: "More photos can be added later",
+    profileAbout: "About",
+    ageLabel: "Age",
+    cityLabel: "City",
+    countryLabel: "Country",
+    searchMode: "Search mode",
+    appearance: "App appearance",
+    compactMode: "Compact mode",
+    softMotion: "Motion effects",
+    darkCards: "Higher contrast cards",
+    phoneHint: "Optimized for phone and desktop",
+    mutualTitle: "It's a match!",
+    mutualText: "Now you can start chatting.",
+    startChat: "Start chat",
+    continueSwipe: "Keep browsing",
+    emptyDeck: "No more profiles",
+    emptyDeckText: "Reset search or start browsing again.",
+    restartDeck: "Start again",
+    myProfileName: "Alex",
+    myProfileBio:
+      "I like real conversations, beautiful places, music and interesting connections.",
+    saveSettings: "Save settings",
+    settingsSaved: "Settings saved",
+    onePhoto: "1 photo",
+    manyPhotos: "photos",
+    starred: "Starred",
+  },
+};
 
-const profiles = [
+const profilesData = [
   {
     id: 1,
     name: "Anna",
     age: 26,
-    city: "Los Angeles",
-    distance: 4,
     gender: "female",
-    interests: ["Music", "Travel", "Coffee"],
-    aboutRu: "Люблю красивые места, музыку и лёгкое общение.",
-    aboutEn: "I love beautiful places, music, and easygoing conversation.",
-    photos: [
-      "https://randomuser.me/api/portraits/women/44.jpg",
-      "https://randomuser.me/api/portraits/women/45.jpg"
-    ],
-    verified: true,
+    city: "Los Angeles",
+    country: "USA",
+    distanceMi: 12,
     online: true,
-    mutual: true
+    bio: "Люблю красивые места, музыку и лёгкое общение.",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessages: [
+      "Привет 😊 Рада взаимной симпатии.",
+      "Как проходит твой день?",
+    ],
   },
   {
     id: 2,
     name: "Sofia",
     age: 24,
-    city: "Santa Monica",
-    distance: 9,
     gender: "female",
-    interests: ["Ocean", "Fitness", "Cinema"],
-    aboutRu: "Обожаю прогулки у океана и уютные вечера.",
-    aboutEn: "I love ocean walks and cozy evenings.",
+    city: "Miami",
+    country: "USA",
+    distanceMi: 278,
+    online: true,
+    bio: "Люблю прогулки у океана, кофе и тёплые разговоры.",
+    avatar:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
     photos: [
-      "https://randomuser.me/api/portraits/women/65.jpg",
-      "https://randomuser.me/api/portraits/women/66.jpg"
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
     ],
-    verified: true,
-    online: false,
-    mutual: false
+    starterMessages: ["Очень приятно 😊", "Ты больше любишь город или природу?"],
   },
   {
     id: 3,
-    name: "Emma",
-    age: 27,
-    city: "Burbank",
-    distance: 16,
-    gender: "female",
-    interests: ["Art", "Books", "Humor"],
-    aboutRu: "Ценю искренность, юмор и интересные знакомства.",
-    aboutEn: "I value sincerity, humor, and meaningful connections.",
-    photos: [
-      "https://randomuser.me/api/portraits/women/68.jpg",
-      "https://randomuser.me/api/portraits/women/69.jpg"
-    ],
-    verified: false,
+    name: "Daniel",
+    age: 29,
+    gender: "male",
+    city: "New York",
+    country: "USA",
+    distanceMi: 120,
     online: true,
-    mutual: true
+    bio: "Ценю юмор, активную жизнь и настоящие эмоции.",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessages: ["Привет! Рад мэтчу.", "Чем любишь заниматься в свободное время?"],
   },
   {
     id: 4,
-    name: "Luna",
-    age: 25,
-    city: "West Hollywood",
-    distance: 7,
-    gender: "female",
-    interests: ["Style", "Food", "Night Walks"],
-    aboutRu: "Люблю стиль, новые впечатления и спонтанность.",
-    aboutEn: "I love style, new experiences, and spontaneity.",
-    photos: [
-      "https://randomuser.me/api/portraits/women/33.jpg",
-      "https://randomuser.me/api/portraits/women/34.jpg"
-    ],
-    verified: true,
-    online: true,
-    mutual: false
-  },
-  {
-    id: 5,
-    name: "Daniel",
-    age: 29,
-    city: "Los Angeles",
-    distance: 6,
-    gender: "male",
-    interests: ["Gym", "Cars", "Travel"],
-    aboutRu: "Люблю активную жизнь, спорт и хорошие разговоры.",
-    aboutEn: "I enjoy an active lifestyle, fitness, and good conversations.",
-    photos: [
-      "https://randomuser.me/api/portraits/men/32.jpg",
-      "https://randomuser.me/api/portraits/men/33.jpg"
-    ],
-    verified: true,
-    online: false,
-    mutual: true
-  },
-  {
-    id: 6,
-    name: "Chris",
+    name: "Michael",
     age: 31,
-    city: "Santa Monica",
-    distance: 12,
     gender: "male",
-    interests: ["Ocean", "Music", "Business"],
-    aboutRu: "Люблю океан, музыку и людей с хорошей энергией.",
-    aboutEn: "I love the ocean, music, and people with good energy.",
+    city: "Chicago",
+    country: "USA",
+    distanceMi: 320,
+    online: false,
+    bio: "Люблю путешествия, спорт и хорошие разговоры без лишнего шума.",
+    avatar:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
     photos: [
-      "https://randomuser.me/api/portraits/men/45.jpg",
-      "https://randomuser.me/api/portraits/men/46.jpg"
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
     ],
-    verified: false,
-    online: true,
-    mutual: false
-  }
-]
+    starterMessages: ["Привет 👋", "Какой у тебя идеальный выходной?"],
+  },
+];
 
-const starterMessages = {
-  1: [
-    { from: "them", textRu: "Привет 😊 Рада взаимной симпатии.", textEn: "Hi 😊 Glad we matched." },
-    { from: "them", textRu: "Как проходит твой день?", textEn: "How is your day going?" }
-  ],
-  3: [
-    { from: "them", textRu: "Привет! Похоже, у нас мэтч ✨", textEn: "Hi! Looks like we matched ✨" },
-    { from: "them", textRu: "Любишь вечерние прогулки?", textEn: "Do you like evening walks?" }
-  ],
-  5: [
-    { from: "them", textRu: "Привет! Рад знакомству.", textEn: "Hi! Nice to meet you." },
-    { from: "them", textRu: "Чем увлекаешься в свободное время?", textEn: "What do you do in your free time?" }
-  ]
-}
+const countriesMap = {
+  USA: ["Los Angeles", "Miami", "New York", "Chicago"],
+  Canada: ["Toronto", "Vancouver", "Montreal"],
+  UK: ["London", "Manchester", "Birmingham"],
+  Germany: ["Berlin", "Munich", "Hamburg"],
+  France: ["Paris", "Lyon", "Marseille"],
+  Spain: ["Madrid", "Barcelona", "Valencia"],
+  Italy: ["Rome", "Milan", "Naples"],
+  Poland: ["Warsaw", "Krakow", "Gdansk"],
+  Ukraine: ["Kyiv", "Lviv", "Odesa"],
+  Russia: ["Moscow", "Saint Petersburg", "Sochi"],
+  Turkey: ["Istanbul", "Antalya", "Ankara"],
+  UAE: ["Dubai", "Abu Dhabi", "Sharjah"],
+  Mexico: ["Mexico City", "Cancun", "Guadalajara"],
+  Brazil: ["Sao Paulo", "Rio de Janeiro", "Brasilia"],
+  Japan: ["Tokyo", "Osaka", "Kyoto"],
+};
 
-const locationOptions = ["All", "Los Angeles", "Santa Monica", "Burbank", "West Hollywood"]
-const distanceOptions = ["Any", 5, 10, 25, 50]
-const interestOptions = [
-  "Any",
-  "Music",
-  "Travel",
-  "Coffee",
-  "Ocean",
-  "Fitness",
-  "Cinema",
-  "Art",
-  "Books",
-  "Humor",
-  "Style",
-  "Food",
-  "Night Walks",
-  "Gym",
-  "Cars",
-  "Business"
-]
-const ageFromOptions = [18, 21, 25, 30, 35]
-const ageToOptions = [25, 30, 35, 40, 50]
+function App() {
+  const [lang, setLang] = useState("ru");
+  const t = translations[lang];
 
-function getPageFromHash() {
-  const hash = window.location.hash.replace("#", "")
-  if (
-    hash === "/profiles" ||
-    hash === "/likes" ||
-    hash === "/messages" ||
-    hash === "/profile"
-  ) {
-    return hash
-  }
-  return "/"
-}
+  const [tab, setTab] = useState("home");
+  const [profiles, setProfiles] = useState(profilesData);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [favorites, setFavorites] = useState([2]);
+  const [likedIds, setLikedIds] = useState([1]);
+  const [matches, setMatches] = useState([1]);
+  const [selectedChatId, setSelectedChatId] = useState(1);
+  const [showMatch, setShowMatch] = useState(false);
+  const [matchedProfile, setMatchedProfile] = useState(null);
+  const [savedLabel, setSavedLabel] = useState(false);
 
-function isMobileWidth() {
-  return typeof window !== "undefined" ? window.innerWidth <= 768 : false
-}
+  const [settings, setSettings] = useState({
+    searchMode: "all",
+    country: "All",
+    city: "All",
+    maxDistance: 500,
+    unit: "mi",
+    compactMode: false,
+    softMotion: true,
+    darkCards: false,
+  });
 
-function NavLink({ href, label, currentPage, mobile = false }) {
-  const active = currentPage === href
-  return (
-    <a
-      href={`#${href}`}
-      style={{
-        textDecoration: "none",
-        color: active ? "#fff" : "#25202a",
-        background: active ? "linear-gradient(135deg, #ff4d8d, #ff7a59)" : "rgba(255,255,255,0.72)",
-        padding: mobile ? "10px 14px" : "12px 18px",
-        borderRadius: "999px",
-        fontWeight: "700",
-        fontSize: mobile ? "14px" : "15px",
-        boxShadow: active ? "0 12px 28px rgba(255,98,122,0.22)" : "none",
-        border: active ? "none" : "1px solid rgba(0,0,0,0.05)"
-      }}
-    >
-      {label}
-    </a>
-  )
-}
+  const [chatDraft, setChatDraft] = useState("");
 
-function PhotoSwitcher({ activePhoto, setActivePhoto, t }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: "16px",
-        left: "16px",
-        display: "flex",
-        gap: "8px",
-        zIndex: 3
-      }}
-    >
-      {[0, 1].map((i) => (
-        <button
-          key={i}
-          onClick={(e) => {
-            e.stopPropagation()
-            setActivePhoto(i)
-          }}
-          style={{
-            border: "none",
-            background: activePhoto === i ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.55)",
-            color: "#1f1722",
-            padding: "8px 12px",
-            borderRadius: "999px",
-            fontWeight: "800",
-            cursor: "pointer",
-            fontSize: "13px"
-          }}
-        >
-          {i === 0 ? t.photo1 : t.photo2}
-        </button>
-      ))}
-    </div>
-  )
-}
+  const [messages, setMessages] = useState({
+    1: [
+      { from: "them", text: "Привет 😊 Рада взаимной симпатии." },
+      { from: "them", text: "Как проходит твой день?" },
+    ],
+  });
 
-function LikedCard({ profile, t, language }) {
-  const [photoIndex, setPhotoIndex] = useState(0)
+  const currentProfile = profiles[currentIndex] || null;
+  const cardRef = useRef(null);
+  const dragRef = useRef({
+    active: false,
+    startX: 0,
+    startY: 0,
+    dx: 0,
+    dy: 0,
+    moved: false,
+  });
 
-  return (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: "28px",
-        overflow: "hidden",
-        boxShadow: "0 20px 46px rgba(31,20,39,0.09)"
-      }}
-    >
-      <div style={{ position: "relative", height: "320px" }}>
-        <PhotoSwitcher activePhoto={photoIndex} setActivePhoto={setPhotoIndex} t={t} />
-        <img
-          src={profile.photos[photoIndex]}
-          alt={profile.name}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block"
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0.04) 48%, transparent)"
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: "18px",
-            right: "18px",
-            bottom: "18px",
-            color: "#fff"
-          }}
-        >
-          <div style={{ fontSize: "30px", fontWeight: "900", lineHeight: "1" }}>
-            {profile.name}, {profile.age}
-          </div>
-          <div style={{ marginTop: "8px", fontWeight: "700", color: "rgba(255,255,255,0.9)" }}>
-            {profile.city} • {profile.distance} {t.miles}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ padding: "18px" }}>
-        <p style={{ marginTop: 0, color: "#5f5466", lineHeight: "1.5" }}>
-          {language === "ru" ? profile.aboutRu : profile.aboutEn}
-        </p>
-
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-          {profile.interests.map((interest) => (
-            <span
-              key={interest}
-              style={{
-                background: "#f5f2f6",
-                padding: "7px 12px",
-                borderRadius: "999px",
-                fontSize: "13px",
-                fontWeight: "700"
-              }}
-            >
-              {interest}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default function App() {
-  const [page, setPage] = useState(getPageFromHash())
-  const [language, setLanguage] = useState("ru")
-  const [selectedLocation, setSelectedLocation] = useState("All")
-  const [selectedDistance, setSelectedDistance] = useState("Any")
-  const [selectedGender, setSelectedGender] = useState("Any")
-  const [selectedInterest, setSelectedInterest] = useState("Any")
-  const [ageFrom, setAgeFrom] = useState(18)
-  const [ageTo, setAgeTo] = useState(50)
-  const [index, setIndex] = useState(0)
-  const [likedIds, setLikedIds] = useState([])
-  const [matchedIds, setMatchedIds] = useState([])
-  const [chatMap, setChatMap] = useState({})
-  const [selectedChatId, setSelectedChatId] = useState(null)
-  const [messageInput, setMessageInput] = useState("")
-  const [dragX, setDragX] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
-  const [animatingOut, setAnimatingOut] = useState(null)
-  const [isMobile, setIsMobile] = useState(isMobileWidth())
-  const [showMutualModal, setShowMutualModal] = useState(false)
-  const [mutualProfile, setMutualProfile] = useState(null)
-  const [activePhoto, setActivePhoto] = useState(0)
-
-  const startXRef = useRef(0)
-  const t = translations[language]
-
-  useEffect(() => {
-    const handleHash = () => setPage(getPageFromHash())
-    const handleResize = () => setIsMobile(isMobileWidth())
-
-    window.addEventListener("hashchange", handleHash)
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("hashchange", handleHash)
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
+  const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
+  const cityOptions = useMemo(() => {
+    if (settings.country === "All") return ["All"];
+    return ["All", ...(countriesMap[settings.country] || [])];
+  }, [settings.country]);
 
   const filteredProfiles = useMemo(() => {
-    return profiles.filter((profile) => {
-      const locationMatch =
-        selectedLocation === "All" || profile.city === selectedLocation
+    return profiles.filter((p) => {
+      const distanceValue =
+        settings.unit === "mi" ? p.distanceMi : Math.round(p.distanceMi * 1.60934);
 
-      const distanceMatch =
-        selectedDistance === "Any" || profile.distance <= selectedDistance
+      if (settings.searchMode === "nearby" && distanceValue > settings.maxDistance) {
+        return false;
+      }
 
-      const genderMatch =
-        selectedGender === "Any" || profile.gender === selectedGender
+      if (settings.country !== "All" && p.country !== settings.country) return false;
+      if (settings.city !== "All" && p.city !== settings.city) return false;
 
-      const interestMatch =
-        selectedInterest === "Any" || profile.interests.includes(selectedInterest)
+      return true;
+    });
+  }, [profiles, settings]);
 
-      const ageMatch = profile.age >= ageFrom && profile.age <= ageTo
-
-      return locationMatch && distanceMatch && genderMatch && interestMatch && ageMatch
-    })
-  }, [selectedLocation, selectedDistance, selectedGender, selectedInterest, ageFrom, ageTo])
+  const visibleDeck = filteredProfiles.filter((p) => !likedIds.includes(p.id) || matches.includes(p.id));
+  const activeDeckProfile = visibleDeck[currentIndex] || null;
 
   useEffect(() => {
-    setIndex(0)
-    setDragX(0)
-    setIsDragging(false)
-    setAnimatingOut(null)
-    setActivePhoto(0)
-  }, [selectedLocation, selectedDistance, selectedGender, selectedInterest, ageFrom, ageTo])
+    setCurrentIndex(0);
+  }, [settings.searchMode, settings.country, settings.city, settings.maxDistance, settings.unit]);
 
-  const likedProfiles = useMemo(
-    () => profiles.filter((profile) => likedIds.includes(profile.id)),
-    [likedIds]
-  )
+  useEffect(() => {
+    if (selectedChatId && !matches.includes(selectedChatId)) {
+      const firstMatch = matches[0] || null;
+      setSelectedChatId(firstMatch);
+    }
+  }, [matches, selectedChatId]);
 
-  const matchedProfiles = useMemo(
-    () => profiles.filter((profile) => matchedIds.includes(profile.id)),
-    [matchedIds]
-  )
+  const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
 
-  const currentProfile =
-    filteredProfiles.length > 0
-      ? filteredProfiles[index % filteredProfiles.length]
-      : null
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
 
-  const currentChatMessages = selectedChatId ? chatMap[selectedChatId] || [] : []
-
-  const rotation = dragX / 18
-  const likeOpacity = dragX > 0 ? Math.min(dragX / 140, 1) : 0
-  const nopeOpacity = dragX < 0 ? Math.min(Math.abs(dragX) / 140, 1) : 0
-
-  const cardTransform = useMemo(() => {
-    if (animatingOut === "right") return "translateX(900px) rotate(22deg)"
-    if (animatingOut === "left") return "translateX(-900px) rotate(-22deg)"
-    return `translateX(${dragX}px) rotate(${rotation}deg)`
-  }, [animatingOut, dragX, rotation])
-
-  const nextProfile = () => {
-    if (filteredProfiles.length === 0) return
-    setIndex((prev) => (prev + 1) % filteredProfiles.length)
-    setActivePhoto(0)
-  }
-
-  const addLike = (profile) => {
-    setLikedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]))
-
-    if (profile.mutual) {
-      setMatchedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]))
-      setChatMap((prev) => ({
+  const ensureMessages = (profile) => {
+    setMessages((prev) => {
+      if (prev[profile.id]) return prev;
+      return {
         ...prev,
-        [profile.id]:
-          prev[profile.id] ||
-          (starterMessages[profile.id] || []).map((m) => ({
-            from: m.from,
-            text: language === "ru" ? m.textRu : m.textEn
-          }))
-      }))
-      setSelectedChatId(profile.id)
-      setMutualProfile(profile)
-      setShowMutualModal(true)
+        [profile.id]: profile.starterMessages.map((text) => ({ from: "them", text })),
+      };
+    });
+  };
+
+  const handleLike = (profile) => {
+    if (!profile) return;
+    setLikedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
+
+    const makeMatch = profile.id === 1 || profile.id === 3 || profile.id === 2;
+    if (makeMatch) {
+      setMatches((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
+      ensureMessages(profile);
+      setMatchedProfile(profile);
+      setShowMatch(true);
+      setSelectedChatId(profile.id);
     }
-  }
+    goNextCard();
+  };
 
-  const animateOutAndNext = (direction) => {
-    if (!currentProfile) return
+  const handleSkip = () => {
+    goNextCard();
+  };
 
-    if (direction === "right") {
-      addLike(currentProfile)
-    }
+  const goNextCard = () => {
+    setCurrentIndex((prev) => {
+      const next = prev + 1;
+      return next >= visibleDeck.length ? prev + 1 : next;
+    });
+  };
 
-    setAnimatingOut(direction)
-
-    setTimeout(() => {
-      nextProfile()
-      setAnimatingOut(null)
-      setDragX(0)
-      setIsDragging(false)
-    }, 260)
-  }
-
-  const handlePointerDown = (e) => {
-    if (animatingOut || !currentProfile || isMobile) return
-    setIsDragging(true)
-    startXRef.current = e.clientX
-  }
-
-  const handlePointerMove = (e) => {
-    if (!isDragging || animatingOut || !currentProfile || isMobile) return
-    const delta = e.clientX - startXRef.current
-    setDragX(delta)
-  }
-
-  const handlePointerUp = () => {
-    if (!isDragging || animatingOut || !currentProfile || isMobile) return
-
-    if (dragX > 120) {
-      animateOutAndNext("right")
-      return
-    }
-
-    if (dragX < -120) {
-      animateOutAndNext("left")
-      return
-    }
-
-    setIsDragging(false)
-    setDragX(0)
-  }
-
-  const handleLike = () => {
-    if (animatingOut || !currentProfile) return
-    animateOutAndNext("right")
-  }
-
-  const handleNext = () => {
-    if (animatingOut || !currentProfile) return
-    animateOutAndNext("left")
-  }
+  const restartDeck = () => {
+    setCurrentIndex(0);
+    setLikedIds([]);
+  };
 
   const sendMessage = () => {
-    if (!selectedChatId || !messageInput.trim()) return
-
-    setChatMap((prev) => ({
+    if (!selectedChatId || !chatDraft.trim()) return;
+    setMessages((prev) => ({
       ...prev,
-      [selectedChatId]: [
-        ...(prev[selectedChatId] || []),
-        { from: "me", text: messageInput.trim() }
-      ]
-    }))
-    setMessageInput("")
-  }
+      [selectedChatId]: [...(prev[selectedChatId] || []), { from: "me", text: chatDraft.trim() }],
+    }));
+    setChatDraft("");
+  };
 
-  const filterCardStyle = {
-    background: "rgba(255,255,255,0.9)",
-    padding: "16px",
-    borderRadius: "20px",
-    boxShadow: "0 10px 30px rgba(26, 16, 34, 0.06)"
-  }
+  const animateOut = (direction) => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = "transform 0.35s ease, opacity 0.35s ease";
+    el.style.transform = `translateX(${direction === "right" ? 420 : -420}px) rotate(${
+      direction === "right" ? 16 : -16
+    }deg)`;
+    el.style.opacity = "0";
+    setTimeout(() => {
+      if (direction === "right" && activeDeckProfile) handleLike(activeDeckProfile);
+      if (direction === "left") handleSkip();
+      if (cardRef.current) {
+        cardRef.current.style.transition = "none";
+        cardRef.current.style.transform = "translateX(0px) translateY(0px) rotate(0deg)";
+        cardRef.current.style.opacity = "1";
+      }
+    }, 320);
+  };
 
-  const selectStyle = {
-    width: "100%",
-    padding: "12px",
-    borderRadius: "12px",
-    border: "1px solid #eee",
-    fontSize: "15px",
-    background: "#fff"
-  }
+  const pointerDown = (clientX, clientY) => {
+    dragRef.current = {
+      active: true,
+      startX: clientX,
+      startY: clientY,
+      dx: 0,
+      dy: 0,
+      moved: false,
+    };
+    if (cardRef.current) {
+      cardRef.current.style.transition = "none";
+    }
+  };
+
+  const pointerMove = (clientX, clientY) => {
+    if (!dragRef.current.active || !cardRef.current) return;
+
+    const dx = clientX - dragRef.current.startX;
+    const dy = clientY - dragRef.current.startY;
+
+    dragRef.current.dx = dx;
+    dragRef.current.dy = dy;
+
+    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+      dragRef.current.moved = true;
+    }
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      const rotate = dx / 18;
+      cardRef.current.style.transform = `translateX(${dx}px) translateY(${Math.min(
+        Math.max(dy, -20),
+        20
+      )}px) rotate(${rotate}deg)`;
+    }
+  };
+
+  const pointerUp = () => {
+    if (!dragRef.current.active || !cardRef.current) return;
+
+    const { dx } = dragRef.current;
+    dragRef.current.active = false;
+
+    if (dx > 110) {
+      animateOut("right");
+      return;
+    }
+
+    if (dx < -110) {
+      animateOut("left");
+      return;
+    }
+
+    cardRef.current.style.transition = "transform 0.22s ease";
+    cardRef.current.style.transform = "translateX(0px) translateY(0px) rotate(0deg)";
+  };
+
+  const onMouseDown = (e) => pointerDown(e.clientX, e.clientY);
+  const onMouseMove = (e) => pointerMove(e.clientX, e.clientY);
+  const onMouseUp = () => pointerUp();
+  const onTouchStart = (e) => {
+    const touch = e.touches[0];
+    pointerDown(touch.clientX, touch.clientY);
+  };
+  const onTouchMove = (e) => {
+    const touch = e.touches[0];
+    pointerMove(touch.clientX, touch.clientY);
+  };
+  const onTouchEnd = () => pointerUp();
+
+  const saveSettings = () => {
+    setSavedLabel(true);
+    setTimeout(() => setSavedLabel(false), 1600);
+  };
+
+  const sectionClass = settings.darkCards ? "panel panel-dark" : "panel";
 
   return (
-    <div
-      style={{
-        fontFamily: "Inter, Arial, sans-serif",
-        background:
-          "radial-gradient(circle at top, rgba(255,132,161,0.18), transparent 28%), linear-gradient(180deg, #fff8fb 0%, #fff1f4 35%, #f7f5ff 100%)",
-        minHeight: "100vh",
-        color: "#211a24"
-      }}
-    >
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 20,
-          background: "rgba(255,255,255,0.72)",
-          backdropFilter: "blur(16px)",
-          borderBottom: "1px solid rgba(0,0,0,0.04)"
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            padding: isMobile ? "14px 14px" : "18px 20px",
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            gap: isMobile ? "12px" : "18px",
-            alignItems: isMobile ? "stretch" : "center",
-            justifyContent: "space-between"
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: isMobile ? "space-between" : "flex-start",
-              gap: "14px"
-            }}
-          >
-            <div
-              style={{
-                fontSize: isMobile ? "24px" : "28px",
-                fontWeight: "900",
-                letterSpacing: "-0.8px",
-                background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent"
-              }}
-            >
-              {t.brand}
-            </div>
+    <div className={`app-shell ${settings.softMotion ? "soft-motion" : ""}`}>
+      <style>{`
+        * { box-sizing: border-box; }
+        html, body, #root {
+          margin: 0;
+          padding: 0;
+          min-height: 100%;
+          font-family: Inter, Arial, sans-serif;
+          background:
+            radial-gradient(circle at top left, rgba(255,97,141,0.10), transparent 24%),
+            radial-gradient(circle at top right, rgba(255,175,189,0.16), transparent 28%),
+            linear-gradient(180deg, #fff8fb 0%, #f8f6fb 100%);
+          color: #231b2e;
+        }
+        body {
+          overflow-x: hidden;
+        }
+        .app-shell {
+          min-height: 100vh;
+          position: relative;
+        }
+        .soft-motion::before,
+        .soft-motion::after {
+          content: "";
+          position: fixed;
+          width: 340px;
+          height: 340px;
+          border-radius: 50%;
+          filter: blur(60px);
+          opacity: 0.22;
+          z-index: 0;
+          pointer-events: none;
+          animation: floatBlob 10s ease-in-out infinite;
+        }
+        .soft-motion::before {
+          background: #ff8dad;
+          top: -60px;
+          left: -80px;
+        }
+        .soft-motion::after {
+          background: #c9b8ff;
+          right: -90px;
+          top: 140px;
+          animation-delay: -4s;
+        }
+        @keyframes floatBlob {
+          0%,100% { transform: translateY(0px) translateX(0px) scale(1); }
+          50% { transform: translateY(24px) translateX(18px) scale(1.05); }
+        }
 
-            <div style={{ display: "flex", gap: "8px" }}>
+        .page {
+          max-width: 1360px;
+          margin: 0 auto;
+          padding: 20px 18px 36px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .topbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+          padding: 14px 18px;
+          border-radius: 24px;
+          background: rgba(255,255,255,0.82);
+          backdrop-filter: blur(14px);
+          box-shadow: 0 10px 30px rgba(36, 20, 48, 0.06);
+          margin-bottom: 20px;
+          position: sticky;
+          top: 10px;
+          z-index: 40;
+        }
+
+        .brand-wrap {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        .brand {
+          font-size: 22px;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+          color: #ff5f8f;
+        }
+
+        .lang-switch {
+          display: flex;
+          gap: 8px;
+        }
+
+        .chip-btn {
+          border: none;
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-weight: 700;
+          cursor: pointer;
+          background: #f0edf3;
+          color: #2a2331;
+          transition: 0.2s ease;
+        }
+
+        .chip-btn.active {
+          background: linear-gradient(135deg, #ff5f8f, #ff8a6b);
+          color: white;
+          box-shadow: 0 10px 20px rgba(255,95,143,0.22);
+        }
+
+        .nav {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .nav-btn {
+          border: none;
+          padding: 13px 20px;
+          border-radius: 999px;
+          background: #f5f3f7;
+          color: #2b2235;
+          font-weight: 700;
+          font-size: 15px;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .nav-btn.active {
+          color: white;
+          background: linear-gradient(135deg, #ff5f8f, #ff8d6b);
+          box-shadow: 0 12px 22px rgba(255,95,143,0.24);
+        }
+
+        .hero {
+          display: grid;
+          grid-template-columns: 1.2fr 0.95fr;
+          gap: 22px;
+          align-items: stretch;
+          margin-bottom: 24px;
+        }
+
+        .hero-left,
+        .panel {
+          background: rgba(255,255,255,0.78);
+          backdrop-filter: blur(12px);
+          border-radius: 28px;
+          padding: 26px;
+          box-shadow: 0 16px 34px rgba(36, 20, 48, 0.06);
+        }
+
+        .panel-dark {
+          background: rgba(255,255,255,0.92);
+          box-shadow: 0 20px 40px rgba(26, 10, 44, 0.10);
+        }
+
+        .hero-title {
+          font-size: clamp(38px, 5vw, 74px);
+          line-height: 0.95;
+          letter-spacing: -2px;
+          margin: 0 0 18px;
+          font-weight: 900;
+        }
+
+        .hero-text {
+          font-size: 18px;
+          line-height: 1.6;
+          color: #5c5168;
+          max-width: 780px;
+          margin-bottom: 22px;
+        }
+
+        .hero-actions {
+          display: flex;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn,
+        .ghost-btn {
+          border: none;
+          border-radius: 18px;
+          padding: 16px 24px;
+          font-size: 16px;
+          font-weight: 800;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .primary-btn {
+          color: white;
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          box-shadow: 0 14px 24px rgba(255,95,143,0.24);
+        }
+
+        .secondary-btn {
+          background: #f2eef4;
+          color: #2b2235;
+        }
+
+        .ghost-btn {
+          background: rgba(255,255,255,0.75);
+          color: #2b2235;
+          border: 1px solid rgba(80,60,100,0.08);
+        }
+
+        .hero-right {
+          display: flex;
+          align-items: stretch;
+        }
+
+        .preview-card {
+          width: 100%;
+          min-height: 520px;
+          border-radius: 34px;
+          overflow: hidden;
+          position: relative;
+          background: #eee;
+          box-shadow: 0 24px 40px rgba(22, 11, 30, 0.10);
+        }
+
+        .preview-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .preview-overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 24px;
+          color: white;
+          background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.62));
+        }
+
+        .preview-badge {
+          align-self: flex-start;
+          padding: 8px 14px;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.22);
+          font-weight: 700;
+          font-size: 14px;
+          backdrop-filter: blur(10px);
+          margin-bottom: 14px;
+        }
+
+        .preview-name {
+          font-size: clamp(30px, 4vw, 52px);
+          font-weight: 900;
+          margin: 0 0 6px;
+        }
+
+        .preview-bio {
+          margin: 0;
+          font-size: 18px;
+          line-height: 1.45;
+          max-width: 85%;
+        }
+
+        .hero-mini-actions {
+          display: flex;
+          gap: 10px;
+          margin-top: 16px;
+        }
+
+        .hero-mini-actions button {
+          flex: 1;
+          border: none;
+          border-radius: 18px;
+          padding: 14px 16px;
+          font-size: 16px;
+          font-weight: 800;
+          cursor: pointer;
+        }
+
+        .hero-mini-actions .pink {
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+        }
+
+        .hero-mini-actions .light {
+          background: rgba(255,255,255,0.90);
+          color: #2b2235;
+        }
+
+        .quick-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+          margin-top: 10px;
+        }
+
+        .quick-box {
+          min-height: 220px;
+        }
+
+        .quick-num {
+          width: 48px;
+          height: 48px;
+          border-radius: 16px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+          font-weight: 900;
+          margin-bottom: 18px;
+        }
+
+        .section-title {
+          margin: 0 0 8px;
+          font-size: clamp(30px, 4vw, 64px);
+          font-weight: 900;
+          letter-spacing: -1.6px;
+        }
+
+        .section-subtitle {
+          margin: 0 0 24px;
+          font-size: 18px;
+          color: #665b70;
+        }
+
+        .profiles-layout,
+        .messages-layout,
+        .likes-layout,
+        .settings-layout,
+        .profile-layout {
+          display: grid;
+          gap: 18px;
+        }
+
+        .profiles-layout {
+          grid-template-columns: 380px minmax(0, 1fr);
+          align-items: start;
+        }
+
+        .settings-layout {
+          grid-template-columns: 360px minmax(0, 1fr);
+        }
+
+        .likes-layout {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .messages-layout {
+          grid-template-columns: 320px minmax(0, 1fr);
+          min-height: 640px;
+        }
+
+        .profile-layout {
+          grid-template-columns: 340px minmax(0, 1fr);
+        }
+
+        .settings-group {
+          display: grid;
+          gap: 14px;
+        }
+
+        .field {
+          display: grid;
+          gap: 8px;
+        }
+
+        .field label {
+          font-weight: 700;
+          font-size: 14px;
+          color: #544a60;
+        }
+
+        .field select,
+        .field input {
+          width: 100%;
+          border-radius: 16px;
+          border: 1px solid rgba(95, 80, 110, 0.12);
+          background: #fcfbfd;
+          padding: 14px 15px;
+          font-size: 15px;
+          outline: none;
+        }
+
+        .range-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          font-weight: 800;
+        }
+
+        .toggle-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          padding: 14px 0;
+          border-bottom: 1px solid rgba(100, 80, 120, 0.08);
+        }
+
+        .toggle-row:last-child {
+          border-bottom: none;
+        }
+
+        .toggle-row input {
+          width: 22px;
+          height: 22px;
+        }
+
+        .save-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(70, 199, 121, 0.12);
+          color: #159552;
+          padding: 10px 14px;
+          border-radius: 999px;
+          font-weight: 800;
+          margin-top: 8px;
+        }
+
+        .deck-wrap {
+          position: relative;
+          min-height: 720px;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+        }
+
+        .swipe-card {
+          width: 100%;
+          max-width: 520px;
+          height: 720px;
+          border-radius: 34px;
+          overflow: hidden;
+          background: #f0edf3;
+          box-shadow: 0 30px 50px rgba(25, 10, 38, 0.14);
+          position: relative;
+          user-select: none;
+          touch-action: pan-y;
+          cursor: grab;
+        }
+
+        .swipe-card:active {
+          cursor: grabbing;
+        }
+
+        .swipe-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          pointer-events: none;
+        }
+
+        .card-topbar {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          right: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 3;
+        }
+
+        .photo-count,
+        .star-btn,
+        .distance-pill {
+          background: rgba(255,255,255,0.18);
+          backdrop-filter: blur(10px);
+          color: white;
+          border: none;
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-size: 14px;
+          font-weight: 800;
+        }
+
+        .star-btn {
+          cursor: pointer;
+          font-size: 18px;
+          width: 46px;
+          height: 46px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .star-btn.active {
+          background: linear-gradient(135deg, #ffd64d, #ffb300);
+          color: #3a2800;
+        }
+
+        .card-overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 22px;
+          background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.64));
+          color: white;
+        }
+
+        .profile-line {
+          display: flex;
+          align-items: end;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 8px;
+        }
+
+        .profile-name {
+          font-size: clamp(28px, 4vw, 42px);
+          font-weight: 900;
+          margin: 0;
+          letter-spacing: -1px;
+        }
+
+        .profile-meta {
+          font-size: 14px;
+          opacity: 0.95;
+          font-weight: 700;
+          margin-bottom: 8px;
+        }
+
+        .profile-bio {
+          margin: 0 0 16px;
+          font-size: 16px;
+          line-height: 1.5;
+          max-width: 90%;
+        }
+
+        .card-action-row {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+        }
+
+        .round-action {
+          width: 62px;
+          height: 62px;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          font-size: 22px;
+          font-weight: 900;
+          box-shadow: 0 14px 28px rgba(20, 10, 28, 0.20);
+        }
+
+        .round-action.skip {
+          background: rgba(255,255,255,0.90);
+          color: #5d5168;
+        }
+
+        .round-action.like {
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+        }
+
+        .round-action.favorite {
+          background: linear-gradient(135deg, #ffd54a, #ffb200);
+          color: #3b2800;
+        }
+
+        .card-side-info {
+          display: grid;
+          gap: 14px;
+        }
+
+        .mini-profile-list,
+        .match-list,
+        .favorite-list {
+          display: grid;
+          gap: 12px;
+        }
+
+        .mini-profile-item,
+        .chat-list-item,
+        .favorite-item,
+        .match-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px;
+          border-radius: 20px;
+          background: rgba(248, 245, 250, 0.95);
+          transition: 0.2s ease;
+        }
+
+        .mini-profile-item:hover,
+        .chat-list-item:hover,
+        .favorite-item:hover,
+        .match-item:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 10px 20px rgba(34, 19, 46, 0.06);
+        }
+
+        .mini-profile-item img,
+        .chat-list-item img,
+        .favorite-item img,
+        .match-item img,
+        .profile-avatar img {
+          width: 58px;
+          height: 58px;
+          border-radius: 50%;
+          object-fit: cover;
+          flex-shrink: 0;
+        }
+
+        .chat-list-item {
+          cursor: pointer;
+        }
+
+        .chat-list-item.active {
+          background: linear-gradient(135deg, rgba(255,95,143,0.12), rgba(255,139,110,0.12));
+          border: 1px solid rgba(255,95,143,0.14);
+        }
+
+        .item-title {
+          font-weight: 800;
+          font-size: 18px;
+          margin: 0 0 2px;
+        }
+
+        .item-sub {
+          color: #685d73;
+          font-size: 14px;
+          margin: 0;
+        }
+
+        .empty-state {
+          min-height: 320px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          gap: 10px;
+          color: #655b70;
+        }
+
+        .message-panel {
+          display: grid;
+          grid-template-rows: auto 1fr auto;
+          min-height: 640px;
+        }
+
+        .message-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding-bottom: 14px;
+          border-bottom: 1px solid rgba(100,80,120,0.08);
+        }
+
+        .message-header img {
+          width: 58px;
+          height: 58px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .message-body {
+          padding: 18px 4px 18px 0;
+          overflow: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .bubble {
+          max-width: 78%;
+          padding: 13px 16px;
+          border-radius: 20px;
+          font-size: 16px;
+          line-height: 1.45;
+        }
+
+        .bubble.them {
+          align-self: flex-start;
+          background: #f1edf4;
+          color: #2b2235;
+        }
+
+        .bubble.me {
+          align-self: flex-end;
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+        }
+
+        .message-input-row {
+          display: flex;
+          gap: 10px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(100,80,120,0.08);
+        }
+
+        .message-input-row input {
+          flex: 1;
+          border-radius: 16px;
+          border: 1px solid rgba(95,80,110,0.12);
+          padding: 14px 15px;
+          font-size: 15px;
+          outline: none;
+          background: #fcfbfd;
+        }
+
+        .mutual-modal {
+          position: fixed;
+          inset: 0;
+          background: rgba(20, 8, 30, 0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 18px;
+          z-index: 100;
+          animation: fadeIn 0.22s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .mutual-box {
+          width: min(520px, 100%);
+          border-radius: 30px;
+          padding: 28px;
+          background:
+            radial-gradient(circle at top center, rgba(255,255,255,0.18), transparent 35%),
+            linear-gradient(135deg, #ff5f8f 0%, #ff8b6e 100%);
+          color: white;
+          box-shadow: 0 24px 50px rgba(25, 10, 35, 0.26);
+          text-align: center;
+          transform: scale(1);
+          animation: popIn 0.26s ease;
+        }
+
+        @keyframes popIn {
+          from { transform: scale(0.92) translateY(18px); opacity: 0; }
+          to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .mutual-avatars {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+
+        .mutual-avatars img {
+          width: 94px;
+          height: 94px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 4px solid rgba(255,255,255,0.5);
+          box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+        }
+
+        .heart {
+          font-size: 34px;
+          animation: pulseHeart 1.1s ease-in-out infinite;
+        }
+
+        @keyframes pulseHeart {
+          0%,100% { transform: scale(1); }
+          50% { transform: scale(1.18); }
+        }
+
+        .profile-page-grid {
+          display: grid;
+          grid-template-columns: 320px 1fr;
+          gap: 18px;
+        }
+
+        .profile-avatar {
+          text-align: center;
+        }
+
+        .profile-avatar img {
+          width: 180px;
+          height: 180px;
+          border-radius: 50%;
+          margin-bottom: 16px;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+          margin-top: 18px;
+        }
+
+        .stat-box {
+          border-radius: 20px;
+          background: #faf7fc;
+          padding: 18px;
+          text-align: center;
+        }
+
+        .stat-num {
+          font-size: 28px;
+          font-weight: 900;
+          margin-bottom: 4px;
+        }
+
+        .phone-bottom-nav {
+          display: none;
+        }
+
+        @media (max-width: 1080px) {
+          .hero {
+            grid-template-columns: 1fr;
+          }
+          .profiles-layout,
+          .settings-layout,
+          .messages-layout,
+          .profile-layout,
+          .profile-page-grid,
+          .likes-layout {
+            grid-template-columns: 1fr;
+          }
+          .quick-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 760px) {
+          .page {
+            padding: 12px 12px 96px;
+          }
+          .topbar {
+            position: static;
+            border-radius: 22px;
+            padding: 14px;
+          }
+          .nav {
+            display: none;
+          }
+          .brand {
+            font-size: 20px;
+          }
+          .hero-left, .panel {
+            border-radius: 24px;
+            padding: 18px;
+          }
+          .hero-title,
+          .section-title {
+            letter-spacing: -1.2px;
+          }
+          .hero-text,
+          .section-subtitle {
+            font-size: 16px;
+          }
+          .preview-card {
+            min-height: 440px;
+            border-radius: 28px;
+          }
+          .preview-name {
+            font-size: 34px;
+          }
+          .profiles-layout {
+            gap: 14px;
+          }
+          .deck-wrap {
+            min-height: auto;
+          }
+          .swipe-card {
+            max-width: 100%;
+            width: 100%;
+            height: min(78vh, 640px);
+            border-radius: 28px;
+          }
+          .card-overlay {
+            padding: 18px;
+          }
+          .profile-name {
+            font-size: 32px;
+          }
+          .profile-bio {
+            max-width: 100%;
+            font-size: 15px;
+          }
+          .round-action {
+            width: 58px;
+            height: 58px;
+          }
+          .messages-layout {
+            min-height: auto;
+          }
+          .message-panel {
+            min-height: 72vh;
+          }
+          .message-body {
+            max-height: 46vh;
+          }
+          .bubble {
+            max-width: 88%;
+            font-size: 15px;
+          }
+          .phone-bottom-nav {
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            padding: 8px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 16px 34px rgba(29, 14, 40, 0.12);
+            z-index: 60;
+          }
+          .phone-tab-btn {
+            border: none;
+            background: transparent;
+            padding: 10px 6px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #5b5066;
+            cursor: pointer;
+          }
+          .phone-tab-btn.active {
+            background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+            color: white;
+          }
+        }
+      `}</style>
+
+      <div className="page">
+        <header className="topbar">
+          <div className="brand-wrap">
+            <div className="brand">{t.brand}</div>
+            <div className="lang-switch">
               <button
-                onClick={() => setLanguage("ru")}
-                style={{
-                  border: "none",
-                  borderRadius: "10px",
-                  padding: "8px 12px",
-                  cursor: "pointer",
-                  fontWeight: "700",
-                  background: language === "ru" ? "#1f1722" : "#f0edf1",
-                  color: language === "ru" ? "#fff" : "#221c26"
-                }}
+                className={`chip-btn ${lang === "ru" ? "active" : ""}`}
+                onClick={() => setLang("ru")}
               >
                 RU
               </button>
               <button
-                onClick={() => setLanguage("en")}
-                style={{
-                  border: "none",
-                  borderRadius: "10px",
-                  padding: "8px 12px",
-                  cursor: "pointer",
-                  fontWeight: "700",
-                  background: language === "en" ? "#1f1722" : "#f0edf1",
-                  color: language === "en" ? "#fff" : "#221c26"
-                }}
+                className={`chip-btn ${lang === "en" ? "active" : ""}`}
+                onClick={() => setLang("en")}
               >
                 EN
               </button>
             </div>
           </div>
 
-          <nav
-            style={{
-              display: "flex",
-              gap: "10px",
-              flexWrap: "wrap",
-              justifyContent: isMobile ? "center" : "flex-end"
-            }}
-          >
-            <NavLink href="/" label={t.navHome} currentPage={page} mobile={isMobile} />
-            <NavLink href="/profiles" label={t.navFeed} currentPage={page} mobile={isMobile} />
-            <NavLink href="/likes" label={t.navLikes} currentPage={page} mobile={isMobile} />
-            <NavLink href="/messages" label={t.navMessages} currentPage={page} mobile={isMobile} />
-            <NavLink href="/profile" label={t.navProfile} currentPage={page} mobile={isMobile} />
+          <nav className="nav">
+            <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+              {t.navHome}
+            </button>
+            <button className={`nav-btn ${tab === "profiles" ? "active" : ""}`} onClick={() => setTab("profiles")}>
+              {t.navProfiles}
+            </button>
+            <button className={`nav-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
+              {t.navLikes}
+            </button>
+            <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+              {t.navMessages}
+            </button>
+            <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+              {t.navProfile}
+            </button>
+            <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
+              {t.navSettings}
+            </button>
           </nav>
-        </div>
-      </header>
+        </header>
 
-      <main
-        style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
-          padding: isMobile ? "20px 14px 60px" : "34px 20px 90px"
-        }}
-      >
-        {page === "/" && (
+        {tab === "home" && (
           <>
-            <section
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "1.1fr 0.9fr",
-                gap: "26px",
-                alignItems: "center",
-                paddingTop: isMobile ? "10px" : "20px"
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    display: "inline-block",
-                    padding: "8px 14px",
-                    borderRadius: "999px",
-                    background: "rgba(255,255,255,0.8)",
-                    border: "1px solid rgba(0,0,0,0.05)",
-                    fontWeight: "700",
-                    fontSize: "14px",
-                    marginBottom: "16px"
-                  }}
-                >
-                  {t.heroBadge}
-                </div>
-
-                <h1
-                  style={{
-                    margin: "0 0 18px",
-                    fontSize: isMobile ? "40px" : "72px",
-                    lineHeight: "0.98",
-                    letterSpacing: "-2px",
-                    fontWeight: "900"
-                  }}
-                >
-                  {t.heroTitle}
-                </h1>
-
-                <p
-                  style={{
-                    margin: "0 0 26px",
-                    fontSize: isMobile ? "17px" : "21px",
-                    lineHeight: "1.55",
-                    color: "#5e5364",
-                    maxWidth: "720px"
-                  }}
-                >
-                  {t.heroText}
-                </p>
-
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "12px",
-                    flexWrap: "wrap"
-                  }}
-                >
-                  <a
-                    href="#/profiles"
-                    style={{
-                      textDecoration: "none",
-                      background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                      color: "#fff",
-                      padding: "16px 24px",
-                      borderRadius: "18px",
-                      fontWeight: "800",
-                      boxShadow: "0 18px 38px rgba(255,105,130,0.22)"
-                    }}
-                  >
+            <section className="hero">
+              <div className="hero-left">
+                <h1 className="hero-title">{t.heroTitle}</h1>
+                <p className="hero-text">{t.heroText}</p>
+                <div className="hero-actions">
+                  <button className="primary-btn" onClick={() => setTab("profiles")}>
                     {t.heroPrimary}
-                  </a>
-
-                  <a
-                    href="#/messages"
-                    style={{
-                      textDecoration: "none",
-                      background: "rgba(255,255,255,0.82)",
-                      color: "#241d29",
-                      padding: "16px 24px",
-                      borderRadius: "18px",
-                      fontWeight: "800",
-                      border: "1px solid rgba(0,0,0,0.05)"
-                    }}
-                  >
+                  </button>
+                  <button className="secondary-btn" onClick={() => setTab("messages")}>
                     {t.heroSecondary}
-                  </a>
+                  </button>
                 </div>
               </div>
 
-              <div
-                style={{
-                  position: "relative",
-                  minHeight: isMobile ? "420px" : "620px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    width: isMobile ? "82%" : "420px",
-                    height: isMobile ? "360px" : "560px",
-                    background: "rgba(255,255,255,0.48)",
-                    borderRadius: "34px",
-                    transform: "rotate(-8deg)",
-                    boxShadow: "0 18px 40px rgba(26,16,34,0.05)"
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    width: isMobile ? "82%" : "420px",
-                    height: isMobile ? "360px" : "560px",
-                    background: "rgba(255,255,255,0.64)",
-                    borderRadius: "34px",
-                    transform: "rotate(7deg)",
-                    boxShadow: "0 18px 40px rgba(26,16,34,0.07)"
-                  }}
-                />
-                <div
-                  style={{
-                    width: isMobile ? "88%" : "430px",
-                    background: "#fff",
-                    borderRadius: "36px",
-                    overflow: "hidden",
-                    boxShadow: "0 30px 70px rgba(31,20,39,0.14)",
-                    position: "relative"
-                  }}
-                >
-                  <div style={{ position: "relative", height: isMobile ? "360px" : "520px" }}>
-                    <PhotoSwitcher activePhoto={activePhoto} setActivePhoto={setActivePhoto} t={t} />
-                    <img
-                      src={profiles[0].photos[activePhoto]}
-                      alt={profiles[0].name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        display: "block"
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(to top, rgba(0,0,0,0.68), rgba(0,0,0,0.05) 48%, transparent)"
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        left: "22px",
-                        right: "22px",
-                        bottom: "22px",
-                        color: "#fff"
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "inline-block",
-                          padding: "8px 13px",
-                          borderRadius: "999px",
-                          background: "rgba(255,255,255,0.16)",
-                          backdropFilter: "blur(8px)",
-                          fontWeight: "700",
-                          marginBottom: "12px"
-                        }}
-                      >
-                        {profiles[0].city} • {profiles[0].distance} {t.miles}
-                      </div>
-
-                      <div
-                        style={{
-                          fontSize: isMobile ? "30px" : "42px",
-                          fontWeight: "900",
-                          lineHeight: "1",
-                          marginBottom: "10px"
-                        }}
-                      >
-                        {profiles[0].name}, {profiles[0].age}
-                      </div>
-
-                      <div
-                        style={{
-                          maxWidth: "330px",
-                          lineHeight: "1.45",
-                          color: "rgba(255,255,255,0.9)"
-                        }}
-                      >
-                        {language === "ru" ? profiles[0].aboutRu : profiles[0].aboutEn}
-                      </div>
+              <div className="hero-right">
+                <div className="preview-card">
+                  <img src={profiles[0].photos[0]} alt={profiles[0].name} />
+                  <div className="preview-overlay">
+                    <div className="preview-badge">
+                      {profiles[0].city} • {profiles[0].distanceMi} {t.miles}
                     </div>
-                  </div>
-
-                  <div style={{ padding: "18px 18px 20px" }}>
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      <a
-                        href="#/profiles"
-                        style={{
-                          flex: 1,
-                          textAlign: "center",
-                          textDecoration: "none",
-                          background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                          color: "#fff",
-                          padding: "14px",
-                          borderRadius: "16px",
-                          fontWeight: "800"
-                        }}
-                      >
+                    <h2 className="preview-name">
+                      {profiles[0].name}, {profiles[0].age}
+                    </h2>
+                    <p className="preview-bio">{profiles[0].bio}</p>
+                    <div className="hero-mini-actions">
+                      <button className="pink" onClick={() => setTab("profiles")}>
                         {t.heroPrimary}
-                      </a>
-                      <a
-                        href="#/profile"
-                        style={{
-                          flex: 1,
-                          textAlign: "center",
-                          textDecoration: "none",
-                          background: "#f4f2f6",
-                          color: "#241d29",
-                          padding: "14px",
-                          borderRadius: "16px",
-                          fontWeight: "800"
-                        }}
-                      >
+                      </button>
+                      <button className="light" onClick={() => setTab("profile")}>
                         {t.navProfile}
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
-                gap: "20px",
-                marginTop: isMobile ? "26px" : "40px"
-              }}
-            >
-              {[1, 2, 3].map((item) => {
-                const title =
-                  item === 1 ? t.step1Title : item === 2 ? t.step2Title : t.step3Title
-                const text =
-                  item === 1 ? t.step1Text : item === 2 ? t.step2Text : t.step3Text
-
-                return (
-                  <div
-                    key={item}
-                    style={{
-                      background: "rgba(255,255,255,0.88)",
-                      borderRadius: "26px",
-                      padding: "26px",
-                      boxShadow: "0 14px 34px rgba(26,16,34,0.05)"
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "46px",
-                        height: "46px",
-                        borderRadius: "14px",
-                        background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                        color: "#fff",
-                        fontWeight: "900",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginBottom: "16px"
-                      }}
-                    >
-                      {item}
-                    </div>
-                    <h3 style={{ marginTop: 0, fontSize: "24px" }}>{title}</h3>
-                    <p style={{ marginBottom: 0, lineHeight: "1.55", color: "#5d5364" }}>
-                      {text}
-                    </p>
-                  </div>
-                )
-              })}
+            <section className="quick-grid">
+              <div className={sectionClass + " quick-box"}>
+                <div className="quick-num">1</div>
+                <h3>{t.quick1}</h3>
+                <p>{t.quick1Text}</p>
+              </div>
+              <div className={sectionClass + " quick-box"}>
+                <div className="quick-num">2</div>
+                <h3>{t.quick2}</h3>
+                <p>{t.quick2Text}</p>
+              </div>
+              <div className={sectionClass + " quick-box"}>
+                <div className="quick-num">3</div>
+                <h3>{t.quick3}</h3>
+                <p>{t.quick3Text}</p>
+              </div>
             </section>
           </>
         )}
 
-        {page === "/profiles" && (
+        {tab === "profiles" && (
           <>
-            <section style={{ marginBottom: "26px" }}>
-              <h2
-                style={{
-                  fontSize: isMobile ? "36px" : "52px",
-                  margin: "0 0 10px",
-                  fontWeight: "900",
-                  letterSpacing: "-1.5px"
-                }}
-              >
-                {t.feedTitle}
-              </h2>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: isMobile ? "16px" : "18px",
-                  color: "#645a6a",
-                  lineHeight: "1.55"
-                }}
-              >
-                {t.feedText}
-              </p>
-            </section>
+            <h2 className="section-title">{t.profilesTitle}</h2>
+            <p className="section-subtitle">{t.profilesText}</p>
 
-            <section
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
-                gap: "16px",
-                marginBottom: "26px"
-              }}
-            >
-              <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.language}
-                </div>
-                <div style={{ display: "flex", gap: "8px" }}>
-                  <button
-                    onClick={() => setLanguage("ru")}
-                    style={{
-                      flex: 1,
-                      background: language === "ru" ? "#e91e63" : "#f3f3f7",
-                      color: language === "ru" ? "#fff" : "#222",
-                      border: "none",
-                      padding: "12px",
-                      borderRadius: "12px",
-                      cursor: "pointer",
-                      fontWeight: "700"
-                    }}
-                  >
-                    RU
-                  </button>
-                  <button
-                    onClick={() => setLanguage("en")}
-                    style={{
-                      flex: 1,
-                      background: language === "en" ? "#e91e63" : "#f3f3f7",
-                      color: language === "en" ? "#fff" : "#222",
-                      border: "none",
-                      padding: "12px",
-                      borderRadius: "12px",
-                      cursor: "pointer",
-                      fontWeight: "700"
-                    }}
-                  >
-                    EN
-                  </button>
-                </div>
-              </div>
+            <section className="profiles-layout">
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.navSettings}</h3>
+                <div className="settings-group">
+                  <div className="field">
+                    <label>{t.searchMode}</label>
+                    <select
+                      value={settings.searchMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                      }
+                    >
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.allPeople}</option>
+                    </select>
+                  </div>
 
-              <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.location}
-                </div>
-                <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)} style={selectStyle}>
-                  {locationOptions.map((location) => (
-                    <option key={location} value={location}>
-                      {location === "All" ? t.allLocations : location}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.distance}
-                </div>
-                <select
-                  value={selectedDistance}
-                  onChange={(e) =>
-                    setSelectedDistance(e.target.value === "Any" ? "Any" : Number(e.target.value))
-                  }
-                  style={selectStyle}
-                >
-                  {distanceOptions.map((distance) => (
-                    <option key={distance} value={distance}>
-                      {distance === "Any" ? t.allDistances : `${distance} ${t.miles}`}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.gender}
-                </div>
-                <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} style={selectStyle}>
-                  <option value="Any">{t.allGenders}</option>
-                  <option value="female">{t.female}</option>
-                  <option value="male">{t.male}</option>
-                </select>
-              </div>
-
-              <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.interest}
-                </div>
-                <select value={selectedInterest} onChange={(e) => setSelectedInterest(e.target.value)} style={selectStyle}>
-                  {interestOptions.map((interest) => (
-                    <option key={interest} value={interest}>
-                      {interest === "Any" ? t.allInterests : interest}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div style={filterCardStyle}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-                  <div>
-                    <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                      {t.ageFrom}
-                    </div>
-                    <select value={ageFrom} onChange={(e) => setAgeFrom(Number(e.target.value))} style={selectStyle}>
-                      {ageFromOptions.map((age) => (
-                        <option key={age} value={age}>
-                          {age}
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select
+                      value={settings.country}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          country: e.target.value,
+                          city: "All",
+                        }))
+                      }
+                    >
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.locationAll : country}
                         </option>
                       ))}
                     </select>
                   </div>
 
-                  <div>
-                    <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                      {t.ageTo}
-                    </div>
-                    <select value={ageTo} onChange={(e) => setAgeTo(Number(e.target.value))} style={selectStyle}>
-                      {ageToOptions.map((age) => (
-                        <option key={age} value={age}>
-                          {age}
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select
+                      value={settings.city}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, city: e.target.value }))
+                      }
+                    >
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.locationAll : city}
                         </option>
                       ))}
                     </select>
                   </div>
-                </div>
-              </div>
-            </section>
 
-            {!currentProfile ? (
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.9)",
-                  borderRadius: "28px",
-                  padding: "40px 28px",
-                  textAlign: "center",
-                  boxShadow: "0 16px 40px rgba(26,16,34,0.06)"
-                }}
-              >
-                <h3 style={{ marginTop: 0, fontSize: "32px" }}>{t.noProfiles}</h3>
-                <p style={{ marginBottom: 0, color: "#63596a", fontSize: "18px" }}>
-                  {t.noProfilesText}
-                </p>
-              </div>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  minHeight: isMobile ? "auto" : "760px",
-                  paddingTop: "10px"
-                }}
-              >
-                <div
-                  onPointerMove={handlePointerMove}
-                  onPointerUp={handlePointerUp}
-                  onPointerLeave={handlePointerUp}
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  {!isMobile && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        width: "520px",
-                        height: "720px",
-                        borderRadius: "36px",
-                        background: "rgba(255,255,255,0.5)",
-                        transform: "scale(0.97)",
-                        filter: "blur(2px)"
-                      }}
-                    />
-                  )}
-
-                  <div
-                    onPointerDown={handlePointerDown}
-                    style={{
-                      width: isMobile ? "100%" : "520px",
-                      maxWidth: "520px",
-                      background: "#fff",
-                      borderRadius: "36px",
-                      overflow: "hidden",
-                      boxShadow: "0 30px 70px rgba(31,20,39,0.14)",
-                      transform: isMobile ? "none" : cardTransform,
-                      transition: isDragging ? "none" : "transform 260ms ease",
-                      cursor: isMobile ? "default" : isDragging ? "grabbing" : "grab",
-                      userSelect: "none",
-                      touchAction: "none",
-                      position: "relative"
-                    }}
-                  >
-                    <div style={{ position: "relative", height: isMobile ? "430px" : "560px" }}>
-                      <PhotoSwitcher activePhoto={activePhoto} setActivePhoto={setActivePhoto} t={t} />
-                      <img
-                        src={currentProfile.photos[activePhoto]}
-                        alt={currentProfile.name}
-                        draggable="false"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          display: "block"
-                        }}
-                      />
-
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          background:
-                            "linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.08) 46%, transparent)"
-                        }}
-                      />
-
-                      {!isMobile && (
-                        <>
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: "24px",
-                              left: "24px",
-                              padding: "10px 16px",
-                              borderRadius: "14px",
-                              border: "3px solid #20c36a",
-                              color: "#20c36a",
-                              fontWeight: "900",
-                              fontSize: "24px",
-                              background: "rgba(255,255,255,0.94)",
-                              opacity: likeOpacity,
-                              transform: "rotate(-10deg)"
-                            }}
-                          >
-                            LIKE
-                          </div>
-
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: "24px",
-                              right: "24px",
-                              padding: "10px 16px",
-                              borderRadius: "14px",
-                              border: "3px solid #ff5f7b",
-                              color: "#ff5f7b",
-                              fontWeight: "900",
-                              fontSize: "24px",
-                              background: "rgba(255,255,255,0.94)",
-                              opacity: nopeOpacity,
-                              transform: "rotate(10deg)"
-                            }}
-                          >
-                            NEXT
-                          </div>
-                        </>
-                      )}
-
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: "24px",
-                          right: "24px",
-                          bottom: "24px",
-                          color: "#fff"
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: "8px",
-                            marginBottom: "14px"
-                          }}
-                        >
-                          <span
-                            style={{
-                              background: "rgba(255,255,255,0.16)",
-                              backdropFilter: "blur(8px)",
-                              padding: "8px 14px",
-                              borderRadius: "999px",
-                              fontSize: "14px",
-                              fontWeight: "700"
-                            }}
-                          >
-                            {currentProfile.city} • {currentProfile.distance} {t.miles}
-                          </span>
-
-                          {currentProfile.verified && (
-                            <span
-                              style={{
-                                background: "rgba(255,255,255,0.16)",
-                                backdropFilter: "blur(8px)",
-                                padding: "8px 14px",
-                                borderRadius: "999px",
-                                fontSize: "14px",
-                                fontWeight: "700"
-                              }}
-                            >
-                              ✓ {t.verified}
-                            </span>
-                          )}
-
-                          {currentProfile.online && (
-                            <span
-                              style={{
-                                background: "rgba(31,198,106,0.18)",
-                                backdropFilter: "blur(8px)",
-                                padding: "8px 14px",
-                                borderRadius: "999px",
-                                fontSize: "14px",
-                                fontWeight: "700",
-                                border: "1px solid rgba(31,198,106,0.32)"
-                              }}
-                            >
-                              ● {t.online}
-                            </span>
-                          )}
-                        </div>
-
-                        <h3
-                          style={{
-                            margin: "0 0 10px",
-                            fontSize: isMobile ? "34px" : "44px",
-                            fontWeight: "900",
-                            lineHeight: "1"
-                          }}
-                        >
-                          {currentProfile.name}, {currentProfile.age}
-                        </h3>
-
-                        <p
-                          style={{
-                            margin: "0 0 12px",
-                            fontSize: isMobile ? "16px" : "18px",
-                            lineHeight: "1.5",
-                            color: "rgba(255,255,255,0.92)",
-                            maxWidth: "420px"
-                          }}
-                        >
-                          {language === "ru" ? currentProfile.aboutRu : currentProfile.aboutEn}
-                        </p>
-
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                          {currentProfile.interests.map((interest) => (
-                            <span
-                              key={interest}
-                              style={{
-                                background: "rgba(255,255,255,0.14)",
-                                border: "1px solid rgba(255,255,255,0.16)",
-                                padding: "7px 12px",
-                                borderRadius: "999px",
-                                fontSize: "13px",
-                                fontWeight: "700"
-                              }}
-                            >
-                              {interest}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div style={{ padding: "20px" }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "12px",
-                          flexDirection: isMobile ? "column" : "row"
-                        }}
-                      >
-                        <button
-                          onClick={handleLike}
-                          style={{
-                            flex: 1,
-                            border: "none",
-                            background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                            color: "#fff",
-                            padding: "16px",
-                            borderRadius: "18px",
-                            fontWeight: "900",
-                            fontSize: "17px",
-                            cursor: "pointer",
-                            boxShadow: "0 16px 32px rgba(255,98,122,0.2)"
-                          }}
-                        >
-                          {t.like}
-                        </button>
-
-                        <button
-                          onClick={handleNext}
-                          style={{
-                            flex: 1,
-                            border: "none",
-                            background: "#f3f0f5",
-                            color: "#231d28",
-                            padding: "16px",
-                            borderRadius: "18px",
-                            fontWeight: "900",
-                            fontSize: "17px",
-                            cursor: "pointer"
-                          }}
-                        >
-                          {t.next}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-
-        {page === "/likes" && (
-          <>
-            <section style={{ marginBottom: "22px" }}>
-              <h2
-                style={{
-                  fontSize: isMobile ? "36px" : "52px",
-                  margin: "0 0 10px",
-                  fontWeight: "900",
-                  letterSpacing: "-1.5px"
-                }}
-              >
-                {t.likesTitle}
-              </h2>
-              <p
-                style={{
-                  margin: "0 0 18px",
-                  fontSize: isMobile ? "16px" : "18px",
-                  color: "#645a6a",
-                  lineHeight: "1.55"
-                }}
-              >
-                {t.likesText}
-              </p>
-
-              {likedProfiles.length > 0 && (
-                <button
-                  onClick={() => setLikedIds([])}
-                  style={{
-                    border: "none",
-                    background: "#1f1722",
-                    color: "#fff",
-                    padding: "12px 16px",
-                    borderRadius: "14px",
-                    fontWeight: "800",
-                    cursor: "pointer"
-                  }}
-                >
-                  {t.clearLikes}
-                </button>
-              )}
-            </section>
-
-            {likedProfiles.length === 0 ? (
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.88)",
-                  borderRadius: "28px",
-                  padding: "40px 28px",
-                  textAlign: "center",
-                  boxShadow: "0 16px 40px rgba(26,16,34,0.06)"
-                }}
-              >
-                <h3 style={{ marginTop: 0, fontSize: "30px" }}>{t.noLikes}</h3>
-                <p style={{ marginBottom: 0, color: "#63596a", fontSize: "18px" }}>
-                  {t.noLikesText}
-                </p>
-              </div>
-            ) : (
-              <section
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
-                  gap: "18px"
-                }}
-              >
-                {likedProfiles.map((profile) => (
-                  <LikedCard key={profile.id} profile={profile} t={t} language={language} />
-                ))}
-              </section>
-            )}
-          </>
-        )}
-
-        {page === "/messages" && (
-          <>
-            <section style={{ marginBottom: "22px" }}>
-              <h2
-                style={{
-                  fontSize: isMobile ? "36px" : "52px",
-                  margin: "0 0 10px",
-                  fontWeight: "900",
-                  letterSpacing: "-1.5px"
-                }}
-              >
-                {t.messagesTitle}
-              </h2>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: isMobile ? "16px" : "18px",
-                  color: "#645a6a",
-                  lineHeight: "1.55"
-                }}
-              >
-                {t.messagesText}
-              </p>
-            </section>
-
-            {matchedProfiles.length === 0 ? (
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.88)",
-                  borderRadius: "28px",
-                  padding: "40px 28px",
-                  textAlign: "center",
-                  boxShadow: "0 16px 40px rgba(26,16,34,0.06)"
-                }}
-              >
-                <h3 style={{ marginTop: 0, fontSize: "30px" }}>{t.noMessages}</h3>
-                <p style={{ marginBottom: 0, color: "#63596a", fontSize: "18px" }}>
-                  {t.noMessagesText}
-                </p>
-              </div>
-            ) : (
-              <section
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : "320px 1fr",
-                  gap: "18px"
-                }}
-              >
-                <div
-                  style={{
-                    background: "#fff",
-                    borderRadius: "28px",
-                    padding: "14px",
-                    boxShadow: "0 20px 46px rgba(31,20,39,0.09)"
-                  }}
-                >
-                  {matchedProfiles.map((profile) => (
-                    <button
-                      key={profile.id}
-                      onClick={() => setSelectedChatId(profile.id)}
-                      style={{
-                        width: "100%",
-                        border: "none",
-                        background: selectedChatId === profile.id ? "#f6eef4" : "transparent",
-                        padding: "12px",
-                        borderRadius: "18px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "12px",
-                        cursor: "pointer",
-                        textAlign: "left",
-                        marginBottom: "8px"
-                      }}
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select
+                      value={settings.unit}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, unit: e.target.value }))
+                      }
                     >
-                      <img
-                        src={profile.photos[0]}
-                        alt={profile.name}
-                        style={{
-                          width: "54px",
-                          height: "54px",
-                          borderRadius: "16px",
-                          objectFit: "cover"
-                        }}
-                      />
-                      <div>
-                        <div style={{ fontWeight: "800", fontSize: "16px", color: "#1f1722" }}>
-                          {profile.name}
-                        </div>
-                        <div style={{ fontSize: "13px", color: "#7b6f80" }}>
-                          {language === "ru"
-                            ? profile.online ? "Онлайн" : profile.city
-                            : profile.online ? "Online" : profile.city}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-
-                <div
-                  style={{
-                    background: "#fff",
-                    borderRadius: "28px",
-                    padding: "18px",
-                    boxShadow: "0 20px 46px rgba(31,20,39,0.09)",
-                    minHeight: "520px",
-                    display: "flex",
-                    flexDirection: "column"
-                  }}
-                >
-                  {!selectedChatId ? (
-                    <div
-                      style={{
-                        flex: 1,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#746879",
-                        fontSize: "18px",
-                        textAlign: "center"
-                      }}
-                    >
-                      {t.selectChat}
-                    </div>
-                  ) : (
-                    <>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "12px",
-                          borderBottom: "1px solid #f0e9f0",
-                          paddingBottom: "14px",
-                          marginBottom: "14px"
-                        }}
-                      >
-                        <img
-                          src={profiles.find((p) => p.id === selectedChatId)?.photos[0]}
-                          alt=""
-                          style={{
-                            width: "56px",
-                            height: "56px",
-                            borderRadius: "16px",
-                            objectFit: "cover"
-                          }}
-                        />
-                        <div>
-                          <div style={{ fontWeight: "900", fontSize: "18px" }}>
-                            {profiles.find((p) => p.id === selectedChatId)?.name}
-                          </div>
-                          <div style={{ color: "#7e7283", fontSize: "14px" }}>
-                            {language === "ru"
-                              ? profiles.find((p) => p.id === selectedChatId)?.online
-                                ? "Онлайн"
-                                : "Не в сети"
-                              : profiles.find((p) => p.id === selectedChatId)?.online
-                                ? "Online"
-                                : "Offline"}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div
-                        style={{
-                          flex: 1,
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "10px",
-                          paddingBottom: "14px"
-                        }}
-                      >
-                        {currentChatMessages.map((msg, idx) => (
-                          <div
-                            key={idx}
-                            style={{
-                              maxWidth: "72%",
-                              alignSelf: msg.from === "me" ? "flex-end" : "flex-start",
-                              background: msg.from === "me"
-                                ? "linear-gradient(135deg, #ff4d8d, #ff7a59)"
-                                : "#f4f1f5",
-                              color: msg.from === "me" ? "#fff" : "#241d29",
-                              padding: "12px 14px",
-                              borderRadius: "18px",
-                              fontSize: "15px",
-                              lineHeight: "1.45"
-                            }}
-                          >
-                            {msg.text}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "10px",
-                          borderTop: "1px solid #f0e9f0",
-                          paddingTop: "14px",
-                          flexDirection: isMobile ? "column" : "row"
-                        }}
-                      >
-                        <input
-                          value={messageInput}
-                          onChange={(e) => setMessageInput(e.target.value)}
-                          placeholder={t.writeMessage}
-                          style={{
-                            flex: 1,
-                            padding: "14px 16px",
-                            borderRadius: "16px",
-                            border: "1px solid #ebe4eb",
-                            fontSize: "15px",
-                            outline: "none"
-                          }}
-                        />
-                        <button
-                          onClick={sendMessage}
-                          style={{
-                            border: "none",
-                            background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                            color: "#fff",
-                            padding: "14px 18px",
-                            borderRadius: "16px",
-                            fontWeight: "900",
-                            cursor: "pointer"
-                          }}
-                        >
-                          {t.send}
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </section>
-            )}
-          </>
-        )}
-
-        {page === "/profile" && (
-          <>
-            <section style={{ marginBottom: "26px" }}>
-              <h2
-                style={{
-                  fontSize: isMobile ? "36px" : "52px",
-                  margin: "0 0 10px",
-                  fontWeight: "900",
-                  letterSpacing: "-1.5px"
-                }}
-              >
-                {t.profileTitle}
-              </h2>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: isMobile ? "16px" : "18px",
-                  color: "#645a6a",
-                  lineHeight: "1.55"
-                }}
-              >
-                {t.profileText}
-              </p>
-            </section>
-
-            <section
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "360px 1fr",
-                gap: "20px"
-              }}
-            >
-              <div
-                style={{
-                  background: "#fff",
-                  borderRadius: "30px",
-                  overflow: "hidden",
-                  boxShadow: "0 20px 46px rgba(31,20,39,0.09)"
-                }}
-              >
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px", background: "#f5eff4" }}>
-                  <img
-                    src="https://randomuser.me/api/portraits/men/77.jpg"
-                    alt="Профиль 1"
-                    style={{ width: "100%", height: "240px", objectFit: "cover", display: "block" }}
-                  />
-                  <img
-                    src="https://randomuser.me/api/portraits/men/78.jpg"
-                    alt="Профиль 2"
-                    style={{ width: "100%", height: "240px", objectFit: "cover", display: "block" }}
-                  />
-                </div>
-              </div>
-
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.9)",
-                  borderRadius: "30px",
-                  padding: isMobile ? "22px" : "28px",
-                  boxShadow: "0 20px 46px rgba(31,20,39,0.07)"
-                }}
-              >
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                    gap: "16px"
-                  }}
-                >
-                  <div style={filterCardStyle}>
-                    <div style={{ fontSize: "13px", color: "#7a707f", marginBottom: "6px", fontWeight: "700" }}>
-                      {t.profileName}
-                    </div>
-                    <div style={{ fontSize: "18px", fontWeight: "800" }}>Alex</div>
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
                   </div>
 
-                  <div style={filterCardStyle}>
-                    <div style={{ fontSize: "13px", color: "#7a707f", marginBottom: "6px", fontWeight: "700" }}>
-                      {t.profileAge}
-                    </div>
-                    <div style={{ fontSize: "18px", fontWeight: "800" }}>30</div>
-                  </div>
-
-                  <div style={filterCardStyle}>
-                    <div style={{ fontSize: "13px", color: "#7a707f", marginBottom: "6px", fontWeight: "700" }}>
-                      {t.profileCity}
-                    </div>
-                    <div style={{ fontSize: "18px", fontWeight: "800" }}>Los Angeles</div>
-                  </div>
-
-                  <div style={filterCardStyle}>
-                    <div style={{ fontSize: "13px", color: "#7a707f", marginBottom: "6px", fontWeight: "700" }}>
-                      {t.verified}
-                    </div>
-                    <div style={{ fontSize: "18px", fontWeight: "800" }}>✓</div>
-                  </div>
-                </div>
-
-                <div style={{ ...filterCardStyle, marginTop: "16px" }}>
-                  <div style={{ fontSize: "13px", color: "#7a707f", marginBottom: "6px", fontWeight: "700" }}>
-                    {t.profileAbout}
-                  </div>
-                  <div style={{ fontSize: "17px", lineHeight: "1.6", color: "#4f4555" }}>
-                    {language === "ru"
-                      ? "Здесь позже будет настоящая страница профиля пользователя: фото, описание, интересы, анкета и настройки."
-                      : "This will later become the real user profile page with photos, bio, interests, profile details, and settings."}
-                  </div>
-                </div>
-
-                <div style={{ ...filterCardStyle, marginTop: "16px" }}>
-                  <div style={{ fontSize: "13px", color: "#7a707f", marginBottom: "10px", fontWeight: "700" }}>
-                    {t.profileInterests}
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                    {["Music", "Travel", "Business", "Style"].map((interest) => (
-                      <span
-                        key={interest}
-                        style={{
-                          background: "#f5f2f6",
-                          padding: "8px 12px",
-                          borderRadius: "999px",
-                          fontSize: "13px",
-                          fontWeight: "700"
-                        }}
-                      >
-                        {interest}
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <div className="range-row">
+                      <span>
+                        {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
                       </span>
-                    ))}
+                    </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={settings.maxDistance}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          maxDistance: Number(e.target.value),
+                        }))
+                      }
+                    />
                   </div>
-                </div>
 
-                <button
-                  style={{
-                    marginTop: "18px",
-                    border: "none",
-                    background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                    color: "#fff",
-                    padding: "16px 22px",
-                    borderRadius: "18px",
-                    fontWeight: "900",
-                    fontSize: "16px",
-                    cursor: "pointer",
-                    boxShadow: "0 16px 32px rgba(255,98,122,0.2)"
-                  }}
-                >
-                  {t.editProfile}
-                </button>
+                  <div className="toggle-row">
+                    <span>{t.compactMode}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.compactMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          compactMode: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.softMotion}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.softMotion}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          softMotion: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.darkCards}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.darkCards}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          darkCards: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <button className="primary-btn" onClick={saveSettings}>
+                    {t.apply}
+                  </button>
+                  <button
+                    className="secondary-btn"
+                    onClick={() =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        searchMode: "all",
+                        country: "All",
+                        city: "All",
+                        maxDistance: 500,
+                        unit: "mi",
+                      }))
+                    }
+                  >
+                    {t.reset}
+                  </button>
+
+                  {savedLabel && <div className="save-badge">{t.settingsSaved}</div>}
+                </div>
+              </div>
+
+              <div className={sectionClass}>
+                {activeDeckProfile ? (
+                  <div className="deck-wrap">
+                    <div
+                      ref={cardRef}
+                      className="swipe-card"
+                      onMouseDown={onMouseDown}
+                      onMouseMove={onMouseMove}
+                      onMouseUp={onMouseUp}
+                      onMouseLeave={onMouseUp}
+                      onTouchStart={onTouchStart}
+                      onTouchMove={onTouchMove}
+                      onTouchEnd={onTouchEnd}
+                    >
+                      <img
+                        src={activeDeckProfile.photos[0]}
+                        alt={activeDeckProfile.name}
+                        draggable="false"
+                      />
+
+                      <div className="card-topbar">
+                        <div className="photo-count">
+                          {activeDeckProfile.photos.length}{" "}
+                          {activeDeckProfile.photos.length === 1 ? t.onePhoto : t.manyPhotos}
+                        </div>
+                        <div className="distance-pill">
+                          {settings.unit === "mi"
+                            ? `${activeDeckProfile.distanceMi} ${t.miles}`
+                            : `${Math.round(activeDeckProfile.distanceMi * 1.60934)} ${t.km}`}
+                        </div>
+                        <button
+                          className={`star-btn ${
+                            favorites.includes(activeDeckProfile.id) ? "active" : ""
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleFavorite(activeDeckProfile.id);
+                          }}
+                        >
+                          ★
+                        </button>
+                      </div>
+
+                      <div className="card-overlay">
+                        <div className="profile-line">
+                          <h3 className="profile-name">
+                            {activeDeckProfile.name}, {activeDeckProfile.age}
+                          </h3>
+                        </div>
+                        <div className="profile-meta">
+                          {activeDeckProfile.city}, {activeDeckProfile.country} •{" "}
+                          {activeDeckProfile.online ? t.online : "Offline"}
+                        </div>
+                        <p className="profile-bio">{activeDeckProfile.bio}</p>
+
+                        <div className="card-action-row">
+                          <button className="round-action skip" onClick={() => animateOut("left")}>
+                            ✕
+                          </button>
+                          <button
+                            className="round-action favorite"
+                            onClick={() => toggleFavorite(activeDeckProfile.id)}
+                          >
+                            ★
+                          </button>
+                          <button className="round-action like" onClick={() => animateOut("right")}>
+                            ♥
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="empty-state">
+                    <h3>{t.emptyDeck}</h3>
+                    <p>{t.emptyDeckText}</p>
+                    <button className="primary-btn" onClick={restartDeck}>
+                      {t.restartDeck}
+                    </button>
+                  </div>
+                )}
               </div>
             </section>
           </>
         )}
-      </main>
 
-      {showMutualModal && mutualProfile && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(20,16,26,0.45)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "20px",
-            zIndex: 50
-          }}
-        >
-          <div
-            style={{
-              width: "100%",
-              maxWidth: "520px",
-              background: "#fff",
-              borderRadius: "30px",
-              overflow: "hidden",
-              boxShadow: "0 30px 70px rgba(31,20,39,0.22)"
-            }}
-          >
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px", background: "#f4edf3" }}>
+        {tab === "likes" && (
+          <>
+            <h2 className="section-title">{t.likesTitle}</h2>
+            <p className="section-subtitle">{t.likesText}</p>
+
+            <section className="likes-layout">
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.favorites}</h3>
+                {favorites.length ? (
+                  <div className="favorite-list">
+                    {profiles
+                      .filter((p) => favorites.includes(p.id))
+                      .map((p) => (
+                        <div className="favorite-item" key={p.id}>
+                          <img src={p.avatar} alt={p.name} />
+                          <div style={{ flex: 1 }}>
+                            <div className="item-title">
+                              {p.name}, {p.age}
+                            </div>
+                            <div className="item-sub">
+                              {p.city}, {p.country}
+                            </div>
+                          </div>
+                          <button className="chip-btn active" onClick={() => setTab("profiles")}>
+                            ★
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noFavorites}</div>
+                )}
+              </div>
+
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.matches}</h3>
+                {matches.length ? (
+                  <div className="match-list">
+                    {profiles
+                      .filter((p) => matches.includes(p.id))
+                      .map((p) => (
+                        <div className="match-item" key={p.id}>
+                          <img src={p.avatar} alt={p.name} />
+                          <div style={{ flex: 1 }}>
+                            <div className="item-title">
+                              {p.name}, {p.age}
+                            </div>
+                            <div className="item-sub">
+                              {p.city}, {p.country}
+                            </div>
+                          </div>
+                          <button
+                            className="primary-btn"
+                            onClick={() => {
+                              setSelectedChatId(p.id);
+                              setTab("messages");
+                            }}
+                          >
+                            {t.openChat}
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noMatches}</div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "messages" && (
+          <>
+            <h2 className="section-title">{t.messagesTitle}</h2>
+            <p className="section-subtitle">{t.messagesText}</p>
+
+            <section className="messages-layout">
+              <div className={sectionClass}>
+                {matches.length ? (
+                  <div className="mini-profile-list">
+                    {profiles
+                      .filter((p) => matches.includes(p.id))
+                      .map((p) => (
+                        <div
+                          key={p.id}
+                          className={`chat-list-item ${selectedChatId === p.id ? "active" : ""}`}
+                          onClick={() => setSelectedChatId(p.id)}
+                        >
+                          <img src={p.avatar} alt={p.name} />
+                          <div>
+                            <div className="item-title">{p.name}</div>
+                            <div className="item-sub">{p.online ? t.online : "Offline"}</div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noMessages}</div>
+                )}
+              </div>
+
+              <div className={sectionClass}>
+                {selectedChatProfile ? (
+                  <div className="message-panel">
+                    <div className="message-header">
+                      <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
+                      <div>
+                        <div className="item-title">{selectedChatProfile.name}</div>
+                        <div className="item-sub">
+                          {selectedChatProfile.online ? t.online : "Offline"} •{" "}
+                          {selectedChatProfile.city}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="message-body">
+                      {(messages[selectedChatId] || []).map((msg, index) => (
+                        <div key={index} className={`bubble ${msg.from}`}>
+                          {msg.text}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="message-input-row">
+                      <input
+                        value={chatDraft}
+                        onChange={(e) => setChatDraft(e.target.value)}
+                        placeholder={t.messagePlaceholder}
+                      />
+                      <button className="primary-btn" onClick={sendMessage}>
+                        {t.send}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noMessages}</div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "profile" && (
+          <>
+            <h2 className="section-title">{t.profileTitle}</h2>
+            <p className="section-subtitle">{t.phoneHint}</p>
+
+            <section className="profile-page-grid">
+              <div className={sectionClass}>
+                <div className="profile-avatar">
+                  <img
+                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"
+                    alt={t.myProfileName}
+                  />
+                  <h3 style={{ margin: 0 }}>{t.myProfileName}</h3>
+                  <p style={{ color: "#655b70" }}>{t.myProfileBio}</p>
+                </div>
+              </div>
+
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.profileAbout}</h3>
+                <div className="stats-grid">
+                  <div className="stat-box">
+                    <div className="stat-num">{profiles.length}</div>
+                    <div>{t.navProfiles}</div>
+                  </div>
+                  <div className="stat-box">
+                    <div className="stat-num">{favorites.length}</div>
+                    <div>{t.favorites}</div>
+                  </div>
+                  <div className="stat-box">
+                    <div className="stat-num">{matches.length}</div>
+                    <div>{t.matches}</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "settings" && (
+          <>
+            <h2 className="section-title">{t.settingsTitle}</h2>
+            <p className="section-subtitle">{t.phoneHint}</p>
+
+            <section className="settings-layout">
+              <div className={sectionClass}>
+                <div className="settings-group">
+                  <div className="field">
+                    <label>{t.searchMode}</label>
+                    <select
+                      value={settings.searchMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                      }
+                    >
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.allPeople}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select
+                      value={settings.country}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          country: e.target.value,
+                          city: "All",
+                        }))
+                      }
+                    >
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.locationAll : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select
+                      value={settings.city}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, city: e.target.value }))
+                      }
+                    >
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.locationAll : city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select
+                      value={settings.unit}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, unit: e.target.value }))
+                      }
+                    >
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <div className="range-row">
+                      <span>
+                        {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={settings.maxDistance}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          maxDistance: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className={sectionClass}>
+                <div className="settings-group">
+                  <div className="toggle-row">
+                    <span>{t.compactMode}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.compactMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          compactMode: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.softMotion}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.softMotion}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          softMotion: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.darkCards}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.darkCards}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          darkCards: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <button className="primary-btn" onClick={saveSettings}>
+                    {t.saveSettings}
+                  </button>
+                  {savedLabel && <div className="save-badge">{t.settingsSaved}</div>}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+      </div>
+
+      <div className="phone-bottom-nav">
+        <button className={`phone-tab-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+          {t.navHome}
+        </button>
+        <button className={`phone-tab-btn ${tab === "profiles" ? "active" : ""}`} onClick={() => setTab("profiles")}>
+          {t.navProfiles}
+        </button>
+        <button className={`phone-tab-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
+          {t.navLikes}
+        </button>
+        <button className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+          {t.navMessages}
+        </button>
+        <button className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+          {t.navProfile}
+        </button>
+        <button className={`phone-tab-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
+          {t.navSettings}
+        </button>
+      </div>
+
+      {showMatch && matchedProfile && (
+        <div className="mutual-modal" onClick={() => setShowMatch(false)}>
+          <div className="mutual-box" onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ marginTop: 0, fontSize: 36 }}>{t.mutualTitle}</h2>
+            <p style={{ fontSize: 18, marginBottom: 0 }}>{t.mutualText}</p>
+
+            <div className="mutual-avatars">
               <img
-                src={mutualProfile.photos[0]}
-                alt={mutualProfile.name}
-                style={{ width: "100%", height: "220px", objectFit: "cover", display: "block" }}
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"
+                alt="Me"
               />
-              <img
-                src={mutualProfile.photos[1]}
-                alt={mutualProfile.name}
-                style={{ width: "100%", height: "220px", objectFit: "cover", display: "block" }}
-              />
+              <div className="heart">♥</div>
+              <img src={matchedProfile.avatar} alt={matchedProfile.name} />
             </div>
 
-            <div style={{ padding: "24px" }}>
-              <h3 style={{ margin: "0 0 10px", fontSize: "32px", fontWeight: "900" }}>
-                {t.mutualTitle}
-              </h3>
-              <p style={{ margin: "0 0 20px", color: "#62586a", lineHeight: "1.55", fontSize: "17px" }}>
-                {language === "ru"
-                  ? `${mutualProfile.name} тоже проявил(а) к тебе интерес. ${t.mutualText}`
-                  : `${mutualProfile.name} liked you back. ${t.mutualText}`}
-              </p>
-
-              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                <a
-                  href="#/messages"
-                  onClick={() => setShowMutualModal(false)}
-                  style={{
-                    textDecoration: "none",
-                    background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-                    color: "#fff",
-                    padding: "14px 18px",
-                    borderRadius: "16px",
-                    fontWeight: "900"
-                  }}
-                >
-                  {t.openMessages}
-                </a>
-
-                <button
-                  onClick={() => setShowMutualModal(false)}
-                  style={{
-                    border: "none",
-                    background: "#f3eef4",
-                    color: "#211a24",
-                    padding: "14px 18px",
-                    borderRadius: "16px",
-                    fontWeight: "900",
-                    cursor: "pointer"
-                  }}
-                >
-                  {t.close}
-                </button>
-              </div>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <button
+                className="secondary-btn"
+                onClick={() => {
+                  setShowMatch(false);
+                  setTab("profiles");
+                }}
+              >
+                {t.continueSwipe}
+              </button>
+              <button
+                className="ghost-btn"
+                onClick={() => {
+                  setShowMatch(false);
+                  setSelectedChatId(matchedProfile.id);
+                  setTab("messages");
+                }}
+              >
+                {t.startChat}
+              </button>
             </div>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
+
+export default App;
