@@ -12,16 +12,16 @@ const tr = {
 
     heroTitle: "Найди новые знакомства в Telegram",
     heroText:
-      "Смотри анкеты в вертикальном формате, листай фото и информацию, используй удобный поиск и начинай общение только после взаимной симпатии.",
+      "Смотри полный профиль в вертикальном формате, листай фото и информацию, используй удобный поиск и общайся только после взаимной симпатии.",
     heroPrimary: "Начать поиск",
     heroSecondary: "Открыть сообщения",
 
     card1: "Полный профиль",
-    card1t: "Анкета открывается как отдельная вертикальная страница без наложения текста на фото.",
+    card1t: "Каждая анкета открывается как отдельная вертикальная страница без наложения текста на фото.",
     card2: "Удобный поиск",
     card2t: "Фильтры по стране, городу, возрасту, полу и дистанции.",
     card3: "Выбор в любой момент",
-    card3t: "Кнопки лайка и дизлайка закреплены внизу и доступны во время всей прокрутки.",
+    card3t: "Кнопки лайка и дизлайка закреплены внизу на протяжении всей анкеты.",
 
     searchTitle: "Поиск",
     filters: "Настройки поиска",
@@ -80,14 +80,14 @@ const tr = {
     settingsTitle: "Настройки",
     settingsText: "Управляй фильтрами поиска и параметрами профиля.",
     help: "Помощь",
-    help1: "Как теперь работает просмотр анкет?",
+    help1: "Как работает просмотр анкеты?",
     help1t:
-      "Открывается сразу полный вертикальный профиль. Следующая анкета появляется только после лайка или дизлайка.",
-    help2: "Как смотреть фото и информацию?",
-    help2t:
-      "Просто прокручивай анкету вверх и вниз. Фото и блоки информации идут отдельно друг за другом.",
-    help3: "Когда можно написать человеку?",
-    help3t: "Только после взаимной симпатии. Без мэтча чат недоступен.",
+      "Профиль открывается как вертикальная страница. Листай вниз, чтобы смотреть фото и информацию. Следующая анкета появляется только после лайка или дизлайка.",
+    help2: "Когда можно написать человеку?",
+    help2t: "Только после взаимной симпатии. Без мэтча чат недоступен.",
+    help3: "Что можно увидеть в анкете?",
+    help3t:
+      "Местоположение, кого ищет человек, рост, семейное положение, возраст, знак зодиака, увлечения и фото в развернутом виде.",
 
     mutualTitle: "Взаимная симпатия!",
     mutualText: "Теперь вы можете начать общение.",
@@ -98,32 +98,23 @@ const tr = {
     photosCount: "фото",
     premium: "PREMIUM",
 
-    location: "Местоположение",
     lookingFor: "Кого ищет",
+    location: "Местоположение",
     height: "Рост",
-    relationship: "Семейное положение",
+    relationshipStatus: "Семейное положение",
     interests: "Интересы",
     report: "Пожаловаться",
     block: "Заблокировать",
-    profileBlocked: "Профиль заблокирован",
-    profileReported: "Жалоба отправлена",
-    chooseReason: "Выбери причину",
-    spam: "Спам",
-    fake: "Фейковая анкета",
-    inappropriate: "Неподходящий контент",
-    cancelAction: "Отмена",
-    confirm: "Подтвердить",
+    blocked: "Профиль заблокирован",
+    reported: "Жалоба отправлена",
+    statusSingle: "Не женат / не замужем",
+    statusDivorced: "В разводе",
+    statusOpen: "Свободен(на)",
+    statusComplicated: "Все сложно",
 
-    single: "Не женат / не замужем",
-    divorced: "В разводе",
-    relationshipOpen: "Открыт(а) к отношениям",
-    casual: "Лёгкое общение",
-    serious: "Серьёзные отношения",
-    travelTogether: "Путешествия и общение",
-
-    infoSection: "Информация",
-    gallerySection: "Фотографии",
-    nextAfterChoice: "Следующая анкета откроется после лайка или дизлайка",
+    footerHint: "Следующая анкета откроется только после лайка или дизлайка.",
+    reportReason: "Жалоба отправлена. Профиль будет проверен.",
+    blockReason: "Профиль скрыт из поиска.",
   },
   en: {
     brand: "Telegram Dating",
@@ -136,16 +127,16 @@ const tr = {
 
     heroTitle: "Find new connections in Telegram",
     heroText:
-      "Browse profiles in a vertical format, scroll photos and information, use smart search and start chatting only after a mutual match.",
+      "Browse a full vertical profile, scroll through photos and information, use smart search and chat only after a mutual match.",
     heroPrimary: "Start search",
     heroSecondary: "Open messages",
 
     card1: "Full profile",
-    card1t: "Each profile opens as a full vertical page with no text covering the photos.",
+    card1t: "Each profile opens as a separate vertical page without text covering the photos.",
     card2: "Smart search",
     card2t: "Filters by country, city, age, gender and distance.",
     card3: "Choose anytime",
-    card3t: "Like and dislike buttons stay fixed at the bottom while you scroll.",
+    card3t: "Like and dislike buttons stay fixed at the bottom during the whole profile view.",
 
     searchTitle: "Search",
     filters: "Search settings",
@@ -204,13 +195,14 @@ const tr = {
     settingsTitle: "Settings",
     settingsText: "Manage search filters and profile preferences.",
     help: "Help",
-    help1: "How does profile browsing work now?",
+    help1: "How does profile browsing work?",
     help1t:
-      "A full vertical profile opens immediately. The next profile appears only after a like or dislike.",
-    help2: "How do I browse photos and information?",
-    help2t: "Just scroll up and down. Photos and information blocks appear one after another.",
-    help3: "When can I message someone?",
-    help3t: "Only after a mutual match. No chat is available before that.",
+      "A profile opens as a vertical page. Scroll down to view photos and information. The next profile appears only after like or dislike.",
+    help2: "When can I message someone?",
+    help2t: "Only after a mutual match. No chat is available before that.",
+    help3: "What can I see in a profile?",
+    help3t:
+      "Location, who the person is looking for, height, relationship status, age, zodiac sign, interests, and photos in a full expanded view.",
 
     mutualTitle: "It's a match!",
     mutualText: "Now you can start chatting.",
@@ -221,32 +213,23 @@ const tr = {
     photosCount: "photos",
     premium: "PREMIUM",
 
-    location: "Location",
     lookingFor: "Looking for",
+    location: "Location",
     height: "Height",
-    relationship: "Relationship status",
+    relationshipStatus: "Relationship status",
     interests: "Interests",
     report: "Report",
     block: "Block",
-    profileBlocked: "Profile blocked",
-    profileReported: "Report sent",
-    chooseReason: "Choose a reason",
-    spam: "Spam",
-    fake: "Fake profile",
-    inappropriate: "Inappropriate content",
-    cancelAction: "Cancel",
-    confirm: "Confirm",
+    blocked: "Profile blocked",
+    reported: "Report sent",
+    statusSingle: "Single",
+    statusDivorced: "Divorced",
+    statusOpen: "Open to relationship",
+    statusComplicated: "It's complicated",
 
-    single: "Single",
-    divorced: "Divorced",
-    relationshipOpen: "Open to relationship",
-    casual: "Casual connection",
-    serious: "Serious relationship",
-    travelTogether: "Travel and connection",
-
-    infoSection: "Information",
-    gallerySection: "Photos",
-    nextAfterChoice: "The next profile opens only after like or dislike",
+    footerHint: "The next profile opens only after like or dislike.",
+    reportReason: "Report sent. The profile will be reviewed.",
+    blockReason: "The profile has been hidden from search.",
   },
 };
 
@@ -261,20 +244,30 @@ const countriesMap = {
     "Las Vegas",
     "Seattle",
     "Boston",
-    "Houston",
   ],
-  Canada: ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"],
-  UK: ["London", "Manchester", "Birmingham", "Liverpool", "Edinburgh"],
-  Germany: ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne"],
-  France: ["Paris", "Lyon", "Marseille", "Nice", "Toulouse"],
-  Spain: ["Madrid", "Barcelona", "Valencia", "Seville", "Malaga"],
-  Italy: ["Rome", "Milan", "Naples", "Turin", "Florence"],
-  Poland: ["Warsaw", "Krakow", "Gdansk", "Wroclaw", "Poznan"],
-  Ukraine: ["Kyiv", "Lviv", "Odesa", "Dnipro", "Kharkiv"],
-  Turkey: ["Istanbul", "Antalya", "Ankara", "Izmir", "Bursa"],
+  Russia: [
+    "Moscow",
+    "Saint Petersburg",
+    "Novosibirsk",
+    "Yekaterinburg",
+    "Kazan",
+    "Nizhny Novgorod",
+    "Sochi",
+    "Krasnodar",
+    "Rostov-on-Don",
+    "Samara",
+  ],
+  Canada: ["Toronto", "Vancouver", "Montreal", "Calgary"],
+  UK: ["London", "Manchester", "Birmingham", "Liverpool"],
+  Germany: ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+  France: ["Paris", "Lyon", "Marseille", "Nice"],
+  Spain: ["Madrid", "Barcelona", "Valencia", "Seville"],
+  Italy: ["Rome", "Milan", "Naples", "Florence"],
+  Poland: ["Warsaw", "Krakow", "Gdansk", "Wroclaw"],
+  Ukraine: ["Kyiv", "Lviv", "Odesa", "Dnipro"],
+  Turkey: ["Istanbul", "Antalya", "Ankara", "Izmir"],
   UAE: ["Dubai", "Abu Dhabi", "Sharjah"],
-  Japan: ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Sapporo"],
-  Russia: ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan", "Sochi"],
+  Japan: ["Tokyo", "Osaka", "Kyoto", "Yokohama"],
 };
 
 const zodiacOptions = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
@@ -289,16 +282,18 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 4,
     online: true,
+    lookingFor: "Серьёзные отношения",
+    lookingForEn: "Serious relationship",
+    height: "170 см",
+    heightEn: "5'7\"",
+    relationshipStatus: "statusSingle",
+    bio: "Люблю красивые места, музыку, кофе, поездки и лёгкое общение. Ценю стиль, хорошую энергетику и людей, с которыми интересно и легко.",
+    bioEn: "I love beautiful places, music, coffee, trips and easy conversations. I appreciate style, good energy and people who are interesting and easy to be around.",
+    interests: ["music", "travel", "coffee", "sunsets", "fashion"],
     zodiac: "♎",
     verified: true,
-    heightCm: 168,
-    relationshipStatus: "single",
-    lookingFor: "serious",
-    bio: "Люблю красивую подачу, музыку, поездки, кофе и лёгкое, но настоящее общение. Нравятся внимательные люди с чувством юмора и вкусом к жизни.",
-    bioEn:
-      "I love beautiful aesthetics, music, trips, coffee and easy but real communication. I like attentive people with humor and taste for life.",
-    interests: ["music", "travel", "coffee", "sunsets", "fashion"],
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=1200&q=80",
@@ -316,16 +311,18 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 12,
     online: true,
+    lookingFor: "Общение и встречи",
+    lookingForEn: "Dating and chemistry",
+    height: "168 см",
+    heightEn: "5'6\"",
+    relationshipStatus: "statusOpen",
+    bio: "Люблю прогулки у океана, кофе, вечерние огни и тёплые разговоры. Мне нравятся красивые детали и лёгкая романтика.",
+    bioEn: "I love ocean walks, coffee, city lights and warm conversations. I enjoy beautiful details and soft romance.",
+    interests: ["ocean", "coffee", "night walks", "beach", "photos"],
     zodiac: "♌",
     verified: false,
-    heightCm: 165,
-    relationshipStatus: "relationshipOpen",
-    lookingFor: "casual",
-    bio: "Люблю океан, прогулки, красивые вечера и тёплые разговоры. Мне важно, чтобы рядом был живой, лёгкий и приятный человек.",
-    bioEn:
-      "I love the ocean, walks, beautiful evenings and warm conversations. It matters to me that the person next to me feels alive, easy and pleasant.",
-    interests: ["ocean", "coffee", "night walks", "beach", "photos"],
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
@@ -343,16 +340,18 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 7,
     online: true,
+    lookingFor: "Серьёзные отношения",
+    lookingForEn: "Serious relationship",
+    height: "183 см",
+    heightEn: "6'0\"",
+    relationshipStatus: "statusSingle",
+    bio: "Ценю юмор, спорт, хорошие фильмы и настоящие эмоции. Люблю уверенное, живое общение и людей с характером.",
+    bioEn: "I value humor, sports, good movies and real emotions. I like confident, genuine communication and people with character.",
+    interests: ["sport", "movies", "humor", "fitness", "city life"],
     zodiac: "♐",
     verified: true,
-    heightCm: 182,
-    relationshipStatus: "single",
-    lookingFor: "serious",
-    bio: "Ценю юмор, спорт, хорошие фильмы и настоящие эмоции. Нравится уверенное общение без игр и лишней драмы.",
-    bioEn:
-      "I value humor, sports, good movies and real emotions. I like confident communication without games and unnecessary drama.",
-    interests: ["sport", "movies", "humor", "fitness", "city life"],
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
@@ -370,16 +369,18 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 18,
     online: false,
+    lookingFor: "Общение и свидания",
+    lookingForEn: "Dating and connection",
+    height: "186 см",
+    heightEn: "6'1\"",
+    relationshipStatus: "statusDivorced",
+    bio: "Люблю путешествия, спорт и спокойные разговоры без лишнего шума. Ценю искренность, надёжность и хорошую атмосферу.",
+    bioEn: "I love travel, sports and calm conversations without extra noise. I appreciate sincerity, reliability and a good atmosphere.",
+    interests: ["travel", "fitness", "weekends", "cars", "coffee"],
     zodiac: "♒",
     verified: false,
-    heightCm: 186,
-    relationshipStatus: "divorced",
-    lookingFor: "relationshipOpen",
-    bio: "Люблю путешествия, спорт и спокойные разговоры. Ценю искренность, зрелость и людей, с которыми по-настоящему легко.",
-    bioEn:
-      "I love travel, sports and calm conversations. I value sincerity, maturity and people it is genuinely easy to be around.",
-    interests: ["travel", "fitness", "weekends", "cars", "coffee"],
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
@@ -397,16 +398,18 @@ const initialProfiles = [
     country: "Canada",
     distanceMi: 32,
     online: true,
+    lookingFor: "Серьёзные отношения",
+    lookingForEn: "Serious relationship",
+    height: "167 см",
+    heightEn: "5'6\"",
+    relationshipStatus: "statusSingle",
+    bio: "Люблю уютные места, прогулки, музыку и красивые фотографии. Легко иду на контакт, если чувствую хорошую энергию.",
+    bioEn: "I love cozy places, walks, music and beautiful photos. I open up easily when I feel good energy.",
+    interests: ["music", "walks", "art", "coffee", "travel"],
     zodiac: "♉",
     verified: true,
-    heightCm: 170,
-    relationshipStatus: "single",
-    lookingFor: "serious",
-    bio: "Люблю уютные места, прогулки, музыку и красивые фотографии. Открываюсь людям, если чувствую хорошую энергетику.",
-    bioEn:
-      "I love cozy places, walks, music and beautiful photos. I open up to people when I feel good energy.",
-    interests: ["music", "walks", "art", "coffee", "travel"],
-    avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
@@ -424,16 +427,18 @@ const initialProfiles = [
     country: "Germany",
     distanceMi: 54,
     online: true,
+    lookingFor: "Лёгкое знакомство",
+    lookingForEn: "Casual dating",
+    height: "185 см",
+    heightEn: "6'1\"",
+    relationshipStatus: "statusOpen",
+    bio: "Люблю путешествия, музыку, спорт и стильные места. Ценю лёгкость в общении и яркую химию между людьми.",
+    bioEn: "I love travel, music, sports and stylish places. I appreciate ease in conversation and strong chemistry between people.",
+    interests: ["travel", "music", "style", "fitness", "night city"],
     zodiac: "♏",
     verified: true,
-    heightCm: 184,
-    relationshipStatus: "single",
-    lookingFor: "travelTogether",
-    bio: "Люблю путешествия, музыку, спорт и стильные места. Ценю лёгкость в общении и яркую химию между людьми.",
-    bioEn:
-      "I love travel, music, sports and stylish places. I appreciate ease in conversation and strong chemistry between people.",
-    interests: ["travel", "music", "style", "fitness", "night city"],
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
@@ -451,16 +456,18 @@ const initialProfiles = [
     country: "Spain",
     distanceMi: 65,
     online: false,
+    lookingFor: "Общение и химия",
+    lookingForEn: "Chemistry and connection",
+    height: "172 см",
+    heightEn: "5'8\"",
+    relationshipStatus: "statusOpen",
+    bio: "Обожаю море, красивые вечера, танцы и вдохновляющих людей. Люблю, когда общение естественное и без напряжения.",
+    bioEn: "I adore the sea, beautiful evenings, dancing and inspiring people. I love when conversation feels natural and relaxed.",
+    interests: ["sea", "dance", "sunsets", "travel", "fashion"],
     zodiac: "♊",
     verified: true,
-    heightCm: 167,
-    relationshipStatus: "relationshipOpen",
-    lookingFor: "casual",
-    bio: "Обожаю море, красивые вечера, танцы и вдохновляющих людей. Люблю, когда общение естественное и без напряжения.",
-    bioEn:
-      "I adore the sea, beautiful evenings, dancing and inspiring people. I love when conversation feels natural and relaxed.",
-    interests: ["sea", "dance", "sunsets", "travel", "fashion"],
-    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
@@ -478,16 +485,18 @@ const initialProfiles = [
     country: "UK",
     distanceMi: 83,
     online: true,
+    lookingFor: "Серьёзные отношения",
+    lookingForEn: "Serious relationship",
+    height: "181 см",
+    heightEn: "5'11\"",
+    relationshipStatus: "statusComplicated",
+    bio: "Люблю спокойную уверенность, хорошие разговоры и красивую городскую атмосферу. Ценю ум, вкус и чувство юмора.",
+    bioEn: "I like calm confidence, good conversations and beautiful city atmosphere. I appreciate intelligence, taste and humor.",
+    interests: ["city", "books", "coffee", "cinema", "business"],
     zodiac: "♑",
     verified: false,
-    heightCm: 180,
-    relationshipStatus: "single",
-    lookingFor: "serious",
-    bio: "Люблю спокойную уверенность, хорошие разговоры и красивую городскую атмосферу. Ценю ум, вкус и чувство юмора.",
-    bioEn:
-      "I like calm confidence, good conversations and beautiful city atmosphere. I appreciate intelligence, taste and humor.",
-    interests: ["city", "books", "coffee", "cinema", "business"],
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
@@ -505,16 +514,18 @@ const initialProfiles = [
     country: "Italy",
     distanceMi: 101,
     online: true,
+    lookingFor: "Красивое знакомство",
+    lookingForEn: "Meaningful dating",
+    height: "166 см",
+    heightEn: "5'5\"",
+    relationshipStatus: "statusSingle",
+    bio: "Люблю стиль, путешествия, вкусную еду и лёгкое живое общение. Мне нравятся уверенные и внимательные люди.",
+    bioEn: "I love style, travel, good food and easy lively conversation. I like confident and attentive people.",
+    interests: ["style", "food", "travel", "photos", "shopping"],
     zodiac: "♍",
     verified: false,
-    heightCm: 166,
-    relationshipStatus: "single",
-    lookingFor: "casual",
-    bio: "Люблю стиль, путешествия, вкусную еду и лёгкое живое общение. Мне нравятся уверенные и внимательные люди.",
-    bioEn:
-      "I love style, travel, good food and easy lively conversation. I like confident and attentive people.",
-    interests: ["style", "food", "travel", "photos", "shopping"],
-    avatar: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
@@ -528,20 +539,22 @@ const initialProfiles = [
     name: "Ethan",
     age: 27,
     gender: "male",
-    city: "Moscow",
-    country: "Russia",
+    city: "Paris",
+    country: "France",
     distanceMi: 123,
     online: false,
+    lookingFor: "Серьёзные отношения",
+    lookingForEn: "Serious relationship",
+    height: "184 см",
+    heightEn: "6'0\"",
+    relationshipStatus: "statusSingle",
+    bio: "Люблю атмосферные места, искусство, поездки и интересные разговоры. Стараюсь жить со вкусом и без лишней суеты.",
+    bioEn: "I love atmospheric places, art, trips and interesting conversations. I try to live with taste and without unnecessary rush.",
+    interests: ["art", "travel", "wine", "architecture", "music"],
     zodiac: "♈",
     verified: true,
-    heightCm: 183,
-    relationshipStatus: "single",
-    lookingFor: "serious",
-    bio: "Люблю атмосферные места, искусство, поездки и интересные разговоры. Стараюсь жить со вкусом и без лишней суеты.",
-    bioEn:
-      "I love atmospheric places, art, trips and interesting conversations. I try to live with taste and without unnecessary rush.",
-    interests: ["art", "travel", "music", "architecture", "coffee"],
-    avatar: "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80",
     photos: [
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
@@ -585,7 +598,6 @@ function App() {
   const [matches, setMatches] = useState([1]);
   const [likedYouIds] = useState([2, 4, 7]);
   const [guestIds] = useState([3, 1, 8]);
-  const [swipedIds, setSwipedIds] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState(1);
   const [chatDraft, setChatDraft] = useState("");
@@ -594,10 +606,10 @@ function App() {
   const [savedProfileLabel, setSavedProfileLabel] = useState(false);
   const [likePulse, setLikePulse] = useState(false);
   const [skipPulse, setSkipPulse] = useState(false);
-  const [actionNotice, setActionNotice] = useState("");
-  const [reportModal, setReportModal] = useState({ open: false, profile: null, reason: "spam" });
-
-  const profilePageRef = useRef(null);
+  const [notice, setNotice] = useState("");
+  const [blockedIds, setBlockedIds] = useState([]);
+  const [reportedIds, setReportedIds] = useState([]);
+  const [currentDeckIndex, setCurrentDeckIndex] = useState(0);
 
   const [settings, setSettings] = useState({
     searchMode: "nearby",
@@ -645,6 +657,8 @@ function App() {
   const [editProfile, setEditProfile] = useState(false);
   const [profileDraft, setProfileDraft] = useState(myProfile);
 
+  const profilePageRef = useRef(null);
+
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
   const cityOptions = useMemo(() => {
     if (draftSettings.country === "All") return ["All"];
@@ -653,6 +667,7 @@ function App() {
 
   const filteredProfiles = useMemo(() => {
     return profiles.filter((p) => {
+      if (blockedIds.includes(p.id)) return false;
       const distanceValue = settings.unit === "mi" ? p.distanceMi : Math.round(p.distanceMi * 1.60934);
       if (settings.searchMode === "nearby" && distanceValue > settings.maxDistance) return false;
       if (settings.country !== "All" && p.country !== settings.country) return false;
@@ -661,32 +676,34 @@ function App() {
       if (settings.gender !== "all" && p.gender !== settings.gender) return false;
       return true;
     });
-  }, [profiles, settings]);
+  }, [profiles, settings, blockedIds]);
 
-  const deckProfiles = useMemo(
-    () => filteredProfiles.filter((p) => !swipedIds.includes(p.id)),
-    [filteredProfiles, swipedIds]
-  );
-
-  const activeProfile = deckProfiles[0] || null;
+  const activeProfile = filteredProfiles[currentDeckIndex] || null;
   const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
 
   useEffect(() => {
-    if (profilePageRef.current) profilePageRef.current.scrollTop = 0;
+    if (currentDeckIndex >= filteredProfiles.length) {
+      setCurrentDeckIndex(0);
+    }
+  }, [filteredProfiles.length, currentDeckIndex]);
+
+  useEffect(() => {
+    if (profilePageRef.current) {
+      profilePageRef.current.scrollTop = 0;
+    }
   }, [activeProfile?.id]);
 
   useEffect(() => {
-    if (matches.length && !matches.includes(selectedChatId)) setSelectedChatId(matches[0]);
+    if (matches.length && !matches.includes(selectedChatId)) {
+      setSelectedChatId(matches[0]);
+    }
   }, [matches, selectedChatId]);
 
   useEffect(() => {
-    if (!actionNotice) return;
-    const timer = setTimeout(() => setActionNotice(""), 1600);
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(""), 1800);
     return () => clearTimeout(timer);
-  }, [actionNotice]);
-
-  const labelForRelationship = (value) => t[value] || value;
-  const labelForLookingFor = (value) => t[value] || value;
+  }, [notice]);
 
   const ensureMessages = (profile) => {
     setMessages((prev) => {
@@ -702,8 +719,12 @@ function App() {
     });
   };
 
-  const markSwiped = (id) => {
-    setSwipedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  const moveToNextProfile = () => {
+    setCurrentDeckIndex((prev) => {
+      if (!filteredProfiles.length) return 0;
+      if (prev + 1 >= filteredProfiles.length) return 0;
+      return prev + 1;
+    });
   };
 
   const handleLike = (profile) => {
@@ -712,7 +733,6 @@ function App() {
     setTimeout(() => setLikePulse(false), 260);
 
     const makeMatch = [1, 2, 3, 5].includes(profile.id);
-    markSwiped(profile.id);
 
     if (makeMatch) {
       setMatches((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
@@ -722,48 +742,24 @@ function App() {
       setSelectedChatId(profile.id);
       setMessageView("matches");
     }
+
+    moveToNextProfile();
   };
 
-  const handleSkip = (profile) => {
-    if (!profile) return;
+  const handleSkip = () => {
     setSkipPulse(true);
     setTimeout(() => setSkipPulse(false), 260);
-    markSwiped(profile.id);
-  };
-
-  const handleBlockProfile = (profile) => {
-    if (!profile) return;
-    setActionNotice(t.profileBlocked);
-    markSwiped(profile.id);
-  };
-
-  const confirmReport = () => {
-    if (!reportModal.profile) return;
-    setActionNotice(t.profileReported);
-    markSwiped(reportModal.profile.id);
-    setReportModal({ open: false, profile: null, reason: "spam" });
+    moveToNextProfile();
   };
 
   const restartDeck = () => {
-    setSwipedIds([]);
+    setCurrentDeckIndex(0);
     if (profilePageRef.current) profilePageRef.current.scrollTop = 0;
-  };
-
-  const sendMessage = () => {
-    if (!selectedChatId || !chatDraft.trim() || !matches.includes(selectedChatId)) return;
-    setMessages((prev) => ({
-      ...prev,
-      [selectedChatId]: [
-        ...(prev[selectedChatId] || []),
-        { from: "me", text: chatDraft.trim(), textEn: chatDraft.trim() },
-      ],
-    }));
-    setChatDraft("");
   };
 
   const applyFilters = () => {
     setSettings(draftSettings);
-    setSwipedIds([]);
+    setCurrentDeckIndex(0);
     setShowFilters(false);
   };
 
@@ -780,7 +776,19 @@ function App() {
     };
     setDraftSettings(reset);
     setSettings(reset);
-    setSwipedIds([]);
+    setCurrentDeckIndex(0);
+  };
+
+  const sendMessage = () => {
+    if (!selectedChatId || !chatDraft.trim() || !matches.includes(selectedChatId)) return;
+    setMessages((prev) => ({
+      ...prev,
+      [selectedChatId]: [
+        ...(prev[selectedChatId] || []),
+        { from: "me", text: chatDraft.trim(), textEn: chatDraft.trim() },
+      ],
+    }));
+    setChatDraft("");
   };
 
   const handleProfilePhotoUpload = (e) => {
@@ -803,6 +811,21 @@ function App() {
     setMessageView("matches");
     setTab("messages");
   };
+
+  const handleBlock = (id) => {
+    setBlockedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    setNotice(t.blockReason);
+    if (activeProfile?.id === id) {
+      moveToNextProfile();
+    }
+  };
+
+  const handleReport = (id) => {
+    setReportedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    setNotice(t.reportReason);
+  };
+
+  const relationshipLabel = (profile) => t[profile.relationshipStatus] || profile.relationshipStatus;
 
   const listProfiles =
     messageView === "matches"
@@ -827,7 +850,7 @@ function App() {
         body{overflow-x:hidden}
         button,input,select,textarea{font-family:inherit}
         .app-shell{min-height:100vh}
-        .page{max-width:1380px;margin:0 auto;padding:18px 16px 100px}
+        .page{max-width:1380px;margin:0 auto;padding:18px 16px 110px}
         .topbar,.panel{
           background:rgba(255,255,255,.84);
           backdrop-filter:blur(14px);
@@ -839,8 +862,10 @@ function App() {
         }
         .brand-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
         .brand{font-size:22px;font-weight:900;color:#ff5f8f}
-        .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{display:flex;gap:10px;flex-wrap:wrap}
-        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.round-btn,.danger-btn{
+        .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{
+          display:flex;gap:10px;flex-wrap:wrap
+        }
+        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.action-btn{
           border:none;cursor:pointer;transition:.2s ease;font-weight:800
         }
         .chip-btn,.nav-btn{
@@ -851,18 +876,19 @@ function App() {
           color:#fff;
           box-shadow:0 12px 22px rgba(255,95,143,.24)
         }
-        .primary-btn,.secondary-btn,.ghost-btn,.danger-btn{
+        .primary-btn,.secondary-btn,.ghost-btn{
           border-radius:16px;
           padding:13px 18px;
           font-size:14px
         }
-        .secondary-btn{background:#f3eef6;color:#2b2335}
+        .secondary-btn{
+          background:#f3eef6;color:#2b2335
+        }
         .ghost-btn{
           background:rgba(255,255,255,.16);
           color:#fff;
           border:1px solid rgba(255,255,255,.28)
         }
-        .danger-btn{background:#fff0f3;color:#d63e68}
         .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
         .nav-btn{padding:12px 16px;font-size:14px}
         .mobile-tabs{display:none}
@@ -876,7 +902,7 @@ function App() {
           min-height:520px;border-radius:32px;overflow:hidden;position:relative;
           box-shadow:0 24px 40px rgba(22,11,30,.12)
         }
-        .hero-preview img,.profile-photo-grid img,.list-item img,.chat-item img,.profile-avatar img,.profile-photo{
+        .hero-preview img,.profile-photo-grid img,.list-item img,.chat-item img,.profile-avatar img{
           display:block;object-fit:cover
         }
         .hero-preview img{width:100%;height:100%}
@@ -894,189 +920,199 @@ function App() {
         .search-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
         .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
         .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:78vh}
-
-        .vertical-card{
+        .profile-page-wrap{
           width:100%;
-          max-width:520px;
-          height:min(86vh,820px);
+          max-width:560px;
+          height:min(84vh,820px);
           border-radius:34px;
           overflow:hidden;
           position:relative;
-          background:#f9f7fb;
+          background:#fff;
           box-shadow:0 30px 60px rgba(25,10,38,.14);
-          border:1px solid rgba(255,255,255,.5);
         }
-        .vertical-scroll{
-          position:absolute;inset:0;
-          overflow-y:auto;
-          padding-bottom:160px;
-          scroll-behavior:smooth;
+        .profile-page-scroll{
+          height:100%;
+          overflow:auto;
+          padding-bottom:120px;
+          -ms-overflow-style:none;
+          scrollbar-width:none;
         }
-        .vertical-scroll::-webkit-scrollbar{width:8px}
-        .vertical-scroll::-webkit-scrollbar-thumb{background:rgba(120,100,140,.18);border-radius:999px}
-        .profile-hero{
-          position:relative;
-          padding:14px 14px 0;
+        .profile-page-scroll::-webkit-scrollbar{display:none}
+        .profile-hero-photo{
+          width:100%;
+          height:420px;
+          object-fit:cover;
+          display:block;
         }
-        .top-sticky{
-          position:sticky;
-          top:0;
-          z-index:7;
-          padding:14px 14px 10px;
-          background:linear-gradient(180deg, rgba(249,247,251,.95), rgba(249,247,251,.82));
-          backdrop-filter:blur(14px);
-          border-bottom:1px solid rgba(100,80,120,.08);
+        .profile-header{
+          padding:18px 18px 10px;
+          background:#fff;
         }
-        .top-sticky-inner{
-          display:flex;align-items:flex-start;justify-content:space-between;gap:12px
-        }
-        .profile-main{
-          min-width:0;
-        }
-        .profile-main-title{
+        .profile-title{
           margin:0;
-          font-size:28px;
+          font-size:34px;
           line-height:1;
           font-weight:900;
           display:flex;
           align-items:center;
-          gap:6px;
           flex-wrap:wrap;
+          gap:6px;
         }
-        .profile-sub{
-          margin:7px 0 0;
-          color:#655a70;
-          font-weight:800;
+        .profile-subtitle{
+          margin:10px 0 0;
+          color:#6a6076;
           font-size:14px;
+          font-weight:800;
         }
-        .premium-tag{
-          display:inline-flex;align-items:center;justify-content:center;
-          padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;
-          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff;
-          white-space:nowrap;
-        }
-        .counter-pill{
-          padding:9px 12px;border-radius:999px;background:#f2edf6;color:#4b3f58;font-size:12px;font-weight:900;white-space:nowrap
-        }
-
-        .section-card{
-          margin:14px;
-          background:#fff;
-          border-radius:28px;
-          overflow:hidden;
-          box-shadow:0 14px 30px rgba(30,15,40,.08);
-          border:1px solid rgba(100,80,120,.06);
-        }
-        .section-header{
-          padding:16px 18px 0;
-          font-size:13px;
+        .premium-pill{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          padding:6px 10px;
+          border-radius:999px;
+          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
+          color:#fff;
+          font-size:11px;
           font-weight:900;
-          letter-spacing:.08em;
-          color:#8a7f95;
-          text-transform:uppercase;
+          margin-left:4px;
         }
-        .photo-block{
-          padding:14px;
+        .profile-section{
+          padding:0 18px 18px;
         }
-        .profile-photo{
-          width:100%;
-          height:380px;
-          border-radius:24px;
-          background:#f0edf3;
-        }
-        .photo-meta{
-          display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px
-        }
-        .photo-count,.distance-chip{
-          padding:8px 12px;border-radius:999px;background:#f4eef7;color:#4f445a;font-size:12px;font-weight:900
-        }
-
         .info-grid{
           display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
           gap:12px;
-          padding:14px 18px 18px;
         }
-        .info-item{
-          display:flex;justify-content:space-between;gap:14px;
-          padding:14px 0;border-bottom:1px solid rgba(100,80,120,.08)
+        .info-card{
+          background:#faf7fc;
+          border-radius:20px;
+          padding:14px;
+          border:1px solid rgba(100,80,120,.06);
         }
-        .info-item:last-child{border-bottom:none}
-        .info-label{font-weight:900;color:#3f344a}
-        .info-value{color:#6a6076;text-align:right}
-        .bio-text{
-          padding:4px 18px 18px;
-          color:#665b70;
-          line-height:1.62;
+        .info-card-label{
+          font-size:12px;
+          font-weight:900;
+          color:#8d8299;
+          margin-bottom:8px;
+          text-transform:uppercase;
+          letter-spacing:.04em;
+        }
+        .info-card-value{
           font-size:15px;
+          font-weight:800;
+          color:#2b2235;
+          line-height:1.4;
         }
-        .chip-row{
-          display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 18px
+        .section-heading{
+          margin:0 0 12px;
+          font-size:18px;
+          font-weight:900;
         }
+        .bio-box{
+          background:#faf7fc;
+          border-radius:22px;
+          padding:16px;
+          color:#62576d;
+          line-height:1.6;
+          border:1px solid rgba(100,80,120,.06);
+        }
+        .chip-row{display:flex;gap:8px;flex-wrap:wrap}
         .interest{
-          padding:8px 12px;border-radius:999px;background:#f5eff7;
+          padding:9px 12px;border-radius:999px;background:#f5eff7;
           font-size:13px;font-weight:800;color:#52475e
         }
-
-        .danger-area{
+        .profile-photo-stack{
           display:grid;
-          gap:12px;
-          padding:0 18px 20px;
+          gap:14px;
         }
-
-        .fixed-actions{
+        .profile-photo-stack img{
+          width:100%;
+          height:420px;
+          display:block;
+          object-fit:cover;
+          border-radius:24px;
+        }
+        .profile-footer-actions{
+          display:grid;
+          gap:10px;
+        }
+        .danger-btn{
+          border:none;
+          padding:14px 16px;
+          border-radius:18px;
+          font-size:14px;
+          font-weight:900;
+          cursor:pointer;
+          transition:.2s ease;
+        }
+        .danger-btn.report{
+          background:#fff2f4;
+          color:#d64568;
+        }
+        .danger-btn.block{
+          background:#eef2ff;
+          color:#4c5fc7;
+        }
+        .danger-btn:hover{transform:translateY(-1px)}
+        .fixed-action-bar{
           position:absolute;
-          left:14px;
-          right:14px;
-          bottom:14px;
-          z-index:9;
+          left:16px;
+          right:16px;
+          bottom:16px;
+          z-index:10;
           display:flex;
           justify-content:center;
           pointer-events:none;
         }
-        .fixed-actions-inner{
-          display:flex;gap:16px;padding:10px 12px;border-radius:999px;
-          background:rgba(18,14,26,.58);backdrop-filter:blur(14px);
+        .fixed-action-inner{
+          display:flex;
+          gap:16px;
+          padding:10px 12px;
+          border-radius:999px;
+          background:rgba(18,14,26,.62);
+          backdrop-filter:blur(14px);
           border:1px solid rgba(255,255,255,.14);
           box-shadow:0 16px 30px rgba(18,9,26,.20);
           pointer-events:auto;
         }
-        .round-btn{
-          width:74px;height:74px;border-radius:26px;font-size:28px;
+        .action-btn{
+          width:76px;height:76px;border-radius:26px;font-size:28px;
           box-shadow:0 16px 30px rgba(20,10,28,.14);
-          transform:scale(1)
+          transform:scale(1);
         }
-        .round-btn.skip{background:linear-gradient(135deg,#eef0ff,#dfe5ff);color:#4f5acb}
-        .round-btn.like{background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff}
-        .round-btn:hover{transform:translateY(-1px) scale(1.02)}
-        .round-btn:active{transform:scale(.94)}
-        .round-btn.pop{transform:scale(1.08);box-shadow:0 20px 36px rgba(255,95,143,.24)}
-
-        .choice-note{
-          margin:0 14px 14px;
-          padding:13px 16px;
-          border-radius:18px;
-          background:#fff4f7;
-          color:#8a5870;
-          font-size:13px;
-          font-weight:800;
+        .action-btn.skip{
+          background:linear-gradient(135deg,#eef0ff,#dfe5ff);
+          color:#4f5acb
+        }
+        .action-btn.like{
+          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
+          color:#fff
+        }
+        .action-btn:hover{transform:translateY(-1px) scale(1.02)}
+        .action-btn:active{transform:scale(.94)}
+        .action-btn.pop{transform:scale(1.08)}
+        .footer-hint{
+          margin-top:16px;
+          font-size:12px;
+          color:#8a7f96;
           text-align:center;
+          font-weight:700;
         }
-
         .notice{
           position:fixed;
           top:20px;
           left:50%;
           transform:translateX(-50%);
           z-index:120;
+          background:rgba(27,20,35,.92);
+          color:#fff;
           padding:12px 16px;
           border-radius:999px;
-          background:#1f1727;
-          color:#fff;
-          font-size:14px;
-          font-weight:900;
-          box-shadow:0 12px 24px rgba(24,10,34,.22);
+          font-size:13px;
+          font-weight:800;
+          box-shadow:0 10px 26px rgba(22,10,30,.24);
         }
-
         .empty{
           min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;
           text-align:center;color:#665b70;gap:10px
@@ -1127,35 +1163,19 @@ function App() {
           display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(100,80,120,.08)
         }
         .help-item{padding:18px;border-radius:20px;background:#faf7fc}
-        .mutual-modal,.overlay-modal{
+        .mutual-modal{
           position:fixed;inset:0;background:rgba(20,8,30,.45);display:flex;align-items:center;justify-content:center;
           padding:18px;z-index:100
         }
-        .mutual-box,.modal-box{
-          width:min(520px,100%);border-radius:30px;padding:28px;background:#fff;
-          box-shadow:0 24px 50px rgba(25,10,35,.26)
-        }
         .mutual-box{
-          background:linear-gradient(135deg,#ff5f8f 0%,#ff8b6e 100%);
-          color:#fff;text-align:center
+          width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#ff5f8f 0%,#ff8b6e 100%);
+          color:#fff;box-shadow:0 24px 50px rgba(25,10,35,.26);text-align:center
         }
         .mutual-avatars{display:flex;justify-content:center;align-items:center;gap:14px;margin:16px 0 22px}
         .mutual-avatars img{
           width:94px;height:94px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.5)
         }
         .heart{font-size:34px}
-        .modal-title{margin:0 0 14px;font-size:28px;font-weight:900}
-        .modal-sub{margin:0 0 16px;color:#6a6076}
-        .reason-list{display:grid;gap:10px;margin-bottom:18px}
-        .reason-btn{
-          padding:14px 16px;border-radius:18px;border:1px solid rgba(95,80,110,.12);
-          background:#faf8fc;color:#2b2335;text-align:left;font-weight:800;cursor:pointer
-        }
-        .reason-btn.active{
-          border-color:#ff7ca0;
-          background:#fff1f5;
-          color:#d94370;
-        }
         .phone-bottom-nav{display:none}
 
         @media (max-width:1120px){
@@ -1163,7 +1183,7 @@ function App() {
           .quick-grid{grid-template-columns:1fr}
         }
         @media (max-width:760px){
-          .page{padding:12px 12px 98px}
+          .page{padding:12px 12px 104px}
           .topbar{position:static;flex-direction:column;align-items:flex-start;padding:14px}
           .nav{display:none}
           .mobile-tabs{
@@ -1180,10 +1200,11 @@ function App() {
           .chat-item img{width:38px;height:38px}
           .item-title{font-size:12px;justify-content:center}
           .item-sub{font-size:11px}
-          .vertical-card{max-width:100%;height:min(84vh,760px);border-radius:28px}
-          .profile-main-title{font-size:23px}
-          .profile-photo{height:300px;border-radius:20px}
-          .round-btn{width:68px;height:68px;border-radius:22px}
+          .profile-page-wrap{max-width:100%;height:min(82vh,760px);border-radius:28px}
+          .profile-hero-photo,.profile-photo-stack img{height:350px}
+          .profile-title{font-size:30px}
+          .info-grid{grid-template-columns:1fr}
+          .action-btn{width:70px;height:70px;border-radius:22px}
           .two-col{grid-template-columns:1fr}
           .phone-bottom-nav{
             position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);
@@ -1198,7 +1219,7 @@ function App() {
         }
       `}</style>
 
-      {actionNotice ? <div className="notice">{actionNotice}</div> : null}
+      {notice && <div className="notice">{notice}</div>}
 
       <div className="page">
         <header className="topbar">
@@ -1266,7 +1287,7 @@ function App() {
               <button className="secondary-btn" onClick={() => setShowFilters((v) => !v)}>
                 ⚙️ {t.filters}
               </button>
-              <div className="muted">{deckProfiles.length}</div>
+              <div className="muted">{filteredProfiles.length}</div>
             </div>
 
             {showFilters && (
@@ -1295,9 +1316,7 @@ function App() {
                       <label>{t.country}</label>
                       <select
                         value={draftSettings.country}
-                        onChange={(e) =>
-                          setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
-                        }
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))}
                       >
                         {countries.map((country) => (
                           <option key={country} value={country}>
@@ -1357,64 +1376,537 @@ function App() {
               <div className="panel">
                 {activeProfile ? (
                   <div className="deck-wrap">
-                    <div className="vertical-card">
-                      <div className="top-sticky">
-                        <div className="top-sticky-inner">
-                          <div className="profile-main">
-                            <h3 className="profile-main-title">
-                              {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
-                              {activeProfile.verified && <Badge />}
-                            </h3>
-                            <p className="profile-sub">
-                              {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
-                            </p>
+                    <div className="profile-page-wrap">
+                      <div ref={profilePageRef} className="profile-page-scroll">
+                        <img className="profile-hero-photo" src={activeProfile.photos[0]} alt={activeProfile.name} />
+
+                        <div className="profile-header">
+                          <h3 className="profile-title">
+                            {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
+                            {activeProfile.verified && <Badge />}
+                            <span className="premium-pill">{t.premium}</span>
+                          </h3>
+                          <p className="profile-subtitle">
+                            {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
+                          </p>
+                        </div>
+
+                        <div className="profile-section">
+                          <div className="info-grid">
+                            <div className="info-card">
+                              <div className="info-card-label">{t.location}</div>
+                              <div className="info-card-value">{activeProfile.city}, {activeProfile.country}</div>
+                            </div>
+                            <div className="info-card">
+                              <div className="info-card-label">{t.lookingFor}</div>
+                              <div className="info-card-value">{lang === "ru" ? activeProfile.lookingFor : activeProfile.lookingForEn}</div>
+                            </div>
+                            <div className="info-card">
+                              <div className="info-card-label">{t.height}</div>
+                              <div className="info-card-value">{lang === "ru" ? activeProfile.height : activeProfile.heightEn}</div>
+                            </div>
+                            <div className="info-card">
+                              <div className="info-card-label">{t.relationshipStatus}</div>
+                              <div className="info-card-value">{relationshipLabel(activeProfile)}</div>
+                            </div>
+                            <div className="info-card">
+                              <div className="info-card-label">{t.age}</div>
+                              <div className="info-card-value">{activeProfile.age} {t.years}</div>
+                            </div>
+                            <div className="info-card">
+                              <div className="info-card-label">{t.zodiac}</div>
+                              <div className="info-card-value">{activeProfile.zodiac}</div>
+                            </div>
                           </div>
-                          <div style={{ display: "grid", gap: 8, justifyItems: "end" }}>
-                            <div className="premium-tag">{t.premium}</div>
-                            <div className="counter-pill">{deckProfiles.length}</div>
+                        </div>
+
+                        <div className="profile-section">
+                          <h4 className="section-heading">{t.about}</h4>
+                          <div className="bio-box">
+                            {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
                           </div>
+                        </div>
+
+                        <div className="profile-section">
+                          <h4 className="section-heading">{t.interests}</h4>
+                          <div className="chip-row">
+                            {activeProfile.interests.map((it) => (
+                              <span className="interest" key={it}>{it}</span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="profile-section">
+                          <div className="profile-photo-stack">
+                            {activeProfile.photos.map((photo, i) => (
+                              <img key={i} src={photo} alt={`${activeProfile.name}-${i + 1}`} />
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="profile-section">
+                          <div className="profile-footer-actions">
+                            <button
+                              className="danger-btn block"
+                              onClick={() => handleBlock(activeProfile.id)}
+                            >
+                              {blockedIds.includes(activeProfile.id) ? t.blocked : t.block}
+                            </button>
+
+                            <button
+                              className="danger-btn report"
+                              onClick={() => handleReport(activeProfile.id)}
+                            >
+                              {reportedIds.includes(activeProfile.id) ? t.reported : t.report}
+                            </button>
+                          </div>
+
+                          <div className="footer-hint">{t.footerHint}</div>
                         </div>
                       </div>
 
-                      <div ref={profilePageRef} className="vertical-scroll">
-                        <div className="choice-note">{t.nextAfterChoice}</div>
+                      <div className="fixed-action-bar">
+                        <div className="fixed-action-inner">
+                          <button
+                            className={`action-btn skip ${skipPulse ? "pop" : ""}`}
+                            onClick={() => handleSkip(activeProfile)}
+                            title="skip"
+                          >
+                            ✕
+                          </button>
+                          <button
+                            className={`action-btn like ${likePulse ? "pop" : ""}`}
+                            onClick={() => handleLike(activeProfile)}
+                            title="like"
+                          >
+                            ♥
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="empty">
+                    <h3>{t.emptyDeck}</h3>
+                    <p>{t.emptyDeckText}</p>
+                    <button className="primary-btn" onClick={restartDeck}>{t.restart}</button>
+                  </div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
 
-                        {activeProfile.photos.map((photo, idx) => (
-                          <div key={idx} className="section-card">
-                            <div className="section-header">{t.gallerySection} {idx + 1}</div>
-                            <div className="photo-block">
-                              <img className="profile-photo" src={photo} alt={`${activeProfile.name}-${idx + 1}`} />
-                              <div className="photo-meta">
-                                <div className="photo-count">{idx + 1} / {activeProfile.photos.length} {t.photosCount}</div>
-                                <div className="distance-chip">
-                                  {settings.unit === "mi"
-                                    ? `${activeProfile.distanceMi} ${t.miles}`
-                                    : `${Math.round(activeProfile.distanceMi * 1.60934)} ${t.km}`}
-                                </div>
-                              </div>
-                            </div>
+        {tab === "messages" && (
+          <>
+            <h2 className="section-title">{t.messages}</h2>
+
+            <div className="segmented" style={{ marginBottom: 14 }}>
+              <button className={`chip-btn ${messageView === "matches" ? "active" : ""}`} onClick={() => setMessageView("matches")}>{t.msgMatches}</button>
+              <button className={`chip-btn ${messageView === "liked" ? "active" : ""}`} onClick={() => setMessageView("liked")}>{t.msgLikedYou}</button>
+              <button className={`chip-btn ${messageView === "guests" ? "active" : ""}`} onClick={() => setMessageView("guests")}>{t.msgGuests}</button>
+            </div>
+
+            <section className="messages-layout">
+              <div className="panel">
+                {listProfiles.length ? (
+                  <div className="list-grid">
+                    {listProfiles.map((profile) => (
+                      <div
+                        key={profile.id}
+                        className={`chat-item ${selectedChatId === profile.id && messageView === "matches" ? "active" : ""}`}
+                        onClick={() => {
+                          if (messageView !== "matches" && !matches.includes(profile.id)) return;
+                          setSelectedChatId(profile.id);
+                        }}
+                      >
+                        <img src={profile.avatar} alt={profile.name} />
+                        <div>
+                          <div className="item-title">
+                            {profile.name}
+                            {profile.verified && <Badge />}
+                          </div>
+                          <p className="item-sub">
+                            {messageView === "matches"
+                              ? profile.online ? t.online : t.offline
+                              : `${profile.city}, ${profile.country}`}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="empty">
+                    {messageView === "matches"
+                      ? t.noMessages
+                      : messageView === "liked"
+                      ? t.noLikedYou
+                      : t.noGuests}
+                  </div>
+                )}
+              </div>
+
+              <div className="panel">
+                {messageView === "matches" ? (
+                  selectedChatProfile && matches.includes(selectedChatProfile.id) ? (
+                    <div className="message-panel">
+                      <div className="message-header">
+                        <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
+                        <div>
+                          <div className="item-title">
+                            {selectedChatProfile.name}, {selectedChatProfile.age} {selectedChatProfile.zodiac}
+                            {selectedChatProfile.verified && <Badge />}
+                          </div>
+                          <p className="item-sub">
+                            {selectedChatProfile.online ? t.online : t.offline} • {selectedChatProfile.city}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="message-body">
+                        {(messages[selectedChatId] || []).map((msg, i) => (
+                          <div key={i} className={`bubble ${msg.from}`}>
+                            {lang === "ru" ? msg.text : msg.textEn || msg.text}
                           </div>
                         ))}
+                      </div>
 
-                        <div className="section-card">
-                          <div className="section-header">{t.infoSection}</div>
-                          <div className="info-grid">
-                            <div className="info-item">
-                              <div className="info-label">{t.location}</div>
-                              <div className="info-value">{activeProfile.city}, {activeProfile.country}</div>
-                            </div>
-                            <div className="info-item">
-                              <div className="info-label">{t.lookingFor}</div>
-                              <div className="info-value">{labelForLookingFor(activeProfile.lookingFor)}</div>
-                            </div>
-                            <div className="info-item">
-                              <div className="info-label">{t.height}</div>
-                              <div className="info-value">{activeProfile.heightCm} cm</div>
-                            </div>
-                            <div className="info-item">
-                              <div className="info-label">{t.relationship}</div>
-                              <div className="info-value">{labelForRelationship(activeProfile.relationshipStatus)}</div>
-                            </div>
-                            <div className="info-item">
-                              <div className="info-label">{t.age}</div>
-                              <div className="info-value">{activeProfile.age}</div>
+                      <div className="message-input-row">
+                        <input
+                          value={chatDraft}
+                          onChange={(e) => setChatDraft(e.target.value)}
+                          placeholder={t.messagePlaceholder}
+                        />
+                        <button className="primary-btn" onClick={sendMessage}>{t.send}</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="empty">{t.noMessages}</div>
+                  )
+                ) : (
+                  <div className="list-grid">
+                    {listProfiles.map((profile) => (
+                      <div key={profile.id} className="list-item">
+                        <img src={profile.avatar} alt={profile.name} />
+                        <div style={{ flex: 1 }}>
+                          <div className="item-title">
+                            {profile.name}, {profile.age} {profile.zodiac}
+                            {profile.verified && <Badge />}
+                          </div>
+                          <p className="item-sub">{profile.city}, {profile.country}</p>
+                        </div>
+                        {matches.includes(profile.id) ? (
+                          <button className="primary-btn" onClick={() => openChatFromProfile(profile.id)}>
+                            {t.openChat}
+                          </button>
+                        ) : (
+                          <button className="secondary-btn" disabled style={{ opacity: 0.65, cursor: "default" }}>
+                            🔒
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "profile" && (
+          <>
+            <h2 className="section-title">{t.profileTitle}</h2>
+
+            <section className="profile-layout">
+              <div className="panel">
+                <div className="profile-avatar">
+                  <img src={myProfile.photos[0]} alt={myProfile.name} />
+                  <h3 className="profile-main-name">
+                    {myProfile.name}
+                    {myProfile.verified && <Badge />}
+                  </h3>
+                  <p className="muted" style={{ margin: "8px 0 10px" }}>
+                    {myProfile.age} • {myProfile.zodiac}
+                  </p>
+                  <p className="muted" style={{ marginBottom: 0 }}>
+                    {lang === "ru" ? myProfile.bio : myProfile.bioEn}
+                  </p>
+                </div>
+              </div>
+
+              <div className="panel">
+                <h3 style={{ marginTop: 0 }}>{t.about}</h3>
+
+                <div className="info-list">
+                  <div className="info-row"><strong>{t.age}</strong><span>{myProfile.age}</span></div>
+                  <div className="info-row"><strong>{t.cityLabel}</strong><span>{myProfile.city}</span></div>
+                  <div className="info-row"><strong>{t.countryLabel}</strong><span>{myProfile.country}</span></div>
+                  <div className="info-row"><strong>{t.zodiac}</strong><span>{myProfile.zodiac}</span></div>
+                  <div className="info-row"><strong>{t.verified}</strong><span>{myProfile.verified ? t.verifiedYes : t.verifiedNo}</span></div>
+                </div>
+
+                <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  {!editProfile ? (
+                    <button className="primary-btn" onClick={() => setEditProfile(true)}>{t.editProfile}</button>
+                  ) : (
+                    <>
+                      <button className="primary-btn" onClick={saveProfile}>{t.saveProfile}</button>
+                      <button
+                        className="secondary-btn"
+                        onClick={() => {
+                          setProfileDraft(myProfile);
+                          setEditProfile(false);
+                        }}
+                      >
+                        {t.cancel}
+                      </button>
+                    </>
+                  )}
+
+                  {savedProfileLabel && (
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "10px 14px",
+                        borderRadius: 999,
+                        background: "rgba(70,199,121,0.12)",
+                        color: "#169453",
+                        fontWeight: 800,
+                      }}
+                    >
+                      {t.profileSaved}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+
+            {editProfile && (
+              <section className="panel" style={{ marginTop: 18 }}>
+                <h3 style={{ marginTop: 0 }}>{t.editProfile}</h3>
+
+                <div className="field-group">
+                  <div className="two-col">
+                    <div className="field">
+                      <label>{t.name}</label>
+                      <input value={profileDraft.name} onChange={(e) => setProfileDraft((p) => ({ ...p, name: e.target.value }))} />
+                    </div>
+                    <div className="field">
+                      <label>{t.age}</label>
+                      <input type="number" value={profileDraft.age} onChange={(e) => setProfileDraft((p) => ({ ...p, age: Number(e.target.value || 0) }))} />
+                    </div>
+                  </div>
+
+                  <div className="two-col">
+                    <div className="field">
+                      <label>{t.cityLabel}</label>
+                      <input value={profileDraft.city} onChange={(e) => setProfileDraft((p) => ({ ...p, city: e.target.value }))} />
+                    </div>
+                    <div className="field">
+                      <label>{t.countryLabel}</label>
+                      <input value={profileDraft.country} onChange={(e) => setProfileDraft((p) => ({ ...p, country: e.target.value }))} />
+                    </div>
+                  </div>
+
+                  <div className="two-col">
+                    <div className="field">
+                      <label>{t.zodiac}</label>
+                      <select value={profileDraft.zodiac} onChange={(e) => setProfileDraft((p) => ({ ...p, zodiac: e.target.value }))}>
+                        {zodiacOptions.map((z) => <option key={z} value={z}>{z}</option>)}
+                      </select>
+                    </div>
+                    <div className="field">
+                      <label>{t.verified}</label>
+                      <select
+                        value={profileDraft.verified ? "yes" : "no"}
+                        onChange={(e) => setProfileDraft((p) => ({ ...p, verified: e.target.value === "yes" }))}
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.bio}</label>
+                    <textarea
+                      rows="4"
+                      value={lang === "ru" ? profileDraft.bio : profileDraft.bioEn}
+                      onChange={(e) =>
+                        setProfileDraft((p) =>
+                          lang === "ru" ? { ...p, bio: e.target.value } : { ...p, bioEn: e.target.value }
+                        )
+                      }
+                    />
+                  </div>
+
+                  <div className="field">
+                    <label>{t.addPhoto}</label>
+                    <input type="file" accept="image/*" multiple onChange={handleProfilePhotoUpload} />
+                  </div>
+                </div>
+
+                <h4 style={{ marginBottom: 10 }}>{t.photos}</h4>
+                <div className="profile-photo-grid">
+                  {profileDraft.photos.map((photo, i) => (
+                    <img key={i} src={photo} alt={`profile-${i}`} />
+                  ))}
+                </div>
+              </section>
+            )}
+          </>
+        )}
+
+        {tab === "settings" && (
+          <>
+            <h2 className="section-title">{t.settingsTitle}</h2>
+            <p className="section-subtitle">{t.settingsText}</p>
+
+            <section className="settings-layout">
+              <div className="panel">
+                <div className="field-group">
+                  <div className="field">
+                    <label>{t.mode}</label>
+                    <select value={draftSettings.searchMode} onChange={(e) => setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))}>
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.all}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.gender}</label>
+                    <select value={draftSettings.gender} onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}>
+                      <option value="all">{t.all}</option>
+                      <option value="male">{t.men}</option>
+                      <option value="female">{t.women}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select value={draftSettings.country} onChange={(e) => setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))}>
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.allLocations : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select value={draftSettings.city} onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}>
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.allLocations : city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="two-col">
+                    <div className="field">
+                      <label>{t.ageFrom}</label>
+                      <input type="number" value={draftSettings.ageFrom} onChange={(e) => setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))} />
+                    </div>
+                    <div className="field">
+                      <label>{t.ageTo}</label>
+                      <input type="number" value={draftSettings.ageTo} onChange={(e) => setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))} />
+                    </div>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select value={draftSettings.unit} onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}>
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <input type="range" min="1" max="5000" value={draftSettings.maxDistance} onChange={(e) => setDraftSettings((p) => ({ ...p, maxDistance: Number(e.target.value) }))} />
+                    <div className="muted">{draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}</div>
+                  </div>
+
+                  <div className="filter-actions">
+                    <button className="primary-btn" onClick={applyFilters}>{t.apply}</button>
+                    <button className="secondary-btn" onClick={resetFilters}>{t.reset}</button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="panel">
+                <h3 style={{ marginTop: 0 }}>{t.help}</h3>
+                <div className="help-grid">
+                  <div className="help-item">
+                    <h3 style={{ marginTop: 0 }}>{t.help1}</h3>
+                    <p style={{ marginBottom: 0 }}>{t.help1t}</p>
+                  </div>
+                  <div className="help-item">
+                    <h3 style={{ marginTop: 0 }}>{t.help2}</h3>
+                    <p style={{ marginBottom: 0 }}>{t.help2t}</p>
+                  </div>
+                  <div className="help-item">
+                    <h3 style={{ marginTop: 0 }}>{t.help3}</h3>
+                    <p style={{ marginBottom: 0 }}>{t.help3t}</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+      </div>
+
+      <div className="phone-bottom-nav">
+        <button className={`phone-tab-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>{t.home}</button>
+        <button className={`phone-tab-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>{t.search}</button>
+        <button className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>{t.messages}</button>
+        <button className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>{t.profile}</button>
+        <button className={`phone-tab-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>{t.settings}</button>
+      </div>
+
+      {showMatch && matchedProfile && (
+        <div className="mutual-modal" onClick={() => setShowMatch(false)}>
+          <div className="mutual-box" onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ marginTop: 0, fontSize: 36 }}>{t.mutualTitle}</h2>
+            <p style={{ fontSize: 18, marginBottom: 0 }}>{t.mutualText}</p>
+
+            <div className="mutual-avatars">
+              <img src={myProfile.photos[0]} alt={myProfile.name} />
+              <div className="heart">♥</div>
+              <img src={matchedProfile.avatar} alt={matchedProfile.name} />
+            </div>
+
+            <div className="mutual-actions" style={{ justifyContent: "center" }}>
+              <button
+                className="secondary-btn"
+                onClick={() => {
+                  setShowMatch(false);
+                  setTab("search");
+                }}
+              >
+                {t.continue}
+              </button>
+              <button
+                className="ghost-btn"
+                onClick={() => {
+                  setShowMatch(false);
+                  ensureMessages(matchedProfile);
+                  setSelectedChatId(matchedProfile.id);
+                  setTab("messages");
+                  setMessageView("matches");
+                }}
+              >
+                {t.startChat}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
