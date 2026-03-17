@@ -8,6 +8,7 @@ const tr = {
     messages: "Сообщения",
     profile: "Профиль",
     settings: "Настройки",
+    name: "Имя",
 
     heroTitle: "Найди новые знакомства в Telegram",
     heroText:
@@ -80,7 +81,8 @@ const tr = {
     settingsText: "Управляй фильтрами поиска и параметрами профиля.",
     help: "Помощь",
     help1: "Как работает поиск?",
-    help1t: "Листай анкеты свайпом вверх, открывай информацию движением вниз, фото листай влево и вправо.",
+    help1t:
+      "Свайп влево и вправо переключает фото. Свайп вверх и вниз переключает анкеты. Внутри информации работает отдельный скролл.",
     help2: "Когда можно написать человеку?",
     help2t: "Только после взаимной симпатии. Без мэтча чат недоступен.",
     help3: "Как смотреть фото?",
@@ -93,6 +95,9 @@ const tr = {
 
     years: "лет",
     photosCount: "фото",
+    premium: "PREMIUM",
+    infoHint:
+      "Небольшой свайп внутри текста — прокрутка информации. Сильный свайп вверх или вниз — следующая или предыдущая анкета.",
   },
   en: {
     brand: "Telegram Dating",
@@ -101,6 +106,7 @@ const tr = {
     messages: "Messages",
     profile: "Profile",
     settings: "Settings",
+    name: "Name",
 
     heroTitle: "Find new connections in Telegram",
     heroText:
@@ -173,7 +179,8 @@ const tr = {
     settingsText: "Manage search filters and profile preferences.",
     help: "Help",
     help1: "How does search work?",
-    help1t: "Swipe up to go to the next profile, pull down to open more info, swipe left and right for photos.",
+    help1t:
+      "Swipe left and right to switch photos. Swipe up and down to switch profiles. Profile info has its own scroll area.",
     help2: "When can I message someone?",
     help2t: "Only after a mutual match. No chat is available before that.",
     help3: "How do I browse photos?",
@@ -186,6 +193,9 @@ const tr = {
 
     years: "years",
     photosCount: "photos",
+    premium: "PREMIUM",
+    infoHint:
+      "Small swipe inside the text scrolls profile info. A stronger swipe up or down moves to the next or previous profile.",
   },
 };
 
@@ -216,9 +226,9 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 4,
     online: true,
-    bio: "Люблю красивые места, музыку, кофе, поездки и лёгкое общение.",
-    bioEn: "I love beautiful places, music, coffee, trips and easy conversations.",
-    interests: ["music", "travel", "coffee"],
+    bio: "Люблю красивые места, музыку, кофе, поездки и лёгкое общение. Ценю стиль, хорошую энергетику и людей, с которыми интересно и легко.",
+    bioEn: "I love beautiful places, music, coffee, trips and easy conversations. I appreciate style, good energy and people who are interesting and easy to be around.",
+    interests: ["music", "travel", "coffee", "sunsets", "fashion"],
     zodiac: "♎",
     verified: true,
     avatar:
@@ -240,9 +250,9 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 12,
     online: true,
-    bio: "Люблю прогулки у океана, кофе, вечерние огни и тёплые разговоры.",
-    bioEn: "I love ocean walks, coffee, city lights and warm conversations.",
-    interests: ["ocean", "coffee", "night walks"],
+    bio: "Люблю прогулки у океана, кофе, вечерние огни и тёплые разговоры. Мне нравятся красивые детали и лёгкая романтика.",
+    bioEn: "I love ocean walks, coffee, city lights and warm conversations. I enjoy beautiful details and soft romance.",
+    interests: ["ocean", "coffee", "night walks", "beach", "photos"],
     zodiac: "♌",
     verified: false,
     avatar:
@@ -250,6 +260,7 @@ const initialProfiles = [
     photos: [
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessagesRu: ["Очень приятно 😊", "Ты больше любишь город или природу?"],
     starterMessagesEn: ["Nice to meet you 😊", "Do you prefer the city or nature?"],
@@ -263,9 +274,9 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 7,
     online: true,
-    bio: "Ценю юмор, спорт, хорошие фильмы и настоящие эмоции.",
-    bioEn: "I value humor, sports, good movies and real emotions.",
-    interests: ["sport", "movies", "humor"],
+    bio: "Ценю юмор, спорт, хорошие фильмы и настоящие эмоции. Люблю уверенное, живое общение и людей с характером.",
+    bioEn: "I value humor, sports, good movies and real emotions. I like confident, genuine communication and people with character.",
+    interests: ["sport", "movies", "humor", "fitness", "city life"],
     zodiac: "♐",
     verified: true,
     avatar:
@@ -273,6 +284,7 @@ const initialProfiles = [
     photos: [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessagesRu: ["Привет! Рад мэтчу.", "Чем любишь заниматься в свободное время?"],
     starterMessagesEn: ["Hi! Glad we matched.", "What do you like doing in your free time?"],
@@ -286,9 +298,9 @@ const initialProfiles = [
     country: "USA",
     distanceMi: 18,
     online: false,
-    bio: "Люблю путешествия, спорт и спокойные разговоры без лишнего шума.",
-    bioEn: "I love travel, sports and calm conversations without extra noise.",
-    interests: ["travel", "fitness", "weekends"],
+    bio: "Люблю путешествия, спорт и спокойные разговоры без лишнего шума. Ценю искренность, надёжность и хорошую атмосферу.",
+    bioEn: "I love travel, sports and calm conversations without extra noise. I appreciate sincerity, reliability and a good atmosphere.",
+    interests: ["travel", "fitness", "weekends", "cars", "coffee"],
     zodiac: "♒",
     verified: false,
     avatar:
@@ -296,9 +308,154 @@ const initialProfiles = [
     photos: [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
     ],
     starterMessagesRu: ["Привет 👋", "Какой у тебя идеальный выходной?"],
     starterMessagesEn: ["Hi 👋", "What does your perfect weekend look like?"],
+  },
+  {
+    id: 5,
+    name: "Emily",
+    age: 25,
+    gender: "female",
+    city: "Toronto",
+    country: "Canada",
+    distanceMi: 32,
+    online: true,
+    bio: "Люблю уютные места, прогулки, музыку и красивые фотографии. Легко иду на контакт, если чувствую хорошую энергию.",
+    bioEn: "I love cozy places, walks, music and beautiful photos. I open up easily when I feel good energy.",
+    interests: ["music", "walks", "art", "coffee", "travel"],
+    zodiac: "♉",
+    verified: true,
+    avatar:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessagesRu: ["Привет ✨", "Что тебе ближе — спонтанность или план?"],
+    starterMessagesEn: ["Hi ✨", "What do you prefer — spontaneity or planning?"],
+  },
+  {
+    id: 6,
+    name: "Lucas",
+    age: 28,
+    gender: "male",
+    city: "Berlin",
+    country: "Germany",
+    distanceMi: 54,
+    online: true,
+    bio: "Люблю путешествия, музыку, спорт и стильные места. Ценю лёгкость в общении и яркую химию между людьми.",
+    bioEn: "I love travel, music, sports and stylish places. I appreciate ease in conversation and strong chemistry between people.",
+    interests: ["travel", "music", "style", "fitness", "night city"],
+    zodiac: "♏",
+    verified: true,
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessagesRu: ["Рад знакомству.", "Какой город тебе нравится больше всего?"],
+    starterMessagesEn: ["Nice to meet you.", "What city do you like the most?"],
+  },
+  {
+    id: 7,
+    name: "Olivia",
+    age: 27,
+    gender: "female",
+    city: "Barcelona",
+    country: "Spain",
+    distanceMi: 65,
+    online: false,
+    bio: "Обожаю море, красивые вечера, танцы и вдохновляющих людей. Люблю, когда общение естественное и без напряжения.",
+    bioEn: "I adore the sea, beautiful evenings, dancing and inspiring people. I love when conversation feels natural and relaxed.",
+    interests: ["sea", "dance", "sunsets", "travel", "fashion"],
+    zodiac: "♊",
+    verified: true,
+    avatar:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessagesRu: ["Привет 💫", "Любишь спонтанные поездки?"],
+    starterMessagesEn: ["Hi 💫", "Do you like spontaneous trips?"],
+  },
+  {
+    id: 8,
+    name: "Noah",
+    age: 30,
+    gender: "male",
+    city: "London",
+    country: "UK",
+    distanceMi: 83,
+    online: true,
+    bio: "Люблю спокойную уверенность, хорошие разговоры и красивую городскую атмосферу. Ценю ум, вкус и чувство юмора.",
+    bioEn: "I like calm confidence, good conversations and beautiful city atmosphere. I appreciate intelligence, taste and humor.",
+    interests: ["city", "books", "coffee", "cinema", "business"],
+    zodiac: "♑",
+    verified: false,
+    avatar:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessagesRu: ["Привет.", "Как ты обычно проводишь вечер?"],
+    starterMessagesEn: ["Hi.", "How do you usually spend your evening?"],
+  },
+  {
+    id: 9,
+    name: "Mia",
+    age: 23,
+    gender: "female",
+    city: "Milan",
+    country: "Italy",
+    distanceMi: 101,
+    online: true,
+    bio: "Люблю стиль, путешествия, вкусную еду и лёгкое живое общение. Мне нравятся уверенные и внимательные люди.",
+    bioEn: "I love style, travel, good food and easy lively conversation. I like confident and attentive people.",
+    interests: ["style", "food", "travel", "photos", "shopping"],
+    zodiac: "♍",
+    verified: false,
+    avatar:
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessagesRu: ["Очень приятно 🌷", "Какой у тебя любимый город?"],
+    starterMessagesEn: ["Nice to meet you 🌷", "What is your favorite city?"],
+  },
+  {
+    id: 10,
+    name: "Ethan",
+    age: 27,
+    gender: "male",
+    city: "Paris",
+    country: "France",
+    distanceMi: 123,
+    online: false,
+    bio: "Люблю атмосферные места, искусство, поездки и интересные разговоры. Стараюсь жить со вкусом и без лишней суеты.",
+    bioEn: "I love atmospheric places, art, trips and interesting conversations. I try to live with taste and without unnecessary rush.",
+    interests: ["art", "travel", "wine", "architecture", "music"],
+    zodiac: "♈",
+    verified: true,
+    avatar:
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessagesRu: ["Привет, рад знакомству.", "Что тебя вдохновляет?"],
+    starterMessagesEn: ["Hi, nice to meet you.", "What inspires you?"],
   },
 ];
 
@@ -333,8 +490,8 @@ function App() {
   const [profiles] = useState(initialProfiles);
   const [messageView, setMessageView] = useState("matches");
   const [matches, setMatches] = useState([1]);
-  const [likedYouIds] = useState([2, 4]);
-  const [guestIds] = useState([3, 1]);
+  const [likedYouIds] = useState([2, 4, 7]);
+  const [guestIds] = useState([3, 1, 8]);
   const [swipedIds, setSwipedIds] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState(1);
@@ -343,7 +500,6 @@ function App() {
   const [matchedProfile, setMatchedProfile] = useState(null);
   const [savedProfileLabel, setSavedProfileLabel] = useState(false);
   const [cardPhotoIndex, setCardPhotoIndex] = useState(0);
-  const [cardInfoOpen, setCardInfoOpen] = useState(false);
   const [likePulse, setLikePulse] = useState(false);
   const [skipPulse, setSkipPulse] = useState(false);
 
@@ -351,7 +507,7 @@ function App() {
     searchMode: "nearby",
     country: "All",
     city: "All",
-    maxDistance: 5,
+    maxDistance: 5000,
     unit: "mi",
     ageFrom: 18,
     ageTo: 60,
@@ -362,7 +518,7 @@ function App() {
     searchMode: "nearby",
     country: "All",
     city: "All",
-    maxDistance: 5,
+    maxDistance: 5000,
     unit: "mi",
     ageFrom: 18,
     ageTo: 60,
@@ -394,13 +550,16 @@ function App() {
   const [profileDraft, setProfileDraft] = useState(myProfile);
 
   const cardRef = useRef(null);
-  const dragRef = useRef({
+  const infoScrollRef = useRef(null);
+
+  const gestureRef = useRef({
     active: false,
     startX: 0,
     startY: 0,
-    dx: 0,
-    dy: 0,
-    mode: null,
+    currentX: 0,
+    currentY: 0,
+    area: "media",
+    moved: false,
   });
 
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
@@ -427,12 +586,13 @@ function App() {
   );
 
   const activeProfile = deckProfiles[0] || null;
+  const activeProfileIndexInDeck = deckProfiles.length ? 0 : -1;
   const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
 
   useEffect(() => {
     if (activeProfile) {
       setCardPhotoIndex(0);
-      setCardInfoOpen(false);
+      if (infoScrollRef.current) infoScrollRef.current.scrollTop = 0;
     }
   }, [activeProfile?.id]);
 
@@ -445,10 +605,10 @@ function App() {
       if (prev[profile.id]) return prev;
       return {
         ...prev,
-        [profile.id]: (lang === "ru" ? profile.starterMessagesRu : profile.starterMessagesEn).map((text) => ({
+        [profile.id]: (lang === "ru" ? profile.starterMessagesRu : profile.starterMessagesEn).map((text, i) => ({
           from: "them",
-          text,
-          textEn: text,
+          text: profile.starterMessagesRu?.[i] || text,
+          textEn: profile.starterMessagesEn?.[i] || text,
         })),
       };
     });
@@ -463,7 +623,7 @@ function App() {
     setLikePulse(true);
     setTimeout(() => setLikePulse(false), 260);
 
-    const makeMatch = [1, 2, 3].includes(profile.id);
+    const makeMatch = [1, 2, 3, 5].includes(profile.id);
     markSwiped(profile.id);
 
     if (makeMatch) {
@@ -483,105 +643,199 @@ function App() {
     markSwiped(profile.id);
   };
 
-  const restartDeck = () => setSwipedIds([]);
+  const restartDeck = () => {
+    setSwipedIds([]);
+    setCardPhotoIndex(0);
+    if (infoScrollRef.current) infoScrollRef.current.scrollTop = 0;
+  };
 
   const animateOut = (direction) => {
     const el = cardRef.current;
     if (!el || !activeProfile) return;
 
     el.style.transition = "transform .34s ease, opacity .34s ease";
-    el.style.transform =
-      direction === "up"
-        ? "translateY(-420px) scale(.96)"
-        : direction === "right"
-        ? "translateX(420px) rotate(10deg)"
-        : "translateX(-420px) rotate(-10deg)";
+
+    if (direction === "up") {
+      el.style.transform = "translateY(-420px) scale(.97)";
+      el.style.opacity = "0";
+      setTimeout(() => {
+        handleSkip(activeProfile);
+        if (cardRef.current) {
+          cardRef.current.style.transition = "none";
+          cardRef.current.style.transform = "translate3d(0,0,0) scale(1)";
+          cardRef.current.style.opacity = "1";
+        }
+      }, 300);
+      return;
+    }
+
+    if (direction === "down") {
+      el.style.transform = "translateY(420px) scale(.97)";
+      el.style.opacity = "0";
+      setTimeout(() => {
+        handleSkip(activeProfile);
+        if (cardRef.current) {
+          cardRef.current.style.transition = "none";
+          cardRef.current.style.transform = "translate3d(0,0,0) scale(1)";
+          cardRef.current.style.opacity = "1";
+        }
+      }, 300);
+      return;
+    }
+
+    if (direction === "right") {
+      el.style.transform = "translateX(420px) rotate(10deg)";
+      el.style.opacity = "0";
+      setTimeout(() => {
+        handleLike(activeProfile);
+        if (cardRef.current) {
+          cardRef.current.style.transition = "none";
+          cardRef.current.style.transform = "translate3d(0,0,0) scale(1)";
+          cardRef.current.style.opacity = "1";
+        }
+      }, 300);
+      return;
+    }
+
+    el.style.transform = "translateX(-420px) rotate(-10deg)";
     el.style.opacity = "0";
-
     setTimeout(() => {
-      if (direction === "right") handleLike(activeProfile);
-      else handleSkip(activeProfile);
-
+      handleSkip(activeProfile);
       if (cardRef.current) {
         cardRef.current.style.transition = "none";
-        cardRef.current.style.transform = "translate(0,0) scale(1)";
+        cardRef.current.style.transform = "translate3d(0,0,0) scale(1)";
         cardRef.current.style.opacity = "1";
       }
     }, 300);
   };
 
-  const pointerDown = (x, y) => {
-    dragRef.current = {
+  const nextPhoto = () => {
+    if (!activeProfile) return;
+    setCardPhotoIndex((prev) => (prev + 1) % activeProfile.photos.length);
+  };
+
+  const prevPhoto = () => {
+    if (!activeProfile) return;
+    setCardPhotoIndex((prev) => (prev === 0 ? activeProfile.photos.length - 1 : prev - 1));
+  };
+
+  const switchToPreviousProfile = () => {
+    if (!swipedIds.length) return;
+    const lastId = swipedIds[swipedIds.length - 1];
+    setSwipedIds((prev) => prev.filter((id) => id !== lastId));
+    setCardPhotoIndex(0);
+    requestAnimationFrame(() => {
+      if (infoScrollRef.current) infoScrollRef.current.scrollTop = 0;
+    });
+  };
+
+  const startGesture = (x, y, area = "media") => {
+    gestureRef.current = {
       active: true,
       startX: x,
       startY: y,
-      dx: 0,
-      dy: 0,
-      mode: null,
+      currentX: x,
+      currentY: y,
+      area,
+      moved: false,
     };
-    if (cardRef.current) cardRef.current.style.transition = "none";
-  };
-
-  const pointerMove = (x, y) => {
-    if (!dragRef.current.active || !cardRef.current) return;
-
-    const dx = x - dragRef.current.startX;
-    const dy = y - dragRef.current.startY;
-
-    dragRef.current.dx = dx;
-    dragRef.current.dy = dy;
-
-    if (!dragRef.current.mode) {
-      dragRef.current.mode = Math.abs(dx) > Math.abs(dy) ? "photo" : "vertical";
-    }
-
-    if (dragRef.current.mode === "vertical") {
-      const limitedY = Math.max(-140, Math.min(140, dy));
-      const scale = 1 - Math.min(Math.abs(limitedY) / 1200, 0.03);
-      cardRef.current.style.transform = `translateY(${limitedY}px) scale(${scale})`;
-    } else {
-      const limitedX = Math.max(-90, Math.min(90, dx));
-      cardRef.current.style.transform = `translateX(${limitedX}px)`;
+    if (cardRef.current) {
+      cardRef.current.style.transition = "none";
     }
   };
 
-  const pointerUp = () => {
-    if (!dragRef.current.active || !cardRef.current) return;
+  const moveGesture = (x, y) => {
+    const g = gestureRef.current;
+    if (!g.active || !cardRef.current) return;
 
-    const { dx, dy, mode } = dragRef.current;
-    dragRef.current.active = false;
+    g.currentX = x;
+    g.currentY = y;
+    g.moved = true;
 
-    if (mode === "vertical") {
-      if (dy < -120) {
-        animateOut("up");
+    const dx = x - g.startX;
+    const dy = y - g.startY;
+
+    if (g.area === "media") {
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      if (absY > absX) {
+        const limitedY = Math.max(-120, Math.min(120, dy));
+        const scale = 1 - Math.min(Math.abs(limitedY) / 1500, 0.025);
+        cardRef.current.style.transform = `translateY(${limitedY}px) scale(${scale})`;
+      } else {
+        const limitedX = Math.max(-70, Math.min(70, dx));
+        cardRef.current.style.transform = `translateX(${limitedX}px)`;
+      }
+      return;
+    }
+
+    if (g.area === "info") {
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+      if (!infoScrollRef.current) return;
+
+      if (absY > absX && absY > 8) {
+        infoScrollRef.current.scrollTop -= y - g.currentY;
+      }
+    }
+  };
+
+  const endGesture = () => {
+    const g = gestureRef.current;
+    const el = cardRef.current;
+    if (!g.active) return;
+
+    const dx = g.currentX - g.startX;
+    const dy = g.currentY - g.startY;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+
+    g.active = false;
+
+    if (g.area === "media") {
+      if (absX > absY && absX > 55) {
+        if (dx < 0) nextPhoto();
+        else prevPhoto();
+
+        if (el) {
+          el.style.transition = "transform .2s ease";
+          el.style.transform = "translate3d(0,0,0) scale(1)";
+        }
         return;
       }
 
-      if (dy > 90) {
-        setCardInfoOpen(true);
-        cardRef.current.style.transition = "transform .22s ease";
-        cardRef.current.style.transform = "translate(0,0) scale(1)";
-        return;
-      }
-
-      if (dy < -40 && cardInfoOpen) {
-        setCardInfoOpen(false);
-        cardRef.current.style.transition = "transform .22s ease";
-        cardRef.current.style.transform = "translate(0,0) scale(1)";
+      if (absY > absX && absY > 110) {
+        if (dy < 0) animateOut("up");
+        else switchToPreviousProfile();
         return;
       }
     }
 
-    if (mode === "photo" && activeProfile) {
-      if (dx < -60) {
-        setCardPhotoIndex((v) => (v + 1) % activeProfile.photos.length);
-      } else if (dx > 60) {
-        setCardPhotoIndex((v) => (v === 0 ? activeProfile.photos.length - 1 : v - 1));
+    if (g.area === "info") {
+      const infoEl = infoScrollRef.current;
+      if (infoEl) {
+        const atTop = infoEl.scrollTop <= 2;
+        const atBottom = infoEl.scrollTop + infoEl.clientHeight >= infoEl.scrollHeight - 2;
+
+        if (absY > absX && absY > 110) {
+          if (dy < 0 && atBottom) {
+            animateOut("up");
+            return;
+          }
+          if (dy > 0 && atTop) {
+            switchToPreviousProfile();
+            return;
+          }
+        }
       }
     }
 
-    cardRef.current.style.transition = "transform .22s ease";
-    cardRef.current.style.transform = "translate(0,0) scale(1)";
+    if (el) {
+      el.style.transition = "transform .22s ease";
+      el.style.transform = "translate3d(0,0,0) scale(1)";
+      el.style.opacity = "1";
+    }
   };
 
   const sendMessage = () => {
@@ -599,6 +853,7 @@ function App() {
   const applyFilters = () => {
     setSettings(draftSettings);
     setSwipedIds([]);
+    setCardPhotoIndex(0);
     setShowFilters(false);
   };
 
@@ -607,7 +862,7 @@ function App() {
       searchMode: "nearby",
       country: "All",
       city: "All",
-      maxDistance: 5,
+      maxDistance: 5000,
       unit: "mi",
       ageFrom: 18,
       ageTo: 60,
@@ -616,6 +871,7 @@ function App() {
     setDraftSettings(reset);
     setSettings(reset);
     setSwipedIds([]);
+    setCardPhotoIndex(0);
   };
 
   const handleProfilePhotoUpload = (e) => {
@@ -660,38 +916,81 @@ function App() {
           color:#231b2e
         }
         body{overflow-x:hidden}
+        button{font-family:inherit}
+        .app-shell{min-height:100vh}
         .page{max-width:1380px;margin:0 auto;padding:18px 16px 100px}
-        .topbar,.panel{background:rgba(255,255,255,.84);backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(36,20,48,.06)}
-        .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:50}
+        .topbar,.panel{
+          background:rgba(255,255,255,.84);
+          backdrop-filter:blur(14px);
+          box-shadow:0 12px 30px rgba(36,20,48,.06)
+        }
+        .topbar{
+          display:flex;justify-content:space-between;align-items:center;gap:14px;
+          padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:50
+        }
         .brand-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
         .brand{font-size:22px;font-weight:900;color:#ff5f8f}
         .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{display:flex;gap:10px;flex-wrap:wrap}
-        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.round-btn{border:none;cursor:pointer;transition:.2s ease;font-weight:800}
-        .chip-btn,.nav-btn{border-radius:999px;padding:10px 14px;background:#f1edf4;color:#2b2335}
-        .chip-btn.active,.nav-btn.active,.primary-btn{background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff;box-shadow:0 12px 22px rgba(255,95,143,.24)}
+        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.round-btn{
+          border:none;cursor:pointer;transition:.2s ease;font-weight:800
+        }
+        .chip-btn,.nav-btn{
+          border-radius:999px;padding:10px 14px;background:#f1edf4;color:#2b2335
+        }
+        .chip-btn.active,.nav-btn.active,.primary-btn{
+          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
+          color:#fff;
+          box-shadow:0 12px 22px rgba(255,95,143,.24)
+        }
+        .primary-btn,.secondary-btn,.ghost-btn{
+          border-radius:16px;
+          padding:13px 18px;
+          font-size:14px
+        }
+        .secondary-btn{
+          background:#f3eef6;color:#2b2335
+        }
+        .ghost-btn{
+          background:rgba(255,255,255,.16);
+          color:#fff;
+          border:1px solid rgba(255,255,255,.28)
+        }
         .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
         .nav-btn{padding:12px 16px;font-size:14px}
         .mobile-tabs{display:none}
         .panel{border-radius:28px;padding:22px}
         .hero{display:grid;grid-template-columns:1.15fr .95fr;gap:20px;margin-bottom:22px}
-        .hero-title,.section-title{margin:0 0 12px;font-size:clamp(34px,5vw,68px);line-height:.95;font-weight:900;letter-spacing:-1.6px}
+        .hero-title,.section-title{
+          margin:0 0 12px;font-size:clamp(34px,5vw,68px);line-height:.95;font-weight:900;letter-spacing:-1.6px
+        }
         .hero-text,.section-subtitle,.muted{font-size:17px;line-height:1.55;color:#655a70}
-        .hero-preview{min-height:520px;border-radius:32px;overflow:hidden;position:relative;box-shadow:0 24px 40px rgba(22,11,30,.12)}
-        .hero-preview img,.profile-photo-grid img,.swipe-card img,.list-item img,.chat-item img,.profile-avatar img{display:block;object-fit:cover}
+        .hero-preview{
+          min-height:520px;border-radius:32px;overflow:hidden;position:relative;
+          box-shadow:0 24px 40px rgba(22,11,30,.12)
+        }
+        .hero-preview img,.profile-photo-grid img,.swipe-card img,.list-item img,.chat-item img,.profile-avatar img{
+          display:block;object-fit:cover
+        }
         .hero-preview img{width:100%;height:100%}
-        .preview-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.64))}
+        .preview-overlay{
+          position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+          padding:22px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.64))
+        }
         .preview-name{margin:0 0 6px;font-size:clamp(28px,4vw,46px);font-weight:900}
         .preview-bio{margin:0;max-width:88%}
         .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-        .quick-num{width:46px;height:46px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff;font-weight:900;margin-bottom:14px}
+        .quick-num{
+          width:46px;height:46px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;
+          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff;font-weight:900;margin-bottom:14px
+        }
         .search-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
         .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
         .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:78vh}
 
         .swipe-card{
           width:100%;
-          max-width:520px;
-          height:min(84vh,780px);
+          max-width:470px;
+          height:min(84vh,790px);
           border-radius:34px;
           overflow:hidden;
           position:relative;
@@ -700,15 +999,33 @@ function App() {
           touch-action:none;
           user-select:none;
           cursor:grab;
+          isolation:isolate;
         }
         .swipe-card:active{cursor:grabbing}
-        .swipe-card img{width:100%;height:100%;object-fit:cover}
-        .photo-tap{position:absolute;inset:0;z-index:3}
-        .photo-bars{position:absolute;top:16px;left:16px;right:16px;display:flex;gap:6px;z-index:4}
-        .photo-bar{height:4px;flex:1;border-radius:999px;background:rgba(255,255,255,.34);overflow:hidden}
+        .swipe-card img{width:100%;height:100%;object-fit:cover;display:block}
+        .swipe-media{
+          position:absolute;
+          inset:0;
+          z-index:1;
+        }
+        .swipe-overlay{
+          position:absolute;
+          inset:0;
+          background:
+            linear-gradient(180deg, rgba(0,0,0,.50) 0%, rgba(0,0,0,.12) 24%, rgba(0,0,0,0) 38%),
+            linear-gradient(0deg, rgba(5,5,10,.9) 0%, rgba(10,10,18,.52) 24%, rgba(10,10,18,0) 42%);
+          z-index:2;
+          pointer-events:none;
+        }
+        .photo-bars{
+          position:absolute;top:14px;left:14px;right:14px;display:flex;gap:6px;z-index:4
+        }
+        .photo-bar{
+          height:4px;flex:1;border-radius:999px;background:rgba(255,255,255,.28);overflow:hidden
+        }
         .photo-bar>span{display:block;height:100%;background:#fff;transition:.22s ease}
         .top-pills{
-          position:absolute;top:28px;left:16px;right:16px;
+          position:absolute;top:28px;left:14px;right:14px;
           display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:4
         }
         .pill{
@@ -716,76 +1033,230 @@ function App() {
           background:rgba(255,255,255,.18);color:#fff;
           backdrop-filter:blur(12px);font-size:13px;font-weight:900
         }
+
+        .fixed-name-wrap{
+          position:absolute;
+          top:56px;
+          left:14px;
+          right:14px;
+          z-index:5;
+          pointer-events:none;
+        }
+        .fixed-name{
+          display:inline-flex;
+          flex-direction:column;
+          gap:4px;
+          max-width:calc(100% - 4px);
+          padding:14px 16px;
+          border-radius:22px;
+          background:rgba(9,13,28,.36);
+          border:1px solid rgba(255,255,255,.14);
+          backdrop-filter:blur(16px);
+          box-shadow:0 10px 30px rgba(0,0,0,.18);
+          color:#fff;
+        }
+        .fixed-name-title{
+          margin:0;
+          font-size:28px;
+          font-weight:900;
+          line-height:1;
+          display:flex;
+          align-items:center;
+          gap:6px;
+          flex-wrap:wrap;
+        }
+        .fixed-name-sub{
+          font-size:13px;
+          font-weight:700;
+          color:rgba(255,255,255,.84)
+        }
+        .premium-tag{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          padding:6px 10px;
+          border-radius:999px;
+          font-size:11px;
+          font-weight:900;
+          background:rgba(255,255,255,.15);
+          border:1px solid rgba(255,255,255,.18);
+          color:#fff;
+        }
+
         .card-bottom{
-          position:absolute;left:0;right:0;bottom:0;z-index:4;
-          padding:18px 18px 22px;
-          background:linear-gradient(180deg,rgba(22,14,28,0) 0%,rgba(22,14,28,.20) 22%,rgba(255,255,255,.96) 23%,#fff 100%);
-          transition:.28s ease;
+          position:absolute;
+          left:0;right:0;bottom:0;
+          z-index:4;
+          padding:0 14px 14px;
         }
-        .card-bottom.open{max-height:58%}
-        .card-bottom.closed{max-height:33%}
-        .card-name{
-          margin:0 0 6px;font-size:34px;font-weight:900;
-          display:flex;align-items:center;flex-wrap:wrap;color:#241c2d
+
+        .info-shell{
+          position:relative;
+          border-radius:28px;
+          overflow:hidden;
+          background:rgba(255,255,255,.92);
+          box-shadow:0 18px 40px rgba(17,8,24,.16);
+          border:1px solid rgba(255,255,255,.5);
         }
-        .card-meta{margin:0 0 10px;color:#64596f;font-weight:800}
+        .info-header{
+          position:sticky;
+          top:0;
+          z-index:2;
+          padding:16px 16px 12px;
+          background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92));
+          border-bottom:1px solid rgba(100,80,120,.08);
+        }
+        .info-title{
+          margin:0;
+          font-size:28px;
+          font-weight:900;
+          line-height:1;
+          display:flex;
+          align-items:center;
+          gap:6px;
+          flex-wrap:wrap;
+          color:#241c2d;
+        }
+        .info-sub{
+          margin:8px 0 0;
+          color:#64596f;
+          font-weight:800;
+          font-size:14px;
+        }
         .card-scroll{
           overflow:auto;
-          max-height:220px;
-          padding-right:4px;
+          max-height:250px;
+          padding:12px 16px 118px;
+          -ms-overflow-style:none;
+          scrollbar-width:none;
         }
-        .card-scroll.open{max-height:360px}
-        .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+        .card-scroll::-webkit-scrollbar{display:none}
+        .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
         .interest{
           padding:8px 12px;border-radius:999px;background:#f5eff7;
           font-size:13px;font-weight:800;color:#52475e
         }
-        .card-bio{margin:0;color:#665b70;line-height:1.55}
-        .card-actions{
-          display:flex;justify-content:center;gap:18px;
-          margin-top:18px
+        .card-bio{margin:0;color:#665b70;line-height:1.58}
+        .info-hint{
+          margin-top:14px;
+          color:#7b7186;
+          font-size:12px;
+          line-height:1.5;
         }
+
+        .card-actions-fixed{
+          position:absolute;
+          left:14px;
+          right:14px;
+          bottom:14px;
+          z-index:7;
+          display:flex;
+          justify-content:center;
+          pointer-events:none;
+        }
+        .card-actions-inner{
+          display:flex;
+          gap:16px;
+          padding:10px 12px;
+          border-radius:999px;
+          background:rgba(18,14,26,.56);
+          backdrop-filter:blur(14px);
+          border:1px solid rgba(255,255,255,.14);
+          box-shadow:0 16px 30px rgba(18,9,26,.20);
+          pointer-events:auto;
+        }
+
         .round-btn{
-          width:74px;height:74px;border-radius:24px;font-size:28px;
-          box-shadow:0 16px 30px rgba(20,10,28,.14)
+          width:74px;height:74px;border-radius:26px;font-size:28px;
+          box-shadow:0 16px 30px rgba(20,10,28,.14);
+          transform:scale(1);
         }
         .round-btn.skip{
-          background:linear-gradient(135deg,#f4eff7,#ebe3f0);
-          color:#5f536b
+          background:linear-gradient(135deg,#eef0ff,#dfe5ff);
+          color:#4f5acb
         }
         .round-btn.like{
           background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
           color:#fff
         }
+        .round-btn:hover{transform:translateY(-1px) scale(1.02)}
+        .round-btn:active{transform:scale(.94)}
         .round-btn.pop{transform:scale(1.08);box-shadow:0 20px 36px rgba(255,95,143,.24)}
+
+        .nav-hint{
+          position:absolute;
+          left:50%;
+          transform:translateX(-50%);
+          bottom:112px;
+          z-index:6;
+          padding:8px 12px;
+          border-radius:999px;
+          font-size:12px;
+          font-weight:800;
+          color:#fff;
+          background:rgba(15,11,24,.35);
+          backdrop-filter:blur(10px);
+          border:1px solid rgba(255,255,255,.12);
+          white-space:nowrap;
+        }
+
+        .counter-pill{
+          position:absolute;
+          top:14px;
+          right:14px;
+          z-index:5;
+          padding:9px 12px;
+          border-radius:999px;
+          background:rgba(255,255,255,.18);
+          color:#fff;
+          font-size:12px;
+          font-weight:900;
+          backdrop-filter:blur(12px);
+        }
+
         .match-pop{animation:matchPop .42s ease}
         @keyframes matchPop{
           0%{transform:scale(.88);opacity:0}
           100%{transform:scale(1);opacity:1}
         }
 
-        .empty{min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#665b70;gap:10px}
+        .empty{
+          min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+          text-align:center;color:#665b70;gap:10px
+        }
         .messages-layout,.profile-layout,.settings-layout{display:grid;gap:16px}
         .messages-layout{grid-template-columns:220px minmax(0,1fr);min-height:620px}
         .profile-layout{grid-template-columns:320px minmax(0,1fr)}
         .settings-layout{grid-template-columns:360px minmax(0,1fr)}
         .list-grid{display:grid;gap:12px}
-        .list-item,.chat-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:20px;background:#f8f5fa}
+        .list-item,.chat-item{
+          display:flex;align-items:center;gap:12px;padding:12px;border-radius:20px;background:#f8f5fa
+        }
         .list-item img{width:58px;height:58px;border-radius:18px;flex-shrink:0}
         .chat-item{cursor:pointer}
-        .chat-item.active{background:linear-gradient(135deg,rgba(255,95,143,.11),rgba(255,139,110,.11));border:1px solid rgba(255,95,143,.12)}
+        .chat-item.active{
+          background:linear-gradient(135deg,rgba(255,95,143,.11),rgba(255,139,110,.11));
+          border:1px solid rgba(255,95,143,.12)
+        }
         .chat-item img{width:42px;height:42px;border-radius:50%;flex-shrink:0}
         .item-title{font-size:16px;font-weight:900;margin:0 0 2px;display:flex;align-items:center;flex-wrap:wrap}
         .item-sub{font-size:13px;color:#6a6076;margin:0}
         .message-panel{display:grid;grid-template-rows:auto 1fr auto;min-height:620px}
-        .message-header{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(100,80,120,.08)}
+        .message-header{
+          display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(100,80,120,.08)
+        }
         .message-header img{width:56px;height:56px;border-radius:50%}
         .message-body{padding:18px 2px 18px 0;overflow:auto;display:flex;flex-direction:column;gap:12px}
         .bubble{max-width:78%;padding:13px 16px;border-radius:20px;font-size:15px;line-height:1.45}
         .bubble.them{align-self:flex-start;background:#f1edf4;color:#2b2235}
         .bubble.me{align-self:flex-end;background:linear-gradient(135deg,#ff5f8f,#ff8b6e);color:#fff}
-        .message-input-row{display:flex;gap:10px;padding-top:14px;border-top:1px solid rgba(100,80,120,.08)}
-        .message-input-row input,.field input,.field select,.field textarea{width:100%;border-radius:16px;border:1px solid rgba(95,80,110,.12);background:#fcfbfd;padding:14px 15px;font-size:15px;outline:none;font-family:inherit}
+        .message-input-row{
+          display:flex;gap:10px;padding-top:14px;border-top:1px solid rgba(100,80,120,.08)
+        }
+        .message-input-row input,.field input,.field select,.field textarea{
+          width:100%;border-radius:16px;border:1px solid rgba(95,80,110,.12);
+          background:#fcfbfd;padding:14px 15px;font-size:15px;outline:none;font-family:inherit
+        }
         .field{display:grid;gap:8px}
         .field label{font-size:14px;font-weight:800;color:#544a60}
         .field-group,.help-grid,.info-list{display:grid;gap:14px}
@@ -795,12 +1266,22 @@ function App() {
         .profile-main-name{margin:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
         .profile-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:12px}
         .profile-photo-grid img{width:100%;height:170px;border-radius:18px}
-        .info-row{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(100,80,120,.08)}
+        .info-row{
+          display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(100,80,120,.08)
+        }
         .help-item{padding:18px;border-radius:20px;background:#faf7fc}
-        .mutual-modal{position:fixed;inset:0;background:rgba(20,8,30,.45);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100}
-        .mutual-box{width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#ff5f8f 0%,#ff8b6e 100%);color:#fff;box-shadow:0 24px 50px rgba(25,10,35,.26);text-align:center}
+        .mutual-modal{
+          position:fixed;inset:0;background:rgba(20,8,30,.45);display:flex;align-items:center;justify-content:center;
+          padding:18px;z-index:100
+        }
+        .mutual-box{
+          width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#ff5f8f 0%,#ff8b6e 100%);
+          color:#fff;box-shadow:0 24px 50px rgba(25,10,35,.26);text-align:center
+        }
         .mutual-avatars{display:flex;justify-content:center;align-items:center;gap:14px;margin:16px 0 22px}
-        .mutual-avatars img{width:94px;height:94px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.5)}
+        .mutual-avatars img{
+          width:94px;height:94px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.5)
+        }
         .heart{font-size:34px}
         .phone-bottom-nav{display:none}
 
@@ -812,22 +1293,37 @@ function App() {
           .page{padding:12px 12px 98px}
           .topbar{position:static;flex-direction:column;align-items:flex-start;padding:14px}
           .nav{display:none}
-          .mobile-tabs{display:flex;gap:10px;overflow:auto;padding:2px 2px 4px;margin-bottom:14px;scrollbar-width:none}
+          .mobile-tabs{
+            display:flex;gap:10px;overflow:auto;padding:2px 2px 4px;margin-bottom:14px;scrollbar-width:none
+          }
           .mobile-tabs::-webkit-scrollbar{display:none}
           .mobile-tabs .nav-btn{flex:0 0 auto}
           .panel{padding:18px;border-radius:24px}
           .hero{grid-template-columns:1fr}
           .messages-layout{grid-template-columns:110px minmax(0,1fr);gap:12px}
-          .chat-item{flex-direction:column;align-items:center;text-align:center;padding:10px 6px;border-radius:18px;gap:8px}
+          .chat-item{
+            flex-direction:column;align-items:center;text-align:center;padding:10px 6px;border-radius:18px;gap:8px
+          }
           .chat-item img{width:38px;height:38px}
           .item-title{font-size:12px;justify-content:center}
           .item-sub{font-size:11px}
           .swipe-card{max-width:100%;height:min(82vh,720px);border-radius:28px}
-          .card-name{font-size:29px}
+          .fixed-name{padding:12px 14px;border-radius:20px}
+          .fixed-name-title{font-size:24px}
+          .info-title{font-size:24px}
+          .card-scroll{max-height:245px;padding:12px 14px 116px}
           .round-btn{width:68px;height:68px;border-radius:22px}
           .two-col{grid-template-columns:1fr}
-          .phone-bottom-nav{position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 16px 34px rgba(29,14,40,.12);z-index:60}
-          .phone-tab-btn{border:none;background:transparent;padding:9px 4px;border-radius:16px;font-size:11px;font-weight:900;color:#5b5066;line-height:1.15}
+          .nav-hint{bottom:108px;font-size:11px}
+          .phone-bottom-nav{
+            position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);
+            gap:8px;padding:8px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+            box-shadow:0 16px 34px rgba(29,14,40,.12);z-index:60
+          }
+          .phone-tab-btn{
+            border:none;background:transparent;padding:9px 4px;border-radius:16px;font-size:11px;font-weight:900;
+            color:#5b5066;line-height:1.15
+          }
           .phone-tab-btn.active{background:linear-gradient(135deg,#ff5f8f,#ff8b6e);color:#fff}
         }
       `}</style>
@@ -992,27 +1488,29 @@ function App() {
                     <div
                       ref={cardRef}
                       className="swipe-card"
-                      onMouseDown={(e) => pointerDown(e.clientX, e.clientY)}
-                      onMouseMove={(e) => pointerMove(e.clientX, e.clientY)}
-                      onMouseUp={pointerUp}
-                      onMouseLeave={pointerUp}
+                      onMouseDown={(e) => startGesture(e.clientX, e.clientY, "media")}
+                      onMouseMove={(e) => {
+                        if (gestureRef.current.active) moveGesture(e.clientX, e.clientY);
+                      }}
+                      onMouseUp={endGesture}
+                      onMouseLeave={() => {
+                        if (gestureRef.current.active) endGesture();
+                      }}
                       onTouchStart={(e) => {
                         const touch = e.touches[0];
-                        pointerDown(touch.clientX, touch.clientY);
+                        startGesture(touch.clientX, touch.clientY, "media");
                       }}
                       onTouchMove={(e) => {
                         const touch = e.touches[0];
-                        pointerMove(touch.clientX, touch.clientY);
+                        moveGesture(touch.clientX, touch.clientY);
                       }}
-                      onTouchEnd={pointerUp}
+                      onTouchEnd={endGesture}
                     >
-                      <img src={activeProfile.photos[cardPhotoIndex]} alt={activeProfile.name} />
+                      <div className="swipe-media">
+                        <img src={activeProfile.photos[cardPhotoIndex]} alt={activeProfile.name} />
+                      </div>
 
-                      <button
-                        className="photo-tap"
-                        onClick={(e) => e.preventDefault()}
-                        aria-label="photo swipe area"
-                      />
+                      <div className="swipe-overlay" />
 
                       <div className="photo-bars">
                         {activeProfile.photos.map((_, i) => (
@@ -1033,39 +1531,105 @@ function App() {
                         </div>
                       </div>
 
-                      <div className={`card-bottom ${cardInfoOpen ? "open" : "closed"}`}>
-                        <h3 className="card-name">
-                          {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
-                          {activeProfile.verified && <Badge />}
-                        </h3>
+                      <div className="counter-pill">
+                        {activeProfileIndexInDeck + 1} / {deckProfiles.length}
+                      </div>
 
-                        <p className="card-meta">
-                          {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
-                        </p>
+                      <div className="fixed-name-wrap">
+                        <div className="fixed-name">
+                          <div className="fixed-name-title">
+                            {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
+                            {activeProfile.verified && <Badge />}
+                            <span className="premium-tag">{t.premium}</span>
+                          </div>
+                          <div className="fixed-name-sub">
+                            {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
+                          </div>
+                        </div>
+                      </div>
 
-                        <div className={`card-scroll ${cardInfoOpen ? "open" : ""}`}>
-                          <div className="chip-row">
-                            {activeProfile.interests.map((it) => (
-                              <span className="interest" key={it}>{it}</span>
-                            ))}
+                      <div className="card-bottom">
+                        <div className="info-shell">
+                          <div className="info-header">
+                            <h3 className="info-title">
+                              {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
+                              {activeProfile.verified && <Badge />}
+                            </h3>
+                            <p className="info-sub">
+                              {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
+                            </p>
                           </div>
 
-                          <p className="card-bio">
-                            {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
-                          </p>
-                        </div>
+                          <div
+                            ref={infoScrollRef}
+                            className="card-scroll"
+                            onMouseDown={(e) => {
+                              e.stopPropagation();
+                              startGesture(e.clientX, e.clientY, "info");
+                            }}
+                            onMouseMove={(e) => {
+                              if (gestureRef.current.active && gestureRef.current.area === "info") {
+                                moveGesture(e.clientX, e.clientY);
+                              }
+                            }}
+                            onMouseUp={(e) => {
+                              e.stopPropagation();
+                              endGesture();
+                            }}
+                            onMouseLeave={(e) => {
+                              if (gestureRef.current.active && gestureRef.current.area === "info") {
+                                endGesture();
+                              }
+                            }}
+                            onTouchStart={(e) => {
+                              e.stopPropagation();
+                              const touch = e.touches[0];
+                              startGesture(touch.clientX, touch.clientY, "info");
+                            }}
+                            onTouchMove={(e) => {
+                              const touch = e.touches[0];
+                              moveGesture(touch.clientX, touch.clientY);
+                            }}
+                            onTouchEnd={(e) => {
+                              e.stopPropagation();
+                              endGesture();
+                            }}
+                          >
+                            <div className="chip-row">
+                              {activeProfile.interests.map((it) => (
+                                <span className="interest" key={it}>{it}</span>
+                              ))}
+                            </div>
 
-                        <div className="card-actions">
+                            <p className="card-bio">
+                              {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
+                            </p>
+
+                            <div className="info-hint">{t.infoHint}</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="nav-hint">← → фото · ↑ ↓ анкеты</div>
+
+                      <div className="card-actions-fixed">
+                        <div className="card-actions-inner">
                           <button
                             className={`round-btn skip ${skipPulse ? "pop" : ""}`}
-                            onClick={() => animateOut("left")}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              animateOut("left");
+                            }}
                             title="skip"
                           >
                             ✕
                           </button>
                           <button
                             className={`round-btn like ${likePulse ? "pop" : ""}`}
-                            onClick={() => animateOut("right")}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              animateOut("right");
+                            }}
                             title="like"
                           >
                             ♥
