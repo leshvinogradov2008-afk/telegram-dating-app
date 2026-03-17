@@ -1,96 +1,178 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 
-const texts = {
-  brand: "Velvet",
-  navHome: "Главная",
-  navFeed: "Лента",
-  navLikes: "Симпатии",
-  navMessages: "Сообщения",
-  navProfile: "Профиль",
+const translations = {
+  ru: {
+    brand: "Telegram Dating",
+    navHome: "Главная",
+    navFeed: "Анкеты",
+    navLikes: "Симпатии",
+    navMessages: "Сообщения",
+    navProfile: "Профиль",
 
-  heroBadge: "Современные знакомства",
-  heroTitle: "Знакомства в красивом формате",
-  heroText:
-    "Смотри анкеты, переключай фото, используй фильтры, ставь симпатии и общайся внутри сайта после взаимного интереса.",
-  heroPrimary: "Смотреть анкеты",
-  heroSecondary: "Перейти в сообщения",
+    heroBadge: "Новый формат знакомств",
+    heroTitle: "Найди новые знакомства в Telegram",
+    heroText:
+      "Смотри анкеты, переключай фото, используй фильтры, ставь симпатии и общайся после взаимного интереса.",
+    heroPrimary: "Смотреть анкеты",
+    heroSecondary: "Открыть сообщения",
 
-  step1Title: "Быстрый старт",
-  step1Text: "Открываешь сайт и сразу попадаешь в удобный интерфейс знакомств.",
-  step2Title: "Умные фильтры",
-  step2Text: "Выбираешь город, возраст, пол и интересы за пару секунд.",
-  step3Title: "Общение внутри сайта",
-  step3Text: "После взаимной симпатии появляется переписка прямо на сайте.",
+    step1Title: "1. Быстрый старт",
+    step1Text: "Открываешь сайт и сразу смотришь анкеты.",
+    step2Title: "2. Удобные фильтры",
+    step2Text: "Выбираешь локацию, возраст, пол и интересы.",
+    step3Title: "3. Общение после мэтча",
+    step3Text: "После взаимной симпатии появляется чат внутри сайта.",
 
-  feedTitle: "Лента анкет",
-  feedText: "Листай анкеты, переключай фото и находи интересных людей рядом.",
-  likesTitle: "Мои симпатии",
-  likesText: "Здесь хранятся анкеты, которые ты лайкнул.",
-  messagesTitle: "Сообщения",
-  messagesText: "После взаимной симпатии здесь появляется чат.",
-  profileTitle: "Мой профиль",
-  profileText: "Здесь позже будет полноценная анкета пользователя.",
+    feedTitle: "Популярные анкеты",
+    feedText: "Потяни карточку мышкой влево или вправо. Или используй кнопки ниже.",
+    likesTitle: "Мои симпатии",
+    likesText: "Здесь хранятся анкеты, которые ты лайкнул.",
+    messagesTitle: "Сообщения",
+    messagesText: "После взаимной симпатии здесь появляется чат.",
+    profileTitle: "Мой профиль",
+    profileText: "Здесь позже будет полноценная анкета пользователя.",
 
-  like: "❤️ Симпатия",
-  next: "Дальше",
-  clearLikes: "Очистить симпатии",
-  noLikes: "Пока нет лайкнутых анкет",
-  noLikesText: "Перейди в ленту и добавь несколько симпатий.",
-  noProfiles: "Анкеты не найдены",
-  noProfilesText: "Попробуй изменить фильтры.",
-  noMessages: "Пока нет сообщений",
-  noMessagesText: "Когда случится взаимная симпатия, здесь появится чат.",
+    like: "❤️ Нравится",
+    next: "Дальше",
+    clearLikes: "Очистить симпатии",
+    noLikes: "Пока нет лайкнутых анкет",
+    noLikesText: "Перейди в анкеты и добавь несколько симпатий.",
+    noProfiles: "Анкеты не найдены",
+    noProfilesText: "Попробуй изменить фильтры.",
+    noMessages: "Пока нет сообщений",
+    noMessagesText: "Когда случится взаимная симпатия, здесь появится чат.",
 
-  location: "Локация",
-  distance: "Дальность",
-  gender: "Пол",
-  interest: "Интерес",
-  ageFrom: "Возраст от",
-  ageTo: "Возраст до",
+    language: "Язык",
+    location: "Локация",
+    distance: "Дальность",
+    gender: "Пол",
+    interest: "Интересы",
+    ageFrom: "Возраст от",
+    ageTo: "Возраст до",
 
-  allLocations: "Все локации",
-  allDistances: "Любая",
-  allGenders: "Любой",
-  allInterests: "Любой",
-  female: "Девушки",
-  male: "Мужчины",
+    allLocations: "Все локации",
+    allDistances: "Любая",
+    allGenders: "Любой",
+    allInterests: "Любые",
+    female: "Девушки",
+    male: "Мужчины",
 
-  verified: "Проверено",
-  online: "Онлайн",
-  miles: "миль",
+    verified: "Проверено",
+    online: "Онлайн",
+    miles: "миль",
 
-  profileName: "Имя",
-  profileAge: "Возраст",
-  profileCity: "Город",
-  profileAbout: "О себе",
-  profileInterests: "Интересы",
-  editProfile: "Редактировать позже",
+    profileName: "Имя",
+    profileAge: "Возраст",
+    profileCity: "Город",
+    profileAbout: "О себе",
+    profileInterests: "Интересы",
+    editProfile: "Редактировать позже",
 
-  mutualTitle: "Взаимная симпатия!",
-  mutualText: "Теперь вы можете общаться в разделе «Сообщения».",
-  openMessages: "Открыть сообщения",
-  close: "Закрыть",
+    mutualTitle: "Взаимная симпатия!",
+    mutualText: "Теперь вы можете общаться в разделе «Сообщения».",
+    openMessages: "Открыть сообщения",
+    close: "Закрыть",
 
-  photo1: "Фото 1",
-  photo2: "Фото 2",
-  send: "Отправить",
-  writeMessage: "Написать сообщение...",
-  selectChat: "Выбери чат слева, чтобы открыть переписку."
+    photo1: "Фото 1",
+    photo2: "Фото 2",
+    send: "Отправить",
+    writeMessage: "Написать сообщение...",
+    selectChat: "Выбери чат слева, чтобы открыть переписку."
+  },
+  en: {
+    brand: "Telegram Dating",
+    navHome: "Home",
+    navFeed: "Profiles",
+    navLikes: "Likes",
+    navMessages: "Messages",
+    navProfile: "Profile",
+
+    heroBadge: "New dating format",
+    heroTitle: "Find new connections on Telegram",
+    heroText:
+      "Browse profiles, switch photos, use filters, like profiles, and chat after a mutual match.",
+    heroPrimary: "Browse Profiles",
+    heroSecondary: "Open Messages",
+
+    step1Title: "1. Fast start",
+    step1Text: "Open the site and start browsing profiles right away.",
+    step2Title: "2. Smart filters",
+    step2Text: "Choose location, age, gender, and interests.",
+    step3Title: "3. Chat after a match",
+    step3Text: "After a mutual like, a chat appears inside the site.",
+
+    feedTitle: "Popular profiles",
+    feedText: "Drag the card left or right with your mouse, or use the buttons below.",
+    likesTitle: "My Likes",
+    likesText: "Profiles you liked are stored here.",
+    messagesTitle: "Messages",
+    messagesText: "After a mutual match, your chat appears here.",
+    profileTitle: "My Profile",
+    profileText: "A full user profile page will appear here later.",
+
+    like: "❤️ Like",
+    next: "Next",
+    clearLikes: "Clear Likes",
+    noLikes: "No liked profiles yet",
+    noLikesText: "Go to profiles and add a few likes.",
+    noProfiles: "No profiles found",
+    noProfilesText: "Try changing your filters.",
+    noMessages: "No messages yet",
+    noMessagesText: "When a mutual match happens, a chat will appear here.",
+
+    language: "Language",
+    location: "Location",
+    distance: "Distance",
+    gender: "Gender",
+    interest: "Interests",
+    ageFrom: "Age from",
+    ageTo: "Age to",
+
+    allLocations: "All locations",
+    allDistances: "Any",
+    allGenders: "Any",
+    allInterests: "Any",
+    female: "Women",
+    male: "Men",
+
+    verified: "Verified",
+    online: "Online",
+    miles: "miles",
+
+    profileName: "Name",
+    profileAge: "Age",
+    profileCity: "City",
+    profileAbout: "About",
+    profileInterests: "Interests",
+    editProfile: "Edit later",
+
+    mutualTitle: "It's a match!",
+    mutualText: "Now you can chat in the Messages section.",
+    openMessages: "Open Messages",
+    close: "Close",
+
+    photo1: "Photo 1",
+    photo2: "Photo 2",
+    send: "Send",
+    writeMessage: "Write a message...",
+    selectChat: "Choose a chat on the left to open the conversation."
+  }
 }
 
 const profiles = [
   {
     id: 1,
-    name: "Анна",
+    name: "Anna",
     age: 26,
     city: "Los Angeles",
     distance: 4,
     gender: "female",
-    interests: ["Музыка", "Путешествия", "Кофе"],
-    about: "Люблю красивые места, музыку и лёгкое общение.",
+    interests: ["Music", "Travel", "Coffee"],
+    aboutRu: "Люблю красивые места, музыку и лёгкое общение.",
+    aboutEn: "I love beautiful places, music, and easygoing conversation.",
     photos: [
-      "https://i.pravatar.cc/900?img=47",
-      "https://i.pravatar.cc/900?img=48"
+      "https://randomuser.me/api/portraits/women/44.jpg",
+      "https://randomuser.me/api/portraits/women/45.jpg"
     ],
     verified: true,
     online: true,
@@ -98,16 +180,17 @@ const profiles = [
   },
   {
     id: 2,
-    name: "София",
+    name: "Sofia",
     age: 24,
     city: "Santa Monica",
     distance: 9,
     gender: "female",
-    interests: ["Океан", "Фитнес", "Кино"],
-    about: "Обожаю прогулки у океана и уютные вечера.",
+    interests: ["Ocean", "Fitness", "Cinema"],
+    aboutRu: "Обожаю прогулки у океана и уютные вечера.",
+    aboutEn: "I love ocean walks and cozy evenings.",
     photos: [
-      "https://i.pravatar.cc/900?img=49",
-      "https://i.pravatar.cc/900?img=50"
+      "https://randomuser.me/api/portraits/women/65.jpg",
+      "https://randomuser.me/api/portraits/women/66.jpg"
     ],
     verified: true,
     online: false,
@@ -115,16 +198,17 @@ const profiles = [
   },
   {
     id: 3,
-    name: "Эмма",
+    name: "Emma",
     age: 27,
     city: "Burbank",
     distance: 16,
     gender: "female",
-    interests: ["Искусство", "Книги", "Юмор"],
-    about: "Ценю искренность, юмор и интересные знакомства.",
+    interests: ["Art", "Books", "Humor"],
+    aboutRu: "Ценю искренность, юмор и интересные знакомства.",
+    aboutEn: "I value sincerity, humor, and meaningful connections.",
     photos: [
-      "https://i.pravatar.cc/900?img=51",
-      "https://i.pravatar.cc/900?img=52"
+      "https://randomuser.me/api/portraits/women/68.jpg",
+      "https://randomuser.me/api/portraits/women/69.jpg"
     ],
     verified: false,
     online: true,
@@ -132,16 +216,17 @@ const profiles = [
   },
   {
     id: 4,
-    name: "Луна",
+    name: "Luna",
     age: 25,
     city: "West Hollywood",
     distance: 7,
     gender: "female",
-    interests: ["Стиль", "Еда", "Ночные прогулки"],
-    about: "Люблю стиль, новые впечатления и спонтанность.",
+    interests: ["Style", "Food", "Night Walks"],
+    aboutRu: "Люблю стиль, новые впечатления и спонтанность.",
+    aboutEn: "I love style, new experiences, and spontaneity.",
     photos: [
-      "https://i.pravatar.cc/900?img=53",
-      "https://i.pravatar.cc/900?img=54"
+      "https://randomuser.me/api/portraits/women/33.jpg",
+      "https://randomuser.me/api/portraits/women/34.jpg"
     ],
     verified: true,
     online: true,
@@ -149,16 +234,17 @@ const profiles = [
   },
   {
     id: 5,
-    name: "Даниэль",
+    name: "Daniel",
     age: 29,
     city: "Los Angeles",
     distance: 6,
     gender: "male",
-    interests: ["Спорт", "Авто", "Путешествия"],
-    about: "Люблю активную жизнь, спорт и хорошие разговоры.",
+    interests: ["Gym", "Cars", "Travel"],
+    aboutRu: "Люблю активную жизнь, спорт и хорошие разговоры.",
+    aboutEn: "I enjoy an active lifestyle, fitness, and good conversations.",
     photos: [
-      "https://i.pravatar.cc/900?img=12",
-      "https://i.pravatar.cc/900?img=14"
+      "https://randomuser.me/api/portraits/men/32.jpg",
+      "https://randomuser.me/api/portraits/men/33.jpg"
     ],
     verified: true,
     online: false,
@@ -166,16 +252,17 @@ const profiles = [
   },
   {
     id: 6,
-    name: "Крис",
+    name: "Chris",
     age: 31,
     city: "Santa Monica",
     distance: 12,
     gender: "male",
-    interests: ["Океан", "Музыка", "Бизнес"],
-    about: "Люблю океан, музыку и людей с хорошей энергией.",
+    interests: ["Ocean", "Music", "Business"],
+    aboutRu: "Люблю океан, музыку и людей с хорошей энергией.",
+    aboutEn: "I love the ocean, music, and people with good energy.",
     photos: [
-      "https://i.pravatar.cc/900?img=15",
-      "https://i.pravatar.cc/900?img=16"
+      "https://randomuser.me/api/portraits/men/45.jpg",
+      "https://randomuser.me/api/portraits/men/46.jpg"
     ],
     verified: false,
     online: true,
@@ -185,16 +272,16 @@ const profiles = [
 
 const starterMessages = {
   1: [
-    { from: "them", text: "Привет 😊 Рада взаимной симпатии." },
-    { from: "them", text: "Как проходит твой день?" }
+    { from: "them", textRu: "Привет 😊 Рада взаимной симпатии.", textEn: "Hi 😊 Glad we matched." },
+    { from: "them", textRu: "Как проходит твой день?", textEn: "How is your day going?" }
   ],
   3: [
-    { from: "them", text: "Привет! Похоже, у нас мэтч ✨" },
-    { from: "them", text: "Любишь вечерние прогулки?" }
+    { from: "them", textRu: "Привет! Похоже, у нас мэтч ✨", textEn: "Hi! Looks like we matched ✨" },
+    { from: "them", textRu: "Любишь вечерние прогулки?", textEn: "Do you like evening walks?" }
   ],
   5: [
-    { from: "them", text: "Привет! Рад знакомству." },
-    { from: "them", text: "Чем увлекаешься в свободное время?" }
+    { from: "them", textRu: "Привет! Рад знакомству.", textEn: "Hi! Nice to meet you." },
+    { from: "them", textRu: "Чем увлекаешься в свободное время?", textEn: "What do you do in your free time?" }
   ]
 }
 
@@ -202,21 +289,21 @@ const locationOptions = ["All", "Los Angeles", "Santa Monica", "Burbank", "West 
 const distanceOptions = ["Any", 5, 10, 25, 50]
 const interestOptions = [
   "Any",
-  "Музыка",
-  "Путешествия",
-  "Кофе",
-  "Океан",
-  "Фитнес",
-  "Кино",
-  "Искусство",
-  "Книги",
-  "Юмор",
-  "Стиль",
-  "Еда",
-  "Ночные прогулки",
-  "Спорт",
-  "Авто",
-  "Бизнес"
+  "Music",
+  "Travel",
+  "Coffee",
+  "Ocean",
+  "Fitness",
+  "Cinema",
+  "Art",
+  "Books",
+  "Humor",
+  "Style",
+  "Food",
+  "Night Walks",
+  "Gym",
+  "Cars",
+  "Business"
 ]
 const ageFromOptions = [18, 21, 25, 30, 35]
 const ageToOptions = [25, 30, 35, 40, 50]
@@ -224,10 +311,10 @@ const ageToOptions = [25, 30, 35, 40, 50]
 function getPageFromHash() {
   const hash = window.location.hash.replace("#", "")
   if (
-    hash === "/лента" ||
-    hash === "/симпатии" ||
-    hash === "/сообщения" ||
-    hash === "/профиль"
+    hash === "/profiles" ||
+    hash === "/likes" ||
+    hash === "/messages" ||
+    hash === "/profile"
   ) {
     return hash
   }
@@ -260,7 +347,7 @@ function NavLink({ href, label, currentPage, mobile = false }) {
   )
 }
 
-function PhotoSwitcher({ activePhoto, setActivePhoto }) {
+function PhotoSwitcher({ activePhoto, setActivePhoto, t }) {
   return (
     <div
       style={{
@@ -290,15 +377,92 @@ function PhotoSwitcher({ activePhoto, setActivePhoto }) {
             fontSize: "13px"
           }}
         >
-          {i === 0 ? texts.photo1 : texts.photo2}
+          {i === 0 ? t.photo1 : t.photo2}
         </button>
       ))}
     </div>
   )
 }
 
+function LikedCard({ profile, t, language }) {
+  const [photoIndex, setPhotoIndex] = useState(0)
+
+  return (
+    <div
+      style={{
+        background: "#fff",
+        borderRadius: "28px",
+        overflow: "hidden",
+        boxShadow: "0 20px 46px rgba(31,20,39,0.09)"
+      }}
+    >
+      <div style={{ position: "relative", height: "320px" }}>
+        <PhotoSwitcher activePhoto={photoIndex} setActivePhoto={setPhotoIndex} t={t} />
+        <img
+          src={profile.photos[photoIndex]}
+          alt={profile.name}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block"
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0.04) 48%, transparent)"
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "18px",
+            right: "18px",
+            bottom: "18px",
+            color: "#fff"
+          }}
+        >
+          <div style={{ fontSize: "30px", fontWeight: "900", lineHeight: "1" }}>
+            {profile.name}, {profile.age}
+          </div>
+          <div style={{ marginTop: "8px", fontWeight: "700", color: "rgba(255,255,255,0.9)" }}>
+            {profile.city} • {profile.distance} {t.miles}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ padding: "18px" }}>
+        <p style={{ marginTop: 0, color: "#5f5466", lineHeight: "1.5" }}>
+          {language === "ru" ? profile.aboutRu : profile.aboutEn}
+        </p>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+          {profile.interests.map((interest) => (
+            <span
+              key={interest}
+              style={{
+                background: "#f5f2f6",
+                padding: "7px 12px",
+                borderRadius: "999px",
+                fontSize: "13px",
+                fontWeight: "700"
+              }}
+            >
+              {interest}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const [page, setPage] = useState(getPageFromHash())
+  const [language, setLanguage] = useState("ru")
   const [selectedLocation, setSelectedLocation] = useState("All")
   const [selectedDistance, setSelectedDistance] = useState("Any")
   const [selectedGender, setSelectedGender] = useState("Any")
@@ -320,7 +484,7 @@ export default function App() {
   const [activePhoto, setActivePhoto] = useState(0)
 
   const startXRef = useRef(0)
-  const t = texts
+  const t = translations[language]
 
   useEffect(() => {
     const handleHash = () => setPage(getPageFromHash())
@@ -403,7 +567,12 @@ export default function App() {
       setMatchedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]))
       setChatMap((prev) => ({
         ...prev,
-        [profile.id]: prev[profile.id] || starterMessages[profile.id] || []
+        [profile.id]:
+          prev[profile.id] ||
+          (starterMessages[profile.id] || []).map((m) => ({
+            from: m.from,
+            text: language === "ru" ? m.textRu : m.textEn
+          }))
       }))
       setSelectedChatId(profile.id)
       setMutualProfile(profile)
@@ -530,15 +699,55 @@ export default function App() {
         >
           <div
             style={{
-              fontSize: isMobile ? "24px" : "28px",
-              fontWeight: "900",
-              letterSpacing: "-0.8px",
-              background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent"
+              display: "flex",
+              alignItems: "center",
+              justifyContent: isMobile ? "space-between" : "flex-start",
+              gap: "14px"
             }}
           >
-            {t.brand}
+            <div
+              style={{
+                fontSize: isMobile ? "24px" : "28px",
+                fontWeight: "900",
+                letterSpacing: "-0.8px",
+                background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent"
+              }}
+            >
+              {t.brand}
+            </div>
+
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button
+                onClick={() => setLanguage("ru")}
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  padding: "8px 12px",
+                  cursor: "pointer",
+                  fontWeight: "700",
+                  background: language === "ru" ? "#1f1722" : "#f0edf1",
+                  color: language === "ru" ? "#fff" : "#221c26"
+                }}
+              >
+                RU
+              </button>
+              <button
+                onClick={() => setLanguage("en")}
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  padding: "8px 12px",
+                  cursor: "pointer",
+                  fontWeight: "700",
+                  background: language === "en" ? "#1f1722" : "#f0edf1",
+                  color: language === "en" ? "#fff" : "#221c26"
+                }}
+              >
+                EN
+              </button>
+            </div>
           </div>
 
           <nav
@@ -550,10 +759,10 @@ export default function App() {
             }}
           >
             <NavLink href="/" label={t.navHome} currentPage={page} mobile={isMobile} />
-            <NavLink href="/лента" label={t.navFeed} currentPage={page} mobile={isMobile} />
-            <NavLink href="/симпатии" label={t.navLikes} currentPage={page} mobile={isMobile} />
-            <NavLink href="/сообщения" label={t.navMessages} currentPage={page} mobile={isMobile} />
-            <NavLink href="/профиль" label={t.navProfile} currentPage={page} mobile={isMobile} />
+            <NavLink href="/profiles" label={t.navFeed} currentPage={page} mobile={isMobile} />
+            <NavLink href="/likes" label={t.navLikes} currentPage={page} mobile={isMobile} />
+            <NavLink href="/messages" label={t.navMessages} currentPage={page} mobile={isMobile} />
+            <NavLink href="/profile" label={t.navProfile} currentPage={page} mobile={isMobile} />
           </nav>
         </div>
       </header>
@@ -624,7 +833,7 @@ export default function App() {
                   }}
                 >
                   <a
-                    href="#/лента"
+                    href="#/profiles"
                     style={{
                       textDecoration: "none",
                       background: "linear-gradient(135deg, #ff4d8d, #ff7a59)",
@@ -639,7 +848,7 @@ export default function App() {
                   </a>
 
                   <a
-                    href="#/сообщения"
+                    href="#/messages"
                     style={{
                       textDecoration: "none",
                       background: "rgba(255,255,255,0.82)",
@@ -697,7 +906,7 @@ export default function App() {
                   }}
                 >
                   <div style={{ position: "relative", height: isMobile ? "360px" : "520px" }}>
-                    <PhotoSwitcher activePhoto={activePhoto} setActivePhoto={setActivePhoto} />
+                    <PhotoSwitcher activePhoto={activePhoto} setActivePhoto={setActivePhoto} t={t} />
                     <img
                       src={profiles[0].photos[activePhoto]}
                       alt={profiles[0].name}
@@ -757,7 +966,7 @@ export default function App() {
                           color: "rgba(255,255,255,0.9)"
                         }}
                       >
-                        {profiles[0].about}
+                        {language === "ru" ? profiles[0].aboutRu : profiles[0].aboutEn}
                       </div>
                     </div>
                   </div>
@@ -765,7 +974,7 @@ export default function App() {
                   <div style={{ padding: "18px 18px 20px" }}>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <a
-                        href="#/лента"
+                        href="#/profiles"
                         style={{
                           flex: 1,
                           textAlign: "center",
@@ -780,7 +989,7 @@ export default function App() {
                         {t.heroPrimary}
                       </a>
                       <a
-                        href="#/профиль"
+                        href="#/profile"
                         style={{
                           flex: 1,
                           textAlign: "center",
@@ -851,7 +1060,7 @@ export default function App() {
           </>
         )}
 
-        {page === "/лента" && (
+        {page === "/profiles" && (
           <>
             <section style={{ marginBottom: "26px" }}>
               <h2
@@ -884,6 +1093,44 @@ export default function App() {
                 marginBottom: "26px"
               }}
             >
+              <div style={filterCardStyle}>
+                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
+                  {t.language}
+                </div>
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <button
+                    onClick={() => setLanguage("ru")}
+                    style={{
+                      flex: 1,
+                      background: language === "ru" ? "#e91e63" : "#f3f3f7",
+                      color: language === "ru" ? "#fff" : "#222",
+                      border: "none",
+                      padding: "12px",
+                      borderRadius: "12px",
+                      cursor: "pointer",
+                      fontWeight: "700"
+                    }}
+                  >
+                    RU
+                  </button>
+                  <button
+                    onClick={() => setLanguage("en")}
+                    style={{
+                      flex: 1,
+                      background: language === "en" ? "#e91e63" : "#f3f3f7",
+                      color: language === "en" ? "#fff" : "#222",
+                      border: "none",
+                      padding: "12px",
+                      borderRadius: "12px",
+                      cursor: "pointer",
+                      fontWeight: "700"
+                    }}
+                  >
+                    EN
+                  </button>
+                </div>
+              </div>
+
               <div style={filterCardStyle}>
                 <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
                   {t.location}
@@ -941,29 +1188,33 @@ export default function App() {
               </div>
 
               <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.ageFrom}
-                </div>
-                <select value={ageFrom} onChange={(e) => setAgeFrom(Number(e.target.value))} style={selectStyle}>
-                  {ageFromOptions.map((age) => (
-                    <option key={age} value={age}>
-                      {age}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+                  <div>
+                    <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
+                      {t.ageFrom}
+                    </div>
+                    <select value={ageFrom} onChange={(e) => setAgeFrom(Number(e.target.value))} style={selectStyle}>
+                      {ageFromOptions.map((age) => (
+                        <option key={age} value={age}>
+                          {age}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-              <div style={filterCardStyle}>
-                <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
-                  {t.ageTo}
+                  <div>
+                    <div style={{ fontSize: "14px", color: "#777", marginBottom: "8px", fontWeight: "700" }}>
+                      {t.ageTo}
+                    </div>
+                    <select value={ageTo} onChange={(e) => setAgeTo(Number(e.target.value))} style={selectStyle}>
+                      {ageToOptions.map((age) => (
+                        <option key={age} value={age}>
+                          {age}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                <select value={ageTo} onChange={(e) => setAgeTo(Number(e.target.value))} style={selectStyle}>
-                  {ageToOptions.map((age) => (
-                    <option key={age} value={age}>
-                      {age}
-                    </option>
-                  ))}
-                </select>
               </div>
             </section>
 
@@ -1035,7 +1286,7 @@ export default function App() {
                     }}
                   >
                     <div style={{ position: "relative", height: isMobile ? "430px" : "560px" }}>
-                      <PhotoSwitcher activePhoto={activePhoto} setActivePhoto={setActivePhoto} />
+                      <PhotoSwitcher activePhoto={activePhoto} setActivePhoto={setActivePhoto} t={t} />
                       <img
                         src={currentProfile.photos[activePhoto]}
                         alt={currentProfile.name}
@@ -1181,7 +1432,7 @@ export default function App() {
                             maxWidth: "420px"
                           }}
                         >
-                          {currentProfile.about}
+                          {language === "ru" ? currentProfile.aboutRu : currentProfile.aboutEn}
                         </p>
 
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
@@ -1255,7 +1506,7 @@ export default function App() {
           </>
         )}
 
-        {page === "/симпатии" && (
+        {page === "/likes" && (
           <>
             <section style={{ marginBottom: "22px" }}>
               <h2
@@ -1320,18 +1571,15 @@ export default function App() {
                   gap: "18px"
                 }}
               >
-                {likedProfiles.map((profile) => {
-                  const [cardPhoto, setCardPhoto] = useState ? [0, () => {}] : [0, () => {}]
-                  return (
-                    <LikedCard key={profile.id} profile={profile} t={t} />
-                  )
-                })}
+                {likedProfiles.map((profile) => (
+                  <LikedCard key={profile.id} profile={profile} t={t} language={language} />
+                ))}
               </section>
             )}
           </>
         )}
 
-        {page === "/сообщения" && (
+        {page === "/messages" && (
           <>
             <section style={{ marginBottom: "22px" }}>
               <h2
@@ -1420,7 +1668,9 @@ export default function App() {
                           {profile.name}
                         </div>
                         <div style={{ fontSize: "13px", color: "#7b6f80" }}>
-                          {profile.online ? "Онлайн" : profile.city}
+                          {language === "ru"
+                            ? profile.online ? "Онлайн" : profile.city
+                            : profile.online ? "Online" : profile.city}
                         </div>
                       </div>
                     </button>
@@ -1479,7 +1729,13 @@ export default function App() {
                             {profiles.find((p) => p.id === selectedChatId)?.name}
                           </div>
                           <div style={{ color: "#7e7283", fontSize: "14px" }}>
-                            {profiles.find((p) => p.id === selectedChatId)?.online ? "Онлайн" : "Не в сети"}
+                            {language === "ru"
+                              ? profiles.find((p) => p.id === selectedChatId)?.online
+                                ? "Онлайн"
+                                : "Не в сети"
+                              : profiles.find((p) => p.id === selectedChatId)?.online
+                                ? "Online"
+                                : "Offline"}
                           </div>
                         </div>
                       </div>
@@ -1559,7 +1815,7 @@ export default function App() {
           </>
         )}
 
-        {page === "/профиль" && (
+        {page === "/profile" && (
           <>
             <section style={{ marginBottom: "26px" }}>
               <h2
@@ -1601,12 +1857,12 @@ export default function App() {
               >
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px", background: "#f5eff4" }}>
                   <img
-                    src="https://i.pravatar.cc/900?img=67"
+                    src="https://randomuser.me/api/portraits/men/77.jpg"
                     alt="Профиль 1"
                     style={{ width: "100%", height: "240px", objectFit: "cover", display: "block" }}
                   />
                   <img
-                    src="https://i.pravatar.cc/900?img=68"
+                    src="https://randomuser.me/api/portraits/men/78.jpg"
                     alt="Профиль 2"
                     style={{ width: "100%", height: "240px", objectFit: "cover", display: "block" }}
                   />
@@ -1662,7 +1918,9 @@ export default function App() {
                     {t.profileAbout}
                   </div>
                   <div style={{ fontSize: "17px", lineHeight: "1.6", color: "#4f4555" }}>
-                    Здесь позже будет настоящая страница профиля пользователя: фото, описание, интересы, анкета и настройки.
+                    {language === "ru"
+                      ? "Здесь позже будет настоящая страница профиля пользователя: фото, описание, интересы, анкета и настройки."
+                      : "This will later become the real user profile page with photos, bio, interests, profile details, and settings."}
                   </div>
                 </div>
 
@@ -1671,7 +1929,7 @@ export default function App() {
                     {t.profileInterests}
                   </div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                    {["Музыка", "Путешествия", "Бизнес", "Стиль"].map((interest) => (
+                    {["Music", "Travel", "Business", "Style"].map((interest) => (
                       <span
                         key={interest}
                         style={{
@@ -1751,12 +2009,14 @@ export default function App() {
                 {t.mutualTitle}
               </h3>
               <p style={{ margin: "0 0 20px", color: "#62586a", lineHeight: "1.55", fontSize: "17px" }}>
-                {mutualProfile.name} тоже проявил(а) к тебе интерес. {t.mutualText}
+                {language === "ru"
+                  ? `${mutualProfile.name} тоже проявил(а) к тебе интерес. ${t.mutualText}`
+                  : `${mutualProfile.name} liked you back. ${t.mutualText}`}
               </p>
 
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 <a
-                  href="#/сообщения"
+                  href="#/messages"
                   onClick={() => setShowMutualModal(false)}
                   style={{
                     textDecoration: "none",
@@ -1789,111 +2049,6 @@ export default function App() {
           </div>
         </div>
       )}
-    </div>
-  )
-}
-
-function LikedCard({ profile, t }) {
-  const [photoIndex, setPhotoIndex] = useState(0)
-
-  return (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: "28px",
-        overflow: "hidden",
-        boxShadow: "0 20px 46px rgba(31,20,39,0.09)"
-      }}
-    >
-      <div style={{ position: "relative", height: "320px" }}>
-        <div
-          style={{
-            position: "absolute",
-            top: "16px",
-            left: "16px",
-            display: "flex",
-            gap: "8px",
-            zIndex: 3
-          }}
-        >
-          {[0, 1].map((i) => (
-            <button
-              key={i}
-              onClick={() => setPhotoIndex(i)}
-              style={{
-                border: "none",
-                background: photoIndex === i ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.55)",
-                color: "#1f1722",
-                padding: "8px 12px",
-                borderRadius: "999px",
-                fontWeight: "800",
-                cursor: "pointer",
-                fontSize: "13px"
-              }}
-            >
-              {i === 0 ? t.photo1 : t.photo2}
-            </button>
-          ))}
-        </div>
-
-        <img
-          src={profile.photos[photoIndex]}
-          alt={profile.name}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block"
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0.04) 48%, transparent)"
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: "18px",
-            right: "18px",
-            bottom: "18px",
-            color: "#fff"
-          }}
-        >
-          <div style={{ fontSize: "30px", fontWeight: "900", lineHeight: "1" }}>
-            {profile.name}, {profile.age}
-          </div>
-          <div style={{ marginTop: "8px", fontWeight: "700", color: "rgba(255,255,255,0.9)" }}>
-            {profile.city} • {profile.distance} {t.miles}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ padding: "18px" }}>
-        <p style={{ marginTop: 0, color: "#5f5466", lineHeight: "1.5" }}>
-          {profile.about}
-        </p>
-
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-          {profile.interests.map((interest) => (
-            <span
-              key={interest}
-              style={{
-                background: "#f5f2f6",
-                padding: "7px 12px",
-                borderRadius: "999px",
-                fontSize: "13px",
-                fontWeight: "700"
-              }}
-            >
-              {interest}
-            </span>
-          ))}
-        </div>
-      </div>
     </div>
   )
 }
