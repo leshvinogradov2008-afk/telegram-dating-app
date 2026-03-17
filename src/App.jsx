@@ -123,6 +123,11 @@ const tr = {
     sentNow: "Сейчас",
     typeDialog: "Выбери диалог",
     typeDialogText: "Открой любой диалог из списка, чтобы начать общение.",
+
+    likeStamp: "ЛАЙК",
+    skipStamp: "НЕТ",
+    swipeHint: "Свайп вправо — лайк, влево — дизлайк",
+    typing: "печатает...",
   },
   en: {
     brand: "Telegram Dating",
@@ -246,6 +251,11 @@ const tr = {
     sentNow: "Now",
     typeDialog: "Choose a dialog",
     typeDialogText: "Open any dialog from the list to start chatting.",
+
+    likeStamp: "LIKE",
+    skipStamp: "NOPE",
+    swipeHint: "Swipe right — like, left — dislike",
+    typing: "typing...",
   },
 };
 
@@ -591,7 +601,7 @@ function Badge() {
         width: 20,
         height: 20,
         borderRadius: "50%",
-        background: "#3ea6ff",
+        background: "#31a8ff",
         color: "#fff",
         fontSize: 12,
         fontWeight: 900,
@@ -602,6 +612,19 @@ function Badge() {
       ✓
     </span>
   );
+}
+
+function formatTime(date = new Date()) {
+  return new Intl.DateTimeFormat("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+
+function getChecks(status) {
+  if (status === "read") return "✓✓";
+  if (status === "delivered") return "✓✓";
+  return "✓";
 }
 
 function App() {
@@ -627,6 +650,16 @@ function App() {
   const [reportedIds, setReportedIds] = useState([]);
   const [currentDeckIndex, setCurrentDeckIndex] = useState(0);
   const [chatScreen, setChatScreen] = useState("list");
+  const [swipeX, setSwipeX] = useState(0);
+  const [swipeAnimating, setSwipeAnimating] = useState(false);
+  const [matchBurst, setMatchBurst] = useState(false);
+
+  const touchStateRef = useRef({
+    startX: 0,
+    startY: 0,
+    dragging: false,
+    horizontal: false,
+  });
 
   const [settings, setSettings] = useState({
     searchMode: "nearby",
@@ -657,12 +690,14 @@ function App() {
         text: "Привет 😊 Рада взаимной симпатии.",
         textEn: "Hi 😊 Glad we matched.",
         status: "read",
+        time: "11:24",
       },
       {
         from: "them",
         text: "Как проходит твой день?",
         textEn: "How is your day going?",
         status: "read",
+        time: "11:26",
       },
     ],
   });
@@ -720,6 +755,8 @@ function App() {
     if (profilePageRef.current) {
       profilePageRef.current.scrollTop = 0;
     }
+    setSwipeX(0);
+    setSwipeAnimating(false);
   }, [activeProfile?.id]);
 
   useEffect(() => {
@@ -750,6 +787,7 @@ function App() {
           text,
           textEn: profile.starterMessagesEn?.[i] || text,
           status: "read",
+          time: formatTime(new Date(Date.now() - (i + 1) * 600000)),
         })),
       };
     });
@@ -774,8 +812,19 @@ function App() {
     });
   };
 
+  const triggerSwipeOut = (direction, callback) => {
+    setSwipeAnimating(true);
+    setSwipeX(direction === "right" ? 900 : -900);
+    setTimeout(() => {
+      callback?.();
+      setSwipeAnimating(false);
+      setSwipeX(0);
+    }, 230);
+  };
+
   const handleLike = (profile) => {
     if (!profile) return;
+
     setLikePulse(true);
     setTimeout(() => setLikePulse(false), 260);
 
@@ -786,6 +835,8 @@ function App() {
       ensureMessages(profile);
       setMatchedProfile(profile);
       setShowMatch(true);
+      setMatchBurst(true);
+      setTimeout(() => setMatchBurst(false), 1200);
       setSelectedChatId(profile.id);
       setMessageView("matches");
       setChatScreen("chat");
@@ -803,6 +854,7 @@ function App() {
   const restartDeck = () => {
     setCurrentDeckIndex(0);
     if (profilePageRef.current) profilePageRef.current.scrollTop = 0;
+    setSwipeX(0);
   };
 
   const applyFilters = () => {
@@ -830,11 +882,13 @@ function App() {
   const sendMessage = () => {
     if (!selectedChatId || !chatDraft.trim() || !matches.includes(selectedChatId)) return;
 
+    const currentText = chatDraft.trim();
     const newMessage = {
       from: "me",
-      text: chatDraft.trim(),
-      textEn: chatDraft.trim(),
+      text: currentText,
+      textEn: currentText,
       status: "delivered",
+      time: formatTime(),
     };
 
     setMessages((prev) => ({
@@ -842,7 +896,6 @@ function App() {
       [selectedChatId]: [...(prev[selectedChatId] || []), newMessage],
     }));
 
-    const currentText = chatDraft.trim();
     setChatDraft("");
 
     setTimeout(() => {
@@ -902,6 +955,64 @@ function App() {
       ? profiles.filter((p) => likedYouIds.includes(p.id))
       : profiles.filter((p) => guestIds.includes(p.id));
 
+  const onTouchStartCard = (e) => {
+    if (!activeProfile) return;
+    const touch = e.touches[0];
+    touchStateRef.current = {
+      startX: touch.clientX,
+      startY: touch.clientY,
+      dragging: true,
+      horizontal: false,
+    };
+  };
+
+  const onTouchMoveCard = (e) => {
+    if (!touchStateRef.current.dragging) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - touchStateRef.current.startX;
+    const dy = touch.clientY - touchStateRef.current.startY;
+
+    if (!touchStateRef.current.horizontal) {
+      if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) + 4) {
+        touchStateRef.current.horizontal = true;
+      } else {
+        return;
+      }
+    }
+
+    e.preventDefault();
+    setSwipeX(dx);
+  };
+
+  const onTouchEndCard = () => {
+    const dx = swipeX;
+    touchStateRef.current.dragging = false;
+
+    if (dx > 110 && activeProfile) {
+      triggerSwipeOut("right", () => handleLike(activeProfile));
+      return;
+    }
+
+    if (dx < -110 && activeProfile) {
+      triggerSwipeOut("left", () => handleSkip(activeProfile));
+      return;
+    }
+
+    setSwipeAnimating(true);
+    setSwipeX(0);
+    setTimeout(() => setSwipeAnimating(false), 180);
+  };
+
+  const swipeStamp =
+    swipeX > 40 ? t.likeStamp : swipeX < -40 ? t.skipStamp : "";
+  const swipeStampClass = swipeX > 40 ? "like" : swipeX < -40 ? "skip" : "";
+
+  const cardTransform = `translateX(${swipeX}px) rotate(${swipeX / 18}deg)`;
+  const cardStyle = {
+    transform: cardTransform,
+    transition: swipeAnimating ? "transform .22s ease, box-shadow .22s ease" : "none",
+  };
+
   return (
     <div className="app-shell">
       <style>{`
@@ -910,10 +1021,10 @@ function App() {
           margin:0;padding:0;min-height:100%;
           font-family:Inter,Arial,sans-serif;
           background:
-            radial-gradient(circle at top left, rgba(255,105,145,.12), transparent 24%),
-            radial-gradient(circle at top right, rgba(255,186,190,.14), transparent 28%),
-            linear-gradient(180deg,#fff8fb 0%,#f8f5fb 100%);
-          color:#231b2e
+            radial-gradient(circle at top left, rgba(91,181,255,.10), transparent 25%),
+            radial-gradient(circle at top right, rgba(255,126,166,.10), transparent 24%),
+            linear-gradient(180deg,#f4f8fd 0%,#eef4fb 100%);
+          color:#18222d
         }
         body{overflow-x:hidden}
         button,input,select,textarea{font-family:inherit}
@@ -921,15 +1032,20 @@ function App() {
         .page{max-width:1380px;margin:0 auto;padding:18px 16px 110px}
         .topbar,.panel{
           background:rgba(255,255,255,.84);
-          backdrop-filter:blur(14px);
-          box-shadow:0 12px 30px rgba(36,20,48,.06)
+          backdrop-filter:blur(16px);
+          box-shadow:0 12px 30px rgba(27,40,52,.08)
         }
         .topbar{
           display:flex;justify-content:space-between;align-items:center;gap:14px;
           padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:80
         }
         .brand-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-        .brand{font-size:22px;font-weight:900;color:#ff5f8f}
+        .brand{
+          font-size:22px;
+          font-weight:900;
+          color:#2894f4;
+          letter-spacing:-.03em;
+        }
         .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{
           display:flex;gap:10px;flex-wrap:wrap
         }
@@ -937,12 +1053,12 @@ function App() {
           border:none;cursor:pointer;transition:.2s ease;font-weight:800
         }
         .chip-btn,.nav-btn{
-          border-radius:999px;padding:10px 14px;background:#f1edf4;color:#2b2335
+          border-radius:999px;padding:10px 14px;background:#ebf2fa;color:#213546
         }
         .chip-btn.active,.nav-btn.active,.primary-btn{
-          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
+          background:linear-gradient(135deg,#33a8ff,#1882eb);
           color:#fff;
-          box-shadow:0 12px 22px rgba(255,95,143,.24)
+          box-shadow:0 12px 22px rgba(38,144,243,.24)
         }
         .primary-btn,.secondary-btn,.ghost-btn,.back-btn{
           border-radius:16px;
@@ -950,7 +1066,7 @@ function App() {
           font-size:14px
         }
         .secondary-btn{
-          background:#f3eef6;color:#2b2335
+          background:#edf4fb;color:#233747
         }
         .ghost-btn{
           background:rgba(255,255,255,.16);
@@ -958,24 +1074,24 @@ function App() {
           border:1px solid rgba(255,255,255,.28)
         }
         .back-btn{
-          background:#f3eef6;
-          color:#2b2335;
+          background:#edf4fb;
+          color:#213546;
           display:inline-flex;
           align-items:center;
           gap:8px;
         }
         .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
         .nav-btn{padding:12px 16px;font-size:14px}
-        .mobile-tabs{display:none}
+        .mobile-tabs{display:none !important}
         .panel{border-radius:28px;padding:22px}
         .hero{display:grid;grid-template-columns:1.15fr .95fr;gap:20px;margin-bottom:22px}
         .hero-title,.section-title{
           margin:0 0 12px;font-size:clamp(34px,5vw,68px);line-height:.95;font-weight:900;letter-spacing:-1.6px
         }
-        .hero-text,.section-subtitle,.muted{font-size:17px;line-height:1.55;color:#655a70}
+        .hero-text,.section-subtitle,.muted{font-size:17px;line-height:1.55;color:#5d7387}
         .hero-preview{
           min-height:520px;border-radius:32px;overflow:hidden;position:relative;
-          box-shadow:0 24px 40px rgba(22,11,30,.12)
+          box-shadow:0 24px 40px rgba(25,44,64,.14)
         }
         .hero-preview img,.profile-photo-grid img,.list-item img,.chat-item img,.profile-avatar img{
           display:block;object-fit:cover
@@ -983,14 +1099,14 @@ function App() {
         .hero-preview img{width:100%;height:100%}
         .preview-overlay{
           position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
-          padding:22px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.64))
+          padding:22px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(6,22,38,.66))
         }
         .preview-name{margin:0 0 6px;font-size:clamp(28px,4vw,46px);font-weight:900}
         .preview-bio{margin:0;max-width:88%}
         .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
         .quick-num{
           width:46px;height:46px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;
-          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff;font-weight:900;margin-bottom:14px
+          background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff;font-weight:900;margin-bottom:14px
         }
         .search-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
         .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
@@ -1003,12 +1119,17 @@ function App() {
           overflow:hidden;
           position:relative;
           background:#fff;
-          box-shadow:0 30px 60px rgba(25,10,38,.14);
+          box-shadow:0 30px 60px rgba(20,39,60,.18);
+          touch-action:pan-y;
+          user-select:none;
+        }
+        .profile-page-wrap.is-dragging{
+          box-shadow:0 38px 78px rgba(20,39,60,.24);
         }
         .profile-page-scroll{
           height:100%;
           overflow:auto;
-          padding-bottom:190px;
+          padding-bottom:210px;
           -ms-overflow-style:none;
           scrollbar-width:none;
         }
@@ -1035,7 +1156,7 @@ function App() {
         }
         .profile-subtitle{
           margin:10px 0 0;
-          color:#6a6076;
+          color:#6b7d8f;
           font-size:14px;
           font-weight:800;
         }
@@ -1045,7 +1166,7 @@ function App() {
           justify-content:center;
           padding:6px 10px;
           border-radius:999px;
-          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
+          background:linear-gradient(135deg,#33a8ff,#1882eb);
           color:#fff;
           font-size:11px;
           font-weight:900;
@@ -1060,15 +1181,15 @@ function App() {
           gap:12px;
         }
         .info-card{
-          background:#faf7fc;
+          background:#f6faff;
           border-radius:20px;
           padding:14px;
-          border:1px solid rgba(100,80,120,.06);
+          border:1px solid rgba(77,130,179,.08);
         }
         .info-card-label{
           font-size:12px;
           font-weight:900;
-          color:#8d8299;
+          color:#7c93a7;
           margin-bottom:8px;
           text-transform:uppercase;
           letter-spacing:.04em;
@@ -1076,7 +1197,7 @@ function App() {
         .info-card-value{
           font-size:15px;
           font-weight:800;
-          color:#2b2235;
+          color:#213546;
           line-height:1.4;
         }
         .section-heading{
@@ -1085,17 +1206,17 @@ function App() {
           font-weight:900;
         }
         .bio-box{
-          background:#faf7fc;
+          background:#f6faff;
           border-radius:22px;
           padding:16px;
-          color:#62576d;
+          color:#4f6578;
           line-height:1.6;
-          border:1px solid rgba(100,80,120,.06);
+          border:1px solid rgba(77,130,179,.08);
         }
         .chip-row{display:flex;gap:8px;flex-wrap:wrap}
         .interest{
-          padding:9px 12px;border-radius:999px;background:#f5eff7;
-          font-size:13px;font-weight:800;color:#52475e
+          padding:9px 12px;border-radius:999px;background:#edf5fd;
+          font-size:13px;font-weight:800;color:#446176
         }
         .profile-photo-stack{
           display:grid;
@@ -1122,32 +1243,70 @@ function App() {
           transition:.2s ease;
         }
         .danger-btn.report{
-          background:#fff2f4;
-          color:#d64568;
+          background:#fff1f4;
+          color:#d84f76;
         }
         .danger-btn.block{
-          background:#eef2ff;
-          color:#4c5fc7;
+          background:#eef6ff;
+          color:#2b77cc;
         }
         .danger-btn:hover{transform:translateY(-1px)}
+
+        .swipe-badge{
+          position:absolute;
+          top:24px;
+          z-index:50;
+          padding:10px 16px;
+          border-radius:16px;
+          font-size:26px;
+          font-weight:1000;
+          letter-spacing:.08em;
+          border:3px solid currentColor;
+          backdrop-filter:blur(8px);
+          -webkit-backdrop-filter:blur(8px);
+          background:rgba(255,255,255,.18);
+          pointer-events:none;
+          transform:rotate(-10deg);
+          opacity:0;
+          transition:.15s ease;
+        }
+        .swipe-badge.like{
+          right:20px;
+          color:#1fb86f;
+          transform:rotate(10deg);
+        }
+        .swipe-badge.skip{
+          left:20px;
+          color:#ff557f;
+        }
+        .swipe-badge.visible{
+          opacity:1;
+        }
+
         .fixed-action-bar{
           position:absolute;
           left:0;
           right:0;
-          bottom:18px;
-          z-index:30;
+          bottom:max(18px, env(safe-area-inset-bottom));
+          z-index:35;
           display:flex;
           justify-content:center;
           pointer-events:none;
         }
         .fixed-action-inner{
-          width:min(100%, 390px);
+          width:min(100%, 410px);
           display:flex;
           justify-content:center;
           align-items:center;
           gap:28px;
-          padding:0 12px;
+          padding:12px 18px;
           pointer-events:none;
+          background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.18));
+          border:1px solid rgba(255,255,255,.24);
+          border-radius:999px;
+          backdrop-filter:blur(18px);
+          -webkit-backdrop-filter:blur(18px);
+          box-shadow:0 8px 24px rgba(20,39,60,.14);
         }
         .action-btn{
           width:94px;
@@ -1162,7 +1321,7 @@ function App() {
           -webkit-backdrop-filter:blur(22px);
           border:1px solid rgba(255,255,255,.42);
           box-shadow:
-            0 20px 40px rgba(31,15,46,.22),
+            0 20px 40px rgba(20,39,60,.22),
             inset 0 1px 0 rgba(255,255,255,.45),
             inset 0 -1px 0 rgba(255,255,255,.08);
           display:flex;
@@ -1178,7 +1337,6 @@ function App() {
           height:28px;
           border-radius:999px;
           background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08));
-          filter:blur(.2px);
           pointer-events:none;
         }
         .action-btn::after{
@@ -1186,28 +1344,28 @@ function App() {
           position:absolute;
           inset:0;
           border-radius:inherit;
-          background:radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 42%);
+          background:radial-gradient(circle at top left, rgba(255,255,255,.30), transparent 42%);
           pointer-events:none;
         }
         .action-btn.skip{
           background:
-            linear-gradient(180deg, rgba(255,255,255,.38), rgba(228,234,255,.20)),
-            linear-gradient(135deg, rgba(159,180,255,.34), rgba(121,146,255,.22));
-          color:#4f5acb;
+            linear-gradient(180deg, rgba(255,255,255,.40), rgba(255,235,240,.14)),
+            linear-gradient(135deg, rgba(255,111,145,.30), rgba(255,142,173,.16));
+          color:#ff4d7c;
           font-size:38px;
         }
         .action-btn.like{
           background:
-            linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,220,231,.16)),
-            linear-gradient(135deg, rgba(255,122,165,.38), rgba(255,158,118,.24));
-          color:#ff4e86;
-          font-size:52px;
+            linear-gradient(180deg, rgba(255,255,255,.38), rgba(226,247,255,.16)),
+            linear-gradient(135deg, rgba(77,190,255,.34), rgba(48,135,248,.20));
+          color:#1793f2;
+          font-size:54px;
           line-height:1;
         }
         .action-btn:hover{
           transform:translateY(-3px) scale(1.04);
           box-shadow:
-            0 24px 48px rgba(31,15,46,.24),
+            0 24px 48px rgba(20,39,60,.24),
             inset 0 1px 0 rgba(255,255,255,.5),
             inset 0 -1px 0 rgba(255,255,255,.08);
         }
@@ -1216,7 +1374,7 @@ function App() {
         .footer-hint{
           margin-top:16px;
           font-size:12px;
-          color:#8a7f96;
+          color:#7b91a3;
           text-align:center;
           font-weight:700;
         }
@@ -1226,25 +1384,25 @@ function App() {
           left:50%;
           transform:translateX(-50%);
           z-index:120;
-          background:rgba(27,20,35,.92);
+          background:rgba(18,32,46,.94);
           color:#fff;
           padding:12px 16px;
           border-radius:999px;
           font-size:13px;
           font-weight:800;
-          box-shadow:0 10px 26px rgba(22,10,30,.24);
+          box-shadow:0 10px 26px rgba(18,32,46,.24);
         }
         .empty{
           min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-          text-align:center;color:#665b70;gap:10px
+          text-align:center;color:#587085;gap:10px
         }
         .messages-outer,.profile-layout,.settings-layout{display:grid;gap:16px}
         .messages-outer{grid-template-columns:minmax(0,1fr);min-height:620px}
         .profile-layout{grid-template-columns:320px minmax(0,1fr)}
         .settings-layout{grid-template-columns:360px minmax(0,1fr)}
-        .list-grid{display:grid;gap:12px}
+        .list-grid{display:grid;gap:10px}
         .list-item,.chat-item{
-          display:flex;align-items:center;gap:12px;padding:14px;border-radius:22px;background:#f8f5fa
+          display:flex;align-items:center;gap:12px;padding:14px;border-radius:22px;background:#f8fbff
         }
         .list-item img{width:58px;height:58px;border-radius:18px;flex-shrink:0}
         .chat-item{
@@ -1253,14 +1411,16 @@ function App() {
           justify-content:space-between;
           transition:.18s ease;
           border:1px solid transparent;
+          background:#f6fbff;
+          padding:12px 14px;
         }
         .chat-item:hover{
           transform:translateY(-1px);
-          background:#f6f1f8;
+          background:#f1f8ff;
         }
         .chat-item.active{
-          background:linear-gradient(135deg,rgba(255,95,143,.11),rgba(255,139,110,.11));
-          border:1px solid rgba(255,95,143,.12)
+          background:linear-gradient(135deg,rgba(51,168,255,.12),rgba(31,147,255,.08));
+          border:1px solid rgba(51,168,255,.14)
         }
         .chat-item img{
           width:56px;
@@ -1275,25 +1435,60 @@ function App() {
           gap:12px;
           align-items:flex-start;
         }
+        .avatar-wrap{
+          position:relative;
+          flex-shrink:0;
+        }
+        .avatar-status{
+          position:absolute;
+          right:1px;
+          bottom:1px;
+          width:13px;
+          height:13px;
+          border-radius:50%;
+          background:#22c55e;
+          border:2px solid #fff;
+          box-shadow:0 0 0 2px rgba(255,255,255,.6);
+        }
+        .avatar-status.offline{
+          background:#b8c4cf;
+        }
         .chat-meta{
           min-width:0;
           flex:1;
         }
+        .item-topline{
+          display:flex;
+          align-items:center;
+          gap:8px;
+          justify-content:space-between;
+          margin-bottom:4px;
+        }
         .item-title{
           font-size:16px;
           font-weight:900;
-          margin:0 0 4px;
+          margin:0;
           display:flex;
           align-items:center;
-          flex-wrap:wrap
+          flex-wrap:wrap;
+          gap:0;
+          min-width:0;
         }
         .item-sub{
           font-size:13px;
-          color:#6a6076;
+          color:#628096;
           margin:0;
           white-space:nowrap;
           overflow:hidden;
           text-overflow:ellipsis;
+          display:flex;
+          align-items:center;
+          gap:8px;
+        }
+        .item-sub-text{
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
         }
         .chat-right{
           display:flex;
@@ -1301,6 +1496,13 @@ function App() {
           align-items:flex-end;
           gap:8px;
           margin-left:10px;
+          flex-shrink:0;
+        }
+        .time-mini{
+          font-size:12px;
+          color:#7e94a8;
+          font-weight:800;
+          white-space:nowrap;
         }
         .reply-badge{
           display:inline-flex;
@@ -1308,17 +1510,39 @@ function App() {
           justify-content:center;
           padding:6px 10px;
           border-radius:999px;
-          background:rgba(255,95,143,.14);
-          color:#d64274;
+          background:rgba(51,168,255,.12);
+          color:#1882eb;
           font-size:11px;
           font-weight:900;
           white-space:nowrap;
         }
         .delivery-mini{
           font-size:11px;
-          color:#95899f;
+          color:#8ea1b1;
           font-weight:800;
           white-space:nowrap;
+        }
+        .unread-dot{
+          width:10px;
+          height:10px;
+          border-radius:50%;
+          background:#1f9fff;
+          flex-shrink:0;
+          box-shadow:0 0 0 4px rgba(31,159,255,.10);
+        }
+        .dialog-icon{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          width:18px;
+          height:18px;
+          border-radius:50%;
+          background:#e8f4ff;
+          color:#1e92f0;
+          font-size:11px;
+          font-weight:900;
+          flex-shrink:0;
+          margin-right:6px;
         }
         .message-shell{
           display:grid;
@@ -1330,15 +1554,29 @@ function App() {
           align-items:center;
           gap:12px;
           padding-bottom:14px;
-          border-bottom:1px solid rgba(100,80,120,.08)
+          border-bottom:1px solid rgba(82,131,176,.10)
         }
         .message-header img{width:56px;height:56px;border-radius:50%}
+        .message-header-line{
+          display:flex;
+          align-items:center;
+          gap:8px;
+          justify-content:space-between;
+        }
         .message-body{
-          padding:18px 2px 18px 0;
+          padding:18px 6px 18px 0;
           overflow:auto;
           display:flex;
           flex-direction:column;
           gap:12px;
+          background:
+            radial-gradient(circle at 20% 20%, rgba(51,168,255,.06), transparent 18%),
+            radial-gradient(circle at 80% 60%, rgba(51,168,255,.05), transparent 22%),
+            linear-gradient(180deg,#eef6fd 0%, #edf5fc 100%);
+          border-radius:22px;
+          margin-top:12px;
+          padding-left:10px;
+          padding-right:10px;
         }
         .message-row{
           display:flex;
@@ -1353,31 +1591,80 @@ function App() {
         }
         .bubble{
           max-width:78%;
-          padding:13px 16px;
-          border-radius:20px;
+          padding:12px 14px 8px;
+          border-radius:18px;
           font-size:15px;
           line-height:1.45;
+          position:relative;
+          box-shadow:0 4px 12px rgba(30,59,86,.06);
         }
-        .bubble.them{align-self:flex-start;background:#f1edf4;color:#2b2235}
-        .bubble.me{align-self:flex-end;background:linear-gradient(135deg,#ff5f8f,#ff8b6e);color:#fff}
-        .bubble-status{
+        .bubble.them{
+          align-self:flex-start;
+          background:#fff;
+          color:#1b2f40;
+          border-top-left-radius:8px;
+        }
+        .bubble.me{
+          align-self:flex-end;
+          background:linear-gradient(135deg,#d8efff,#c8e8ff);
+          color:#14334a;
+          border-top-right-radius:8px;
+        }
+        .bubble-meta{
+          margin-top:6px;
+          display:flex;
+          justify-content:flex-end;
+          align-items:center;
+          gap:6px;
           font-size:11px;
-          color:#9a8fa5;
+          color:#7390a7;
           font-weight:800;
-          padding:0 6px;
+        }
+        .bubble-checks.read{
+          color:#1f9fff;
+        }
+        .bubble-checks.delivered{
+          color:#86a3b8;
         }
         .message-input-row{
           display:flex;
           gap:10px;
           padding-top:14px;
-          border-top:1px solid rgba(100,80,120,.08)
+          border-top:1px solid rgba(82,131,176,.10)
+        }
+        .message-input-shell{
+          display:flex;
+          align-items:center;
+          gap:10px;
+          width:100%;
+          background:#f3f9ff;
+          border:1px solid rgba(82,131,176,.10);
+          border-radius:20px;
+          padding:8px 10px 8px 14px;
+        }
+        .chat-action-icon{
+          width:34px;
+          height:34px;
+          border-radius:50%;
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          background:#e8f4ff;
+          color:#1f93f1;
+          font-size:16px;
+          flex-shrink:0;
         }
         .message-input-row input,.field input,.field select,.field textarea{
           width:100%;border-radius:16px;border:1px solid rgba(95,80,110,.12);
           background:#fcfbfd;padding:14px 15px;font-size:15px;outline:none;font-family:inherit
         }
+        .message-input-shell input{
+          border:none !important;
+          background:transparent !important;
+          padding:8px 0 !important;
+        }
         .field{display:grid;gap:8px}
-        .field label{font-size:14px;font-weight:800;color:#544a60}
+        .field label{font-size:14px;font-weight:800;color:#4b6479}
         .field-group,.help-grid,.info-list{display:grid;gap:14px}
         .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
         .profile-avatar{text-align:center}
@@ -1386,23 +1673,73 @@ function App() {
         .profile-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:12px}
         .profile-photo-grid img{width:100%;height:170px;border-radius:18px}
         .info-row{
-          display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(100,80,120,.08)
+          display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(82,131,176,.10)
         }
-        .help-item{padding:18px;border-radius:20px;background:#faf7fc}
+        .help-item{padding:18px;border-radius:20px;background:#f7fbff}
         .mutual-modal{
-          position:fixed;inset:0;background:rgba(20,8,30,.45);display:flex;align-items:center;justify-content:center;
+          position:fixed;inset:0;background:rgba(7,20,33,.45);display:flex;align-items:center;justify-content:center;
           padding:18px;z-index:100
         }
         .mutual-box{
-          width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#ff5f8f 0%,#ff8b6e 100%);
-          color:#fff;box-shadow:0 24px 50px rgba(25,10,35,.26);text-align:center
+          width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#33a8ff 0%,#1882eb 100%);
+          color:#fff;box-shadow:0 24px 50px rgba(20,39,60,.32);text-align:center;position:relative;overflow:hidden;
+          animation:matchPop .38s ease;
         }
-        .mutual-avatars{display:flex;justify-content:center;align-items:center;gap:14px;margin:16px 0 22px}
+        .mutual-box::before,
+        .mutual-box::after{
+          content:"";
+          position:absolute;
+          width:180px;
+          height:180px;
+          border-radius:50%;
+          background:rgba(255,255,255,.10);
+          filter:blur(4px);
+        }
+        .mutual-box::before{top:-60px;left:-40px}
+        .mutual-box::after{bottom:-60px;right:-40px}
+        .mutual-avatars{display:flex;justify-content:center;align-items:center;gap:14px;margin:16px 0 22px;position:relative;z-index:2}
         .mutual-avatars img{
           width:94px;height:94px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.5)
         }
-        .heart{font-size:34px}
+        .heart{
+          font-size:34px;
+          animation:heartBeat 1.1s infinite ease-in-out;
+        }
+        .floating-hearts{
+          position:absolute;
+          inset:0;
+          pointer-events:none;
+          overflow:hidden;
+        }
+        .floating-hearts span{
+          position:absolute;
+          bottom:-10px;
+          font-size:24px;
+          opacity:0;
+          animation:floatHeart 1.4s ease forwards;
+        }
+        .floating-hearts span:nth-child(1){left:16%;animation-delay:.02s}
+        .floating-hearts span:nth-child(2){left:34%;animation-delay:.12s}
+        .floating-hearts span:nth-child(3){left:50%;animation-delay:.20s}
+        .floating-hearts span:nth-child(4){left:66%;animation-delay:.08s}
+        .floating-hearts span:nth-child(5){left:82%;animation-delay:.18s}
+
         .phone-bottom-nav{display:none}
+
+        @keyframes heartBeat{
+          0%,100%{transform:scale(1)}
+          35%{transform:scale(1.18)}
+          70%{transform:scale(.96)}
+        }
+        @keyframes floatHeart{
+          0%{transform:translateY(0) scale(.7);opacity:0}
+          15%{opacity:1}
+          100%{transform:translateY(-260px) scale(1.2);opacity:0}
+        }
+        @keyframes matchPop{
+          0%{transform:scale(.82) translateY(18px);opacity:0}
+          100%{transform:scale(1) translateY(0);opacity:1}
+        }
 
         @media (max-width:1120px){
           .hero,.profile-layout,.settings-layout{grid-template-columns:1fr}
@@ -1412,53 +1749,55 @@ function App() {
           .page{padding:12px 12px 104px}
           .topbar{position:static;flex-direction:column;align-items:flex-start;padding:14px}
           .nav{display:none}
-          .mobile-tabs{
-            display:flex;gap:10px;overflow:auto;padding:2px 2px 4px;margin-bottom:14px;scrollbar-width:none
-          }
-          .mobile-tabs::-webkit-scrollbar{display:none}
-          .mobile-tabs .nav-btn{flex:0 0 auto}
           .panel{padding:18px;border-radius:24px}
           .hero{grid-template-columns:1fr}
           .profile-page-wrap{max-width:100%;height:min(82vh,760px);border-radius:28px}
           .profile-hero-photo,.profile-photo-stack img{height:350px}
           .profile-title{font-size:30px}
           .info-grid{grid-template-columns:1fr}
+          .fixed-action-bar{
+            bottom:max(14px, env(safe-area-inset-bottom));
+          }
           .fixed-action-inner{
-            width:min(100%, 320px);
-            gap:22px;
-            padding:0 8px;
+            width:min(100%, 336px);
+            gap:20px;
+            padding:10px 12px;
           }
           .action-btn{
-            width:84px;
-            height:84px;
+            width:82px;
+            height:82px;
           }
           .action-btn.skip{font-size:34px}
-          .action-btn.like{font-size:48px}
+          .action-btn.like{font-size:46px}
           .two-col{grid-template-columns:1fr}
           .chat-item{
             padding:12px;
             border-radius:18px;
           }
           .chat-item img{
-            width:50px;
-            height:50px;
+            width:52px;
+            height:52px;
           }
           .item-title{font-size:14px}
           .item-sub{font-size:12px}
           .reply-badge{font-size:10px;padding:5px 9px}
           .delivery-mini{font-size:10px}
+          .time-mini{font-size:11px}
           .phone-bottom-nav{
             position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);
             gap:8px;padding:8px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
-            box-shadow:0 16px 34px rgba(29,14,40,.12);z-index:60
+            box-shadow:0 16px 34px rgba(20,39,60,.12);z-index:60
           }
           .phone-tab-btn{
             border:none;background:transparent;padding:9px 4px;border-radius:16px;font-size:11px;font-weight:900;
-            color:#5b5066;line-height:1.15
+            color:#5b6e80;line-height:1.15
           }
-          .phone-tab-btn.active{background:linear-gradient(135deg,#ff5f8f,#ff8b6e);color:#fff}
+          .phone-tab-btn.active{background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff}
           .message-input-row{
             flex-direction:column;
+          }
+          .bubble{
+            max-width:86%;
           }
         }
       `}</style>
@@ -1512,30 +1851,6 @@ function App() {
             </button>
           </nav>
         </header>
-
-        <div className="mobile-tabs">
-          <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
-            {t.home}
-          </button>
-          <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
-            {t.search}
-          </button>
-          <button
-            className={`nav-btn ${tab === "messages" ? "active" : ""}`}
-            onClick={() => {
-              setTab("messages");
-              setChatScreen("list");
-            }}
-          >
-            {t.messages}
-          </button>
-          <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
-            {t.profile}
-          </button>
-          <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
-            {t.settings}
-          </button>
-        </div>
 
         {tab === "home" && (
           <>
@@ -1733,7 +2048,20 @@ function App() {
               <div className="panel">
                 {activeProfile ? (
                   <div className="deck-wrap">
-                    <div className="profile-page-wrap">
+                    <div
+                      className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
+                      style={cardStyle}
+                      onTouchStart={onTouchStartCard}
+                      onTouchMove={onTouchMoveCard}
+                      onTouchEnd={onTouchEndCard}
+                    >
+                      <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
+                        {t.likeStamp}
+                      </div>
+                      <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
+                        {t.skipStamp}
+                      </div>
+
                       <div ref={profilePageRef} className="profile-page-scroll">
                         <img
                           className="profile-hero-photo"
@@ -1835,7 +2163,9 @@ function App() {
                             </button>
                           </div>
 
-                          <div className="footer-hint">{t.footerHint}</div>
+                          <div className="footer-hint">
+                            {t.footerHint} • {t.swipeHint}
+                          </div>
                         </div>
                       </div>
 
@@ -1843,14 +2173,18 @@ function App() {
                         <div className="fixed-action-inner">
                           <button
                             className={`action-btn skip ${skipPulse ? "pop" : ""}`}
-                            onClick={() => handleSkip(activeProfile)}
+                            onClick={() =>
+                              triggerSwipeOut("left", () => handleSkip(activeProfile))
+                            }
                             title="skip"
                           >
                             ✕
                           </button>
                           <button
                             className={`action-btn like ${likePulse ? "pop" : ""}`}
-                            onClick={() => handleLike(activeProfile)}
+                            onClick={() =>
+                              triggerSwipeOut("right", () => handleLike(activeProfile))
+                            }
                             title="like"
                           >
                             ♥
@@ -1916,14 +2250,7 @@ function App() {
                         {listProfiles.map((profile) => {
                           const lastMsg = getLastMessage(profile.id);
                           const isActive = selectedChatId === profile.id;
-                          const deliveryLabel =
-                            lastMsg?.from === "me"
-                              ? lastMsg.status === "read"
-                                ? t.read
-                                : t.delivered
-                              : profile.online
-                              ? t.online
-                              : t.offline;
+                          const unread = needsMyReply(profile.id);
 
                           return (
                             <div
@@ -1935,27 +2262,45 @@ function App() {
                               }}
                             >
                               <div className="chat-main">
-                                <img src={profile.avatar} alt={profile.name} />
+                                <div className="avatar-wrap">
+                                  <img src={profile.avatar} alt={profile.name} />
+                                  <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
+                                </div>
+
                                 <div className="chat-meta">
-                                  <div className="item-title">
-                                    {profile.name}
-                                    {profile.verified && <Badge />}
+                                  <div className="item-topline">
+                                    <div className="item-title">
+                                      <span className="dialog-icon">💬</span>
+                                      {profile.name}
+                                      {profile.verified && <Badge />}
+                                    </div>
                                   </div>
+
                                   <p className="item-sub">
-                                    {lastMsg
-                                      ? lang === "ru"
-                                        ? lastMsg.text
-                                        : lastMsg.textEn || lastMsg.text
-                                      : `${profile.city}, ${profile.country}`}
+                                    {unread && <span className="unread-dot" />}
+                                    <span className="item-sub-text">
+                                      {lastMsg
+                                        ? lang === "ru"
+                                          ? lastMsg.text
+                                          : lastMsg.textEn || lastMsg.text
+                                        : `${profile.city}, ${profile.country}`}
+                                    </span>
                                   </p>
                                 </div>
                               </div>
 
                               <div className="chat-right">
-                                {needsMyReply(profile.id) && (
-                                  <span className="reply-badge">{t.yourTurn}</span>
+                                <span className="time-mini">{lastMsg?.time || "12:00"}</span>
+                                {unread && <span className="reply-badge">{t.yourTurn}</span>}
+                                {lastMsg?.from === "me" ? (
+                                  <span className="delivery-mini">
+                                    {lastMsg.status === "read" ? t.read : t.delivered}
+                                  </span>
+                                ) : (
+                                  <span className="delivery-mini">
+                                    {profile.online ? t.online : t.offline}
+                                  </span>
                                 )}
-                                <span className="delivery-mini">{deliveryLabel}</span>
                               </div>
                             </div>
                           );
@@ -1972,12 +2317,18 @@ function App() {
                         </button>
 
                         <div className="message-header" style={{ marginTop: 14 }}>
-                          <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
-                          <div>
-                            <div className="item-title">
-                              {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
-                              {selectedChatProfile.zodiac}
-                              {selectedChatProfile.verified && <Badge />}
+                          <div className="avatar-wrap">
+                            <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
+                            <span className={`avatar-status ${selectedChatProfile.online ? "" : "offline"}`} />
+                          </div>
+
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <div className="message-header-line">
+                              <div className="item-title">
+                                {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
+                                {selectedChatProfile.zodiac}
+                                {selectedChatProfile.verified && <Badge />}
+                              </div>
                             </div>
                             <p className="item-sub">
                               {selectedChatProfile.online ? t.online : t.offline} •{" "}
@@ -1992,25 +2343,33 @@ function App() {
                           <div key={i} className={`message-row ${msg.from}`}>
                             <div className={`bubble ${msg.from}`}>
                               {lang === "ru" ? msg.text : msg.textEn || msg.text}
-                            </div>
-                            {msg.from === "me" && (
-                              <div className="bubble-status">
-                                {msg.status === "read" ? t.read : t.delivered}
+                              <div className="bubble-meta">
+                                <span>{msg.time || "12:00"}</span>
+                                {msg.from === "me" && (
+                                  <span className={`bubble-checks ${msg.status}`}>
+                                    {getChecks(msg.status)}
+                                  </span>
+                                )}
                               </div>
-                            )}
+                            </div>
                           </div>
                         ))}
                       </div>
 
                       <div className="message-input-row">
-                        <input
-                          value={chatDraft}
-                          onChange={(e) => setChatDraft(e.target.value)}
-                          placeholder={t.messagePlaceholder}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") sendMessage();
-                          }}
-                        />
+                        <div className="message-input-shell">
+                          <span className="chat-action-icon">😊</span>
+                          <input
+                            value={chatDraft}
+                            onChange={(e) => setChatDraft(e.target.value)}
+                            placeholder={t.messagePlaceholder}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") sendMessage();
+                            }}
+                          />
+                          <span className="chat-action-icon">📎</span>
+                        </div>
+
                         <button className="primary-btn" onClick={sendMessage}>
                           {t.send}
                         </button>
@@ -2024,9 +2383,16 @@ function App() {
                     <div className="list-grid">
                       {listProfiles.map((profile) => (
                         <div key={profile.id} className="list-item">
-                          <img src={profile.avatar} alt={profile.name} />
+                          <div className="avatar-wrap">
+                            <img src={profile.avatar} alt={profile.name} />
+                            <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
+                          </div>
+
                           <div style={{ flex: 1 }}>
                             <div className="item-title">
+                              <span className="dialog-icon">
+                                {messageView === "liked" ? "♥" : "👁"}
+                              </span>
                               {profile.name}, {profile.age} {profile.zodiac}
                               {profile.verified && <Badge />}
                             </div>
@@ -2438,8 +2804,22 @@ function App() {
       {showMatch && matchedProfile && (
         <div className="mutual-modal" onClick={() => setShowMatch(false)}>
           <div className="mutual-box" onClick={(e) => e.stopPropagation()}>
-            <h2 style={{ marginTop: 0, fontSize: 36 }}>{t.mutualTitle}</h2>
-            <p style={{ fontSize: 18, marginBottom: 0 }}>{t.mutualText}</p>
+            {matchBurst && (
+              <div className="floating-hearts">
+                <span>💙</span>
+                <span>✨</span>
+                <span>💙</span>
+                <span>✨</span>
+                <span>💙</span>
+              </div>
+            )}
+
+            <h2 style={{ marginTop: 0, fontSize: 36, position: "relative", zIndex: 2 }}>
+              {t.mutualTitle}
+            </h2>
+            <p style={{ fontSize: 18, marginBottom: 0, position: "relative", zIndex: 2 }}>
+              {t.mutualText}
+            </p>
 
             <div className="mutual-avatars">
               <img src={myProfile.photos[0]} alt={myProfile.name} />
@@ -2447,7 +2827,7 @@ function App() {
               <img src={matchedProfile.avatar} alt={matchedProfile.name} />
             </div>
 
-            <div className="mutual-actions" style={{ justifyContent: "center" }}>
+            <div className="mutual-actions" style={{ justifyContent: "center", position: "relative", zIndex: 2 }}>
               <button
                 className="secondary-btn"
                 onClick={() => {
