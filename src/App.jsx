@@ -41,7 +41,6 @@ const tr = {
     women: "Женщины",
     apply: "Применить",
     reset: "Сбросить",
-    next: "Дальше",
 
     emptyDeck: "Анкеты закончились",
     emptyDeckText: "Измени фильтры поиска или начни просмотр заново.",
@@ -81,11 +80,11 @@ const tr = {
     settingsText: "Управляй фильтрами поиска и параметрами профиля.",
     help: "Помощь",
     help1: "Как работает поиск?",
-    help1t: "Выбирай фильтры, затем листай анкеты свайпом вправо, влево или вверх.",
+    help1t: "Листай анкеты свайпом вверх, открывай информацию движением вниз, фото листай влево и вправо.",
     help2: "Когда можно написать человеку?",
     help2t: "Только после взаимной симпатии. Без мэтча чат недоступен.",
     help3: "Как смотреть фото?",
-    help3t: "Нажми на левую или правую часть фото, чтобы переключать снимки.",
+    help3t: "На карточке свайпай влево и вправо, чтобы переключать фото человека.",
 
     mutualTitle: "Взаимная симпатия!",
     mutualText: "Теперь вы можете начать общение.",
@@ -135,7 +134,6 @@ const tr = {
     women: "Women",
     apply: "Apply",
     reset: "Reset",
-    next: "Next",
 
     emptyDeck: "No more profiles",
     emptyDeckText: "Change your filters or start browsing again.",
@@ -175,11 +173,11 @@ const tr = {
     settingsText: "Manage search filters and profile preferences.",
     help: "Help",
     help1: "How does search work?",
-    help1t: "Choose filters, then swipe profiles right, left or up.",
+    help1t: "Swipe up to go to the next profile, pull down to open more info, swipe left and right for photos.",
     help2: "When can I message someone?",
     help2t: "Only after a mutual match. No chat is available before that.",
     help3: "How do I browse photos?",
-    help3t: "Tap the left or right side of the photo to switch images.",
+    help3t: "Swipe left and right on the card to switch profile photos.",
 
     mutualTitle: "It's a match!",
     mutualText: "Now you can start chatting.",
@@ -345,6 +343,9 @@ function App() {
   const [matchedProfile, setMatchedProfile] = useState(null);
   const [savedProfileLabel, setSavedProfileLabel] = useState(false);
   const [cardPhotoIndex, setCardPhotoIndex] = useState(0);
+  const [cardInfoOpen, setCardInfoOpen] = useState(false);
+  const [likePulse, setLikePulse] = useState(false);
+  const [skipPulse, setSkipPulse] = useState(false);
 
   const [settings, setSettings] = useState({
     searchMode: "nearby",
@@ -393,7 +394,14 @@ function App() {
   const [profileDraft, setProfileDraft] = useState(myProfile);
 
   const cardRef = useRef(null);
-  const dragRef = useRef({ active: false, startX: 0, startY: 0, dx: 0, dy: 0 });
+  const dragRef = useRef({
+    active: false,
+    startX: 0,
+    startY: 0,
+    dx: 0,
+    dy: 0,
+    mode: null,
+  });
 
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
   const cityOptions = useMemo(() => {
@@ -422,11 +430,10 @@ function App() {
   const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
 
   useEffect(() => {
-    if (!activeProfile) setCardPhotoIndex(0);
-  }, [activeProfile]);
-
-  useEffect(() => {
-    if (activeProfile) setCardPhotoIndex(0);
+    if (activeProfile) {
+      setCardPhotoIndex(0);
+      setCardInfoOpen(false);
+    }
   }, [activeProfile?.id]);
 
   useEffect(() => {
@@ -453,8 +460,12 @@ function App() {
 
   const handleLike = (profile) => {
     if (!profile) return;
+    setLikePulse(true);
+    setTimeout(() => setLikePulse(false), 260);
+
     const makeMatch = [1, 2, 3].includes(profile.id);
     markSwiped(profile.id);
+
     if (makeMatch) {
       setMatches((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
       ensureMessages(profile);
@@ -467,6 +478,8 @@ function App() {
 
   const handleSkip = (profile) => {
     if (!profile) return;
+    setSkipPulse(true);
+    setTimeout(() => setSkipPulse(false), 260);
     markSwiped(profile.id);
   };
 
@@ -476,11 +489,13 @@ function App() {
     const el = cardRef.current;
     if (!el || !activeProfile) return;
 
-    const up = direction === "up";
     el.style.transition = "transform .34s ease, opacity .34s ease";
-    el.style.transform = up
-      ? "translateY(-420px) scale(.96)"
-      : `translateX(${direction === "right" ? 460 : -460}px) rotate(${direction === "right" ? 16 : -16}deg)`;
+    el.style.transform =
+      direction === "up"
+        ? "translateY(-420px) scale(.96)"
+        : direction === "right"
+        ? "translateX(420px) rotate(10deg)"
+        : "translateX(-420px) rotate(-10deg)";
     el.style.opacity = "0";
 
     setTimeout(() => {
@@ -489,42 +504,84 @@ function App() {
 
       if (cardRef.current) {
         cardRef.current.style.transition = "none";
-        cardRef.current.style.transform = "translate(0,0) rotate(0deg)";
+        cardRef.current.style.transform = "translate(0,0) scale(1)";
         cardRef.current.style.opacity = "1";
       }
     }, 300);
   };
 
   const pointerDown = (x, y) => {
-    dragRef.current = { active: true, startX: x, startY: y, dx: 0, dy: 0 };
+    dragRef.current = {
+      active: true,
+      startX: x,
+      startY: y,
+      dx: 0,
+      dy: 0,
+      mode: null,
+    };
     if (cardRef.current) cardRef.current.style.transition = "none";
   };
 
   const pointerMove = (x, y) => {
     if (!dragRef.current.active || !cardRef.current) return;
+
     const dx = x - dragRef.current.startX;
     const dy = y - dragRef.current.startY;
+
     dragRef.current.dx = dx;
     dragRef.current.dy = dy;
 
-    if (Math.abs(dy) > Math.abs(dx) && dy < 0) {
-      cardRef.current.style.transform = `translateY(${dy}px) scale(${Math.max(0.94, 1 + dy / 1800)})`;
+    if (!dragRef.current.mode) {
+      dragRef.current.mode = Math.abs(dx) > Math.abs(dy) ? "photo" : "vertical";
+    }
+
+    if (dragRef.current.mode === "vertical") {
+      const limitedY = Math.max(-140, Math.min(140, dy));
+      const scale = 1 - Math.min(Math.abs(limitedY) / 1200, 0.03);
+      cardRef.current.style.transform = `translateY(${limitedY}px) scale(${scale})`;
     } else {
-      cardRef.current.style.transform = `translateX(${dx}px) translateY(${Math.max(-18, Math.min(18, dy))}px) rotate(${dx / 18}deg)`;
+      const limitedX = Math.max(-90, Math.min(90, dx));
+      cardRef.current.style.transform = `translateX(${limitedX}px)`;
     }
   };
 
   const pointerUp = () => {
     if (!dragRef.current.active || !cardRef.current) return;
-    const { dx, dy } = dragRef.current;
+
+    const { dx, dy, mode } = dragRef.current;
     dragRef.current.active = false;
 
-    if (dx > 110) return animateOut("right");
-    if (dx < -110) return animateOut("left");
-    if (dy < -120) return animateOut("up");
+    if (mode === "vertical") {
+      if (dy < -120) {
+        animateOut("up");
+        return;
+      }
+
+      if (dy > 90) {
+        setCardInfoOpen(true);
+        cardRef.current.style.transition = "transform .22s ease";
+        cardRef.current.style.transform = "translate(0,0) scale(1)";
+        return;
+      }
+
+      if (dy < -40 && cardInfoOpen) {
+        setCardInfoOpen(false);
+        cardRef.current.style.transition = "transform .22s ease";
+        cardRef.current.style.transform = "translate(0,0) scale(1)";
+        return;
+      }
+    }
+
+    if (mode === "photo" && activeProfile) {
+      if (dx < -60) {
+        setCardPhotoIndex((v) => (v + 1) % activeProfile.photos.length);
+      } else if (dx > 60) {
+        setCardPhotoIndex((v) => (v === 0 ? activeProfile.photos.length - 1 : v - 1));
+      }
+    }
 
     cardRef.current.style.transition = "transform .22s ease";
-    cardRef.current.style.transform = "translate(0,0) rotate(0deg)";
+    cardRef.current.style.transform = "translate(0,0) scale(1)";
   };
 
   const sendMessage = () => {
@@ -593,10 +650,15 @@ function App() {
     <div className="app-shell">
       <style>{`
         *{box-sizing:border-box}
-        html,body,#root{margin:0;padding:0;min-height:100%;font-family:Inter,Arial,sans-serif;background:
-        radial-gradient(circle at top left, rgba(255,105,145,.12), transparent 24%),
-        radial-gradient(circle at top right, rgba(255,186,190,.14), transparent 28%),
-        linear-gradient(180deg,#fff8fb 0%,#f8f5fb 100%);color:#231b2e}
+        html,body,#root{
+          margin:0;padding:0;min-height:100%;
+          font-family:Inter,Arial,sans-serif;
+          background:
+            radial-gradient(circle at top left, rgba(255,105,145,.12), transparent 24%),
+            radial-gradient(circle at top right, rgba(255,186,190,.14), transparent 28%),
+            linear-gradient(180deg,#fff8fb 0%,#f8f5fb 100%);
+          color:#231b2e
+        }
         body{overflow-x:hidden}
         .page{max-width:1380px;margin:0 auto;padding:18px 16px 100px}
         .topbar,.panel{background:rgba(255,255,255,.84);backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(36,20,48,.06)}
@@ -625,28 +687,83 @@ function App() {
         .search-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
         .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
         .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:78vh}
-        .swipe-card{width:100%;max-width:460px;height:min(82vh,760px);border-radius:30px;overflow:hidden;position:relative;background:#ece8ef;box-shadow:0 28px 50px rgba(25,10,38,.14);touch-action:none;user-select:none;cursor:grab}
+
+        .swipe-card{
+          width:100%;
+          max-width:520px;
+          height:min(84vh,780px);
+          border-radius:34px;
+          overflow:hidden;
+          position:relative;
+          background:#f0edf3;
+          box-shadow:0 30px 60px rgba(25,10,38,.14);
+          touch-action:none;
+          user-select:none;
+          cursor:grab;
+        }
         .swipe-card:active{cursor:grabbing}
-        .swipe-card img{width:100%;height:100%}
-        .photo-tap{position:absolute;top:0;bottom:0;width:50%;z-index:3}
-        .photo-tap.left{left:0}
-        .photo-tap.right{right:0}
-        .photo-bars{position:absolute;top:14px;left:14px;right:14px;display:flex;gap:6px;z-index:4}
-        .photo-bar{height:4px;flex:1;border-radius:999px;background:rgba(255,255,255,.35);overflow:hidden}
-        .photo-bar > span{display:block;height:100%;background:#fff}
-        .top-pills{position:absolute;top:26px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:4}
-        .pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(12px);font-size:13px;font-weight:900}
-        .card-bottom{position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.42) 22%, rgba(255,255,255,.96) 23%, #fff 100%);z-index:4}
-        .card-name{margin:0 0 6px;font-size:32px;font-weight:900;display:flex;align-items:center;flex-wrap:wrap;color:#231b2e}
-        .card-meta{margin:0 0 8px;color:#5d5268;font-weight:800}
+        .swipe-card img{width:100%;height:100%;object-fit:cover}
+        .photo-tap{position:absolute;inset:0;z-index:3}
+        .photo-bars{position:absolute;top:16px;left:16px;right:16px;display:flex;gap:6px;z-index:4}
+        .photo-bar{height:4px;flex:1;border-radius:999px;background:rgba(255,255,255,.34);overflow:hidden}
+        .photo-bar>span{display:block;height:100%;background:#fff;transition:.22s ease}
+        .top-pills{
+          position:absolute;top:28px;left:16px;right:16px;
+          display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:4
+        }
+        .pill{
+          padding:8px 12px;border-radius:999px;
+          background:rgba(255,255,255,.18);color:#fff;
+          backdrop-filter:blur(12px);font-size:13px;font-weight:900
+        }
+        .card-bottom{
+          position:absolute;left:0;right:0;bottom:0;z-index:4;
+          padding:18px 18px 22px;
+          background:linear-gradient(180deg,rgba(22,14,28,0) 0%,rgba(22,14,28,.20) 22%,rgba(255,255,255,.96) 23%,#fff 100%);
+          transition:.28s ease;
+        }
+        .card-bottom.open{max-height:58%}
+        .card-bottom.closed{max-height:33%}
+        .card-name{
+          margin:0 0 6px;font-size:34px;font-weight:900;
+          display:flex;align-items:center;flex-wrap:wrap;color:#241c2d
+        }
+        .card-meta{margin:0 0 10px;color:#64596f;font-weight:800}
+        .card-scroll{
+          overflow:auto;
+          max-height:220px;
+          padding-right:4px;
+        }
+        .card-scroll.open{max-height:360px}
         .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-        .interest{padding:8px 12px;border-radius:999px;background:#f5f1f8;font-size:13px;font-weight:800;color:#52475e}
-        .card-bio{margin:0;color:#665b70;line-height:1.5}
-        .card-actions{display:flex;justify-content:space-between;gap:12px;margin-top:16px}
-        .round-btn{width:62px;height:62px;border-radius:50%;font-size:22px;box-shadow:0 14px 28px rgba(20,10,28,.18)}
-        .round-btn.skip{background:#f3eef6;color:#61556c}
-        .round-btn.like{background:linear-gradient(135deg,#ff5f8f,#ff8a6b);color:#fff}
-        .round-btn.next{background:linear-gradient(135deg,#8f91ff,#6fbcff);color:#fff}
+        .interest{
+          padding:8px 12px;border-radius:999px;background:#f5eff7;
+          font-size:13px;font-weight:800;color:#52475e
+        }
+        .card-bio{margin:0;color:#665b70;line-height:1.55}
+        .card-actions{
+          display:flex;justify-content:center;gap:18px;
+          margin-top:18px
+        }
+        .round-btn{
+          width:74px;height:74px;border-radius:24px;font-size:28px;
+          box-shadow:0 16px 30px rgba(20,10,28,.14)
+        }
+        .round-btn.skip{
+          background:linear-gradient(135deg,#f4eff7,#ebe3f0);
+          color:#5f536b
+        }
+        .round-btn.like{
+          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
+          color:#fff
+        }
+        .round-btn.pop{transform:scale(1.08);box-shadow:0 20px 36px rgba(255,95,143,.24)}
+        .match-pop{animation:matchPop .42s ease}
+        @keyframes matchPop{
+          0%{transform:scale(.88);opacity:0}
+          100%{transform:scale(1);opacity:1}
+        }
+
         .empty{min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#665b70;gap:10px}
         .messages-layout,.profile-layout,.settings-layout{display:grid;gap:16px}
         .messages-layout{grid-template-columns:220px minmax(0,1fr);min-height:620px}
@@ -686,7 +803,11 @@ function App() {
         .mutual-avatars img{width:94px;height:94px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.5)}
         .heart{font-size:34px}
         .phone-bottom-nav{display:none}
-        @media (max-width:1120px){.hero,.profile-layout,.settings-layout{grid-template-columns:1fr}.quick-grid{grid-template-columns:1fr}}
+
+        @media (max-width:1120px){
+          .hero,.profile-layout,.settings-layout{grid-template-columns:1fr}
+          .quick-grid{grid-template-columns:1fr}
+        }
         @media (max-width:760px){
           .page{padding:12px 12px 98px}
           .topbar{position:static;flex-direction:column;align-items:flex-start;padding:14px}
@@ -701,10 +822,9 @@ function App() {
           .chat-item img{width:38px;height:38px}
           .item-title{font-size:12px;justify-content:center}
           .item-sub{font-size:11px}
-          .swipe-card{max-width:100%;height:min(78vh,690px);border-radius:26px}
-          .card-name{font-size:28px}
-          .card-actions{justify-content:center}
-          .round-btn{width:56px;height:56px}
+          .swipe-card{max-width:100%;height:min(82vh,720px);border-radius:28px}
+          .card-name{font-size:29px}
+          .round-btn{width:68px;height:68px;border-radius:22px}
           .two-col{grid-template-columns:1fr}
           .phone-bottom-nav{position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 16px 34px rgba(29,14,40,.12);z-index:60}
           .phone-tab-btn{border:none;background:transparent;padding:9px 4px;border-radius:16px;font-size:11px;font-weight:900;color:#5b5066;line-height:1.15}
@@ -887,19 +1007,11 @@ function App() {
                       onTouchEnd={pointerUp}
                     >
                       <img src={activeProfile.photos[cardPhotoIndex]} alt={activeProfile.name} />
+
                       <button
-                        className="photo-tap left"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCardPhotoIndex((v) => (v === 0 ? activeProfile.photos.length - 1 : v - 1));
-                        }}
-                      />
-                      <button
-                        className="photo-tap right"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCardPhotoIndex((v) => (v + 1) % activeProfile.photos.length);
-                        }}
+                        className="photo-tap"
+                        onClick={(e) => e.preventDefault()}
+                        aria-label="photo swipe area"
                       />
 
                       <div className="photo-bars">
@@ -911,7 +1023,9 @@ function App() {
                       </div>
 
                       <div className="top-pills">
-                        <div className="pill">{activeProfile.photos.length} {t.photosCount}</div>
+                        <div className="pill">
+                          {activeProfile.photos.length} {t.photosCount}
+                        </div>
                         <div className="pill">
                           {settings.unit === "mi"
                             ? `${activeProfile.distanceMi} ${t.miles}`
@@ -919,27 +1033,43 @@ function App() {
                         </div>
                       </div>
 
-                      <div className="card-bottom">
+                      <div className={`card-bottom ${cardInfoOpen ? "open" : "closed"}`}>
                         <h3 className="card-name">
                           {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
                           {activeProfile.verified && <Badge />}
                         </h3>
+
                         <p className="card-meta">
                           {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
                         </p>
 
-                        <div className="chip-row">
-                          {activeProfile.interests.map((it) => (
-                            <span className="interest" key={it}>{it}</span>
-                          ))}
+                        <div className={`card-scroll ${cardInfoOpen ? "open" : ""}`}>
+                          <div className="chip-row">
+                            {activeProfile.interests.map((it) => (
+                              <span className="interest" key={it}>{it}</span>
+                            ))}
+                          </div>
+
+                          <p className="card-bio">
+                            {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
+                          </p>
                         </div>
 
-                        <p className="card-bio">{lang === "ru" ? activeProfile.bio : activeProfile.bioEn}</p>
-
                         <div className="card-actions">
-                          <button className="round-btn skip" onClick={() => animateOut("left")} title="skip">✕</button>
-                          <button className="round-btn next" onClick={() => animateOut("up")} title="next">↑</button>
-                          <button className="round-btn like" onClick={() => animateOut("right")} title="like">♥</button>
+                          <button
+                            className={`round-btn skip ${skipPulse ? "pop" : ""}`}
+                            onClick={() => animateOut("left")}
+                            title="skip"
+                          >
+                            ✕
+                          </button>
+                          <button
+                            className={`round-btn like ${likePulse ? "pop" : ""}`}
+                            onClick={() => animateOut("right")}
+                            title="like"
+                          >
+                            ♥
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1328,7 +1458,7 @@ function App() {
 
       {showMatch && matchedProfile && (
         <div className="mutual-modal" onClick={() => setShowMatch(false)}>
-          <div className="mutual-box" onClick={(e) => e.stopPropagation()}>
+          <div className="mutual-box match-pop" onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginTop: 0, fontSize: 36 }}>{t.mutualTitle}</h2>
             <p style={{ fontSize: 18, marginBottom: 0 }}>{t.mutualText}</p>
 
