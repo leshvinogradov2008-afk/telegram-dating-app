@@ -668,7 +668,8 @@ function App() {
   const filteredProfiles = useMemo(() => {
     return profiles.filter((p) => {
       if (blockedIds.includes(p.id)) return false;
-      const distanceValue = settings.unit === "mi" ? p.distanceMi : Math.round(p.distanceMi * 1.60934);
+      const distanceValue =
+        settings.unit === "mi" ? p.distanceMi : Math.round(p.distanceMi * 1.60934);
       if (settings.searchMode === "nearby" && distanceValue > settings.maxDistance) return false;
       if (settings.country !== "All" && p.country !== settings.country) return false;
       if (settings.city !== "All" && p.city !== settings.city) return false;
@@ -933,7 +934,7 @@ function App() {
         .profile-page-scroll{
           height:100%;
           overflow:auto;
-          padding-bottom:120px;
+          padding-bottom:150px;
           -ms-overflow-style:none;
           scrollbar-width:none;
         }
@@ -1057,41 +1058,81 @@ function App() {
         .danger-btn:hover{transform:translateY(-1px)}
         .fixed-action-bar{
           position:absolute;
-          left:16px;
-          right:16px;
-          bottom:16px;
+          left:0;
+          right:0;
+          bottom:18px;
           z-index:10;
           display:flex;
           justify-content:center;
           pointer-events:none;
         }
         .fixed-action-inner{
+          width:min(100%, 360px);
           display:flex;
-          gap:16px;
-          padding:10px 12px;
-          border-radius:999px;
-          background:rgba(18,14,26,.62);
-          backdrop-filter:blur(14px);
-          border:1px solid rgba(255,255,255,.14);
-          box-shadow:0 16px 30px rgba(18,9,26,.20);
-          pointer-events:auto;
+          justify-content:space-between;
+          align-items:center;
+          padding:0 12px;
+          pointer-events:none;
         }
         .action-btn{
-          width:76px;height:76px;border-radius:26px;font-size:28px;
-          box-shadow:0 16px 30px rgba(20,10,28,.14);
+          width:88px;
+          height:88px;
+          border-radius:30px;
+          font-size:34px;
+          font-weight:900;
+          position:relative;
+          overflow:hidden;
+          pointer-events:auto;
           transform:scale(1);
+          backdrop-filter:blur(20px);
+          -webkit-backdrop-filter:blur(20px);
+          border:1px solid rgba(255,255,255,.42);
+          box-shadow:
+            0 20px 40px rgba(31,15,46,.22),
+            inset 0 1px 0 rgba(255,255,255,.45),
+            inset 0 -1px 0 rgba(255,255,255,.08);
+        }
+        .action-btn::before{
+          content:"";
+          position:absolute;
+          top:8px;
+          left:12px;
+          right:12px;
+          height:28px;
+          border-radius:999px;
+          background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08));
+          filter:blur(.2px);
+          pointer-events:none;
+        }
+        .action-btn::after{
+          content:"";
+          position:absolute;
+          inset:0;
+          border-radius:inherit;
+          background:radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 42%);
+          pointer-events:none;
         }
         .action-btn.skip{
-          background:linear-gradient(135deg,#eef0ff,#dfe5ff);
-          color:#4f5acb
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.38), rgba(228,234,255,.20)),
+            linear-gradient(135deg, rgba(159,180,255,.34), rgba(121,146,255,.22));
+          color:#4f5acb;
         }
         .action-btn.like{
-          background:linear-gradient(135deg,#ff5f8f,#ff8a6b);
-          color:#fff
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,220,231,.16)),
+            linear-gradient(135deg, rgba(255,122,165,.38), rgba(255,158,118,.24));
+          color:#ff4e86;
         }
-        .action-btn:hover{transform:translateY(-1px) scale(1.02)}
-        .action-btn:active{transform:scale(.94)}
-        .action-btn.pop{transform:scale(1.08)}
+        .action-btn:hover{
+          transform:translateY(-3px) scale(1.04);
+          box-shadow:
+            0 24px 48px rgba(31,15,46,.24),
+            inset 0 1px 0 rgba(255,255,255,.5),
+            inset 0 -1px 0 rgba(255,255,255,.08);
+        }
+        .action-btn:active{transform:scale(.93)}
+        .action-btn.pop{transform:scale(1.12)}
         .footer-hint{
           margin-top:16px;
           font-size:12px;
@@ -1204,7 +1245,16 @@ function App() {
           .profile-hero-photo,.profile-photo-stack img{height:350px}
           .profile-title{font-size:30px}
           .info-grid{grid-template-columns:1fr}
-          .action-btn{width:70px;height:70px;border-radius:22px}
+          .fixed-action-inner{
+            width:min(100%, 320px);
+            padding:0 8px;
+          }
+          .action-btn{
+            width:80px;
+            height:80px;
+            border-radius:26px;
+            font-size:31px;
+          }
           .two-col{grid-template-columns:1fr}
           .phone-bottom-nav{
             position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);
@@ -1226,26 +1276,62 @@ function App() {
           <div className="brand-wrap">
             <div className="brand">{t.brand}</div>
             <div className="lang-switch">
-              <button className={`chip-btn ${lang === "ru" ? "active" : ""}`} onClick={() => setLang("ru")}>RU</button>
-              <button className={`chip-btn ${lang === "en" ? "active" : ""}`} onClick={() => setLang("en")}>EN</button>
+              <button
+                className={`chip-btn ${lang === "ru" ? "active" : ""}`}
+                onClick={() => setLang("ru")}
+              >
+                RU
+              </button>
+              <button
+                className={`chip-btn ${lang === "en" ? "active" : ""}`}
+                onClick={() => setLang("en")}
+              >
+                EN
+              </button>
             </div>
           </div>
 
           <nav className="nav">
-            <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>{t.home}</button>
-            <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>{t.search}</button>
-            <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>{t.messages}</button>
-            <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>{t.profile}</button>
-            <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>{t.settings}</button>
+            <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+              {t.home}
+            </button>
+            <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
+              {t.search}
+            </button>
+            <button
+              className={`nav-btn ${tab === "messages" ? "active" : ""}`}
+              onClick={() => setTab("messages")}
+            >
+              {t.messages}
+            </button>
+            <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+              {t.profile}
+            </button>
+            <button
+              className={`nav-btn ${tab === "settings" ? "active" : ""}`}
+              onClick={() => setTab("settings")}
+            >
+              {t.settings}
+            </button>
           </nav>
         </header>
 
         <div className="mobile-tabs">
-          <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>{t.home}</button>
-          <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>{t.search}</button>
-          <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>{t.messages}</button>
-          <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>{t.profile}</button>
-          <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>{t.settings}</button>
+          <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+            {t.home}
+          </button>
+          <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
+            {t.search}
+          </button>
+          <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+            {t.messages}
+          </button>
+          <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+            {t.profile}
+          </button>
+          <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
+            {t.settings}
+          </button>
         </div>
 
         {tab === "home" && (
@@ -1255,8 +1341,12 @@ function App() {
                 <h1 className="hero-title">{t.heroTitle}</h1>
                 <p className="hero-text">{t.heroText}</p>
                 <div className="hero-actions">
-                  <button className="primary-btn" onClick={() => setTab("search")}>{t.heroPrimary}</button>
-                  <button className="secondary-btn" onClick={() => setTab("messages")}>{t.heroSecondary}</button>
+                  <button className="primary-btn" onClick={() => setTab("search")}>
+                    {t.heroPrimary}
+                  </button>
+                  <button className="secondary-btn" onClick={() => setTab("messages")}>
+                    {t.heroSecondary}
+                  </button>
                 </div>
               </div>
 
@@ -1273,9 +1363,21 @@ function App() {
             </section>
 
             <section className="quick-grid">
-              <div className="panel"><div className="quick-num">1</div><h3>{t.card1}</h3><p className="muted">{t.card1t}</p></div>
-              <div className="panel"><div className="quick-num">2</div><h3>{t.card2}</h3><p className="muted">{t.card2t}</p></div>
-              <div className="panel"><div className="quick-num">3</div><h3>{t.card3}</h3><p className="muted">{t.card3t}</p></div>
+              <div className="panel">
+                <div className="quick-num">1</div>
+                <h3>{t.card1}</h3>
+                <p className="muted">{t.card1t}</p>
+              </div>
+              <div className="panel">
+                <div className="quick-num">2</div>
+                <h3>{t.card2}</h3>
+                <p className="muted">{t.card2t}</p>
+              </div>
+              <div className="panel">
+                <div className="quick-num">3</div>
+                <h3>{t.card3}</h3>
+                <p className="muted">{t.card3t}</p>
+              </div>
             </section>
           </>
         )}
@@ -1296,14 +1398,22 @@ function App() {
                   <div className="two-col">
                     <div className="field">
                       <label>{t.mode}</label>
-                      <select value={draftSettings.searchMode} onChange={(e) => setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))}>
+                      <select
+                        value={draftSettings.searchMode}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))
+                        }
+                      >
                         <option value="nearby">{t.nearby}</option>
                         <option value="all">{t.all}</option>
                       </select>
                     </div>
                     <div className="field">
                       <label>{t.gender}</label>
-                      <select value={draftSettings.gender} onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}>
+                      <select
+                        value={draftSettings.gender}
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}
+                      >
                         <option value="all">{t.all}</option>
                         <option value="male">{t.men}</option>
                         <option value="female">{t.women}</option>
@@ -1316,7 +1426,9 @@ function App() {
                       <label>{t.country}</label>
                       <select
                         value={draftSettings.country}
-                        onChange={(e) => setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
+                        }
                       >
                         {countries.map((country) => (
                           <option key={country} value={country}>
@@ -1328,7 +1440,10 @@ function App() {
 
                     <div className="field">
                       <label>{t.city}</label>
-                      <select value={draftSettings.city} onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}>
+                      <select
+                        value={draftSettings.city}
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}
+                      >
                         {cityOptions.map((city) => (
                           <option key={city} value={city}>
                             {city === "All" ? t.allLocations : city}
@@ -1341,32 +1456,65 @@ function App() {
                   <div className="two-col">
                     <div className="field">
                       <label>{t.ageFrom}</label>
-                      <input type="number" value={draftSettings.ageFrom} onChange={(e) => setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))} />
+                      <input
+                        type="number"
+                        value={draftSettings.ageFrom}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))
+                        }
+                      />
                     </div>
                     <div className="field">
                       <label>{t.ageTo}</label>
-                      <input type="number" value={draftSettings.ageTo} onChange={(e) => setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))} />
+                      <input
+                        type="number"
+                        value={draftSettings.ageTo}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))
+                        }
+                      />
                     </div>
                   </div>
 
                   <div className="two-col">
                     <div className="field">
                       <label>{t.unit}</label>
-                      <select value={draftSettings.unit} onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}>
+                      <select
+                        value={draftSettings.unit}
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}
+                      >
                         <option value="mi">{t.miles}</option>
                         <option value="km">{t.km}</option>
                       </select>
                     </div>
                     <div className="field">
                       <label>{t.distance}</label>
-                      <input type="range" min="1" max="5000" value={draftSettings.maxDistance} onChange={(e) => setDraftSettings((p) => ({ ...p, maxDistance: Number(e.target.value) }))} />
-                      <div className="muted">{draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}</div>
+                      <input
+                        type="range"
+                        min="1"
+                        max="5000"
+                        value={draftSettings.maxDistance}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({
+                            ...p,
+                            maxDistance: Number(e.target.value),
+                          }))
+                        }
+                      />
+                      <div className="muted">
+                        {draftSettings.maxDistance}{" "}
+                        {draftSettings.unit === "mi" ? t.miles : t.km}
+                      </div>
                     </div>
                   </div>
 
                   <div className="filter-actions">
-                    <button className="primary-btn" onClick={applyFilters}>{t.apply}</button>
-                    <button className="secondary-btn" onClick={resetFilters}>{t.reset}</button>
+                    <button className="primary-btn" onClick={applyFilters}>
+                      {t.apply}
+                    </button>
+                    <button className="secondary-btn" onClick={resetFilters}>
+                      {t.reset}
+                    </button>
                   </div>
                 </div>
               </section>
@@ -1378,7 +1526,11 @@ function App() {
                   <div className="deck-wrap">
                     <div className="profile-page-wrap">
                       <div ref={profilePageRef} className="profile-page-scroll">
-                        <img className="profile-hero-photo" src={activeProfile.photos[0]} alt={activeProfile.name} />
+                        <img
+                          className="profile-hero-photo"
+                          src={activeProfile.photos[0]}
+                          alt={activeProfile.name}
+                        />
 
                         <div className="profile-header">
                           <h3 className="profile-title">
@@ -1387,7 +1539,8 @@ function App() {
                             <span className="premium-pill">{t.premium}</span>
                           </h3>
                           <p className="profile-subtitle">
-                            {activeProfile.city}, {activeProfile.country} • {activeProfile.online ? t.online : t.offline}
+                            {activeProfile.city}, {activeProfile.country} •{" "}
+                            {activeProfile.online ? t.online : t.offline}
                           </p>
                         </div>
 
@@ -1395,23 +1548,33 @@ function App() {
                           <div className="info-grid">
                             <div className="info-card">
                               <div className="info-card-label">{t.location}</div>
-                              <div className="info-card-value">{activeProfile.city}, {activeProfile.country}</div>
+                              <div className="info-card-value">
+                                {activeProfile.city}, {activeProfile.country}
+                              </div>
                             </div>
                             <div className="info-card">
                               <div className="info-card-label">{t.lookingFor}</div>
-                              <div className="info-card-value">{lang === "ru" ? activeProfile.lookingFor : activeProfile.lookingForEn}</div>
+                              <div className="info-card-value">
+                                {lang === "ru" ? activeProfile.lookingFor : activeProfile.lookingForEn}
+                              </div>
                             </div>
                             <div className="info-card">
                               <div className="info-card-label">{t.height}</div>
-                              <div className="info-card-value">{lang === "ru" ? activeProfile.height : activeProfile.heightEn}</div>
+                              <div className="info-card-value">
+                                {lang === "ru" ? activeProfile.height : activeProfile.heightEn}
+                              </div>
                             </div>
                             <div className="info-card">
                               <div className="info-card-label">{t.relationshipStatus}</div>
-                              <div className="info-card-value">{relationshipLabel(activeProfile)}</div>
+                              <div className="info-card-value">
+                                {relationshipLabel(activeProfile)}
+                              </div>
                             </div>
                             <div className="info-card">
                               <div className="info-card-label">{t.age}</div>
-                              <div className="info-card-value">{activeProfile.age} {t.years}</div>
+                              <div className="info-card-value">
+                                {activeProfile.age} {t.years}
+                              </div>
                             </div>
                             <div className="info-card">
                               <div className="info-card-label">{t.zodiac}</div>
@@ -1431,7 +1594,9 @@ function App() {
                           <h4 className="section-heading">{t.interests}</h4>
                           <div className="chip-row">
                             {activeProfile.interests.map((it) => (
-                              <span className="interest" key={it}>{it}</span>
+                              <span className="interest" key={it}>
+                                {it}
+                              </span>
                             ))}
                           </div>
                         </div>
@@ -1489,7 +1654,9 @@ function App() {
                   <div className="empty">
                     <h3>{t.emptyDeck}</h3>
                     <p>{t.emptyDeckText}</p>
-                    <button className="primary-btn" onClick={restartDeck}>{t.restart}</button>
+                    <button className="primary-btn" onClick={restartDeck}>
+                      {t.restart}
+                    </button>
                   </div>
                 )}
               </div>
@@ -1502,9 +1669,24 @@ function App() {
             <h2 className="section-title">{t.messages}</h2>
 
             <div className="segmented" style={{ marginBottom: 14 }}>
-              <button className={`chip-btn ${messageView === "matches" ? "active" : ""}`} onClick={() => setMessageView("matches")}>{t.msgMatches}</button>
-              <button className={`chip-btn ${messageView === "liked" ? "active" : ""}`} onClick={() => setMessageView("liked")}>{t.msgLikedYou}</button>
-              <button className={`chip-btn ${messageView === "guests" ? "active" : ""}`} onClick={() => setMessageView("guests")}>{t.msgGuests}</button>
+              <button
+                className={`chip-btn ${messageView === "matches" ? "active" : ""}`}
+                onClick={() => setMessageView("matches")}
+              >
+                {t.msgMatches}
+              </button>
+              <button
+                className={`chip-btn ${messageView === "liked" ? "active" : ""}`}
+                onClick={() => setMessageView("liked")}
+              >
+                {t.msgLikedYou}
+              </button>
+              <button
+                className={`chip-btn ${messageView === "guests" ? "active" : ""}`}
+                onClick={() => setMessageView("guests")}
+              >
+                {t.msgGuests}
+              </button>
             </div>
 
             <section className="messages-layout">
@@ -1514,7 +1696,9 @@ function App() {
                     {listProfiles.map((profile) => (
                       <div
                         key={profile.id}
-                        className={`chat-item ${selectedChatId === profile.id && messageView === "matches" ? "active" : ""}`}
+                        className={`chat-item ${
+                          selectedChatId === profile.id && messageView === "matches" ? "active" : ""
+                        }`}
                         onClick={() => {
                           if (messageView !== "matches" && !matches.includes(profile.id)) return;
                           setSelectedChatId(profile.id);
@@ -1528,7 +1712,9 @@ function App() {
                           </div>
                           <p className="item-sub">
                             {messageView === "matches"
-                              ? profile.online ? t.online : t.offline
+                              ? profile.online
+                                ? t.online
+                                : t.offline
                               : `${profile.city}, ${profile.country}`}
                           </p>
                         </div>
@@ -1554,11 +1740,13 @@ function App() {
                         <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
                         <div>
                           <div className="item-title">
-                            {selectedChatProfile.name}, {selectedChatProfile.age} {selectedChatProfile.zodiac}
+                            {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
+                            {selectedChatProfile.zodiac}
                             {selectedChatProfile.verified && <Badge />}
                           </div>
                           <p className="item-sub">
-                            {selectedChatProfile.online ? t.online : t.offline} • {selectedChatProfile.city}
+                            {selectedChatProfile.online ? t.online : t.offline} •{" "}
+                            {selectedChatProfile.city}
                           </p>
                         </div>
                       </div>
@@ -1577,7 +1765,9 @@ function App() {
                           onChange={(e) => setChatDraft(e.target.value)}
                           placeholder={t.messagePlaceholder}
                         />
-                        <button className="primary-btn" onClick={sendMessage}>{t.send}</button>
+                        <button className="primary-btn" onClick={sendMessage}>
+                          {t.send}
+                        </button>
                       </div>
                     </div>
                   ) : (
@@ -1593,14 +1783,20 @@ function App() {
                             {profile.name}, {profile.age} {profile.zodiac}
                             {profile.verified && <Badge />}
                           </div>
-                          <p className="item-sub">{profile.city}, {profile.country}</p>
+                          <p className="item-sub">
+                            {profile.city}, {profile.country}
+                          </p>
                         </div>
                         {matches.includes(profile.id) ? (
                           <button className="primary-btn" onClick={() => openChatFromProfile(profile.id)}>
                             {t.openChat}
                           </button>
                         ) : (
-                          <button className="secondary-btn" disabled style={{ opacity: 0.65, cursor: "default" }}>
+                          <button
+                            className="secondary-btn"
+                            disabled
+                            style={{ opacity: 0.65, cursor: "default" }}
+                          >
                             🔒
                           </button>
                         )}
@@ -1638,19 +1834,38 @@ function App() {
                 <h3 style={{ marginTop: 0 }}>{t.about}</h3>
 
                 <div className="info-list">
-                  <div className="info-row"><strong>{t.age}</strong><span>{myProfile.age}</span></div>
-                  <div className="info-row"><strong>{t.cityLabel}</strong><span>{myProfile.city}</span></div>
-                  <div className="info-row"><strong>{t.countryLabel}</strong><span>{myProfile.country}</span></div>
-                  <div className="info-row"><strong>{t.zodiac}</strong><span>{myProfile.zodiac}</span></div>
-                  <div className="info-row"><strong>{t.verified}</strong><span>{myProfile.verified ? t.verifiedYes : t.verifiedNo}</span></div>
+                  <div className="info-row">
+                    <strong>{t.age}</strong>
+                    <span>{myProfile.age}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.cityLabel}</strong>
+                    <span>{myProfile.city}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.countryLabel}</strong>
+                    <span>{myProfile.country}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.zodiac}</strong>
+                    <span>{myProfile.zodiac}</span>
+                  </div>
+                  <div className="info-row">
+                    <strong>{t.verified}</strong>
+                    <span>{myProfile.verified ? t.verifiedYes : t.verifiedNo}</span>
+                  </div>
                 </div>
 
                 <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
                   {!editProfile ? (
-                    <button className="primary-btn" onClick={() => setEditProfile(true)}>{t.editProfile}</button>
+                    <button className="primary-btn" onClick={() => setEditProfile(true)}>
+                      {t.editProfile}
+                    </button>
                   ) : (
                     <>
-                      <button className="primary-btn" onClick={saveProfile}>{t.saveProfile}</button>
+                      <button className="primary-btn" onClick={saveProfile}>
+                        {t.saveProfile}
+                      </button>
                       <button
                         className="secondary-btn"
                         onClick={() => {
@@ -1690,37 +1905,69 @@ function App() {
                   <div className="two-col">
                     <div className="field">
                       <label>{t.name}</label>
-                      <input value={profileDraft.name} onChange={(e) => setProfileDraft((p) => ({ ...p, name: e.target.value }))} />
+                      <input
+                        value={profileDraft.name}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({ ...p, name: e.target.value }))
+                        }
+                      />
                     </div>
                     <div className="field">
                       <label>{t.age}</label>
-                      <input type="number" value={profileDraft.age} onChange={(e) => setProfileDraft((p) => ({ ...p, age: Number(e.target.value || 0) }))} />
+                      <input
+                        type="number"
+                        value={profileDraft.age}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({ ...p, age: Number(e.target.value || 0) }))
+                        }
+                      />
                     </div>
                   </div>
 
                   <div className="two-col">
                     <div className="field">
                       <label>{t.cityLabel}</label>
-                      <input value={profileDraft.city} onChange={(e) => setProfileDraft((p) => ({ ...p, city: e.target.value }))} />
+                      <input
+                        value={profileDraft.city}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({ ...p, city: e.target.value }))
+                        }
+                      />
                     </div>
                     <div className="field">
                       <label>{t.countryLabel}</label>
-                      <input value={profileDraft.country} onChange={(e) => setProfileDraft((p) => ({ ...p, country: e.target.value }))} />
+                      <input
+                        value={profileDraft.country}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({ ...p, country: e.target.value }))
+                        }
+                      />
                     </div>
                   </div>
 
                   <div className="two-col">
                     <div className="field">
                       <label>{t.zodiac}</label>
-                      <select value={profileDraft.zodiac} onChange={(e) => setProfileDraft((p) => ({ ...p, zodiac: e.target.value }))}>
-                        {zodiacOptions.map((z) => <option key={z} value={z}>{z}</option>)}
+                      <select
+                        value={profileDraft.zodiac}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({ ...p, zodiac: e.target.value }))
+                        }
+                      >
+                        {zodiacOptions.map((z) => (
+                          <option key={z} value={z}>
+                            {z}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="field">
                       <label>{t.verified}</label>
                       <select
                         value={profileDraft.verified ? "yes" : "no"}
-                        onChange={(e) => setProfileDraft((p) => ({ ...p, verified: e.target.value === "yes" }))}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({ ...p, verified: e.target.value === "yes" }))
+                        }
                       >
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
@@ -1768,7 +2015,12 @@ function App() {
                 <div className="field-group">
                   <div className="field">
                     <label>{t.mode}</label>
-                    <select value={draftSettings.searchMode} onChange={(e) => setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))}>
+                    <select
+                      value={draftSettings.searchMode}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))
+                      }
+                    >
                       <option value="nearby">{t.nearby}</option>
                       <option value="all">{t.all}</option>
                     </select>
@@ -1776,7 +2028,10 @@ function App() {
 
                   <div className="field">
                     <label>{t.gender}</label>
-                    <select value={draftSettings.gender} onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}>
+                    <select
+                      value={draftSettings.gender}
+                      onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}
+                    >
                       <option value="all">{t.all}</option>
                       <option value="male">{t.men}</option>
                       <option value="female">{t.women}</option>
@@ -1785,7 +2040,12 @@ function App() {
 
                   <div className="field">
                     <label>{t.country}</label>
-                    <select value={draftSettings.country} onChange={(e) => setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))}>
+                    <select
+                      value={draftSettings.country}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
+                      }
+                    >
                       {countries.map((country) => (
                         <option key={country} value={country}>
                           {country === "All" ? t.allLocations : country}
@@ -1796,7 +2056,10 @@ function App() {
 
                   <div className="field">
                     <label>{t.city}</label>
-                    <select value={draftSettings.city} onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}>
+                    <select
+                      value={draftSettings.city}
+                      onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}
+                    >
                       {cityOptions.map((city) => (
                         <option key={city} value={city}>
                           {city === "All" ? t.allLocations : city}
@@ -1808,17 +2071,32 @@ function App() {
                   <div className="two-col">
                     <div className="field">
                       <label>{t.ageFrom}</label>
-                      <input type="number" value={draftSettings.ageFrom} onChange={(e) => setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))} />
+                      <input
+                        type="number"
+                        value={draftSettings.ageFrom}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))
+                        }
+                      />
                     </div>
                     <div className="field">
                       <label>{t.ageTo}</label>
-                      <input type="number" value={draftSettings.ageTo} onChange={(e) => setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))} />
+                      <input
+                        type="number"
+                        value={draftSettings.ageTo}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))
+                        }
+                      />
                     </div>
                   </div>
 
                   <div className="field">
                     <label>{t.unit}</label>
-                    <select value={draftSettings.unit} onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}>
+                    <select
+                      value={draftSettings.unit}
+                      onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}
+                    >
                       <option value="mi">{t.miles}</option>
                       <option value="km">{t.km}</option>
                     </select>
@@ -1826,13 +2104,27 @@ function App() {
 
                   <div className="field">
                     <label>{t.distance}</label>
-                    <input type="range" min="1" max="5000" value={draftSettings.maxDistance} onChange={(e) => setDraftSettings((p) => ({ ...p, maxDistance: Number(e.target.value) }))} />
-                    <div className="muted">{draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}</div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={draftSettings.maxDistance}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, maxDistance: Number(e.target.value) }))
+                      }
+                    />
+                    <div className="muted">
+                      {draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}
+                    </div>
                   </div>
 
                   <div className="filter-actions">
-                    <button className="primary-btn" onClick={applyFilters}>{t.apply}</button>
-                    <button className="secondary-btn" onClick={resetFilters}>{t.reset}</button>
+                    <button className="primary-btn" onClick={applyFilters}>
+                      {t.apply}
+                    </button>
+                    <button className="secondary-btn" onClick={resetFilters}>
+                      {t.reset}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1860,11 +2152,27 @@ function App() {
       </div>
 
       <div className="phone-bottom-nav">
-        <button className={`phone-tab-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>{t.home}</button>
-        <button className={`phone-tab-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>{t.search}</button>
-        <button className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>{t.messages}</button>
-        <button className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>{t.profile}</button>
-        <button className={`phone-tab-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>{t.settings}</button>
+        <button className={`phone-tab-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+          {t.home}
+        </button>
+        <button className={`phone-tab-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
+          {t.search}
+        </button>
+        <button
+          className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`}
+          onClick={() => setTab("messages")}
+        >
+          {t.messages}
+        </button>
+        <button className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+          {t.profile}
+        </button>
+        <button
+          className={`phone-tab-btn ${tab === "settings" ? "active" : ""}`}
+          onClick={() => setTab("settings")}
+        >
+          {t.settings}
+        </button>
       </div>
 
       {showMatch && matchedProfile && (
