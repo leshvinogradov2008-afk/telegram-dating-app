@@ -54,7 +54,7 @@ const tr = {
     noMessages: "Пока нет взаимных симпатий.",
     openChat: "Открыть чат",
 
-    msgMatches: "Мэтчи",
+    msgMatches: "Диалоги",
     msgLikedYou: "Кому я понравился",
     msgGuests: "Гости",
     noLikedYou: "Пока никто не отметил твою анкету.",
@@ -115,6 +115,14 @@ const tr = {
     footerHint: "Следующая анкета откроется только после лайка или дизлайка.",
     reportReason: "Жалоба отправлена. Профиль будет проверен.",
     blockReason: "Профиль скрыт из поиска.",
+
+    yourTurn: "Твой ответ",
+    backToChats: "Назад",
+    delivered: "Доставлено",
+    read: "Прочитано",
+    sentNow: "Сейчас",
+    typeDialog: "Выбери диалог",
+    typeDialogText: "Открой любой диалог из списка, чтобы начать общение.",
   },
   en: {
     brand: "Telegram Dating",
@@ -136,7 +144,7 @@ const tr = {
     card2: "Smart search",
     card2t: "Filters by country, city, age, gender and distance.",
     card3: "Choose anytime",
-    card3t: "Like and dislike buttons stay fixed at the bottom during the whole profile view.",
+    card3t: "Like and dislike buttons stay fixed and visible during the whole profile view.",
 
     searchTitle: "Search",
     filters: "Search settings",
@@ -169,7 +177,7 @@ const tr = {
     noMessages: "No mutual matches yet.",
     openChat: "Open chat",
 
-    msgMatches: "Matches",
+    msgMatches: "Dialogs",
     msgLikedYou: "Liked you",
     msgGuests: "Guests",
     noLikedYou: "Nobody liked your profile yet.",
@@ -230,6 +238,14 @@ const tr = {
     footerHint: "The next profile opens only after like or dislike.",
     reportReason: "Report sent. The profile will be reviewed.",
     blockReason: "The profile has been hidden from search.",
+
+    yourTurn: "Your reply",
+    backToChats: "Back",
+    delivered: "Delivered",
+    read: "Read",
+    sentNow: "Now",
+    typeDialog: "Choose a dialog",
+    typeDialogText: "Open any dialog from the list to start chatting.",
   },
 };
 
@@ -285,7 +301,7 @@ const initialProfiles = [
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
     height: "170 см",
-    heightEn: "5'7\"",
+    heightEn: `5'7"`,
     relationshipStatus: "statusSingle",
     bio: "Люблю красивые места, музыку, кофе, поездки и лёгкое общение. Ценю стиль, хорошую энергетику и людей, с которыми интересно и легко.",
     bioEn: "I love beautiful places, music, coffee, trips and easy conversations. I appreciate style, good energy and people who are interesting and easy to be around.",
@@ -314,7 +330,7 @@ const initialProfiles = [
     lookingFor: "Общение и встречи",
     lookingForEn: "Dating and chemistry",
     height: "168 см",
-    heightEn: "5'6\"",
+    heightEn: `5'6"`,
     relationshipStatus: "statusOpen",
     bio: "Люблю прогулки у океана, кофе, вечерние огни и тёплые разговоры. Мне нравятся красивые детали и лёгкая романтика.",
     bioEn: "I love ocean walks, coffee, city lights and warm conversations. I enjoy beautiful details and soft romance.",
@@ -343,7 +359,7 @@ const initialProfiles = [
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
     height: "183 см",
-    heightEn: "6'0\"",
+    heightEn: `6'0"`,
     relationshipStatus: "statusSingle",
     bio: "Ценю юмор, спорт, хорошие фильмы и настоящие эмоции. Люблю уверенное, живое общение и людей с характером.",
     bioEn: "I value humor, sports, good movies and real emotions. I like confident, genuine communication and people with character.",
@@ -372,7 +388,7 @@ const initialProfiles = [
     lookingFor: "Общение и свидания",
     lookingForEn: "Dating and connection",
     height: "186 см",
-    heightEn: "6'1\"",
+    heightEn: `6'1"`,
     relationshipStatus: "statusDivorced",
     bio: "Люблю путешествия, спорт и спокойные разговоры без лишнего шума. Ценю искренность, надёжность и хорошую атмосферу.",
     bioEn: "I love travel, sports and calm conversations without extra noise. I appreciate sincerity, reliability and a good atmosphere.",
@@ -401,7 +417,7 @@ const initialProfiles = [
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
     height: "167 см",
-    heightEn: "5'6\"",
+    heightEn: `5'6"`,
     relationshipStatus: "statusSingle",
     bio: "Люблю уютные места, прогулки, музыку и красивые фотографии. Легко иду на контакт, если чувствую хорошую энергию.",
     bioEn: "I love cozy places, walks, music and beautiful photos. I open up easily when I feel good energy.",
@@ -430,7 +446,7 @@ const initialProfiles = [
     lookingFor: "Лёгкое знакомство",
     lookingForEn: "Casual dating",
     height: "185 см",
-    heightEn: "6'1\"",
+    heightEn: `6'1"`,
     relationshipStatus: "statusOpen",
     bio: "Люблю путешествия, музыку, спорт и стильные места. Ценю лёгкость в общении и яркую химию между людьми.",
     bioEn: "I love travel, music, sports and stylish places. I appreciate ease in conversation and strong chemistry between people.",
@@ -459,7 +475,7 @@ const initialProfiles = [
     lookingFor: "Общение и химия",
     lookingForEn: "Chemistry and connection",
     height: "172 см",
-    heightEn: "5'8\"",
+    heightEn: `5'8"`,
     relationshipStatus: "statusOpen",
     bio: "Обожаю море, красивые вечера, танцы и вдохновляющих людей. Люблю, когда общение естественное и без напряжения.",
     bioEn: "I adore the sea, beautiful evenings, dancing and inspiring people. I love when conversation feels natural and relaxed.",
@@ -488,7 +504,7 @@ const initialProfiles = [
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
     height: "181 см",
-    heightEn: "5'11\"",
+    heightEn: `5'11"`,
     relationshipStatus: "statusComplicated",
     bio: "Люблю спокойную уверенность, хорошие разговоры и красивую городскую атмосферу. Ценю ум, вкус и чувство юмора.",
     bioEn: "I like calm confidence, good conversations and beautiful city atmosphere. I appreciate intelligence, taste and humor.",
@@ -517,7 +533,7 @@ const initialProfiles = [
     lookingFor: "Красивое знакомство",
     lookingForEn: "Meaningful dating",
     height: "166 см",
-    heightEn: "5'5\"",
+    heightEn: `5'5"`,
     relationshipStatus: "statusSingle",
     bio: "Люблю стиль, путешествия, вкусную еду и лёгкое живое общение. Мне нравятся уверенные и внимательные люди.",
     bioEn: "I love style, travel, good food and easy lively conversation. I like confident and attentive people.",
@@ -546,7 +562,7 @@ const initialProfiles = [
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
     height: "184 см",
-    heightEn: "6'0\"",
+    heightEn: `6'0"`,
     relationshipStatus: "statusSingle",
     bio: "Люблю атмосферные места, искусство, поездки и интересные разговоры. Стараюсь жить со вкусом и без лишней суеты.",
     bioEn: "I love atmospheric places, art, trips and interesting conversations. I try to live with taste and without unnecessary rush.",
@@ -610,6 +626,7 @@ function App() {
   const [blockedIds, setBlockedIds] = useState([]);
   const [reportedIds, setReportedIds] = useState([]);
   const [currentDeckIndex, setCurrentDeckIndex] = useState(0);
+  const [chatScreen, setChatScreen] = useState("list");
 
   const [settings, setSettings] = useState({
     searchMode: "nearby",
@@ -635,8 +652,18 @@ function App() {
 
   const [messages, setMessages] = useState({
     1: [
-      { from: "them", text: "Привет 😊 Рада взаимной симпатии.", textEn: "Hi 😊 Glad we matched." },
-      { from: "them", text: "Как проходит твой день?", textEn: "How is your day going?" },
+      {
+        from: "them",
+        text: "Привет 😊 Рада взаимной симпатии.",
+        textEn: "Hi 😊 Glad we matched.",
+        status: "read",
+      },
+      {
+        from: "them",
+        text: "Как проходит твой день?",
+        textEn: "How is your day going?",
+        status: "read",
+      },
     ],
   });
 
@@ -658,6 +685,7 @@ function App() {
   const [profileDraft, setProfileDraft] = useState(myProfile);
 
   const profilePageRef = useRef(null);
+  const messageBodyRef = useRef(null);
 
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
   const cityOptions = useMemo(() => {
@@ -706,6 +734,12 @@ function App() {
     return () => clearTimeout(timer);
   }, [notice]);
 
+  useEffect(() => {
+    if (messageBodyRef.current) {
+      messageBodyRef.current.scrollTop = messageBodyRef.current.scrollHeight;
+    }
+  }, [selectedChatId, messages, chatScreen]);
+
   const ensureMessages = (profile) => {
     setMessages((prev) => {
       if (prev[profile.id]) return prev;
@@ -715,9 +749,21 @@ function App() {
           from: "them",
           text,
           textEn: profile.starterMessagesEn?.[i] || text,
+          status: "read",
         })),
       };
     });
+  };
+
+  const getLastMessage = (profileId) => {
+    const list = messages[profileId] || [];
+    return list[list.length - 1] || null;
+  };
+
+  const needsMyReply = (profileId) => {
+    const list = messages[profileId] || [];
+    if (!list.length) return false;
+    return list[list.length - 1].from === "them";
   };
 
   const moveToNextProfile = () => {
@@ -742,6 +788,7 @@ function App() {
       setShowMatch(true);
       setSelectedChatId(profile.id);
       setMessageView("matches");
+      setChatScreen("chat");
     }
 
     moveToNextProfile();
@@ -782,14 +829,33 @@ function App() {
 
   const sendMessage = () => {
     if (!selectedChatId || !chatDraft.trim() || !matches.includes(selectedChatId)) return;
+
+    const newMessage = {
+      from: "me",
+      text: chatDraft.trim(),
+      textEn: chatDraft.trim(),
+      status: "delivered",
+    };
+
     setMessages((prev) => ({
       ...prev,
-      [selectedChatId]: [
-        ...(prev[selectedChatId] || []),
-        { from: "me", text: chatDraft.trim(), textEn: chatDraft.trim() },
-      ],
+      [selectedChatId]: [...(prev[selectedChatId] || []), newMessage],
     }));
+
+    const currentText = chatDraft.trim();
     setChatDraft("");
+
+    setTimeout(() => {
+      setMessages((prev) => {
+        const list = [...(prev[selectedChatId] || [])];
+        if (!list.length) return prev;
+        const lastIndex = list.length - 1;
+        if (list[lastIndex].from === "me" && list[lastIndex].text === currentText) {
+          list[lastIndex] = { ...list[lastIndex], status: "read" };
+        }
+        return { ...prev, [selectedChatId]: list };
+      });
+    }, 1200);
   };
 
   const handleProfilePhotoUpload = (e) => {
@@ -811,6 +877,7 @@ function App() {
     setSelectedChatId(id);
     setMessageView("matches");
     setTab("messages");
+    setChatScreen("chat");
   };
 
   const handleBlock = (id) => {
@@ -859,14 +926,14 @@ function App() {
         }
         .topbar{
           display:flex;justify-content:space-between;align-items:center;gap:14px;
-          padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:50
+          padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:80
         }
         .brand-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
         .brand{font-size:22px;font-weight:900;color:#ff5f8f}
         .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{
           display:flex;gap:10px;flex-wrap:wrap
         }
-        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.action-btn{
+        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.action-btn,.back-btn{
           border:none;cursor:pointer;transition:.2s ease;font-weight:800
         }
         .chip-btn,.nav-btn{
@@ -877,7 +944,7 @@ function App() {
           color:#fff;
           box-shadow:0 12px 22px rgba(255,95,143,.24)
         }
-        .primary-btn,.secondary-btn,.ghost-btn{
+        .primary-btn,.secondary-btn,.ghost-btn,.back-btn{
           border-radius:16px;
           padding:13px 18px;
           font-size:14px
@@ -889,6 +956,13 @@ function App() {
           background:rgba(255,255,255,.16);
           color:#fff;
           border:1px solid rgba(255,255,255,.28)
+        }
+        .back-btn{
+          background:#f3eef6;
+          color:#2b2335;
+          display:inline-flex;
+          align-items:center;
+          gap:8px;
         }
         .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
         .nav-btn{padding:12px 16px;font-size:14px}
@@ -934,7 +1008,7 @@ function App() {
         .profile-page-scroll{
           height:100%;
           overflow:auto;
-          padding-bottom:150px;
+          padding-bottom:190px;
           -ms-overflow-style:none;
           scrollbar-width:none;
         }
@@ -1061,43 +1135,46 @@ function App() {
           left:0;
           right:0;
           bottom:18px;
-          z-index:10;
+          z-index:30;
           display:flex;
           justify-content:center;
           pointer-events:none;
         }
         .fixed-action-inner{
-          width:min(100%, 360px);
+          width:min(100%, 390px);
           display:flex;
-          justify-content:space-between;
+          justify-content:center;
           align-items:center;
+          gap:28px;
           padding:0 12px;
           pointer-events:none;
         }
         .action-btn{
-          width:88px;
-          height:88px;
-          border-radius:30px;
-          font-size:34px;
+          width:94px;
+          height:94px;
+          border-radius:50%;
           font-weight:900;
           position:relative;
           overflow:hidden;
           pointer-events:auto;
           transform:scale(1);
-          backdrop-filter:blur(20px);
-          -webkit-backdrop-filter:blur(20px);
+          backdrop-filter:blur(22px);
+          -webkit-backdrop-filter:blur(22px);
           border:1px solid rgba(255,255,255,.42);
           box-shadow:
             0 20px 40px rgba(31,15,46,.22),
             inset 0 1px 0 rgba(255,255,255,.45),
             inset 0 -1px 0 rgba(255,255,255,.08);
+          display:flex;
+          align-items:center;
+          justify-content:center;
         }
         .action-btn::before{
           content:"";
           position:absolute;
-          top:8px;
-          left:12px;
-          right:12px;
+          top:10px;
+          left:14px;
+          right:14px;
           height:28px;
           border-radius:999px;
           background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08));
@@ -1117,12 +1194,15 @@ function App() {
             linear-gradient(180deg, rgba(255,255,255,.38), rgba(228,234,255,.20)),
             linear-gradient(135deg, rgba(159,180,255,.34), rgba(121,146,255,.22));
           color:#4f5acb;
+          font-size:38px;
         }
         .action-btn.like{
           background:
             linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,220,231,.16)),
             linear-gradient(135deg, rgba(255,122,165,.38), rgba(255,158,118,.24));
           color:#ff4e86;
+          font-size:52px;
+          line-height:1;
         }
         .action-btn:hover{
           transform:translateY(-3px) scale(1.04);
@@ -1158,34 +1238,139 @@ function App() {
           min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;
           text-align:center;color:#665b70;gap:10px
         }
-        .messages-layout,.profile-layout,.settings-layout{display:grid;gap:16px}
-        .messages-layout{grid-template-columns:220px minmax(0,1fr);min-height:620px}
+        .messages-outer,.profile-layout,.settings-layout{display:grid;gap:16px}
+        .messages-outer{grid-template-columns:minmax(0,1fr);min-height:620px}
         .profile-layout{grid-template-columns:320px minmax(0,1fr)}
         .settings-layout{grid-template-columns:360px minmax(0,1fr)}
         .list-grid{display:grid;gap:12px}
         .list-item,.chat-item{
-          display:flex;align-items:center;gap:12px;padding:12px;border-radius:20px;background:#f8f5fa
+          display:flex;align-items:center;gap:12px;padding:14px;border-radius:22px;background:#f8f5fa
         }
         .list-item img{width:58px;height:58px;border-radius:18px;flex-shrink:0}
-        .chat-item{cursor:pointer}
+        .chat-item{
+          cursor:pointer;
+          align-items:flex-start;
+          justify-content:space-between;
+          transition:.18s ease;
+          border:1px solid transparent;
+        }
+        .chat-item:hover{
+          transform:translateY(-1px);
+          background:#f6f1f8;
+        }
         .chat-item.active{
           background:linear-gradient(135deg,rgba(255,95,143,.11),rgba(255,139,110,.11));
           border:1px solid rgba(255,95,143,.12)
         }
-        .chat-item img{width:42px;height:42px;border-radius:50%;flex-shrink:0}
-        .item-title{font-size:16px;font-weight:900;margin:0 0 2px;display:flex;align-items:center;flex-wrap:wrap}
-        .item-sub{font-size:13px;color:#6a6076;margin:0}
-        .message-panel{display:grid;grid-template-rows:auto 1fr auto;min-height:620px}
+        .chat-item img{
+          width:56px;
+          height:56px;
+          border-radius:50%;
+          flex-shrink:0;
+        }
+        .chat-main{
+          flex:1;
+          min-width:0;
+          display:flex;
+          gap:12px;
+          align-items:flex-start;
+        }
+        .chat-meta{
+          min-width:0;
+          flex:1;
+        }
+        .item-title{
+          font-size:16px;
+          font-weight:900;
+          margin:0 0 4px;
+          display:flex;
+          align-items:center;
+          flex-wrap:wrap
+        }
+        .item-sub{
+          font-size:13px;
+          color:#6a6076;
+          margin:0;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+        }
+        .chat-right{
+          display:flex;
+          flex-direction:column;
+          align-items:flex-end;
+          gap:8px;
+          margin-left:10px;
+        }
+        .reply-badge{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          padding:6px 10px;
+          border-radius:999px;
+          background:rgba(255,95,143,.14);
+          color:#d64274;
+          font-size:11px;
+          font-weight:900;
+          white-space:nowrap;
+        }
+        .delivery-mini{
+          font-size:11px;
+          color:#95899f;
+          font-weight:800;
+          white-space:nowrap;
+        }
+        .message-shell{
+          display:grid;
+          grid-template-rows:auto 1fr auto;
+          min-height:620px;
+        }
         .message-header{
-          display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(100,80,120,.08)
+          display:flex;
+          align-items:center;
+          gap:12px;
+          padding-bottom:14px;
+          border-bottom:1px solid rgba(100,80,120,.08)
         }
         .message-header img{width:56px;height:56px;border-radius:50%}
-        .message-body{padding:18px 2px 18px 0;overflow:auto;display:flex;flex-direction:column;gap:12px}
-        .bubble{max-width:78%;padding:13px 16px;border-radius:20px;font-size:15px;line-height:1.45}
+        .message-body{
+          padding:18px 2px 18px 0;
+          overflow:auto;
+          display:flex;
+          flex-direction:column;
+          gap:12px;
+        }
+        .message-row{
+          display:flex;
+          flex-direction:column;
+          gap:4px;
+        }
+        .message-row.me{
+          align-items:flex-end;
+        }
+        .message-row.them{
+          align-items:flex-start;
+        }
+        .bubble{
+          max-width:78%;
+          padding:13px 16px;
+          border-radius:20px;
+          font-size:15px;
+          line-height:1.45;
+        }
         .bubble.them{align-self:flex-start;background:#f1edf4;color:#2b2235}
         .bubble.me{align-self:flex-end;background:linear-gradient(135deg,#ff5f8f,#ff8b6e);color:#fff}
+        .bubble-status{
+          font-size:11px;
+          color:#9a8fa5;
+          font-weight:800;
+          padding:0 6px;
+        }
         .message-input-row{
-          display:flex;gap:10px;padding-top:14px;border-top:1px solid rgba(100,80,120,.08)
+          display:flex;
+          gap:10px;
+          padding-top:14px;
+          border-top:1px solid rgba(100,80,120,.08)
         }
         .message-input-row input,.field input,.field select,.field textarea{
           width:100%;border-radius:16px;border:1px solid rgba(95,80,110,.12);
@@ -1234,28 +1419,34 @@ function App() {
           .mobile-tabs .nav-btn{flex:0 0 auto}
           .panel{padding:18px;border-radius:24px}
           .hero{grid-template-columns:1fr}
-          .messages-layout{grid-template-columns:110px minmax(0,1fr);gap:12px}
-          .chat-item{
-            flex-direction:column;align-items:center;text-align:center;padding:10px 6px;border-radius:18px;gap:8px
-          }
-          .chat-item img{width:38px;height:38px}
-          .item-title{font-size:12px;justify-content:center}
-          .item-sub{font-size:11px}
           .profile-page-wrap{max-width:100%;height:min(82vh,760px);border-radius:28px}
           .profile-hero-photo,.profile-photo-stack img{height:350px}
           .profile-title{font-size:30px}
           .info-grid{grid-template-columns:1fr}
           .fixed-action-inner{
             width:min(100%, 320px);
+            gap:22px;
             padding:0 8px;
           }
           .action-btn{
-            width:80px;
-            height:80px;
-            border-radius:26px;
-            font-size:31px;
+            width:84px;
+            height:84px;
           }
+          .action-btn.skip{font-size:34px}
+          .action-btn.like{font-size:48px}
           .two-col{grid-template-columns:1fr}
+          .chat-item{
+            padding:12px;
+            border-radius:18px;
+          }
+          .chat-item img{
+            width:50px;
+            height:50px;
+          }
+          .item-title{font-size:14px}
+          .item-sub{font-size:12px}
+          .reply-badge{font-size:10px;padding:5px 9px}
+          .delivery-mini{font-size:10px}
           .phone-bottom-nav{
             position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);
             gap:8px;padding:8px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
@@ -1266,6 +1457,9 @@ function App() {
             color:#5b5066;line-height:1.15
           }
           .phone-tab-btn.active{background:linear-gradient(135deg,#ff5f8f,#ff8b6e);color:#fff}
+          .message-input-row{
+            flex-direction:column;
+          }
         }
       `}</style>
 
@@ -1300,7 +1494,10 @@ function App() {
             </button>
             <button
               className={`nav-btn ${tab === "messages" ? "active" : ""}`}
-              onClick={() => setTab("messages")}
+              onClick={() => {
+                setTab("messages");
+                setChatScreen("list");
+              }}
             >
               {t.messages}
             </button>
@@ -1323,7 +1520,13 @@ function App() {
           <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
             {t.search}
           </button>
-          <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+          <button
+            className={`nav-btn ${tab === "messages" ? "active" : ""}`}
+            onClick={() => {
+              setTab("messages");
+              setChatScreen("list");
+            }}
+          >
             {t.messages}
           </button>
           <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
@@ -1344,7 +1547,13 @@ function App() {
                   <button className="primary-btn" onClick={() => setTab("search")}>
                     {t.heroPrimary}
                   </button>
-                  <button className="secondary-btn" onClick={() => setTab("messages")}>
+                  <button
+                    className="secondary-btn"
+                    onClick={() => {
+                      setTab("messages");
+                      setChatScreen("list");
+                    }}
+                  >
                     {t.heroSecondary}
                   </button>
                 </div>
@@ -1671,90 +1880,124 @@ function App() {
             <div className="segmented" style={{ marginBottom: 14 }}>
               <button
                 className={`chip-btn ${messageView === "matches" ? "active" : ""}`}
-                onClick={() => setMessageView("matches")}
+                onClick={() => {
+                  setMessageView("matches");
+                  setChatScreen("list");
+                }}
               >
                 {t.msgMatches}
               </button>
               <button
                 className={`chip-btn ${messageView === "liked" ? "active" : ""}`}
-                onClick={() => setMessageView("liked")}
+                onClick={() => {
+                  setMessageView("liked");
+                  setChatScreen("list");
+                }}
               >
                 {t.msgLikedYou}
               </button>
               <button
                 className={`chip-btn ${messageView === "guests" ? "active" : ""}`}
-                onClick={() => setMessageView("guests")}
+                onClick={() => {
+                  setMessageView("guests");
+                  setChatScreen("list");
+                }}
               >
                 {t.msgGuests}
               </button>
             </div>
 
-            <section className="messages-layout">
-              <div className="panel">
-                {listProfiles.length ? (
-                  <div className="list-grid">
-                    {listProfiles.map((profile) => (
-                      <div
-                        key={profile.id}
-                        className={`chat-item ${
-                          selectedChatId === profile.id && messageView === "matches" ? "active" : ""
-                        }`}
-                        onClick={() => {
-                          if (messageView !== "matches" && !matches.includes(profile.id)) return;
-                          setSelectedChatId(profile.id);
-                        }}
-                      >
-                        <img src={profile.avatar} alt={profile.name} />
-                        <div>
-                          <div className="item-title">
-                            {profile.name}
-                            {profile.verified && <Badge />}
-                          </div>
-                          <p className="item-sub">
-                            {messageView === "matches"
-                              ? profile.online
-                                ? t.online
-                                : t.offline
-                              : `${profile.city}, ${profile.country}`}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="empty">
-                    {messageView === "matches"
-                      ? t.noMessages
-                      : messageView === "liked"
-                      ? t.noLikedYou
-                      : t.noGuests}
-                  </div>
-                )}
-              </div>
-
+            <section className="messages-outer">
               <div className="panel">
                 {messageView === "matches" ? (
-                  selectedChatProfile && matches.includes(selectedChatProfile.id) ? (
-                    <div className="message-panel">
-                      <div className="message-header">
-                        <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
-                        <div>
-                          <div className="item-title">
-                            {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
-                            {selectedChatProfile.zodiac}
-                            {selectedChatProfile.verified && <Badge />}
+                  chatScreen === "list" ? (
+                    listProfiles.length ? (
+                      <div className="list-grid">
+                        {listProfiles.map((profile) => {
+                          const lastMsg = getLastMessage(profile.id);
+                          const isActive = selectedChatId === profile.id;
+                          const deliveryLabel =
+                            lastMsg?.from === "me"
+                              ? lastMsg.status === "read"
+                                ? t.read
+                                : t.delivered
+                              : profile.online
+                              ? t.online
+                              : t.offline;
+
+                          return (
+                            <div
+                              key={profile.id}
+                              className={`chat-item ${isActive ? "active" : ""}`}
+                              onClick={() => {
+                                setSelectedChatId(profile.id);
+                                setChatScreen("chat");
+                              }}
+                            >
+                              <div className="chat-main">
+                                <img src={profile.avatar} alt={profile.name} />
+                                <div className="chat-meta">
+                                  <div className="item-title">
+                                    {profile.name}
+                                    {profile.verified && <Badge />}
+                                  </div>
+                                  <p className="item-sub">
+                                    {lastMsg
+                                      ? lang === "ru"
+                                        ? lastMsg.text
+                                        : lastMsg.textEn || lastMsg.text
+                                      : `${profile.city}, ${profile.country}`}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="chat-right">
+                                {needsMyReply(profile.id) && (
+                                  <span className="reply-badge">{t.yourTurn}</span>
+                                )}
+                                <span className="delivery-mini">{deliveryLabel}</span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="empty">{t.noMessages}</div>
+                    )
+                  ) : selectedChatProfile && matches.includes(selectedChatProfile.id) ? (
+                    <div className="message-shell">
+                      <div>
+                        <button className="back-btn" onClick={() => setChatScreen("list")}>
+                          ← {t.backToChats}
+                        </button>
+
+                        <div className="message-header" style={{ marginTop: 14 }}>
+                          <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
+                          <div>
+                            <div className="item-title">
+                              {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
+                              {selectedChatProfile.zodiac}
+                              {selectedChatProfile.verified && <Badge />}
+                            </div>
+                            <p className="item-sub">
+                              {selectedChatProfile.online ? t.online : t.offline} •{" "}
+                              {selectedChatProfile.city}
+                            </p>
                           </div>
-                          <p className="item-sub">
-                            {selectedChatProfile.online ? t.online : t.offline} •{" "}
-                            {selectedChatProfile.city}
-                          </p>
                         </div>
                       </div>
 
-                      <div className="message-body">
+                      <div className="message-body" ref={messageBodyRef}>
                         {(messages[selectedChatId] || []).map((msg, i) => (
-                          <div key={i} className={`bubble ${msg.from}`}>
-                            {lang === "ru" ? msg.text : msg.textEn || msg.text}
+                          <div key={i} className={`message-row ${msg.from}`}>
+                            <div className={`bubble ${msg.from}`}>
+                              {lang === "ru" ? msg.text : msg.textEn || msg.text}
+                            </div>
+                            {msg.from === "me" && (
+                              <div className="bubble-status">
+                                {msg.status === "read" ? t.read : t.delivered}
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -1764,6 +2007,9 @@ function App() {
                           value={chatDraft}
                           onChange={(e) => setChatDraft(e.target.value)}
                           placeholder={t.messagePlaceholder}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") sendMessage();
+                          }}
                         />
                         <button className="primary-btn" onClick={sendMessage}>
                           {t.send}
@@ -1773,35 +2019,46 @@ function App() {
                   ) : (
                     <div className="empty">{t.noMessages}</div>
                   )
-                ) : (
-                  <div className="list-grid">
-                    {listProfiles.map((profile) => (
-                      <div key={profile.id} className="list-item">
-                        <img src={profile.avatar} alt={profile.name} />
-                        <div style={{ flex: 1 }}>
-                          <div className="item-title">
-                            {profile.name}, {profile.age} {profile.zodiac}
-                            {profile.verified && <Badge />}
+                ) : chatScreen === "list" ? (
+                  listProfiles.length ? (
+                    <div className="list-grid">
+                      {listProfiles.map((profile) => (
+                        <div key={profile.id} className="list-item">
+                          <img src={profile.avatar} alt={profile.name} />
+                          <div style={{ flex: 1 }}>
+                            <div className="item-title">
+                              {profile.name}, {profile.age} {profile.zodiac}
+                              {profile.verified && <Badge />}
+                            </div>
+                            <p className="item-sub">
+                              {profile.city}, {profile.country}
+                            </p>
                           </div>
-                          <p className="item-sub">
-                            {profile.city}, {profile.country}
-                          </p>
+                          {matches.includes(profile.id) ? (
+                            <button className="primary-btn" onClick={() => openChatFromProfile(profile.id)}>
+                              {t.openChat}
+                            </button>
+                          ) : (
+                            <button
+                              className="secondary-btn"
+                              disabled
+                              style={{ opacity: 0.65, cursor: "default" }}
+                            >
+                              🔒
+                            </button>
+                          )}
                         </div>
-                        {matches.includes(profile.id) ? (
-                          <button className="primary-btn" onClick={() => openChatFromProfile(profile.id)}>
-                            {t.openChat}
-                          </button>
-                        ) : (
-                          <button
-                            className="secondary-btn"
-                            disabled
-                            style={{ opacity: 0.65, cursor: "default" }}
-                          >
-                            🔒
-                          </button>
-                        )}
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="empty">
+                      {messageView === "liked" ? t.noLikedYou : t.noGuests}
+                    </div>
+                  )
+                ) : (
+                  <div className="empty">
+                    <h3>{t.typeDialog}</h3>
+                    <p>{t.typeDialogText}</p>
                   </div>
                 )}
               </div>
@@ -2160,7 +2417,10 @@ function App() {
         </button>
         <button
           className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`}
-          onClick={() => setTab("messages")}
+          onClick={() => {
+            setTab("messages");
+            setChatScreen("list");
+          }}
         >
           {t.messages}
         </button>
@@ -2205,6 +2465,7 @@ function App() {
                   setSelectedChatId(matchedProfile.id);
                   setTab("messages");
                   setMessageView("matches");
+                  setChatScreen("chat");
                 }}
               >
                 {t.startChat}
