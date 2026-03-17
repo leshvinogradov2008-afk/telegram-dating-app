@@ -1,934 +1,2171 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import "./App.css";
 
-const defaultProfiles = [
-  {
-    id: 1,
-    name: "Анна",
-    age: 27,
-    city: "Los Angeles",
-    distance: "4 мили",
-    zodiac: "Лев",
-    verified: true,
-    about:
-      "Люблю прогулки, хорошие разговоры, путешествия и людей с чувством юмора.",
-    photos: [
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
-    ],
-  },
-  {
-    id: 2,
-    name: "София",
-    age: 24,
-    city: "West Hollywood",
-    distance: "6 миль",
-    zodiac: "Весы",
-    verified: true,
-    about:
-      "Люблю уютные места, музыку, вечерние поездки и искреннее общение.",
-    photos: [
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop",
-    ],
-  },
-  {
-    id: 3,
-    name: "Юлия",
-    age: 29,
-    city: "Burbank",
-    distance: "8 миль",
-    zodiac: "Скорпион",
-    verified: false,
-    about:
-      "Нравятся кино, активный отдых, вкусная еда и настоящая химия между людьми.",
-    photos: [
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200&auto=format&fit=crop",
-    ],
-  },
-  {
-    id: 4,
-    name: "Стелла",
-    age: 26,
-    city: "Santa Monica",
-    distance: "11 миль",
-    zodiac: "Близнецы",
-    verified: true,
-    about:
-      "За спонтанные планы, честность, красивый стиль и легкость в общении.",
-    photos: [
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1200&auto=format&fit=crop",
-    ],
-  },
-];
+const translations = {
+  ru: {
+    brand: "Telegram Dating",
+    navHome: "Главная",
+    navProfiles: "Анкеты",
+    navLikes: "Симпатии",
+    navMessages: "Сообщения",
+    navProfile: "Профиль",
+    navSettings: "Настройки",
 
-const defaultMyProfile = {
-  name: "Алексей",
-  age: 30,
-  city: "Los Angeles",
-  zodiac: "Козерог",
-  verified: true,
-  about:
-    "Люблю живое общение, поездки по городу, хорошую музыку и интересных людей.",
-  avatar:
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
-  photos: [
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200&auto=format&fit=crop",
-  ],
-  email: "alexey@example.com",
+    heroTitle: "Найди новые знакомства в Telegram",
+    heroText:
+      "Смотри анкеты, свайпай, добавляй в избранное, используй поиск по странам и городам и общайся после взаимной симпатии.",
+    heroPrimary: "Смотреть анкеты",
+    heroSecondary: "Открыть сообщения",
+
+    quick1: "Быстрый старт",
+    quick1Text: "Открываешь сайт и сразу смотришь анкеты.",
+    quick2: "Удобный поиск",
+    quick2Text: "Выбирай страны, города и дистанцию.",
+    quick3: "Общение после мэтча",
+    quick3Text: "После взаимной симпатии появляется чат.",
+
+    profilesTitle: "Анкеты",
+    profilesText: "Свайпай, открывай профиль и добавляй в избранное.",
+    likesTitle: "Симпатии и избранное",
+    likesText: "Здесь отображаются мэтчи и люди, которых ты отметил звездой.",
+    messagesTitle: "Сообщения",
+    messagesText: "После взаимной симпатии здесь появляется чат.",
+    profileTitle: "Профиль",
+    settingsTitle: "Настройки и поиск",
+
+    nearby: "Люди рядом",
+    allPeople: "Все",
+    country: "Страна",
+    city: "Город",
+    distance: "Дистанция",
+    unit: "Единицы",
+    miles: "мили",
+    km: "км",
+    reset: "Сбросить",
+    apply: "Применить",
+    favorites: "Избранное",
+    matches: "Взаимные симпатии",
+    openChat: "Открыть чат",
+    like: "Нравится",
+    nope: "Пропустить",
+    superLike: "В избранное",
+    online: "Онлайн",
+    send: "Отправить",
+    messagePlaceholder: "Напиши сообщение...",
+    noMessages: "Пока нет сообщений.",
+    noFavorites: "Пока никто не добавлен в избранное.",
+    noMatches: "Пока нет взаимных симпатий.",
+    locationAll: "Все локации",
+    addPhotoLater: "Можно добавить больше фото позже",
+    profileAbout: "О себе",
+    ageLabel: "Возраст",
+    cityLabel: "Город",
+    countryLabel: "Страна",
+    searchMode: "Режим поиска",
+    appearance: "Вид приложения",
+    compactMode: "Компактный режим",
+    softMotion: "Эффекты движения",
+    darkCards: "Более контрастные карточки",
+    phoneHint: "Сайт адаптирован под телефон и компьютер",
+    mutualTitle: "Взаимная симпатия!",
+    mutualText: "Теперь вы можете начать общение.",
+    startChat: "Начать чат",
+    continueSwipe: "Продолжить смотреть",
+    emptyDeck: "Анкеты закончились",
+    emptyDeckText: "Сбрось поиск или начни просмотр сначала.",
+    restartDeck: "Начать заново",
+    myProfileName: "Алекс",
+    myProfileBio:
+      "Люблю живое общение, красивые места, музыку и интересные знакомства.",
+    saveSettings: "Сохранить настройки",
+    settingsSaved: "Настройки сохранены",
+    onePhoto: "1 фото",
+    manyPhotos: "фото",
+    starred: "В избранном",
+  },
+  en: {
+    brand: "Telegram Dating",
+    navHome: "Home",
+    navProfiles: "Profiles",
+    navLikes: "Likes",
+    navMessages: "Messages",
+    navProfile: "Profile",
+    navSettings: "Settings",
+
+    heroTitle: "Find new connections in Telegram",
+    heroText:
+      "Browse profiles, swipe, add favorites, use country and city search, and chat after a mutual match.",
+    heroPrimary: "Browse profiles",
+    heroSecondary: "Open messages",
+
+    quick1: "Fast start",
+    quick1Text: "Open the site and instantly browse profiles.",
+    quick2: "Smart search",
+    quick2Text: "Choose countries, cities and distance.",
+    quick3: "Chat after match",
+    quick3Text: "A chat appears after mutual interest.",
+
+    profilesTitle: "Profiles",
+    profilesText: "Swipe, open profiles and add favorites.",
+    likesTitle: "Likes and Favorites",
+    likesText: "This section shows matches and starred people.",
+    messagesTitle: "Messages",
+    messagesText: "Your chat appears here after a mutual match.",
+    profileTitle: "Profile",
+    settingsTitle: "Settings and search",
+
+    nearby: "Nearby",
+    allPeople: "All",
+    country: "Country",
+    city: "City",
+    distance: "Distance",
+    unit: "Units",
+    miles: "miles",
+    km: "km",
+    reset: "Reset",
+    apply: "Apply",
+    favorites: "Favorites",
+    matches: "Matches",
+    openChat: "Open chat",
+    like: "Like",
+    nope: "Skip",
+    superLike: "Favorite",
+    online: "Online",
+    send: "Send",
+    messagePlaceholder: "Write a message...",
+    noMessages: "No messages yet.",
+    noFavorites: "No favorites yet.",
+    noMatches: "No matches yet.",
+    locationAll: "All locations",
+    addPhotoLater: "More photos can be added later",
+    profileAbout: "About",
+    ageLabel: "Age",
+    cityLabel: "City",
+    countryLabel: "Country",
+    searchMode: "Search mode",
+    appearance: "App appearance",
+    compactMode: "Compact mode",
+    softMotion: "Motion effects",
+    darkCards: "Higher contrast cards",
+    phoneHint: "Optimized for phone and desktop",
+    mutualTitle: "It's a match!",
+    mutualText: "Now you can start chatting.",
+    startChat: "Start chat",
+    continueSwipe: "Keep browsing",
+    emptyDeck: "No more profiles",
+    emptyDeckText: "Reset search or start browsing again.",
+    restartDeck: "Start again",
+    myProfileName: "Alex",
+    myProfileBio:
+      "I like real conversations, beautiful places, music and interesting connections.",
+    saveSettings: "Save settings",
+    settingsSaved: "Settings saved",
+    onePhoto: "1 photo",
+    manyPhotos: "photos",
+    starred: "Starred",
+  },
 };
 
-const defaultChats = [
+const profilesData = [
   {
     id: 1,
-    name: "Favour Eve",
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",
-    verified: false,
+    name: "Anna",
+    age: 26,
+    gender: "female",
+    city: "Los Angeles",
+    country: "USA",
+    distanceMi: 12,
     online: true,
-    likedYou: true,
-    yourTurn: false,
-    lastMessage: "Был(а) недавно, создай пару прямо сейчас...",
-    status: "доставлено",
-    unread: 1,
+    bio: "Люблю красивые места, музыку и лёгкое общение.",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessages: [
+      "Привет 😊 Рада взаимной симпатии.",
+      "Как проходит твой день?",
+    ],
   },
   {
     id: 2,
     name: "Sofia",
+    age: 24,
+    gender: "female",
+    city: "Miami",
+    country: "USA",
+    distanceMi: 278,
+    online: true,
+    bio: "Люблю прогулки у океана, кофе и тёплые разговоры.",
     avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop",
-    verified: false,
-    online: false,
-    likedYou: false,
-    yourTurn: false,
-    lastMessage: "Ну ты же говоришь про себя так зна...",
-    status: "прочитано",
-    unread: 0,
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessages: ["Очень приятно 😊", "Ты больше любишь город или природу?"],
   },
   {
     id: 3,
-    name: "Antje",
+    name: "Daniel",
+    age: 29,
+    gender: "male",
+    city: "New York",
+    country: "USA",
+    distanceMi: 120,
+    online: true,
+    bio: "Ценю юмор, активную жизнь и настоящие эмоции.",
     avatar:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop",
-    verified: false,
-    online: false,
-    likedYou: false,
-    yourTurn: false,
-    lastMessage: "Wow",
-    status: "доставлено",
-    unread: 0,
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessages: ["Привет! Рад мэтчу.", "Чем любишь заниматься в свободное время?"],
   },
   {
     id: 4,
-    name: "Mia",
-    avatar:
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=600&auto=format&fit=crop",
-    verified: false,
+    name: "Michael",
+    age: 31,
+    gender: "male",
+    city: "Chicago",
+    country: "USA",
+    distanceMi: 320,
     online: false,
-    likedYou: false,
-    yourTurn: true,
-    lastMessage: "Snapchat: josekaleans",
-    status: "прочитано",
-    unread: 0,
-  },
-  {
-    id: 5,
-    name: "Jane",
+    bio: "Люблю путешествия, спорт и хорошие разговоры без лишнего шума.",
     avatar:
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop",
-    verified: false,
-    online: false,
-    likedYou: false,
-    yourTurn: false,
-    lastMessage: "Are you on WhatsApp or Telegram?",
-    status: "доставлено",
-    unread: 0,
-  },
-  {
-    id: 6,
-    name: "Sahar",
-    avatar:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop",
-    verified: false,
-    online: false,
-    likedYou: false,
-    yourTurn: false,
-    lastMessage: "Hello",
-    status: "прочитано",
-    unread: 0,
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    photos: [
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+    ],
+    starterMessages: ["Привет 👋", "Какой у тебя идеальный выходной?"],
   },
 ];
 
-const helpItems = [
-  {
-    q: "Как поставить лайк анкете?",
-    a: "Открой раздел «Свайпить» и нажми кнопку с сердцем. Также можно использовать свайп карточки вправо.",
-  },
-  {
-    q: "Что значит взаимная симпатия?",
-    a: "Если вы понравились друг другу, создаётся пара и открывается возможность переписки.",
-  },
-  {
-    q: "Что означает «Твой ход»?",
-    a: "Это значит, что собеседник уже написал или ждёт твоего ответа. Ты можешь открыть чат и продолжить общение.",
-  },
-  {
-    q: "Как посмотреть, кто меня лайкнул?",
-    a: "Открой раздел «Лайки» или посмотри верхний блок в разделе «Чат», где отображаются пользователи, поставившие лайк.",
-  },
-  {
-    q: "Как изменить профиль?",
-    a: "Перейди в «Профиль» и нажми «Редактировать профиль». Там можно изменить имя, возраст, город, знак зодиака и описание.",
-  },
-  {
-    q: "Как добавить или удалить фото?",
-    a: "В редактировании профиля можно указать ссылки на фотографии. Каждую ссылку пиши с новой строки.",
-  },
-  {
-    q: "Как работает верификация анкеты?",
-    a: "Верифицированные анкеты получают специальный значок. Это помогает другим пользователям понимать, что профиль подтверждён.",
-  },
-  {
-    q: "Как включить или выключить уведомления?",
-    a: "Открой «Настройки» и используй пункты уведомлений: в приложении, на телефон и на Email.",
-  },
-  {
-    q: "Как изменить email или пароль?",
-    a: "Это можно сделать в разделе «Настройки» через пункты «Изменить email» и «Изменить пароль».",
-  },
-  {
-    q: "Почему я не вижу новые сообщения?",
-    a: "Проверь подключение к интернету, фильтр сообщений и включены ли уведомления в приложении.",
-  },
-  {
-    q: "Как пожаловаться на пользователя?",
-    a: "В будущем это можно будет делать из чата или профиля пользователя через кнопку «Пожаловаться».",
-  },
-  {
-    q: "Как заблокировать пользователя?",
-    a: "Функцию блокировки можно добавить в профиль собеседника и в меню диалога.",
-  },
-  {
-    q: "Как удалить аккаунт?",
-    a: "Это действие обычно находится в настройках приложения. Для демо-версии можно добавить отдельную кнопку позже.",
-  },
-  {
-    q: "Как восстановить доступ?",
-    a: "Используй восстановление через email и обновление пароля в настройках.",
-  },
-];
+const countriesMap = {
+  USA: ["Los Angeles", "Miami", "New York", "Chicago"],
+  Canada: ["Toronto", "Vancouver", "Montreal"],
+  UK: ["London", "Manchester", "Birmingham"],
+  Germany: ["Berlin", "Munich", "Hamburg"],
+  France: ["Paris", "Lyon", "Marseille"],
+  Spain: ["Madrid", "Barcelona", "Valencia"],
+  Italy: ["Rome", "Milan", "Naples"],
+  Poland: ["Warsaw", "Krakow", "Gdansk"],
+  Ukraine: ["Kyiv", "Lviv", "Odesa"],
+  Russia: ["Moscow", "Saint Petersburg", "Sochi"],
+  Turkey: ["Istanbul", "Antalya", "Ankara"],
+  UAE: ["Dubai", "Abu Dhabi", "Sharjah"],
+  Mexico: ["Mexico City", "Cancun", "Guadalajara"],
+  Brazil: ["Sao Paulo", "Rio de Janeiro", "Brasilia"],
+  Japan: ["Tokyo", "Osaka", "Kyoto"],
+};
 
-function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
-    try {
-      const saved = localStorage.getItem(key);
-      return saved ? JSON.parse(saved) : initialValue;
-    } catch {
-      return initialValue;
-    }
+function App() {
+  const [lang, setLang] = useState("ru");
+  const t = translations[lang];
+
+  const [tab, setTab] = useState("home");
+  const [profiles, setProfiles] = useState(profilesData);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [favorites, setFavorites] = useState([2]);
+  const [likedIds, setLikedIds] = useState([1]);
+  const [matches, setMatches] = useState([1]);
+  const [selectedChatId, setSelectedChatId] = useState(1);
+  const [showMatch, setShowMatch] = useState(false);
+  const [matchedProfile, setMatchedProfile] = useState(null);
+  const [savedLabel, setSavedLabel] = useState(false);
+
+  const [settings, setSettings] = useState({
+    searchMode: "all",
+    country: "All",
+    city: "All",
+    maxDistance: 500,
+    unit: "mi",
+    compactMode: false,
+    softMotion: true,
+    darkCards: false,
   });
 
+  const [chatDraft, setChatDraft] = useState("");
+
+  const [messages, setMessages] = useState({
+    1: [
+      { from: "them", text: "Привет 😊 Рада взаимной симпатии." },
+      { from: "them", text: "Как проходит твой день?" },
+    ],
+  });
+
+  const currentProfile = profiles[currentIndex] || null;
+  const cardRef = useRef(null);
+  const dragRef = useRef({
+    active: false,
+    startX: 0,
+    startY: 0,
+    dx: 0,
+    dy: 0,
+    moved: false,
+  });
+
+  const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
+  const cityOptions = useMemo(() => {
+    if (settings.country === "All") return ["All"];
+    return ["All", ...(countriesMap[settings.country] || [])];
+  }, [settings.country]);
+
+  const filteredProfiles = useMemo(() => {
+    return profiles.filter((p) => {
+      const distanceValue =
+        settings.unit === "mi" ? p.distanceMi : Math.round(p.distanceMi * 1.60934);
+
+      if (settings.searchMode === "nearby" && distanceValue > settings.maxDistance) {
+        return false;
+      }
+
+      if (settings.country !== "All" && p.country !== settings.country) return false;
+      if (settings.city !== "All" && p.city !== settings.city) return false;
+
+      return true;
+    });
+  }, [profiles, settings]);
+
+  const visibleDeck = filteredProfiles.filter((p) => !likedIds.includes(p.id) || matches.includes(p.id));
+  const activeDeckProfile = visibleDeck[currentIndex] || null;
+
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+    setCurrentIndex(0);
+  }, [settings.searchMode, settings.country, settings.city, settings.maxDistance, settings.unit]);
 
-  return [value, setValue];
-}
+  useEffect(() => {
+    if (selectedChatId && !matches.includes(selectedChatId)) {
+      const firstMatch = matches[0] || null;
+      setSelectedChatId(firstMatch);
+    }
+  }, [matches, selectedChatId]);
 
-function VerifiedBadge() {
-  return <span className="verified-badge">✓</span>;
-}
+  const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
 
-function Header({ activeTab, setActiveTab }) {
-  const tabs = [
-    { key: "swipe", label: "Свайпить", icon: "🔥" },
-    { key: "likes", label: "Лайки", icon: "💛" },
-    { key: "chat", label: "Чат", icon: "💬" },
-    { key: "profile", label: "Профиль", icon: "👤" },
-  ];
-
-  return (
-    <header className="topbar">
-      <div className="brand-wrap">
-        <div className="brand-logo">❤</div>
-        <div>
-          <div className="brand-title">Telegram Dating</div>
-          <div className="brand-subtitle">знакомства и общение</div>
-        </div>
-      </div>
-
-      <div className="topbar-tabs">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            className={`topbar-tab pressable ${
-              activeTab === tab.key ? "active" : ""
-            }`}
-            onClick={() => setActiveTab(tab.key)}
-          >
-            <span>{tab.label}</span>
-          </button>
-        ))}
-      </div>
-    </header>
-  );
-}
-
-function BottomNav({ activeTab, setActiveTab, likesCount }) {
-  const items = [
-    { key: "swipe", label: "Свайпить", icon: "🔥" },
-    { key: "events", label: "События", icon: "🎟" },
-    { key: "likes", label: "Лайки", icon: "💛", badge: likesCount },
-    { key: "chat", label: "Чат", icon: "💬" },
-    { key: "profile", label: "Профиль", icon: "👤" },
-  ];
-
-  return (
-    <nav className="bottom-nav">
-      {items.map((item) => (
-        <button
-          key={item.key}
-          className={`bottom-nav-item pressable ${
-            activeTab === item.key ? "active" : ""
-          }`}
-          onClick={() => setActiveTab(item.key)}
-        >
-          <div className="bottom-nav-icon-wrap">
-            <span className="bottom-nav-icon">{item.icon}</span>
-            {item.badge ? <span className="bottom-nav-badge">{item.badge}</span> : null}
-          </div>
-          <span className="bottom-nav-label">{item.label}</span>
-        </button>
-      ))}
-    </nav>
-  );
-}
-
-function SwipeCard({ profile, onLike, onDislike }) {
-  const [photoIndex, setPhotoIndex] = useState(0);
-  const [likeBurst, setLikeBurst] = useState(false);
-  const touchStartX = useRef(0);
-
-  const photos = profile.photos?.length ? profile.photos : [profile.avatar];
-
-  const nextPhoto = () => {
-    setPhotoIndex((prev) => (prev + 1) % photos.length);
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
 
-  const prevPhoto = () => {
-    setPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  const ensureMessages = (profile) => {
+    setMessages((prev) => {
+      if (prev[profile.id]) return prev;
+      return {
+        ...prev,
+        [profile.id]: profile.starterMessages.map((text) => ({ from: "them", text })),
+      };
+    });
   };
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.changedTouches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - endX;
-
-    if (diff > 40) nextPhoto();
-    if (diff < -40) prevPhoto();
-  };
-
-  const handleLikeClick = () => {
-    setLikeBurst(true);
-    setTimeout(() => setLikeBurst(false), 650);
-    onLike(profile);
-  };
-
-  return (
-    <div className="swipe-card">
-      <div
-        className="swipe-card-photo-wrap"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <img
-          src={photos[photoIndex]}
-          alt={profile.name}
-          className="swipe-card-photo"
-        />
-
-        <div className="photo-progress">
-          {photos.map((_, index) => (
-            <span
-              key={index}
-              className={`photo-progress-line ${
-                index === photoIndex ? "active" : ""
-              }`}
-            />
-          ))}
-        </div>
-
-        <button className="photo-side-button left pressable" onClick={prevPhoto}>
-          ‹
-        </button>
-        <button className="photo-side-button right pressable" onClick={nextPhoto}>
-          ›
-        </button>
-
-        <div className="distance-pill">
-          {profile.city} • {profile.distance}
-        </div>
-
-        {likeBurst && <div className="like-burst">LIKE</div>}
-      </div>
-
-      <div className="swipe-card-body">
-        <div className="swipe-card-title-row">
-          <h2>
-            {profile.name}, {profile.age}
-          </h2>
-          <div className="meta-inline">
-            {profile.verified ? <VerifiedBadge /> : null}
-            <span className="zodiac-pill">{profile.zodiac}</span>
-          </div>
-        </div>
-        <p className="swipe-card-about">{profile.about}</p>
-
-        <div className="swipe-actions">
-          <button className="action-btn dislike pressable" onClick={() => onDislike(profile)}>
-            ✕
-          </button>
-          <button className="action-btn super pressable">★</button>
-          <button className="action-btn like pressable" onClick={handleLikeClick}>
-            ❤
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SwipeScreen({ profiles, setProfiles, setLikesReceived, setChats, setMatchesCount }) {
-  const currentProfile = profiles[0];
 
   const handleLike = (profile) => {
-    setLikesReceived((prev) => {
-      const exists = prev.some((item) => item.id === profile.id);
-      if (exists) return prev;
-      return [
-        {
-          id: profile.id,
-          name: profile.name,
-          avatar: profile.photos?.[0],
-          verified: profile.verified,
-        },
-        ...prev,
-      ];
-    });
+    if (!profile) return;
+    setLikedIds((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
 
-    setChats((prev) => {
-      const exists = prev.some((chat) => chat.name === profile.name);
-      if (exists) return prev;
-      return [
-        {
-          id: Date.now(),
-          name: profile.name,
-          avatar: profile.photos?.[0],
-          verified: profile.verified,
-          online: true,
-          likedYou: true,
-          yourTurn: true,
-          lastMessage: "Вы создали пару. Напиши первым.",
-          status: "доставлено",
-          unread: 0,
-        },
-        ...prev,
-      ];
-    });
-
-    setMatchesCount((prev) => prev + 1);
-    setProfiles((prev) => [...prev.slice(1), prev[0]]);
+    const makeMatch = profile.id === 1 || profile.id === 3 || profile.id === 2;
+    if (makeMatch) {
+      setMatches((prev) => (prev.includes(profile.id) ? prev : [...prev, profile.id]));
+      ensureMessages(profile);
+      setMatchedProfile(profile);
+      setShowMatch(true);
+      setSelectedChatId(profile.id);
+    }
+    goNextCard();
   };
 
-  const handleDislike = () => {
-    setProfiles((prev) => [...prev.slice(1), prev[0]]);
+  const handleSkip = () => {
+    goNextCard();
   };
 
-  return (
-    <section className="page page-swipe">
-      <div className="page-head">
-        <h1>Свайпить</h1>
-        <p>Смотри анкеты, листай фото свайпом и ставь лайки.</p>
-      </div>
+  const goNextCard = () => {
+    setCurrentIndex((prev) => {
+      const next = prev + 1;
+      return next >= visibleDeck.length ? prev + 1 : next;
+    });
+  };
 
-      {currentProfile ? (
-        <div className="swipe-screen-wrap">
-          <SwipeCard
-            profile={currentProfile}
-            onLike={handleLike}
-            onDislike={handleDislike}
-          />
-        </div>
-      ) : (
-        <div className="empty-box">Анкеты скоро появятся.</div>
-      )}
-    </section>
-  );
-}
+  const restartDeck = () => {
+    setCurrentIndex(0);
+    setLikedIds([]);
+  };
 
-function LikesScreen({ likesReceived }) {
-  return (
-    <section className="page">
-      <div className="page-head">
-        <h1>Лайки</h1>
-        <p>Список пользователей, которым понравилась твоя анкета.</p>
-      </div>
+  const sendMessage = () => {
+    if (!selectedChatId || !chatDraft.trim()) return;
+    setMessages((prev) => ({
+      ...prev,
+      [selectedChatId]: [...(prev[selectedChatId] || []), { from: "me", text: chatDraft.trim() }],
+    }));
+    setChatDraft("");
+  };
 
-      <div className="likes-grid">
-        {likesReceived.map((item) => (
-          <div key={item.id} className="like-card">
-            <img src={item.avatar} alt={item.name} className="like-card-img" />
-            <div className="like-card-info">
-              <div className="like-card-name-row">
-                <strong>{item.name}</strong>
-                {item.verified ? <VerifiedBadge /> : null}
-              </div>
-              <span className="liked-badge">Лайкнул(а) тебя</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+  const animateOut = (direction) => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = "transform 0.35s ease, opacity 0.35s ease";
+    el.style.transform = `translateX(${direction === "right" ? 420 : -420}px) rotate(${
+      direction === "right" ? 16 : -16
+    }deg)`;
+    el.style.opacity = "0";
+    setTimeout(() => {
+      if (direction === "right" && activeDeckProfile) handleLike(activeDeckProfile);
+      if (direction === "left") handleSkip();
+      if (cardRef.current) {
+        cardRef.current.style.transition = "none";
+        cardRef.current.style.transform = "translateX(0px) translateY(0px) rotate(0deg)";
+        cardRef.current.style.opacity = "1";
+      }
+    }, 320);
+  };
 
-function ChatScreen({ chats, likesReceived, matchesCount }) {
-  return (
-    <section className="page chat-page">
-      <div className="chat-header-block">
-        <div>
-          <h1>Чат</h1>
-          <p>Новые пары и сообщения</p>
-        </div>
-        <div className="chat-toggle-panel">
-          <button className="pressable">🛡</button>
-          <button className="pressable">🔔</button>
-        </div>
-      </div>
+  const pointerDown = (clientX, clientY) => {
+    dragRef.current = {
+      active: true,
+      startX: clientX,
+      startY: clientY,
+      dx: 0,
+      dy: 0,
+      moved: false,
+    };
+    if (cardRef.current) {
+      cardRef.current.style.transition = "none";
+    }
+  };
 
-      <div className="pairs-strip">
-        <div className="pair-card likes-card">
-          <div className="likes-counter">{matchesCount}</div>
-          <div className="likes-card-bottom">
-            <span>💛</span>
-            <strong>лайков</strong>
-          </div>
-        </div>
+  const pointerMove = (clientX, clientY) => {
+    if (!dragRef.current.active || !cardRef.current) return;
 
-        {likesReceived.slice(0, 4).map((item) => (
-          <div key={item.id} className="pair-card">
-            <img src={item.avatar} alt={item.name} className="pair-photo" />
-            <div className="pair-name-row">
-              <span>{item.name}</span>
-              {item.verified ? <VerifiedBadge /> : null}
-            </div>
-          </div>
-        ))}
-      </div>
+    const dx = clientX - dragRef.current.startX;
+    const dy = clientY - dragRef.current.startY;
 
-      <div className="messages-list">
-        <h2>Сообщения</h2>
+    dragRef.current.dx = dx;
+    dragRef.current.dy = dy;
 
-        {chats.map((chat) => (
-          <div key={chat.id} className="chat-row pressable">
-            <div className="chat-avatar-wrap">
-              <img src={chat.avatar} alt={chat.name} className="chat-avatar" />
-              {chat.online ? <span className="online-dot" /> : null}
-            </div>
+    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+      dragRef.current.moved = true;
+    }
 
-            <div className="chat-main">
-              <div className="chat-name-row">
-                <div className="chat-name-left">
-                  <strong>{chat.name}</strong>
-                  {chat.verified ? <VerifiedBadge /> : null}
-                  {chat.likedYou ? (
-                    <span className="mini-liked-badge">Лайкнул(а) тебя</span>
-                  ) : null}
-                </div>
+    if (Math.abs(dx) > Math.abs(dy)) {
+      const rotate = dx / 18;
+      cardRef.current.style.transform = `translateX(${dx}px) translateY(${Math.min(
+        Math.max(dy, -20),
+        20
+      )}px) rotate(${rotate}deg)`;
+    }
+  };
 
-                <div className="chat-right-meta">
-                  {chat.yourTurn ? <span className="your-turn-badge">Твой ход</span> : null}
-                </div>
-              </div>
+  const pointerUp = () => {
+    if (!dragRef.current.active || !cardRef.current) return;
 
-              <div className="chat-message-row">
-                <span className="chat-last-message">{chat.lastMessage}</span>
-                <span className="chat-status">
-                  {chat.status === "прочитано" ? "✓✓ Прочитано" : "✓ Доставлено"}
-                </span>
-              </div>
-            </div>
+    const { dx } = dragRef.current;
+    dragRef.current.active = false;
 
-            {chat.unread > 0 ? <span className="unread-badge">{chat.unread}</span> : null}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+    if (dx > 110) {
+      animateOut("right");
+      return;
+    }
 
-function SettingsScreen() {
-  const items = [
-    "Фильтр сообщений",
-    "Уведомления на телефон",
-    "Уведомления в приложении",
-    "Уведомления на Email",
-    "Изменить email",
-    "Изменить пароль",
-    "Информация об анкете",
-    "Настройки приложения",
-    "Помощь",
-    "Выход",
-  ];
+    if (dx < -110) {
+      animateOut("left");
+      return;
+    }
+
+    cardRef.current.style.transition = "transform 0.22s ease";
+    cardRef.current.style.transform = "translateX(0px) translateY(0px) rotate(0deg)";
+  };
+
+  const onMouseDown = (e) => pointerDown(e.clientX, e.clientY);
+  const onMouseMove = (e) => pointerMove(e.clientX, e.clientY);
+  const onMouseUp = () => pointerUp();
+  const onTouchStart = (e) => {
+    const touch = e.touches[0];
+    pointerDown(touch.clientX, touch.clientY);
+  };
+  const onTouchMove = (e) => {
+    const touch = e.touches[0];
+    pointerMove(touch.clientX, touch.clientY);
+  };
+  const onTouchEnd = () => pointerUp();
+
+  const saveSettings = () => {
+    setSavedLabel(true);
+    setTimeout(() => setSavedLabel(false), 1600);
+  };
+
+  const sectionClass = settings.darkCards ? "panel panel-dark" : "panel";
 
   return (
-    <section className="settings-screen">
-      <div className="settings-title">Настройки</div>
-      <div className="settings-list">
-        {items.map((item) => (
-          <button key={item} className="settings-item pressable">
-            <span>{item}</span>
-            <span className="settings-arrow">›</span>
-          </button>
-        ))}
-      </div>
-    </section>
-  );
-}
+    <div className={`app-shell ${settings.softMotion ? "soft-motion" : ""}`}>
+      <style>{`
+        * { box-sizing: border-box; }
+        html, body, #root {
+          margin: 0;
+          padding: 0;
+          min-height: 100%;
+          font-family: Inter, Arial, sans-serif;
+          background:
+            radial-gradient(circle at top left, rgba(255,97,141,0.10), transparent 24%),
+            radial-gradient(circle at top right, rgba(255,175,189,0.16), transparent 28%),
+            linear-gradient(180deg, #fff8fb 0%, #f8f6fb 100%);
+          color: #231b2e;
+        }
+        body {
+          overflow-x: hidden;
+        }
+        .app-shell {
+          min-height: 100vh;
+          position: relative;
+        }
+        .soft-motion::before,
+        .soft-motion::after {
+          content: "";
+          position: fixed;
+          width: 340px;
+          height: 340px;
+          border-radius: 50%;
+          filter: blur(60px);
+          opacity: 0.22;
+          z-index: 0;
+          pointer-events: none;
+          animation: floatBlob 10s ease-in-out infinite;
+        }
+        .soft-motion::before {
+          background: #ff8dad;
+          top: -60px;
+          left: -80px;
+        }
+        .soft-motion::after {
+          background: #c9b8ff;
+          right: -90px;
+          top: 140px;
+          animation-delay: -4s;
+        }
+        @keyframes floatBlob {
+          0%,100% { transform: translateY(0px) translateX(0px) scale(1); }
+          50% { transform: translateY(24px) translateX(18px) scale(1.05); }
+        }
 
-function HelpScreen() {
-  const [openIndex, setOpenIndex] = useState(0);
+        .page {
+          max-width: 1360px;
+          margin: 0 auto;
+          padding: 20px 18px 36px;
+          position: relative;
+          z-index: 1;
+        }
 
-  return (
-    <section className="settings-screen">
-      <div className="settings-title">Помощь</div>
-      <div className="faq-list">
-        {helpItems.map((item, index) => {
-          const isOpen = openIndex === index;
-          return (
-            <div key={item.q} className={`faq-item ${isOpen ? "open" : ""}`}>
+        .topbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+          padding: 14px 18px;
+          border-radius: 24px;
+          background: rgba(255,255,255,0.82);
+          backdrop-filter: blur(14px);
+          box-shadow: 0 10px 30px rgba(36, 20, 48, 0.06);
+          margin-bottom: 20px;
+          position: sticky;
+          top: 10px;
+          z-index: 40;
+        }
+
+        .brand-wrap {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        .brand {
+          font-size: 22px;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+          color: #ff5f8f;
+        }
+
+        .lang-switch {
+          display: flex;
+          gap: 8px;
+        }
+
+        .chip-btn {
+          border: none;
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-weight: 700;
+          cursor: pointer;
+          background: #f0edf3;
+          color: #2a2331;
+          transition: 0.2s ease;
+        }
+
+        .chip-btn.active {
+          background: linear-gradient(135deg, #ff5f8f, #ff8a6b);
+          color: white;
+          box-shadow: 0 10px 20px rgba(255,95,143,0.22);
+        }
+
+        .nav {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .nav-btn {
+          border: none;
+          padding: 13px 20px;
+          border-radius: 999px;
+          background: #f5f3f7;
+          color: #2b2235;
+          font-weight: 700;
+          font-size: 15px;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .nav-btn.active {
+          color: white;
+          background: linear-gradient(135deg, #ff5f8f, #ff8d6b);
+          box-shadow: 0 12px 22px rgba(255,95,143,0.24);
+        }
+
+        .hero {
+          display: grid;
+          grid-template-columns: 1.2fr 0.95fr;
+          gap: 22px;
+          align-items: stretch;
+          margin-bottom: 24px;
+        }
+
+        .hero-left,
+        .panel {
+          background: rgba(255,255,255,0.78);
+          backdrop-filter: blur(12px);
+          border-radius: 28px;
+          padding: 26px;
+          box-shadow: 0 16px 34px rgba(36, 20, 48, 0.06);
+        }
+
+        .panel-dark {
+          background: rgba(255,255,255,0.92);
+          box-shadow: 0 20px 40px rgba(26, 10, 44, 0.10);
+        }
+
+        .hero-title {
+          font-size: clamp(38px, 5vw, 74px);
+          line-height: 0.95;
+          letter-spacing: -2px;
+          margin: 0 0 18px;
+          font-weight: 900;
+        }
+
+        .hero-text {
+          font-size: 18px;
+          line-height: 1.6;
+          color: #5c5168;
+          max-width: 780px;
+          margin-bottom: 22px;
+        }
+
+        .hero-actions {
+          display: flex;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn,
+        .ghost-btn {
+          border: none;
+          border-radius: 18px;
+          padding: 16px 24px;
+          font-size: 16px;
+          font-weight: 800;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .primary-btn {
+          color: white;
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          box-shadow: 0 14px 24px rgba(255,95,143,0.24);
+        }
+
+        .secondary-btn {
+          background: #f2eef4;
+          color: #2b2235;
+        }
+
+        .ghost-btn {
+          background: rgba(255,255,255,0.75);
+          color: #2b2235;
+          border: 1px solid rgba(80,60,100,0.08);
+        }
+
+        .hero-right {
+          display: flex;
+          align-items: stretch;
+        }
+
+        .preview-card {
+          width: 100%;
+          min-height: 520px;
+          border-radius: 34px;
+          overflow: hidden;
+          position: relative;
+          background: #eee;
+          box-shadow: 0 24px 40px rgba(22, 11, 30, 0.10);
+        }
+
+        .preview-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .preview-overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 24px;
+          color: white;
+          background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.62));
+        }
+
+        .preview-badge {
+          align-self: flex-start;
+          padding: 8px 14px;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.22);
+          font-weight: 700;
+          font-size: 14px;
+          backdrop-filter: blur(10px);
+          margin-bottom: 14px;
+        }
+
+        .preview-name {
+          font-size: clamp(30px, 4vw, 52px);
+          font-weight: 900;
+          margin: 0 0 6px;
+        }
+
+        .preview-bio {
+          margin: 0;
+          font-size: 18px;
+          line-height: 1.45;
+          max-width: 85%;
+        }
+
+        .hero-mini-actions {
+          display: flex;
+          gap: 10px;
+          margin-top: 16px;
+        }
+
+        .hero-mini-actions button {
+          flex: 1;
+          border: none;
+          border-radius: 18px;
+          padding: 14px 16px;
+          font-size: 16px;
+          font-weight: 800;
+          cursor: pointer;
+        }
+
+        .hero-mini-actions .pink {
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+        }
+
+        .hero-mini-actions .light {
+          background: rgba(255,255,255,0.90);
+          color: #2b2235;
+        }
+
+        .quick-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+          margin-top: 10px;
+        }
+
+        .quick-box {
+          min-height: 220px;
+        }
+
+        .quick-num {
+          width: 48px;
+          height: 48px;
+          border-radius: 16px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+          font-weight: 900;
+          margin-bottom: 18px;
+        }
+
+        .section-title {
+          margin: 0 0 8px;
+          font-size: clamp(30px, 4vw, 64px);
+          font-weight: 900;
+          letter-spacing: -1.6px;
+        }
+
+        .section-subtitle {
+          margin: 0 0 24px;
+          font-size: 18px;
+          color: #665b70;
+        }
+
+        .profiles-layout,
+        .messages-layout,
+        .likes-layout,
+        .settings-layout,
+        .profile-layout {
+          display: grid;
+          gap: 18px;
+        }
+
+        .profiles-layout {
+          grid-template-columns: 380px minmax(0, 1fr);
+          align-items: start;
+        }
+
+        .settings-layout {
+          grid-template-columns: 360px minmax(0, 1fr);
+        }
+
+        .likes-layout {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .messages-layout {
+          grid-template-columns: 320px minmax(0, 1fr);
+          min-height: 640px;
+        }
+
+        .profile-layout {
+          grid-template-columns: 340px minmax(0, 1fr);
+        }
+
+        .settings-group {
+          display: grid;
+          gap: 14px;
+        }
+
+        .field {
+          display: grid;
+          gap: 8px;
+        }
+
+        .field label {
+          font-weight: 700;
+          font-size: 14px;
+          color: #544a60;
+        }
+
+        .field select,
+        .field input {
+          width: 100%;
+          border-radius: 16px;
+          border: 1px solid rgba(95, 80, 110, 0.12);
+          background: #fcfbfd;
+          padding: 14px 15px;
+          font-size: 15px;
+          outline: none;
+        }
+
+        .range-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          font-weight: 800;
+        }
+
+        .toggle-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          padding: 14px 0;
+          border-bottom: 1px solid rgba(100, 80, 120, 0.08);
+        }
+
+        .toggle-row:last-child {
+          border-bottom: none;
+        }
+
+        .toggle-row input {
+          width: 22px;
+          height: 22px;
+        }
+
+        .save-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(70, 199, 121, 0.12);
+          color: #159552;
+          padding: 10px 14px;
+          border-radius: 999px;
+          font-weight: 800;
+          margin-top: 8px;
+        }
+
+        .deck-wrap {
+          position: relative;
+          min-height: 720px;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+        }
+
+        .swipe-card {
+          width: 100%;
+          max-width: 520px;
+          height: 720px;
+          border-radius: 34px;
+          overflow: hidden;
+          background: #f0edf3;
+          box-shadow: 0 30px 50px rgba(25, 10, 38, 0.14);
+          position: relative;
+          user-select: none;
+          touch-action: pan-y;
+          cursor: grab;
+        }
+
+        .swipe-card:active {
+          cursor: grabbing;
+        }
+
+        .swipe-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          pointer-events: none;
+        }
+
+        .card-topbar {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          right: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 3;
+        }
+
+        .photo-count,
+        .star-btn,
+        .distance-pill {
+          background: rgba(255,255,255,0.18);
+          backdrop-filter: blur(10px);
+          color: white;
+          border: none;
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-size: 14px;
+          font-weight: 800;
+        }
+
+        .star-btn {
+          cursor: pointer;
+          font-size: 18px;
+          width: 46px;
+          height: 46px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .star-btn.active {
+          background: linear-gradient(135deg, #ffd64d, #ffb300);
+          color: #3a2800;
+        }
+
+        .card-overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 22px;
+          background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.64));
+          color: white;
+        }
+
+        .profile-line {
+          display: flex;
+          align-items: end;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 8px;
+        }
+
+        .profile-name {
+          font-size: clamp(28px, 4vw, 42px);
+          font-weight: 900;
+          margin: 0;
+          letter-spacing: -1px;
+        }
+
+        .profile-meta {
+          font-size: 14px;
+          opacity: 0.95;
+          font-weight: 700;
+          margin-bottom: 8px;
+        }
+
+        .profile-bio {
+          margin: 0 0 16px;
+          font-size: 16px;
+          line-height: 1.5;
+          max-width: 90%;
+        }
+
+        .card-action-row {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+        }
+
+        .round-action {
+          width: 62px;
+          height: 62px;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          font-size: 22px;
+          font-weight: 900;
+          box-shadow: 0 14px 28px rgba(20, 10, 28, 0.20);
+        }
+
+        .round-action.skip {
+          background: rgba(255,255,255,0.90);
+          color: #5d5168;
+        }
+
+        .round-action.like {
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+        }
+
+        .round-action.favorite {
+          background: linear-gradient(135deg, #ffd54a, #ffb200);
+          color: #3b2800;
+        }
+
+        .card-side-info {
+          display: grid;
+          gap: 14px;
+        }
+
+        .mini-profile-list,
+        .match-list,
+        .favorite-list {
+          display: grid;
+          gap: 12px;
+        }
+
+        .mini-profile-item,
+        .chat-list-item,
+        .favorite-item,
+        .match-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px;
+          border-radius: 20px;
+          background: rgba(248, 245, 250, 0.95);
+          transition: 0.2s ease;
+        }
+
+        .mini-profile-item:hover,
+        .chat-list-item:hover,
+        .favorite-item:hover,
+        .match-item:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 10px 20px rgba(34, 19, 46, 0.06);
+        }
+
+        .mini-profile-item img,
+        .chat-list-item img,
+        .favorite-item img,
+        .match-item img,
+        .profile-avatar img {
+          width: 58px;
+          height: 58px;
+          border-radius: 50%;
+          object-fit: cover;
+          flex-shrink: 0;
+        }
+
+        .chat-list-item {
+          cursor: pointer;
+        }
+
+        .chat-list-item.active {
+          background: linear-gradient(135deg, rgba(255,95,143,0.12), rgba(255,139,110,0.12));
+          border: 1px solid rgba(255,95,143,0.14);
+        }
+
+        .item-title {
+          font-weight: 800;
+          font-size: 18px;
+          margin: 0 0 2px;
+        }
+
+        .item-sub {
+          color: #685d73;
+          font-size: 14px;
+          margin: 0;
+        }
+
+        .empty-state {
+          min-height: 320px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          gap: 10px;
+          color: #655b70;
+        }
+
+        .message-panel {
+          display: grid;
+          grid-template-rows: auto 1fr auto;
+          min-height: 640px;
+        }
+
+        .message-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding-bottom: 14px;
+          border-bottom: 1px solid rgba(100,80,120,0.08);
+        }
+
+        .message-header img {
+          width: 58px;
+          height: 58px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .message-body {
+          padding: 18px 4px 18px 0;
+          overflow: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .bubble {
+          max-width: 78%;
+          padding: 13px 16px;
+          border-radius: 20px;
+          font-size: 16px;
+          line-height: 1.45;
+        }
+
+        .bubble.them {
+          align-self: flex-start;
+          background: #f1edf4;
+          color: #2b2235;
+        }
+
+        .bubble.me {
+          align-self: flex-end;
+          background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+          color: white;
+        }
+
+        .message-input-row {
+          display: flex;
+          gap: 10px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(100,80,120,0.08);
+        }
+
+        .message-input-row input {
+          flex: 1;
+          border-radius: 16px;
+          border: 1px solid rgba(95,80,110,0.12);
+          padding: 14px 15px;
+          font-size: 15px;
+          outline: none;
+          background: #fcfbfd;
+        }
+
+        .mutual-modal {
+          position: fixed;
+          inset: 0;
+          background: rgba(20, 8, 30, 0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 18px;
+          z-index: 100;
+          animation: fadeIn 0.22s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .mutual-box {
+          width: min(520px, 100%);
+          border-radius: 30px;
+          padding: 28px;
+          background:
+            radial-gradient(circle at top center, rgba(255,255,255,0.18), transparent 35%),
+            linear-gradient(135deg, #ff5f8f 0%, #ff8b6e 100%);
+          color: white;
+          box-shadow: 0 24px 50px rgba(25, 10, 35, 0.26);
+          text-align: center;
+          transform: scale(1);
+          animation: popIn 0.26s ease;
+        }
+
+        @keyframes popIn {
+          from { transform: scale(0.92) translateY(18px); opacity: 0; }
+          to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .mutual-avatars {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+
+        .mutual-avatars img {
+          width: 94px;
+          height: 94px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 4px solid rgba(255,255,255,0.5);
+          box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+        }
+
+        .heart {
+          font-size: 34px;
+          animation: pulseHeart 1.1s ease-in-out infinite;
+        }
+
+        @keyframes pulseHeart {
+          0%,100% { transform: scale(1); }
+          50% { transform: scale(1.18); }
+        }
+
+        .profile-page-grid {
+          display: grid;
+          grid-template-columns: 320px 1fr;
+          gap: 18px;
+        }
+
+        .profile-avatar {
+          text-align: center;
+        }
+
+        .profile-avatar img {
+          width: 180px;
+          height: 180px;
+          border-radius: 50%;
+          margin-bottom: 16px;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+          margin-top: 18px;
+        }
+
+        .stat-box {
+          border-radius: 20px;
+          background: #faf7fc;
+          padding: 18px;
+          text-align: center;
+        }
+
+        .stat-num {
+          font-size: 28px;
+          font-weight: 900;
+          margin-bottom: 4px;
+        }
+
+        .phone-bottom-nav {
+          display: none;
+        }
+
+        @media (max-width: 1080px) {
+          .hero {
+            grid-template-columns: 1fr;
+          }
+          .profiles-layout,
+          .settings-layout,
+          .messages-layout,
+          .profile-layout,
+          .profile-page-grid,
+          .likes-layout {
+            grid-template-columns: 1fr;
+          }
+          .quick-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 760px) {
+          .page {
+            padding: 12px 12px 96px;
+          }
+          .topbar {
+            position: static;
+            border-radius: 22px;
+            padding: 14px;
+          }
+          .nav {
+            display: none;
+          }
+          .brand {
+            font-size: 20px;
+          }
+          .hero-left, .panel {
+            border-radius: 24px;
+            padding: 18px;
+          }
+          .hero-title,
+          .section-title {
+            letter-spacing: -1.2px;
+          }
+          .hero-text,
+          .section-subtitle {
+            font-size: 16px;
+          }
+          .preview-card {
+            min-height: 440px;
+            border-radius: 28px;
+          }
+          .preview-name {
+            font-size: 34px;
+          }
+          .profiles-layout {
+            gap: 14px;
+          }
+          .deck-wrap {
+            min-height: auto;
+          }
+          .swipe-card {
+            max-width: 100%;
+            width: 100%;
+            height: min(78vh, 640px);
+            border-radius: 28px;
+          }
+          .card-overlay {
+            padding: 18px;
+          }
+          .profile-name {
+            font-size: 32px;
+          }
+          .profile-bio {
+            max-width: 100%;
+            font-size: 15px;
+          }
+          .round-action {
+            width: 58px;
+            height: 58px;
+          }
+          .messages-layout {
+            min-height: auto;
+          }
+          .message-panel {
+            min-height: 72vh;
+          }
+          .message-body {
+            max-height: 46vh;
+          }
+          .bubble {
+            max-width: 88%;
+            font-size: 15px;
+          }
+          .phone-bottom-nav {
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            padding: 8px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 16px 34px rgba(29, 14, 40, 0.12);
+            z-index: 60;
+          }
+          .phone-tab-btn {
+            border: none;
+            background: transparent;
+            padding: 10px 6px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #5b5066;
+            cursor: pointer;
+          }
+          .phone-tab-btn.active {
+            background: linear-gradient(135deg, #ff5f8f, #ff8b6e);
+            color: white;
+          }
+        }
+      `}</style>
+
+      <div className="page">
+        <header className="topbar">
+          <div className="brand-wrap">
+            <div className="brand">{t.brand}</div>
+            <div className="lang-switch">
               <button
-                className="faq-question pressable"
-                onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                className={`chip-btn ${lang === "ru" ? "active" : ""}`}
+                onClick={() => setLang("ru")}
               >
-                <span>{item.q}</span>
-                <span className="faq-arrow">{isOpen ? "⌄" : "›"}</span>
+                RU
               </button>
-              {isOpen ? <div className="faq-answer">{item.a}</div> : null}
+              <button
+                className={`chip-btn ${lang === "en" ? "active" : ""}`}
+                onClick={() => setLang("en")}
+              >
+                EN
+              </button>
             </div>
-          );
-        })}
+          </div>
+
+          <nav className="nav">
+            <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+              {t.navHome}
+            </button>
+            <button className={`nav-btn ${tab === "profiles" ? "active" : ""}`} onClick={() => setTab("profiles")}>
+              {t.navProfiles}
+            </button>
+            <button className={`nav-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
+              {t.navLikes}
+            </button>
+            <button className={`nav-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+              {t.navMessages}
+            </button>
+            <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+              {t.navProfile}
+            </button>
+            <button className={`nav-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
+              {t.navSettings}
+            </button>
+          </nav>
+        </header>
+
+        {tab === "home" && (
+          <>
+            <section className="hero">
+              <div className="hero-left">
+                <h1 className="hero-title">{t.heroTitle}</h1>
+                <p className="hero-text">{t.heroText}</p>
+                <div className="hero-actions">
+                  <button className="primary-btn" onClick={() => setTab("profiles")}>
+                    {t.heroPrimary}
+                  </button>
+                  <button className="secondary-btn" onClick={() => setTab("messages")}>
+                    {t.heroSecondary}
+                  </button>
+                </div>
+              </div>
+
+              <div className="hero-right">
+                <div className="preview-card">
+                  <img src={profiles[0].photos[0]} alt={profiles[0].name} />
+                  <div className="preview-overlay">
+                    <div className="preview-badge">
+                      {profiles[0].city} • {profiles[0].distanceMi} {t.miles}
+                    </div>
+                    <h2 className="preview-name">
+                      {profiles[0].name}, {profiles[0].age}
+                    </h2>
+                    <p className="preview-bio">{profiles[0].bio}</p>
+                    <div className="hero-mini-actions">
+                      <button className="pink" onClick={() => setTab("profiles")}>
+                        {t.heroPrimary}
+                      </button>
+                      <button className="light" onClick={() => setTab("profile")}>
+                        {t.navProfile}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="quick-grid">
+              <div className={sectionClass + " quick-box"}>
+                <div className="quick-num">1</div>
+                <h3>{t.quick1}</h3>
+                <p>{t.quick1Text}</p>
+              </div>
+              <div className={sectionClass + " quick-box"}>
+                <div className="quick-num">2</div>
+                <h3>{t.quick2}</h3>
+                <p>{t.quick2Text}</p>
+              </div>
+              <div className={sectionClass + " quick-box"}>
+                <div className="quick-num">3</div>
+                <h3>{t.quick3}</h3>
+                <p>{t.quick3Text}</p>
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "profiles" && (
+          <>
+            <h2 className="section-title">{t.profilesTitle}</h2>
+            <p className="section-subtitle">{t.profilesText}</p>
+
+            <section className="profiles-layout">
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.navSettings}</h3>
+                <div className="settings-group">
+                  <div className="field">
+                    <label>{t.searchMode}</label>
+                    <select
+                      value={settings.searchMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                      }
+                    >
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.allPeople}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select
+                      value={settings.country}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          country: e.target.value,
+                          city: "All",
+                        }))
+                      }
+                    >
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.locationAll : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select
+                      value={settings.city}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, city: e.target.value }))
+                      }
+                    >
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.locationAll : city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select
+                      value={settings.unit}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, unit: e.target.value }))
+                      }
+                    >
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <div className="range-row">
+                      <span>
+                        {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={settings.maxDistance}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          maxDistance: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.compactMode}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.compactMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          compactMode: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.softMotion}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.softMotion}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          softMotion: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.darkCards}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.darkCards}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          darkCards: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <button className="primary-btn" onClick={saveSettings}>
+                    {t.apply}
+                  </button>
+                  <button
+                    className="secondary-btn"
+                    onClick={() =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        searchMode: "all",
+                        country: "All",
+                        city: "All",
+                        maxDistance: 500,
+                        unit: "mi",
+                      }))
+                    }
+                  >
+                    {t.reset}
+                  </button>
+
+                  {savedLabel && <div className="save-badge">{t.settingsSaved}</div>}
+                </div>
+              </div>
+
+              <div className={sectionClass}>
+                {activeDeckProfile ? (
+                  <div className="deck-wrap">
+                    <div
+                      ref={cardRef}
+                      className="swipe-card"
+                      onMouseDown={onMouseDown}
+                      onMouseMove={onMouseMove}
+                      onMouseUp={onMouseUp}
+                      onMouseLeave={onMouseUp}
+                      onTouchStart={onTouchStart}
+                      onTouchMove={onTouchMove}
+                      onTouchEnd={onTouchEnd}
+                    >
+                      <img
+                        src={activeDeckProfile.photos[0]}
+                        alt={activeDeckProfile.name}
+                        draggable="false"
+                      />
+
+                      <div className="card-topbar">
+                        <div className="photo-count">
+                          {activeDeckProfile.photos.length}{" "}
+                          {activeDeckProfile.photos.length === 1 ? t.onePhoto : t.manyPhotos}
+                        </div>
+                        <div className="distance-pill">
+                          {settings.unit === "mi"
+                            ? `${activeDeckProfile.distanceMi} ${t.miles}`
+                            : `${Math.round(activeDeckProfile.distanceMi * 1.60934)} ${t.km}`}
+                        </div>
+                        <button
+                          className={`star-btn ${
+                            favorites.includes(activeDeckProfile.id) ? "active" : ""
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleFavorite(activeDeckProfile.id);
+                          }}
+                        >
+                          ★
+                        </button>
+                      </div>
+
+                      <div className="card-overlay">
+                        <div className="profile-line">
+                          <h3 className="profile-name">
+                            {activeDeckProfile.name}, {activeDeckProfile.age}
+                          </h3>
+                        </div>
+                        <div className="profile-meta">
+                          {activeDeckProfile.city}, {activeDeckProfile.country} •{" "}
+                          {activeDeckProfile.online ? t.online : "Offline"}
+                        </div>
+                        <p className="profile-bio">{activeDeckProfile.bio}</p>
+
+                        <div className="card-action-row">
+                          <button className="round-action skip" onClick={() => animateOut("left")}>
+                            ✕
+                          </button>
+                          <button
+                            className="round-action favorite"
+                            onClick={() => toggleFavorite(activeDeckProfile.id)}
+                          >
+                            ★
+                          </button>
+                          <button className="round-action like" onClick={() => animateOut("right")}>
+                            ♥
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="empty-state">
+                    <h3>{t.emptyDeck}</h3>
+                    <p>{t.emptyDeckText}</p>
+                    <button className="primary-btn" onClick={restartDeck}>
+                      {t.restartDeck}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "likes" && (
+          <>
+            <h2 className="section-title">{t.likesTitle}</h2>
+            <p className="section-subtitle">{t.likesText}</p>
+
+            <section className="likes-layout">
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.favorites}</h3>
+                {favorites.length ? (
+                  <div className="favorite-list">
+                    {profiles
+                      .filter((p) => favorites.includes(p.id))
+                      .map((p) => (
+                        <div className="favorite-item" key={p.id}>
+                          <img src={p.avatar} alt={p.name} />
+                          <div style={{ flex: 1 }}>
+                            <div className="item-title">
+                              {p.name}, {p.age}
+                            </div>
+                            <div className="item-sub">
+                              {p.city}, {p.country}
+                            </div>
+                          </div>
+                          <button className="chip-btn active" onClick={() => setTab("profiles")}>
+                            ★
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noFavorites}</div>
+                )}
+              </div>
+
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.matches}</h3>
+                {matches.length ? (
+                  <div className="match-list">
+                    {profiles
+                      .filter((p) => matches.includes(p.id))
+                      .map((p) => (
+                        <div className="match-item" key={p.id}>
+                          <img src={p.avatar} alt={p.name} />
+                          <div style={{ flex: 1 }}>
+                            <div className="item-title">
+                              {p.name}, {p.age}
+                            </div>
+                            <div className="item-sub">
+                              {p.city}, {p.country}
+                            </div>
+                          </div>
+                          <button
+                            className="primary-btn"
+                            onClick={() => {
+                              setSelectedChatId(p.id);
+                              setTab("messages");
+                            }}
+                          >
+                            {t.openChat}
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noMatches}</div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "messages" && (
+          <>
+            <h2 className="section-title">{t.messagesTitle}</h2>
+            <p className="section-subtitle">{t.messagesText}</p>
+
+            <section className="messages-layout">
+              <div className={sectionClass}>
+                {matches.length ? (
+                  <div className="mini-profile-list">
+                    {profiles
+                      .filter((p) => matches.includes(p.id))
+                      .map((p) => (
+                        <div
+                          key={p.id}
+                          className={`chat-list-item ${selectedChatId === p.id ? "active" : ""}`}
+                          onClick={() => setSelectedChatId(p.id)}
+                        >
+                          <img src={p.avatar} alt={p.name} />
+                          <div>
+                            <div className="item-title">{p.name}</div>
+                            <div className="item-sub">{p.online ? t.online : "Offline"}</div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noMessages}</div>
+                )}
+              </div>
+
+              <div className={sectionClass}>
+                {selectedChatProfile ? (
+                  <div className="message-panel">
+                    <div className="message-header">
+                      <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
+                      <div>
+                        <div className="item-title">{selectedChatProfile.name}</div>
+                        <div className="item-sub">
+                          {selectedChatProfile.online ? t.online : "Offline"} •{" "}
+                          {selectedChatProfile.city}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="message-body">
+                      {(messages[selectedChatId] || []).map((msg, index) => (
+                        <div key={index} className={`bubble ${msg.from}`}>
+                          {msg.text}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="message-input-row">
+                      <input
+                        value={chatDraft}
+                        onChange={(e) => setChatDraft(e.target.value)}
+                        placeholder={t.messagePlaceholder}
+                      />
+                      <button className="primary-btn" onClick={sendMessage}>
+                        {t.send}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="empty-state">{t.noMessages}</div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "profile" && (
+          <>
+            <h2 className="section-title">{t.profileTitle}</h2>
+            <p className="section-subtitle">{t.phoneHint}</p>
+
+            <section className="profile-page-grid">
+              <div className={sectionClass}>
+                <div className="profile-avatar">
+                  <img
+                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"
+                    alt={t.myProfileName}
+                  />
+                  <h3 style={{ margin: 0 }}>{t.myProfileName}</h3>
+                  <p style={{ color: "#655b70" }}>{t.myProfileBio}</p>
+                </div>
+              </div>
+
+              <div className={sectionClass}>
+                <h3 style={{ marginTop: 0 }}>{t.profileAbout}</h3>
+                <div className="stats-grid">
+                  <div className="stat-box">
+                    <div className="stat-num">{profiles.length}</div>
+                    <div>{t.navProfiles}</div>
+                  </div>
+                  <div className="stat-box">
+                    <div className="stat-num">{favorites.length}</div>
+                    <div>{t.favorites}</div>
+                  </div>
+                  <div className="stat-box">
+                    <div className="stat-num">{matches.length}</div>
+                    <div>{t.matches}</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "settings" && (
+          <>
+            <h2 className="section-title">{t.settingsTitle}</h2>
+            <p className="section-subtitle">{t.phoneHint}</p>
+
+            <section className="settings-layout">
+              <div className={sectionClass}>
+                <div className="settings-group">
+                  <div className="field">
+                    <label>{t.searchMode}</label>
+                    <select
+                      value={settings.searchMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, searchMode: e.target.value }))
+                      }
+                    >
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.allPeople}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select
+                      value={settings.country}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          country: e.target.value,
+                          city: "All",
+                        }))
+                      }
+                    >
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.locationAll : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select
+                      value={settings.city}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, city: e.target.value }))
+                      }
+                    >
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.locationAll : city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select
+                      value={settings.unit}
+                      onChange={(e) =>
+                        setSettings((prev) => ({ ...prev, unit: e.target.value }))
+                      }
+                    >
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <div className="range-row">
+                      <span>
+                        {settings.maxDistance} {settings.unit === "mi" ? t.miles : t.km}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={settings.maxDistance}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          maxDistance: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className={sectionClass}>
+                <div className="settings-group">
+                  <div className="toggle-row">
+                    <span>{t.compactMode}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.compactMode}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          compactMode: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.softMotion}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.softMotion}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          softMotion: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div className="toggle-row">
+                    <span>{t.darkCards}</span>
+                    <input
+                      type="checkbox"
+                      checked={settings.darkCards}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          darkCards: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <button className="primary-btn" onClick={saveSettings}>
+                    {t.saveSettings}
+                  </button>
+                  {savedLabel && <div className="save-badge">{t.settingsSaved}</div>}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
       </div>
-    </section>
-  );
-}
 
-function ProfileScreen({ myProfile, setMyProfile, setActiveSubPage }) {
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState(myProfile);
+      <div className="phone-bottom-nav">
+        <button className={`phone-tab-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+          {t.navHome}
+        </button>
+        <button className={`phone-tab-btn ${tab === "profiles" ? "active" : ""}`} onClick={() => setTab("profiles")}>
+          {t.navProfiles}
+        </button>
+        <button className={`phone-tab-btn ${tab === "likes" ? "active" : ""}`} onClick={() => setTab("likes")}>
+          {t.navLikes}
+        </button>
+        <button className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`} onClick={() => setTab("messages")}>
+          {t.navMessages}
+        </button>
+        <button className={`phone-tab-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+          {t.navProfile}
+        </button>
+        <button className={`phone-tab-btn ${tab === "settings" ? "active" : ""}`} onClick={() => setTab("settings")}>
+          {t.navSettings}
+        </button>
+      </div>
 
-  useEffect(() => {
-    setDraft(myProfile);
-  }, [myProfile]);
+      {showMatch && matchedProfile && (
+        <div className="mutual-modal" onClick={() => setShowMatch(false)}>
+          <div className="mutual-box" onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ marginTop: 0, fontSize: 36 }}>{t.mutualTitle}</h2>
+            <p style={{ fontSize: 18, marginBottom: 0 }}>{t.mutualText}</p>
 
-  const saveProfile = () => {
-    const normalizedPhotos =
-      typeof draft.photos === "string"
-        ? draft.photos
-            .split("\n")
-            .map((item) => item.trim())
-            .filter(Boolean)
-        : draft.photos;
+            <div className="mutual-avatars">
+              <img
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"
+                alt="Me"
+              />
+              <div className="heart">♥</div>
+              <img src={matchedProfile.avatar} alt={matchedProfile.name} />
+            </div>
 
-    setMyProfile({
-      ...draft,
-      photos: normalizedPhotos,
-      avatar: normalizedPhotos?.[0] || draft.avatar,
-    });
-    setEditing(false);
-  };
-
-  const photosText = Array.isArray(draft.photos) ? draft.photos.join("\n") : "";
-
-  return (
-    <section className="page">
-      <div className="profile-top-card">
-        <img src={myProfile.avatar} alt={myProfile.name} className="profile-avatar" />
-        <div className="profile-main-info">
-          <div className="profile-name-row">
-            <h1>
-              {myProfile.name}, {myProfile.age}
-            </h1>
-            {myProfile.verified ? <VerifiedBadge /> : null}
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <button
+                className="secondary-btn"
+                onClick={() => {
+                  setShowMatch(false);
+                  setTab("profiles");
+                }}
+              >
+                {t.continueSwipe}
+              </button>
+              <button
+                className="ghost-btn"
+                onClick={() => {
+                  setShowMatch(false);
+                  setSelectedChatId(matchedProfile.id);
+                  setTab("messages");
+                }}
+              >
+                {t.startChat}
+              </button>
+            </div>
           </div>
-          <div className="profile-meta-row">
-            <span>{myProfile.city}</span>
-            <span className="zodiac-pill">{myProfile.zodiac}</span>
-          </div>
-          <p>{myProfile.about}</p>
         </div>
-      </div>
-
-      <div className="profile-actions-grid">
-        <button className="profile-mini-card pressable" onClick={() => setEditing(true)}>
-          <span className="mini-card-title">Редактировать профиль</span>
-          <span className="mini-card-sub">Имя, возраст, город, фото, о себе</span>
-        </button>
-
-        <button className="profile-mini-card pressable" onClick={() => setActiveSubPage("settings")}>
-          <span className="mini-card-title">Настройки</span>
-          <span className="mini-card-sub">Email, пароль, уведомления</span>
-        </button>
-
-        <button className="profile-mini-card pressable" onClick={() => setActiveSubPage("help")}>
-          <span className="mini-card-title">Помощь</span>
-          <span className="mini-card-sub">Вопросы и ответы по приложению</span>
-        </button>
-
-        <button className="profile-mini-card pressable">
-          <span className="mini-card-title">Верификация</span>
-          <span className="mini-card-sub">
-            {myProfile.verified ? "Анкета подтверждена" : "Подтвердить анкету"}
-          </span>
-        </button>
-      </div>
-
-      <div className="profile-gallery">
-        {(myProfile.photos || []).map((photo, idx) => (
-          <img key={idx} src={photo} alt={`Фото ${idx + 1}`} className="profile-gallery-img" />
-        ))}
-      </div>
-
-      {editing ? (
-        <div className="modal-backdrop" onClick={() => setEditing(false)}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <h2>Редактировать профиль</h2>
-
-            <div className="form-grid">
-              <label>
-                <span>Имя</span>
-                <input
-                  value={draft.name}
-                  onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-                />
-              </label>
-
-              <label>
-                <span>Возраст</span>
-                <input
-                  type="number"
-                  value={draft.age}
-                  onChange={(e) => setDraft({ ...draft, age: Number(e.target.value) })}
-                />
-              </label>
-
-              <label>
-                <span>Город</span>
-                <input
-                  value={draft.city}
-                  onChange={(e) => setDraft({ ...draft, city: e.target.value })}
-                />
-              </label>
-
-              <label>
-                <span>Знак зодиака</span>
-                <input
-                  value={draft.zodiac}
-                  onChange={(e) => setDraft({ ...draft, zodiac: e.target.value })}
-                />
-              </label>
-
-              <label className="full">
-                <span>Email</span>
-                <input
-                  value={draft.email}
-                  onChange={(e) => setDraft({ ...draft, email: e.target.value })}
-                />
-              </label>
-
-              <label className="full">
-                <span>О себе</span>
-                <textarea
-                  rows="4"
-                  value={draft.about}
-                  onChange={(e) => setDraft({ ...draft, about: e.target.value })}
-                />
-              </label>
-
-              <label className="full">
-                <span>Фото профиля и галерея — по одной ссылке с новой строки</span>
-                <textarea
-                  rows="6"
-                  value={photosText}
-                  onChange={(e) => setDraft({ ...draft, photos: e.target.value })}
-                />
-              </label>
-            </div>
-
-            <div className="modal-actions">
-              <button className="secondary-btn pressable" onClick={() => setEditing(false)}>
-                Отмена
-              </button>
-              <button className="primary-btn pressable" onClick={saveProfile}>
-                Сохранить
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </section>
-  );
-}
-
-function EventsScreen() {
-  const items = [
-    {
-      title: "Новые пары",
-      text: "Пользователи, с которыми у тебя взаимная симпатия.",
-    },
-    {
-      title: "Гости",
-      text: "Кто заходил в твой профиль за последнее время.",
-    },
-    {
-      title: "Популярность анкеты",
-      text: "Сколько просмотров и лайков получила анкета.",
-    },
-  ];
-
-  return (
-    <section className="page">
-      <div className="page-head">
-        <h1>События</h1>
-        <p>Активность, гости, новые пары и просмотры профиля.</p>
-      </div>
-
-      <div className="events-grid">
-        {items.map((item) => (
-          <div key={item.title} className="event-card">
-            <strong>{item.title}</strong>
-            <p>{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default function App() {
-  const [activeTab, setActiveTab] = useState("swipe");
-  const [activeSubPage, setActiveSubPage] = useState("");
-  const [profiles, setProfiles] = useLocalStorage("dating_profiles", defaultProfiles);
-  const [myProfile, setMyProfile] = useLocalStorage("dating_my_profile", defaultMyProfile);
-  const [likesReceived, setLikesReceived] = useLocalStorage("dating_likes_received", [
-    {
-      id: 101,
-      name: "Stella",
-      avatar:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop",
-      verified: true,
-    },
-    {
-      id: 102,
-      name: "Yulia",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop",
-      verified: false,
-    },
-    {
-      id: 103,
-      name: "Judith",
-      avatar:
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop",
-      verified: false,
-    },
-  ]);
-  const [matchesCount, setMatchesCount] = useLocalStorage("dating_matches_count", 34);
-  const [chats, setChats] = useLocalStorage("dating_chats", defaultChats);
-
-  useEffect(() => {
-    if (activeTab !== "profile") {
-      setActiveSubPage("");
-    }
-  }, [activeTab]);
-
-  const content = useMemo(() => {
-    if (activeTab === "swipe") {
-      return (
-        <SwipeScreen
-          profiles={profiles}
-          setProfiles={setProfiles}
-          setLikesReceived={setLikesReceived}
-          setChats={setChats}
-          setMatchesCount={setMatchesCount}
-        />
-      );
-    }
-
-    if (activeTab === "likes") {
-      return <LikesScreen likesReceived={likesReceived} />;
-    }
-
-    if (activeTab === "chat") {
-      return (
-        <ChatScreen
-          chats={chats}
-          likesReceived={likesReceived}
-          matchesCount={matchesCount}
-        />
-      );
-    }
-
-    if (activeTab === "events") {
-      return <EventsScreen />;
-    }
-
-    if (activeTab === "profile") {
-      if (activeSubPage === "settings") return <SettingsScreen />;
-      if (activeSubPage === "help") return <HelpScreen />;
-      return (
-        <ProfileScreen
-          myProfile={myProfile}
-          setMyProfile={setMyProfile}
-          setActiveSubPage={setActiveSubPage}
-        />
-      );
-    }
-
-    return <EventsScreen />;
-  }, [
-    activeTab,
-    activeSubPage,
-    profiles,
-    setProfiles,
-    likesReceived,
-    chats,
-    matchesCount,
-    myProfile,
-    setMyProfile,
-    setLikesReceived,
-    setChats,
-    setMatchesCount,
-  ]);
-
-  return (
-    <div className="app-shell">
-      <div className="app-frame">
-        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-        <main className="app-content">{content}</main>
-        <BottomNav
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          likesCount={matchesCount}
-        />
-      </div>
+      )}
     </div>
   );
 }
+
+export default App;
