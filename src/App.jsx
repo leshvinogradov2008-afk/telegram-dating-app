@@ -42,6 +42,7 @@ const tr = {
     women: "Женщины",
     apply: "Применить",
     reset: "Сбросить",
+    close: "Закрыть",
 
     emptyDeck: "Анкеты закончились",
     emptyDeckText: "Измени фильтры поиска или начни просмотр заново.",
@@ -107,6 +108,8 @@ const tr = {
     block: "Заблокировать",
     blocked: "Профиль заблокирован",
     reported: "Жалоба отправлена",
+    blockedShort: "Заблокирован",
+    reportedShort: "Отправлено",
     statusSingle: "Не женат / не замужем",
     statusDivorced: "В разводе",
     statusOpen: "Свободен(на)",
@@ -170,6 +173,7 @@ const tr = {
     women: "Women",
     apply: "Apply",
     reset: "Reset",
+    close: "Close",
 
     emptyDeck: "No more profiles",
     emptyDeckText: "Change your filters or start browsing again.",
@@ -235,6 +239,8 @@ const tr = {
     block: "Block",
     blocked: "Profile blocked",
     reported: "Report sent",
+    blockedShort: "Blocked",
+    reportedShort: "Sent",
     statusSingle: "Single",
     statusDivorced: "Divorced",
     statusOpen: "Open to relationship",
@@ -744,6 +750,7 @@ function App() {
 
   const activeProfile = filteredProfiles[currentDeckIndex] || null;
   const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
+  const heroPreviewProfiles = profiles.slice(0, 4);
 
   useEffect(() => {
     if (currentDeckIndex >= filteredProfiles.length) {
@@ -1003,8 +1010,7 @@ function App() {
     setTimeout(() => setSwipeAnimating(false), 180);
   };
 
-  const swipeStamp =
-    swipeX > 40 ? t.likeStamp : swipeX < -40 ? t.skipStamp : "";
+  const swipeStamp = swipeX > 40 ? t.likeStamp : swipeX < -40 ? t.skipStamp : "";
   const swipeStampClass = swipeX > 40 ? "like" : swipeX < -40 ? "skip" : "";
 
   const cardTransform = `translateX(${swipeX}px) rotate(${swipeX / 18}deg)`;
@@ -1037,7 +1043,7 @@ function App() {
         }
         .topbar{
           display:flex;justify-content:space-between;align-items:center;gap:14px;
-          padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:80
+          padding:14px 18px;border-radius:24px;margin-bottom:18px;position:sticky;top:10px;z-index:90
         }
         .brand-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
         .brand{
@@ -1049,7 +1055,7 @@ function App() {
         .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{
           display:flex;gap:10px;flex-wrap:wrap
         }
-        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.action-btn,.back-btn{
+        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.action-btn,.back-btn,.glass-filter-btn{
           border:none;cursor:pointer;transition:.2s ease;font-weight:800
         }
         .chip-btn,.nav-btn{
@@ -1084,33 +1090,193 @@ function App() {
         .nav-btn{padding:12px 16px;font-size:14px}
         .mobile-tabs{display:none !important}
         .panel{border-radius:28px;padding:22px}
-        .hero{display:grid;grid-template-columns:1.15fr .95fr;gap:20px;margin-bottom:22px}
+        .hero{display:grid;grid-template-columns:1.02fr .98fr;gap:20px;margin-bottom:22px}
         .hero-title,.section-title{
           margin:0 0 12px;font-size:clamp(34px,5vw,68px);line-height:.95;font-weight:900;letter-spacing:-1.6px
         }
         .hero-text,.section-subtitle,.muted{font-size:17px;line-height:1.55;color:#5d7387}
-        .hero-preview{
-          min-height:520px;border-radius:32px;overflow:hidden;position:relative;
-          box-shadow:0 24px 40px rgba(25,44,64,.14)
+
+        .hero-mini-grid{
+          display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:14px;
+          min-height:520px;
         }
-        .hero-preview img,.profile-photo-grid img,.list-item img,.chat-item img,.profile-avatar img{
-          display:block;object-fit:cover
+        .hero-mini-card{
+          position:relative;
+          overflow:hidden;
+          border-radius:28px;
+          min-height:250px;
+          box-shadow:0 22px 38px rgba(25,44,64,.12);
+          background:#fff;
         }
-        .hero-preview img{width:100%;height:100%}
-        .preview-overlay{
-          position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
-          padding:22px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(6,22,38,.66))
+        .hero-mini-card img{
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          display:block;
         }
-        .preview-name{margin:0 0 6px;font-size:clamp(28px,4vw,46px);font-weight:900}
-        .preview-bio{margin:0;max-width:88%}
+        .hero-mini-overlay{
+          position:absolute;
+          inset:0;
+          display:flex;
+          flex-direction:column;
+          justify-content:flex-end;
+          padding:16px;
+          color:#fff;
+          background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(6,22,38,.72));
+        }
+        .hero-mini-name{
+          margin:0 0 4px;
+          font-size:22px;
+          line-height:1.05;
+          font-weight:900;
+          display:flex;
+          align-items:center;
+          flex-wrap:wrap;
+          gap:4px;
+        }
+        .hero-mini-meta{
+          margin:0 0 6px;
+          font-size:12px;
+          font-weight:800;
+          color:rgba(255,255,255,.82);
+          letter-spacing:.02em;
+        }
+        .hero-mini-bio{
+          margin:0;
+          font-size:13px;
+          line-height:1.4;
+          color:rgba(255,255,255,.92);
+          display:-webkit-box;
+          -webkit-line-clamp:2;
+          -webkit-box-orient:vertical;
+          overflow:hidden;
+        }
+
         .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
         .quick-num{
           width:46px;height:46px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;
           background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff;font-weight:900;margin-bottom:14px
         }
-        .search-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+
+        .search-top{
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:12px;
+          margin-bottom:16px
+        }
+        .glass-filter-btn{
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding:14px 18px;
+          border-radius:999px;
+          font-size:16px;
+          color:#173550;
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.28)),
+            linear-gradient(135deg, rgba(72,170,255,.16), rgba(255,120,170,.10));
+          backdrop-filter:blur(18px);
+          -webkit-backdrop-filter:blur(18px);
+          border:1px solid rgba(255,255,255,.48);
+          box-shadow:
+            0 12px 28px rgba(31,76,122,.12),
+            inset 0 1px 0 rgba(255,255,255,.65),
+            inset 0 -1px 0 rgba(255,255,255,.14);
+        }
+        .glass-filter-btn:hover{
+          transform:translateY(-2px);
+          box-shadow:
+            0 16px 34px rgba(31,76,122,.16),
+            inset 0 1px 0 rgba(255,255,255,.72),
+            inset 0 -1px 0 rgba(255,255,255,.16);
+        }
         .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
         .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:78vh}
+
+        .search-stage{
+          width:100%;
+          display:grid;
+          gap:16px;
+          align-items:start;
+        }
+
+        .inline-filters-shell{
+          width:100%;
+          display:flex;
+          justify-content:center;
+        }
+        .inline-filters-bar{
+          width:min(100%, 980px);
+          display:flex;
+          flex-wrap:wrap;
+          gap:10px;
+          padding:12px;
+          border-radius:24px;
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.64), rgba(255,255,255,.30)),
+            linear-gradient(135deg, rgba(65,170,255,.10), rgba(255,120,170,.06));
+          backdrop-filter:blur(18px);
+          -webkit-backdrop-filter:blur(18px);
+          border:1px solid rgba(255,255,255,.52);
+          box-shadow:
+            0 14px 28px rgba(23,55,86,.08),
+            inset 0 1px 0 rgba(255,255,255,.7);
+        }
+        .inline-filter-pill{
+          min-width:0;
+          display:flex;
+          align-items:center;
+          gap:8px;
+          padding:10px 12px;
+          border-radius:16px;
+          background:rgba(255,255,255,.64);
+          border:1px solid rgba(140,183,220,.18);
+          color:#2a4257;
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+        }
+        .inline-filter-pill label{
+          font-size:11px;
+          font-weight:900;
+          color:#7390a7;
+          text-transform:uppercase;
+          letter-spacing:.04em;
+          white-space:nowrap;
+        }
+        .inline-filter-pill select,
+        .inline-filter-pill input{
+          min-width:0;
+          border:none;
+          outline:none;
+          background:transparent;
+          font-size:13px;
+          color:#1b3449;
+          font-weight:800;
+          padding:0;
+        }
+        .inline-filter-pill.range{
+          min-width:180px;
+          flex:1 1 180px;
+        }
+        .inline-filter-pill.range input[type="range"]{
+          width:100%;
+        }
+        .inline-filter-actions{
+          margin-left:auto;
+          display:flex;
+          gap:10px;
+          align-items:center;
+          flex-wrap:wrap;
+        }
+        .inline-filter-actions .primary-btn,
+        .inline-filter-actions .secondary-btn{
+          padding:10px 14px;
+          border-radius:14px;
+          font-size:13px;
+        }
+
         .profile-page-wrap{
           width:100%;
           max-width:560px;
@@ -1283,94 +1449,82 @@ function App() {
           opacity:1;
         }
 
-        .fixed-action-bar{
+        .desktop-action-orbits{
           position:absolute;
           left:0;
           right:0;
-          bottom:max(18px, env(safe-area-inset-bottom));
-          z-index:35;
-          display:flex;
-          justify-content:center;
+          bottom:max(20px, env(safe-area-inset-bottom));
+          z-index:36;
           pointer-events:none;
         }
-        .fixed-action-inner{
-          width:min(100%, 410px);
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          gap:28px;
-          padding:12px 18px;
-          pointer-events:none;
-          background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.18));
-          border:1px solid rgba(255,255,255,.24);
-          border-radius:999px;
-          backdrop-filter:blur(18px);
-          -webkit-backdrop-filter:blur(18px);
-          box-shadow:0 8px 24px rgba(20,39,60,.14);
-        }
-        .action-btn{
-          width:94px;
-          height:94px;
+        .desktop-action-btn{
+          position:absolute;
+          bottom:0;
+          width:96px;
+          height:96px;
           border-radius:50%;
           font-weight:900;
-          position:relative;
-          overflow:hidden;
           pointer-events:auto;
           transform:scale(1);
-          backdrop-filter:blur(22px);
-          -webkit-backdrop-filter:blur(22px);
-          border:1px solid rgba(255,255,255,.42);
+          transition:transform .2s ease, box-shadow .2s ease;
+          backdrop-filter:blur(24px);
+          -webkit-backdrop-filter:blur(24px);
+          border:1px solid rgba(255,255,255,.48);
           box-shadow:
-            0 20px 40px rgba(20,39,60,.22),
-            inset 0 1px 0 rgba(255,255,255,.45),
+            0 20px 38px rgba(20,39,60,.18),
+            inset 0 1px 0 rgba(255,255,255,.52),
             inset 0 -1px 0 rgba(255,255,255,.08);
           display:flex;
           align-items:center;
           justify-content:center;
+          overflow:hidden;
         }
-        .action-btn::before{
+        .desktop-action-btn::before{
           content:"";
           position:absolute;
           top:10px;
           left:14px;
           right:14px;
-          height:28px;
+          height:26px;
           border-radius:999px;
-          background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08));
+          background:linear-gradient(180deg, rgba(255,255,255,.56), rgba(255,255,255,.06));
           pointer-events:none;
         }
-        .action-btn::after{
+        .desktop-action-btn::after{
           content:"";
           position:absolute;
           inset:0;
           border-radius:inherit;
-          background:radial-gradient(circle at top left, rgba(255,255,255,.30), transparent 42%);
+          background:radial-gradient(circle at 30% 25%, rgba(255,255,255,.30), transparent 42%);
           pointer-events:none;
         }
-        .action-btn.skip{
+        .desktop-action-btn.skip{
+          left:44px;
           background:
-            linear-gradient(180deg, rgba(255,255,255,.40), rgba(255,235,240,.14)),
-            linear-gradient(135deg, rgba(255,111,145,.30), rgba(255,142,173,.16));
-          color:#ff4d7c;
-          font-size:38px;
+            linear-gradient(180deg, rgba(255,255,255,.40), rgba(255,239,244,.12)),
+            linear-gradient(135deg, rgba(255,103,140,.22), rgba(255,143,176,.12));
+          color:#ff4e7b;
+          font-size:40px;
         }
-        .action-btn.like{
+        .desktop-action-btn.like{
+          right:44px;
           background:
-            linear-gradient(180deg, rgba(255,255,255,.38), rgba(226,247,255,.16)),
-            linear-gradient(135deg, rgba(77,190,255,.34), rgba(48,135,248,.20));
-          color:#1793f2;
-          font-size:54px;
+            linear-gradient(180deg, rgba(255,255,255,.42), rgba(230,246,255,.12)),
+            linear-gradient(135deg, rgba(49,173,255,.24), rgba(71,133,255,.12));
+          color:#1a93f2;
+          font-size:56px;
           line-height:1;
         }
-        .action-btn:hover{
-          transform:translateY(-3px) scale(1.04);
+        .desktop-action-btn:hover{
+          transform:translateY(-4px) scale(1.04);
           box-shadow:
-            0 24px 48px rgba(20,39,60,.24),
-            inset 0 1px 0 rgba(255,255,255,.5),
+            0 24px 46px rgba(20,39,60,.22),
+            inset 0 1px 0 rgba(255,255,255,.58),
             inset 0 -1px 0 rgba(255,255,255,.08);
         }
-        .action-btn:active{transform:scale(.93)}
-        .action-btn.pop{transform:scale(1.12)}
+        .desktop-action-btn:active{transform:scale(.94)}
+        .desktop-action-btn.pop{transform:scale(1.10)}
+
         .footer-hint{
           margin-top:16px;
           font-size:12px;
@@ -1726,6 +1880,64 @@ function App() {
 
         .phone-bottom-nav{display:none}
 
+        .filters-drawer-backdrop{
+          position:fixed;
+          inset:0;
+          background:rgba(10,21,36,.24);
+          backdrop-filter:blur(4px);
+          z-index:120;
+        }
+        .filters-drawer{
+          position:fixed;
+          top:0;
+          right:0;
+          width:min(460px, 100%);
+          height:100vh;
+          z-index:121;
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.56)),
+            linear-gradient(135deg, rgba(51,168,255,.10), rgba(255,126,166,.08));
+          backdrop-filter:blur(22px);
+          -webkit-backdrop-filter:blur(22px);
+          border-left:1px solid rgba(255,255,255,.55);
+          box-shadow:-16px 0 40px rgba(18,46,74,.12);
+          padding:18px;
+          display:flex;
+          flex-direction:column;
+          animation:drawerIn .28s ease;
+        }
+        .filters-drawer-header{
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          gap:12px;
+          margin-bottom:16px;
+        }
+        .filters-drawer-title{
+          margin:0;
+          font-size:26px;
+          font-weight:900;
+          color:#18354f;
+        }
+        .drawer-close{
+          border:none;
+          width:42px;
+          height:42px;
+          border-radius:50%;
+          background:rgba(255,255,255,.7);
+          color:#23415d;
+          font-size:22px;
+          font-weight:900;
+          cursor:pointer;
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+        }
+        .filters-drawer-body{
+          overflow:auto;
+          padding-right:4px;
+          display:grid;
+          gap:14px;
+        }
+
         @keyframes heartBeat{
           0%,100%{transform:scale(1)}
           35%{transform:scale(1.18)}
@@ -1740,35 +1952,108 @@ function App() {
           0%{transform:scale(.82) translateY(18px);opacity:0}
           100%{transform:scale(1) translateY(0);opacity:1}
         }
+        @keyframes drawerIn{
+          0%{transform:translateX(100%);opacity:.4}
+          100%{transform:translateX(0);opacity:1}
+        }
 
         @media (max-width:1120px){
           .hero,.profile-layout,.settings-layout{grid-template-columns:1fr}
           .quick-grid{grid-template-columns:1fr}
+          .hero-mini-grid{
+            min-height:auto;
+          }
         }
+
+        @media (max-width:980px){
+          .inline-filters-bar{
+            justify-content:flex-start;
+          }
+          .inline-filter-pill{
+            flex:1 1 calc(50% - 10px);
+          }
+          .inline-filter-actions{
+            width:100%;
+            margin-left:0;
+          }
+          .desktop-action-btn.skip{
+            left:24px;
+          }
+          .desktop-action-btn.like{
+            right:24px;
+          }
+        }
+
         @media (max-width:760px){
-          .page{padding:12px 12px 104px}
+          .page{padding:12px 12px 118px}
           .topbar{position:static;flex-direction:column;align-items:flex-start;padding:14px}
           .nav{display:none}
           .panel{padding:18px;border-radius:24px}
           .hero{grid-template-columns:1fr}
+          .hero-mini-grid{
+            grid-template-columns:repeat(2,minmax(0,1fr));
+            gap:12px;
+          }
+          .hero-mini-card{
+            min-height:200px;
+            border-radius:22px;
+          }
+          .hero-mini-name{
+            font-size:18px;
+          }
+          .hero-mini-bio{
+            font-size:12px;
+          }
           .profile-page-wrap{max-width:100%;height:min(82vh,760px);border-radius:28px}
           .profile-hero-photo,.profile-photo-stack img{height:350px}
           .profile-title{font-size:30px}
           .info-grid{grid-template-columns:1fr}
-          .fixed-action-bar{
-            bottom:max(14px, env(safe-area-inset-bottom));
+
+          .inline-filters-bar{
+            padding:10px;
+            border-radius:20px;
+            gap:8px;
           }
-          .fixed-action-inner{
-            width:min(100%, 336px);
-            gap:20px;
+          .inline-filter-pill{
+            flex:1 1 100%;
             padding:10px 12px;
           }
-          .action-btn{
+          .inline-filter-pill label{
+            font-size:10px;
+          }
+          .inline-filter-pill select,
+          .inline-filter-pill input{
+            font-size:12px;
+          }
+          .inline-filter-actions{
+            width:100%;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:8px;
+          }
+          .inline-filter-actions .primary-btn,
+          .inline-filter-actions .secondary-btn{
+            width:100%;
+          }
+
+          .desktop-action-orbits{
+            left:0;
+            right:0;
+            bottom:max(14px, env(safe-area-inset-bottom));
+          }
+          .desktop-action-btn{
             width:82px;
             height:82px;
           }
-          .action-btn.skip{font-size:34px}
-          .action-btn.like{font-size:46px}
+          .desktop-action-btn.skip{
+            left:16px;
+            font-size:34px;
+          }
+          .desktop-action-btn.like{
+            right:16px;
+            font-size:46px;
+          }
+
           .two-col{grid-template-columns:1fr}
           .chat-item{
             padding:12px;
@@ -1783,21 +2068,55 @@ function App() {
           .reply-badge{font-size:10px;padding:5px 9px}
           .delivery-mini{font-size:10px}
           .time-mini{font-size:11px}
+
           .phone-bottom-nav{
-            position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);
-            gap:8px;padding:8px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
-            box-shadow:0 16px 34px rgba(20,39,60,.12);z-index:60
+            position:fixed;
+            left:10px;
+            right:10px;
+            bottom:10px;
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:8px;
+            padding:9px;
+            border-radius:24px;
+            background:rgba(255,255,255,.94);
+            backdrop-filter:blur(14px);
+            box-shadow:0 16px 34px rgba(20,39,60,.12);
+            z-index:80
           }
           .phone-tab-btn{
-            border:none;background:transparent;padding:9px 4px;border-radius:16px;font-size:11px;font-weight:900;
-            color:#5b6e80;line-height:1.15
+            border:none;
+            background:transparent;
+            padding:12px 4px;
+            min-height:54px;
+            border-radius:18px;
+            font-size:12px;
+            font-weight:900;
+            color:#5b6e80;
+            line-height:1.15
           }
-          .phone-tab-btn.active{background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff}
+          .phone-tab-btn.active{
+            background:linear-gradient(135deg,#33a8ff,#1882eb);
+            color:#fff
+          }
+
           .message-input-row{
             flex-direction:column;
           }
           .bubble{
             max-width:86%;
+          }
+
+          .filters-drawer{
+            width:100%;
+            padding:16px 14px 24px;
+          }
+          .filters-drawer-title{
+            font-size:22px;
+          }
+          .glass-filter-btn{
+            font-size:15px;
+            padding:13px 16px;
           }
         }
       `}</style>
@@ -1874,15 +2193,24 @@ function App() {
                 </div>
               </div>
 
-              <div className="hero-preview">
-                <img src={profiles[0].photos[0]} alt={profiles[0].name} />
-                <div className="preview-overlay">
-                  <h2 className="preview-name">
-                    {profiles[0].name}, {profiles[0].age} {profiles[0].zodiac}
-                    {profiles[0].verified && <Badge />}
-                  </h2>
-                  <p className="preview-bio">{lang === "ru" ? profiles[0].bio : profiles[0].bioEn}</p>
-                </div>
+              <div className="hero-mini-grid">
+                {heroPreviewProfiles.map((profile) => (
+                  <div className="hero-mini-card" key={profile.id}>
+                    <img src={profile.photos[0]} alt={profile.name} />
+                    <div className="hero-mini-overlay">
+                      <h3 className="hero-mini-name">
+                        {profile.name}, {profile.age} {profile.zodiac}
+                        {profile.verified && <Badge />}
+                      </h3>
+                      <p className="hero-mini-meta">
+                        {profile.city}, {profile.country}
+                      </p>
+                      <p className="hero-mini-bio">
+                        {lang === "ru" ? profile.bio : profile.bioEn}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -1909,282 +2237,282 @@ function App() {
         {tab === "search" && (
           <>
             <h2 className="section-title">{t.searchTitle}</h2>
+
             <div className="search-top">
-              <button className="secondary-btn" onClick={() => setShowFilters((v) => !v)}>
+              <button className="glass-filter-btn" onClick={() => setShowFilters(true)}>
                 ⚙️ {t.filters}
               </button>
               <div className="muted">{filteredProfiles.length}</div>
             </div>
 
-            {showFilters && (
-              <section className="panel" style={{ marginBottom: 16 }}>
-                <div className="field-group">
-                  <div className="two-col">
-                    <div className="field">
-                      <label>{t.mode}</label>
-                      <select
-                        value={draftSettings.searchMode}
-                        onChange={(e) =>
-                          setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))
-                        }
-                      >
-                        <option value="nearby">{t.nearby}</option>
-                        <option value="all">{t.all}</option>
-                      </select>
-                    </div>
-                    <div className="field">
-                      <label>{t.gender}</label>
-                      <select
-                        value={draftSettings.gender}
-                        onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}
-                      >
-                        <option value="all">{t.all}</option>
-                        <option value="male">{t.men}</option>
-                        <option value="female">{t.women}</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="two-col">
-                    <div className="field">
-                      <label>{t.country}</label>
-                      <select
-                        value={draftSettings.country}
-                        onChange={(e) =>
-                          setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
-                        }
-                      >
-                        {countries.map((country) => (
-                          <option key={country} value={country}>
-                            {country === "All" ? t.allLocations : country}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="field">
-                      <label>{t.city}</label>
-                      <select
-                        value={draftSettings.city}
-                        onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}
-                      >
-                        {cityOptions.map((city) => (
-                          <option key={city} value={city}>
-                            {city === "All" ? t.allLocations : city}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="two-col">
-                    <div className="field">
-                      <label>{t.ageFrom}</label>
-                      <input
-                        type="number"
-                        value={draftSettings.ageFrom}
-                        onChange={(e) =>
-                          setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))
-                        }
-                      />
-                    </div>
-                    <div className="field">
-                      <label>{t.ageTo}</label>
-                      <input
-                        type="number"
-                        value={draftSettings.ageTo}
-                        onChange={(e) =>
-                          setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  <div className="two-col">
-                    <div className="field">
-                      <label>{t.unit}</label>
-                      <select
-                        value={draftSettings.unit}
-                        onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}
-                      >
-                        <option value="mi">{t.miles}</option>
-                        <option value="km">{t.km}</option>
-                      </select>
-                    </div>
-                    <div className="field">
-                      <label>{t.distance}</label>
-                      <input
-                        type="range"
-                        min="1"
-                        max="5000"
-                        value={draftSettings.maxDistance}
-                        onChange={(e) =>
-                          setDraftSettings((p) => ({
-                            ...p,
-                            maxDistance: Number(e.target.value),
-                          }))
-                        }
-                      />
-                      <div className="muted">
-                        {draftSettings.maxDistance}{" "}
-                        {draftSettings.unit === "mi" ? t.miles : t.km}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="filter-actions">
-                    <button className="primary-btn" onClick={applyFilters}>
-                      {t.apply}
-                    </button>
-                    <button className="secondary-btn" onClick={resetFilters}>
-                      {t.reset}
-                    </button>
-                  </div>
-                </div>
-              </section>
-            )}
-
             <section className="search-wrap">
               <div className="panel">
                 {activeProfile ? (
-                  <div className="deck-wrap">
-                    <div
-                      className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
-                      style={cardStyle}
-                      onTouchStart={onTouchStartCard}
-                      onTouchMove={onTouchMoveCard}
-                      onTouchEnd={onTouchEndCard}
-                    >
-                      <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
-                        {t.likeStamp}
-                      </div>
-                      <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
-                        {t.skipStamp}
-                      </div>
-
-                      <div ref={profilePageRef} className="profile-page-scroll">
-                        <img
-                          className="profile-hero-photo"
-                          src={activeProfile.photos[0]}
-                          alt={activeProfile.name}
-                        />
-
-                        <div className="profile-header">
-                          <h3 className="profile-title">
-                            {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
-                            {activeProfile.verified && <Badge />}
-                            <span className="premium-pill">{t.premium}</span>
-                          </h3>
-                          <p className="profile-subtitle">
-                            {activeProfile.city}, {activeProfile.country} •{" "}
-                            {activeProfile.online ? t.online : t.offline}
-                          </p>
+                  <div className="search-stage">
+                    <div className="inline-filters-shell">
+                      <div className="inline-filters-bar">
+                        <div className="inline-filter-pill">
+                          <label>{t.mode}</label>
+                          <select
+                            value={settings.searchMode}
+                            onChange={(e) => setSettings((p) => ({ ...p, searchMode: e.target.value }))}
+                          >
+                            <option value="nearby">{t.nearby}</option>
+                            <option value="all">{t.all}</option>
+                          </select>
                         </div>
 
-                        <div className="profile-section">
-                          <div className="info-grid">
-                            <div className="info-card">
-                              <div className="info-card-label">{t.location}</div>
-                              <div className="info-card-value">
-                                {activeProfile.city}, {activeProfile.country}
-                              </div>
-                            </div>
-                            <div className="info-card">
-                              <div className="info-card-label">{t.lookingFor}</div>
-                              <div className="info-card-value">
-                                {lang === "ru" ? activeProfile.lookingFor : activeProfile.lookingForEn}
-                              </div>
-                            </div>
-                            <div className="info-card">
-                              <div className="info-card-label">{t.height}</div>
-                              <div className="info-card-value">
-                                {lang === "ru" ? activeProfile.height : activeProfile.heightEn}
-                              </div>
-                            </div>
-                            <div className="info-card">
-                              <div className="info-card-label">{t.relationshipStatus}</div>
-                              <div className="info-card-value">
-                                {relationshipLabel(activeProfile)}
-                              </div>
-                            </div>
-                            <div className="info-card">
-                              <div className="info-card-label">{t.age}</div>
-                              <div className="info-card-value">
-                                {activeProfile.age} {t.years}
-                              </div>
-                            </div>
-                            <div className="info-card">
-                              <div className="info-card-label">{t.zodiac}</div>
-                              <div className="info-card-value">{activeProfile.zodiac}</div>
-                            </div>
-                          </div>
+                        <div className="inline-filter-pill">
+                          <label>{t.gender}</label>
+                          <select
+                            value={settings.gender}
+                            onChange={(e) => setSettings((p) => ({ ...p, gender: e.target.value }))}
+                          >
+                            <option value="all">{t.all}</option>
+                            <option value="male">{t.men}</option>
+                            <option value="female">{t.women}</option>
+                          </select>
                         </div>
 
-                        <div className="profile-section">
-                          <h4 className="section-heading">{t.about}</h4>
-                          <div className="bio-box">
-                            {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
-                          </div>
-                        </div>
-
-                        <div className="profile-section">
-                          <h4 className="section-heading">{t.interests}</h4>
-                          <div className="chip-row">
-                            {activeProfile.interests.map((it) => (
-                              <span className="interest" key={it}>
-                                {it}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="profile-section">
-                          <div className="profile-photo-stack">
-                            {activeProfile.photos.map((photo, i) => (
-                              <img key={i} src={photo} alt={`${activeProfile.name}-${i + 1}`} />
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="profile-section">
-                          <div className="profile-footer-actions">
-                            <button
-                              className="danger-btn block"
-                              onClick={() => handleBlock(activeProfile.id)}
-                            >
-                              {blockedIds.includes(activeProfile.id) ? t.blocked : t.block}
-                            </button>
-
-                            <button
-                              className="danger-btn report"
-                              onClick={() => handleReport(activeProfile.id)}
-                            >
-                              {reportedIds.includes(activeProfile.id) ? t.reported : t.report}
-                            </button>
-                          </div>
-
-                          <div className="footer-hint">
-                            {t.footerHint} • {t.swipeHint}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="fixed-action-bar">
-                        <div className="fixed-action-inner">
-                          <button
-                            className={`action-btn skip ${skipPulse ? "pop" : ""}`}
-                            onClick={() =>
-                              triggerSwipeOut("left", () => handleSkip(activeProfile))
+                        <div className="inline-filter-pill">
+                          <label>{t.country}</label>
+                          <select
+                            value={settings.country}
+                            onChange={(e) =>
+                              setSettings((p) => ({
+                                ...p,
+                                country: e.target.value,
+                                city: "All",
+                              }))
                             }
+                          >
+                            {countries.map((country) => (
+                              <option key={country} value={country}>
+                                {country === "All" ? t.allLocations : country}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="inline-filter-pill">
+                          <label>{t.city}</label>
+                          <select
+                            value={settings.city}
+                            onChange={(e) => setSettings((p) => ({ ...p, city: e.target.value }))}
+                          >
+                            {(settings.country === "All"
+                              ? ["All"]
+                              : ["All", ...(countriesMap[settings.country] || [])]
+                            ).map((city) => (
+                              <option key={city} value={city}>
+                                {city === "All" ? t.allLocations : city}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="inline-filter-pill">
+                          <label>{t.ageFrom}</label>
+                          <input
+                            type="number"
+                            value={settings.ageFrom}
+                            onChange={(e) =>
+                              setSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))
+                            }
+                          />
+                        </div>
+
+                        <div className="inline-filter-pill">
+                          <label>{t.ageTo}</label>
+                          <input
+                            type="number"
+                            value={settings.ageTo}
+                            onChange={(e) =>
+                              setSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))
+                            }
+                          />
+                        </div>
+
+                        <div className="inline-filter-pill">
+                          <label>{t.unit}</label>
+                          <select
+                            value={settings.unit}
+                            onChange={(e) => setSettings((p) => ({ ...p, unit: e.target.value }))}
+                          >
+                            <option value="mi">{t.miles}</option>
+                            <option value="km">{t.km}</option>
+                          </select>
+                        </div>
+
+                        <div className="inline-filter-pill range">
+                          <label>
+                            {t.distance}: {settings.maxDistance}{" "}
+                            {settings.unit === "mi" ? t.miles : t.km}
+                          </label>
+                          <input
+                            type="range"
+                            min="1"
+                            max="5000"
+                            value={settings.maxDistance}
+                            onChange={(e) =>
+                              setSettings((p) => ({
+                                ...p,
+                                maxDistance: Number(e.target.value),
+                              }))
+                            }
+                          />
+                        </div>
+
+                        <div className="inline-filter-actions">
+                          <button className="secondary-btn" onClick={resetFilters}>
+                            {t.reset}
+                          </button>
+                          <button
+                            className="primary-btn"
+                            onClick={() => {
+                              setDraftSettings(settings);
+                              setShowFilters(true);
+                            }}
+                          >
+                            {t.filters}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="deck-wrap">
+                      <div
+                        className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
+                        style={cardStyle}
+                        onTouchStart={onTouchStartCard}
+                        onTouchMove={onTouchMoveCard}
+                        onTouchEnd={onTouchEndCard}
+                      >
+                        <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
+                          {t.likeStamp}
+                        </div>
+                        <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
+                          {t.skipStamp}
+                        </div>
+
+                        <div ref={profilePageRef} className="profile-page-scroll">
+                          <img
+                            className="profile-hero-photo"
+                            src={activeProfile.photos[0]}
+                            alt={activeProfile.name}
+                          />
+
+                          <div className="profile-header">
+                            <h3 className="profile-title">
+                              {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
+                              {activeProfile.verified && <Badge />}
+                              <span className="premium-pill">{t.premium}</span>
+                            </h3>
+                            <p className="profile-subtitle">
+                              {activeProfile.city}, {activeProfile.country} •{" "}
+                              {activeProfile.online ? t.online : t.offline}
+                            </p>
+                          </div>
+
+                          <div className="profile-section">
+                            <div className="info-grid">
+                              <div className="info-card">
+                                <div className="info-card-label">{t.location}</div>
+                                <div className="info-card-value">
+                                  {activeProfile.city}, {activeProfile.country}
+                                </div>
+                              </div>
+                              <div className="info-card">
+                                <div className="info-card-label">{t.lookingFor}</div>
+                                <div className="info-card-value">
+                                  {lang === "ru" ? activeProfile.lookingFor : activeProfile.lookingForEn}
+                                </div>
+                              </div>
+                              <div className="info-card">
+                                <div className="info-card-label">{t.height}</div>
+                                <div className="info-card-value">
+                                  {lang === "ru" ? activeProfile.height : activeProfile.heightEn}
+                                </div>
+                              </div>
+                              <div className="info-card">
+                                <div className="info-card-label">{t.relationshipStatus}</div>
+                                <div className="info-card-value">
+                                  {relationshipLabel(activeProfile)}
+                                </div>
+                              </div>
+                              <div className="info-card">
+                                <div className="info-card-label">{t.age}</div>
+                                <div className="info-card-value">
+                                  {activeProfile.age} {t.years}
+                                </div>
+                              </div>
+                              <div className="info-card">
+                                <div className="info-card-label">{t.zodiac}</div>
+                                <div className="info-card-value">{activeProfile.zodiac}</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="profile-section">
+                            <h4 className="section-heading">{t.about}</h4>
+                            <div className="bio-box">
+                              {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
+                            </div>
+                          </div>
+
+                          <div className="profile-section">
+                            <h4 className="section-heading">{t.interests}</h4>
+                            <div className="chip-row">
+                              {activeProfile.interests.map((it) => (
+                                <span className="interest" key={it}>
+                                  {it}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="profile-section">
+                            <div className="profile-photo-stack">
+                              {activeProfile.photos.map((photo, i) => (
+                                <img key={i} src={photo} alt={`${activeProfile.name}-${i + 1}`} />
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="profile-section">
+                            <div className="profile-footer-actions">
+                              <button
+                                className="danger-btn block"
+                                onClick={() => handleBlock(activeProfile.id)}
+                              >
+                                {blockedIds.includes(activeProfile.id) ? t.blocked : t.block}
+                              </button>
+
+                              <button
+                                className="danger-btn report"
+                                onClick={() => handleReport(activeProfile.id)}
+                              >
+                                {reportedIds.includes(activeProfile.id) ? t.reported : t.report}
+                              </button>
+                            </div>
+
+                            <div className="footer-hint">
+                              {t.footerHint} • {t.swipeHint}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="desktop-action-orbits">
+                          <button
+                            className={`desktop-action-btn skip ${skipPulse ? "pop" : ""}`}
+                            onClick={() => triggerSwipeOut("left", () => handleSkip(activeProfile))}
                             title="skip"
                           >
                             ✕
                           </button>
                           <button
-                            className={`action-btn like ${likePulse ? "pop" : ""}`}
-                            onClick={() =>
-                              triggerSwipeOut("right", () => handleLike(activeProfile))
-                            }
+                            className={`desktop-action-btn like ${likePulse ? "pop" : ""}`}
+                            onClick={() => triggerSwipeOut("right", () => handleLike(activeProfile))}
                             title="like"
                           >
                             ♥
@@ -2800,6 +3128,149 @@ function App() {
           {t.settings}
         </button>
       </div>
+
+      {showFilters && (
+        <>
+          <div className="filters-drawer-backdrop" onClick={() => setShowFilters(false)} />
+          <aside className="filters-drawer">
+            <div className="filters-drawer-header">
+              <h3 className="filters-drawer-title">{t.filters}</h3>
+              <button className="drawer-close" onClick={() => setShowFilters(false)}>
+                ×
+              </button>
+            </div>
+
+            <div className="filters-drawer-body">
+              <div className="field-group">
+                <div className="two-col">
+                  <div className="field">
+                    <label>{t.mode}</label>
+                    <select
+                      value={draftSettings.searchMode}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))
+                      }
+                    >
+                      <option value="nearby">{t.nearby}</option>
+                      <option value="all">{t.all}</option>
+                    </select>
+                  </div>
+                  <div className="field">
+                    <label>{t.gender}</label>
+                    <select
+                      value={draftSettings.gender}
+                      onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}
+                    >
+                      <option value="all">{t.all}</option>
+                      <option value="male">{t.men}</option>
+                      <option value="female">{t.women}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="two-col">
+                  <div className="field">
+                    <label>{t.country}</label>
+                    <select
+                      value={draftSettings.country}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
+                      }
+                    >
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country === "All" ? t.allLocations : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label>{t.city}</label>
+                    <select
+                      value={draftSettings.city}
+                      onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}
+                    >
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city === "All" ? t.allLocations : city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="two-col">
+                  <div className="field">
+                    <label>{t.ageFrom}</label>
+                    <input
+                      type="number"
+                      value={draftSettings.ageFrom}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, ageFrom: Number(e.target.value || 18) }))
+                      }
+                    />
+                  </div>
+                  <div className="field">
+                    <label>{t.ageTo}</label>
+                    <input
+                      type="number"
+                      value={draftSettings.ageTo}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({ ...p, ageTo: Number(e.target.value || 60) }))
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="two-col">
+                  <div className="field">
+                    <label>{t.unit}</label>
+                    <select
+                      value={draftSettings.unit}
+                      onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}
+                    >
+                      <option value="mi">{t.miles}</option>
+                      <option value="km">{t.km}</option>
+                    </select>
+                  </div>
+                  <div className="field">
+                    <label>{t.distance}</label>
+                    <input
+                      type="range"
+                      min="1"
+                      max="5000"
+                      value={draftSettings.maxDistance}
+                      onChange={(e) =>
+                        setDraftSettings((p) => ({
+                          ...p,
+                          maxDistance: Number(e.target.value),
+                        }))
+                      }
+                    />
+                    <div className="muted">
+                      {draftSettings.maxDistance}{" "}
+                      {draftSettings.unit === "mi" ? t.miles : t.km}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="filter-actions">
+                  <button className="primary-btn" onClick={applyFilters}>
+                    {t.apply}
+                  </button>
+                  <button className="secondary-btn" onClick={resetFilters}>
+                    {t.reset}
+                  </button>
+                  <button className="secondary-btn" onClick={() => setShowFilters(false)}>
+                    {t.close}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </>
+      )}
 
       {showMatch && matchedProfile && (
         <div className="mutual-modal" onClick={() => setShowMatch(false)}>
