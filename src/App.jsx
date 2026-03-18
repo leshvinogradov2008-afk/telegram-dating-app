@@ -17,7 +17,8 @@ const tr = {
     heroSecondary: "Открыть сообщения",
 
     card1: "Полный профиль",
-    card1t: "Каждая анкета открывается как отдельная вертикальная страница без наложения текста на фото.",
+    card1t:
+      "Каждая анкета открывается как отдельная вертикальная страница без наложения текста на фото.",
     card2: "Удобный поиск",
     card2t: "Фильтры по стране, городу, возрасту, полу и дистанции.",
     card3: "Выбор в любой момент",
@@ -55,6 +56,8 @@ const tr = {
     send: "Отправить",
     noMessages: "Пока нет взаимных симпатий.",
     openChat: "Открыть чат",
+    openProfile: "Открыть профиль",
+    backToMessages: "Назад к сообщениям",
 
     msgMatches: "Диалоги",
     msgLikedYou: "Кому я понравился",
@@ -132,6 +135,7 @@ const tr = {
     skipStamp: "НЕТ",
     swipeHint: "Свайп вправо — лайк, влево — дизлайк",
     typing: "печатает...",
+    profilePreviewTitle: "Профиль",
   },
   en: {
     brand: "Telegram Dating",
@@ -149,11 +153,13 @@ const tr = {
     heroSecondary: "Open messages",
 
     card1: "Full profile",
-    card1t: "Each profile opens as a separate vertical page without text covering the photos.",
+    card1t:
+      "Each profile opens as a separate vertical page without text covering the photos.",
     card2: "Smart search",
     card2t: "Filters by country, city, age, gender and distance.",
     card3: "Choose anytime",
-    card3t: "Like and dislike buttons stay fixed and visible during the whole profile view.",
+    card3t:
+      "Like and dislike buttons stay fixed and visible during the whole profile view.",
 
     searchTitle: "Search",
     filters: "Search settings",
@@ -187,6 +193,8 @@ const tr = {
     send: "Send",
     noMessages: "No mutual matches yet.",
     openChat: "Open chat",
+    openProfile: "Open profile",
+    backToMessages: "Back to messages",
 
     msgMatches: "Dialogs",
     msgLikedYou: "Liked you",
@@ -264,6 +272,7 @@ const tr = {
     skipStamp: "NOPE",
     swipeHint: "Swipe right — like, left — dislike",
     typing: "typing...",
+    profilePreviewTitle: "Profile",
   },
 };
 
@@ -327,11 +336,11 @@ const initialProfiles = [
     zodiac: "♎",
     verified: true,
     avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет 😊 Рада взаимной симпатии.", "Как проходит твой день?"],
     starterMessagesEn: ["Hi 😊 Glad we matched.", "How is your day going?"],
@@ -356,11 +365,11 @@ const initialProfiles = [
     zodiac: "♌",
     verified: false,
     avatar:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Очень приятно 😊", "Ты больше любишь город или природу?"],
     starterMessagesEn: ["Nice to meet you 😊", "Do you prefer the city or nature?"],
@@ -385,11 +394,11 @@ const initialProfiles = [
     zodiac: "♐",
     verified: true,
     avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет! Рад мэтчу.", "Чем любишь заниматься в свободное время?"],
     starterMessagesEn: ["Hi! Glad we matched.", "What do you like doing in your free time?"],
@@ -414,11 +423,11 @@ const initialProfiles = [
     zodiac: "♒",
     verified: false,
     avatar:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет 👋", "Какой у тебя идеальный выходной?"],
     starterMessagesEn: ["Hi 👋", "What does your perfect weekend look like?"],
@@ -443,11 +452,11 @@ const initialProfiles = [
     zodiac: "♉",
     verified: true,
     avatar:
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет ✨", "Что тебе ближе — спонтанность или план?"],
     starterMessagesEn: ["Hi ✨", "What do you prefer — spontaneity or planning?"],
@@ -472,11 +481,11 @@ const initialProfiles = [
     zodiac: "♏",
     verified: true,
     avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Рад знакомству.", "Какой город тебе нравится больше всего?"],
     starterMessagesEn: ["Nice to meet you.", "What city do you like the most?"],
@@ -501,11 +510,11 @@ const initialProfiles = [
     zodiac: "♊",
     verified: true,
     avatar:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет 💫", "Любишь спонтанные поездки?"],
     starterMessagesEn: ["Hi 💫", "Do you like spontaneous trips?"],
@@ -530,11 +539,11 @@ const initialProfiles = [
     zodiac: "♑",
     verified: false,
     avatar:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет.", "Как ты обычно проводишь вечер?"],
     starterMessagesEn: ["Hi.", "How do you usually spend your evening?"],
@@ -559,11 +568,11 @@ const initialProfiles = [
     zodiac: "♍",
     verified: false,
     avatar:
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Очень приятно 🌷", "Какой у тебя любимый город?"],
     starterMessagesEn: ["Nice to meet you 🌷", "What is your favorite city?"],
@@ -588,11 +597,11 @@ const initialProfiles = [
     zodiac: "♈",
     verified: true,
     avatar:
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=90",
     photos: [
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
     ],
     starterMessagesRu: ["Привет, рад знакомству.", "Что тебя вдохновляет?"],
     starterMessagesEn: ["Hi, nice to meet you.", "What inspires you?"],
@@ -665,6 +674,7 @@ function App() {
   const [swipeX, setSwipeX] = useState(0);
   const [swipeAnimating, setSwipeAnimating] = useState(false);
   const [matchBurst, setMatchBurst] = useState(false);
+  const [viewedProfileId, setViewedProfileId] = useState(null);
 
   const touchStateRef = useRef({
     startX: 0,
@@ -716,7 +726,7 @@ function App() {
     bio: "Люблю живое общение, красивые места, музыку и интересные знакомства.",
     bioEn: "I love real conversations, beautiful places, music and interesting connections.",
     photos: [
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=90",
     ],
   });
 
@@ -726,7 +736,7 @@ function App() {
   const profilePageRef = useRef(null);
   const messageBodyRef = useRef(null);
   const filterButtonRef = useRef(null);
-  const filterPopoverRef = useRef(null);
+  const filterRailRef = useRef(null);
 
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
   const cityOptions = useMemo(() => {
@@ -750,6 +760,7 @@ function App() {
 
   const activeProfile = filteredProfiles[currentDeckIndex] || null;
   const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
+  const viewedProfile = profiles.find((p) => p.id === viewedProfileId) || null;
   const heroPreviewProfiles = profiles.slice(0, 4);
 
   useEffect(() => {
@@ -764,7 +775,7 @@ function App() {
     }
     setSwipeX(0);
     setSwipeAnimating(false);
-  }, [activeProfile?.id]);
+  }, [activeProfile?.id, viewedProfile?.id]);
 
   useEffect(() => {
     if (matches.length && !matches.includes(selectedChatId)) {
@@ -789,8 +800,8 @@ function App() {
 
     const handleClickOutside = (e) => {
       if (
-        filterPopoverRef.current &&
-        !filterPopoverRef.current.contains(e.target) &&
+        filterRailRef.current &&
+        !filterRailRef.current.contains(e.target) &&
         filterButtonRef.current &&
         !filterButtonRef.current.contains(e.target)
       ) {
@@ -957,6 +968,12 @@ function App() {
     setChatScreen("chat");
   };
 
+  const openProfilePreview = (id) => {
+    if (!matches.includes(id)) return;
+    setViewedProfileId(id);
+    setTab("profilePreview");
+  };
+
   const handleBlock = (id) => {
     setBlockedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
     setNotice(t.blockReason);
@@ -970,7 +987,8 @@ function App() {
     setNotice(t.reportReason);
   };
 
-  const relationshipLabel = (profile) => t[profile.relationshipStatus] || profile.relationshipStatus;
+  const relationshipLabel = (profile) =>
+    t[profile.relationshipStatus] || profile.relationshipStatus;
 
   const listProfiles =
     messageView === "matches"
@@ -1050,9 +1068,115 @@ function App() {
     transition: swipeAnimating ? "transform .22s ease, box-shadow .22s ease" : "none",
   };
 
+  const renderProfileContent = (profile, options = {}) => {
+    if (!profile) return null;
+
+    const {
+      interactive = false,
+      previewOnly = false,
+      scrollRef = null,
+    } = options;
+
+    return (
+      <div ref={scrollRef} className="profile-page-scroll premium-scroll">
+        <img className="profile-hero-photo" src={profile.photos[0]} alt={profile.name} />
+
+        <div className="profile-header">
+          <h3 className="profile-title">
+            {profile.name}, {profile.age} {profile.zodiac}
+            {profile.verified && <Badge />}
+            {!previewOnly && <span className="premium-pill">{t.premium}</span>}
+          </h3>
+          <p className="profile-subtitle">
+            {profile.city}, {profile.country} • {profile.online ? t.online : t.offline}
+          </p>
+        </div>
+
+        <div className="profile-section">
+          <div className="info-grid">
+            <div className="info-card">
+              <div className="info-card-label">{t.location}</div>
+              <div className="info-card-value">
+                {profile.city}, {profile.country}
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-card-label">{t.lookingFor}</div>
+              <div className="info-card-value">
+                {lang === "ru" ? profile.lookingFor : profile.lookingForEn}
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-card-label">{t.height}</div>
+              <div className="info-card-value">
+                {lang === "ru" ? profile.height : profile.heightEn}
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-card-label">{t.relationshipStatus}</div>
+              <div className="info-card-value">{relationshipLabel(profile)}</div>
+            </div>
+            <div className="info-card">
+              <div className="info-card-label">{t.age}</div>
+              <div className="info-card-value">
+                {profile.age} {t.years}
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-card-label">{t.zodiac}</div>
+              <div className="info-card-value">{profile.zodiac}</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="profile-section">
+          <h4 className="section-heading">{t.about}</h4>
+          <div className="bio-box">{lang === "ru" ? profile.bio : profile.bioEn}</div>
+        </div>
+
+        <div className="profile-section">
+          <h4 className="section-heading">{t.interests}</h4>
+          <div className="chip-row">
+            {profile.interests.map((it) => (
+              <span className="interest" key={it}>
+                {it}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="profile-section">
+          <div className="profile-photo-stack">
+            {profile.photos.map((photo, i) => (
+              <img key={i} src={photo} alt={`${profile.name}-${i + 1}`} />
+            ))}
+          </div>
+        </div>
+
+        {interactive && (
+          <div className="profile-section">
+            <div className="profile-footer-actions">
+              <button className="danger-btn block" onClick={() => handleBlock(profile.id)}>
+                {blockedIds.includes(profile.id) ? t.blocked : t.block}
+              </button>
+
+              <button className="danger-btn report" onClick={() => handleReport(profile.id)}>
+                {reportedIds.includes(profile.id) ? t.reported : t.report}
+              </button>
+            </div>
+
+            <div className="footer-hint">
+              {t.footerHint} • {t.swipeHint}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const FilterContent = () => (
-    <div className="filters-grid">
-      <div className="filter-card">
+    <div className="filters-rail-grid">
+      <div className="filter-card compact">
         <label>{t.mode}</label>
         <select
           value={draftSettings.searchMode}
@@ -1065,7 +1189,7 @@ function App() {
         </select>
       </div>
 
-      <div className="filter-card">
+      <div className="filter-card compact">
         <label>{t.gender}</label>
         <select
           value={draftSettings.gender}
@@ -1077,7 +1201,7 @@ function App() {
         </select>
       </div>
 
-      <div className="filter-card">
+      <div className="filter-card compact">
         <label>{t.country}</label>
         <select
           value={draftSettings.country}
@@ -1097,7 +1221,7 @@ function App() {
         </select>
       </div>
 
-      <div className="filter-card">
+      <div className="filter-card compact">
         <label>{t.city}</label>
         <select
           value={draftSettings.city}
@@ -1111,7 +1235,7 @@ function App() {
         </select>
       </div>
 
-      <div className="filter-card">
+      <div className="filter-card compact unit-card">
         <label>{t.unit}</label>
         <select
           value={draftSettings.unit}
@@ -1122,7 +1246,7 @@ function App() {
         </select>
       </div>
 
-      <div className="filter-card range-card age-card">
+      <div className="filter-card compact slim-range age-compact">
         <div className="range-title-row">
           <label>{t.ageRange}</label>
           <span className="range-value">
@@ -1130,7 +1254,7 @@ function App() {
           </span>
         </div>
 
-        <div className="dual-range">
+        <div className="dual-range compact-range">
           <div className="dual-range-track" />
           <div
             className="dual-range-active"
@@ -1156,16 +1280,15 @@ function App() {
         </div>
       </div>
 
-      <div className="filter-card range-card distance-card">
+      <div className="filter-card compact slim-range distance-compact">
         <div className="range-title-row">
           <label>{t.distance}</label>
           <span className="range-value">
-            {draftSettings.maxDistance}{" "}
-            {draftSettings.unit === "mi" ? t.miles : t.km}
+            {draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}
           </span>
         </div>
 
-        <div className="single-range">
+        <div className="single-range compact-range">
           <div className="single-range-track" />
           <div
             className="single-range-active"
@@ -1186,7 +1309,7 @@ function App() {
         </div>
       </div>
 
-      <div className="filters-actions">
+      <div className="filters-actions compact-actions">
         <button className="secondary-btn" onClick={resetFilters}>
           {t.reset}
         </button>
@@ -1214,10 +1337,27 @@ function App() {
         body{
           overflow-x:hidden;
           overscroll-behavior-y:none;
+          -webkit-font-smoothing:antialiased;
+          text-rendering:optimizeLegibility;
         }
         button,input,select,textarea{font-family:inherit}
         .app-shell{min-height:100vh}
-        .page{max-width:1380px;margin:0 auto;padding:18px 16px 110px}
+        .page{
+          max-width:1380px;
+          margin:0 auto;
+          padding:18px 16px 110px;
+          scroll-behavior:smooth;
+        }
+        .page,
+        .panel,
+        .profile-page-scroll,
+        .message-body{
+          scroll-behavior:smooth;
+        }
+        .premium-scroll{
+          -webkit-overflow-scrolling:touch;
+          overscroll-behavior:contain;
+        }
         .topbar,.panel{
           background:rgba(255,255,255,.84);
           backdrop-filter:blur(16px);
@@ -1342,21 +1482,43 @@ function App() {
           background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff;font-weight:900;margin-bottom:14px
         }
 
+        .search-wrap{
+          display:grid;
+          grid-template-columns:minmax(0,1fr);
+          gap:16px
+        }
+        .search-stage{
+          width:100%;
+          display:grid;
+          gap:14px;
+          align-items:start;
+        }
+        .search-head-area{
+          display:grid;
+          gap:10px;
+          margin-bottom:8px;
+        }
         .search-toolbar{
           position:relative;
           display:flex;
+          align-items:center;
           justify-content:space-between;
-          align-items:flex-start;
           gap:12px;
-          margin-bottom:16px
+        }
+        .search-toolbar-left{
+          display:flex;
+          align-items:center;
+          gap:12px;
+          min-width:0;
+          flex-wrap:wrap;
         }
         .glass-filter-btn{
           display:inline-flex;
           align-items:center;
           gap:10px;
-          padding:14px 18px;
+          padding:12px 16px;
           border-radius:999px;
-          font-size:16px;
+          font-size:15px;
           color:#173550;
           background:
             linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.28)),
@@ -1381,23 +1543,22 @@ function App() {
             linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.40)),
             linear-gradient(135deg, rgba(72,170,255,.22), rgba(255,120,170,.16));
         }
-        .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
-        .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:78vh}
-        .search-stage{
-          width:100%;
-          display:grid;
-          gap:16px;
-          align-items:start;
+        .search-counter{
+          font-size:18px;
+          font-weight:900;
+          color:#627b91;
+          min-width:26px;
+          text-align:right;
         }
 
-        .filters-popover{
-          position:absolute;
-          top:64px;
-          left:0;
-          width:min(980px, calc(100vw - 32px));
-          z-index:95;
-          padding:16px;
-          border-radius:26px;
+        .filters-inline-shell{
+          position:relative;
+          min-height:0;
+        }
+        .filters-rail{
+          width:100%;
+          border-radius:24px;
+          padding:12px 14px;
           background:
             linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.58)),
             linear-gradient(135deg, rgba(51,168,255,.08), rgba(255,126,166,.06));
@@ -1405,36 +1566,36 @@ function App() {
           -webkit-backdrop-filter:blur(22px);
           border:1px solid rgba(255,255,255,.56);
           box-shadow:
-            0 22px 48px rgba(18,46,74,.14),
+            0 16px 38px rgba(18,46,74,.12),
             inset 0 1px 0 rgba(255,255,255,.72);
-          animation:filtersDrop .22s ease;
-          transform-origin:top left;
+          animation:filterRailSlide .26s ease;
+          transform-origin:left center;
         }
-        .filters-grid{
+        .filters-rail-grid{
           display:grid;
-          grid-template-columns:repeat(12,minmax(0,1fr));
-          gap:12px;
+          grid-template-columns:1.1fr 1fr 1.15fr 1.15fr .8fr 1.6fr 1.6fr auto;
+          gap:10px;
+          align-items:end;
         }
         .filter-card{
-          grid-column:span 3;
           min-width:0;
-          padding:14px 14px 12px;
-          border-radius:20px;
-          background:rgba(255,255,255,.68);
-          border:1px solid rgba(138,181,216,.16);
-          box-shadow:inset 0 1px 0 rgba(255,255,255,.64);
+          padding:10px 12px;
+          border-radius:18px;
+          background:rgba(255,255,255,.72);
+          border:1px solid rgba(138,181,216,.14);
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.70);
         }
-        .filter-card.range-card{
-          grid-column:span 6;
+        .filter-card.compact{
+          min-height:72px;
         }
         .filter-card label{
           display:block;
-          margin-bottom:8px;
-          font-size:11px;
+          margin-bottom:7px;
+          font-size:10px;
           font-weight:900;
           color:#7c94a9;
           text-transform:uppercase;
-          letter-spacing:.05em;
+          letter-spacing:.06em;
         }
         .filter-card select,
         .filter-card input[type="number"]{
@@ -1442,23 +1603,28 @@ function App() {
           border:none;
           outline:none;
           background:transparent;
-          font-size:15px;
+          font-size:14px;
           font-weight:800;
           color:#18354f;
           padding:0;
+          min-height:24px;
+        }
+        .slim-range{
+          padding-top:10px;
+          padding-bottom:10px;
         }
         .range-title-row{
           display:flex;
           align-items:center;
           justify-content:space-between;
-          gap:10px;
-          margin-bottom:12px;
+          gap:8px;
+          margin-bottom:10px;
         }
         .range-title-row label{
           margin:0;
         }
         .range-value{
-          font-size:14px;
+          font-size:13px;
           font-weight:900;
           color:#1a3854;
           white-space:nowrap;
@@ -1466,25 +1632,29 @@ function App() {
         .dual-range,
         .single-range{
           position:relative;
-          height:34px;
+          height:24px;
           display:flex;
           align-items:center;
+        }
+        .compact-range{
+          height:20px;
         }
         .dual-range-track,
         .single-range-track{
           position:absolute;
           left:0;
           right:0;
-          height:8px;
+          height:6px;
           border-radius:999px;
           background:#dfeaf5;
         }
         .dual-range-active,
         .single-range-active{
           position:absolute;
-          height:8px;
+          height:6px;
           border-radius:999px;
           background:linear-gradient(135deg,#33a8ff,#1882eb);
+          transition:left .06s linear, width .06s linear;
         }
         .single-range-active{
           left:0;
@@ -1504,19 +1674,24 @@ function App() {
         .single-range input[type="range"]::-webkit-slider-thumb{
           -webkit-appearance:none;
           appearance:none;
-          width:22px;
-          height:22px;
+          width:20px;
+          height:20px;
           border-radius:50%;
           background:#fff;
           border:2px solid #2f9cff;
           box-shadow:0 4px 14px rgba(23,73,115,.16);
           pointer-events:auto;
           cursor:pointer;
+          transition:transform .08s ease;
+        }
+        .dual-range input[type="range"]::-webkit-slider-thumb:active,
+        .single-range input[type="range"]::-webkit-slider-thumb:active{
+          transform:scale(1.06);
         }
         .dual-range input[type="range"]::-moz-range-thumb,
         .single-range input[type="range"]::-moz-range-thumb{
-          width:22px;
-          height:22px;
+          width:20px;
+          height:20px;
           border-radius:50%;
           background:#fff;
           border:2px solid #2f9cff;
@@ -1526,26 +1701,45 @@ function App() {
         }
         .dual-range input[type="range"]::-webkit-slider-runnable-track,
         .single-range input[type="range"]::-webkit-slider-runnable-track{
-          height:8px;
+          height:6px;
           background:transparent;
         }
         .dual-range input[type="range"]::-moz-range-track,
         .single-range input[type="range"]::-moz-range-track{
-          height:8px;
+          height:6px;
           background:transparent;
           border:none;
         }
-        .filters-actions{
-          grid-column:span 12;
+        .compact-actions{
           display:flex;
+          align-items:center;
           justify-content:flex-end;
-          gap:10px;
-          padding-top:4px;
+          gap:8px;
+          min-height:72px;
+          padding-left:2px;
+        }
+        .compact-actions .primary-btn,
+        .compact-actions .secondary-btn{
+          padding:11px 16px;
+          border-radius:14px;
+          font-size:13px;
+          white-space:nowrap;
         }
 
-        .profile-page-wrap{
+        .deck-wrap{
+          display:flex;
+          justify-content:center;
+          align-items:flex-start;
+          min-height:78vh
+        }
+        .search-card-stage{
           width:100%;
           max-width:560px;
+          position:relative;
+          padding-bottom:118px;
+        }
+        .profile-page-wrap{
+          width:100%;
           height:min(84vh,820px);
           border-radius:34px;
           overflow:hidden;
@@ -1554,6 +1748,7 @@ function App() {
           box-shadow:0 30px 60px rgba(20,39,60,.18);
           touch-action:pan-y;
           user-select:none;
+          will-change:transform;
         }
         .profile-page-wrap.is-dragging{
           box-shadow:0 38px 78px rgba(20,39,60,.24);
@@ -1561,10 +1756,9 @@ function App() {
         .profile-page-scroll{
           height:100%;
           overflow:auto;
-          padding-bottom:210px;
+          padding-bottom:44px;
           -ms-overflow-style:none;
           scrollbar-width:none;
-          scroll-behavior:smooth;
           -webkit-overflow-scrolling:touch;
           overscroll-behavior:contain;
         }
@@ -1718,13 +1912,14 @@ function App() {
           opacity:1;
         }
 
-        .desktop-action-orbits{
+        .search-floating-actions{
           position:absolute;
           left:0;
           right:0;
-          bottom:max(20px, env(safe-area-inset-bottom));
-          z-index:36;
+          bottom:max(10px, env(safe-area-inset-bottom));
+          z-index:80;
           pointer-events:none;
+          min-height:100px;
         }
         .desktop-action-btn{
           position:absolute;
@@ -1840,7 +2035,14 @@ function App() {
         .list-item,.chat-item{
           display:flex;align-items:center;gap:12px;padding:14px;border-radius:22px;background:#f8fbff
         }
-        .list-item img{width:58px;height:58px;border-radius:18px;flex-shrink:0}
+        .list-item img{
+          width:62px;
+          height:62px;
+          border-radius:18px;
+          object-fit:cover;
+          object-position:center;
+          flex-shrink:0
+        }
         .chat-item{
           cursor:pointer;
           align-items:flex-start;
@@ -1859,9 +2061,11 @@ function App() {
           border:1px solid rgba(51,168,255,.14)
         }
         .chat-item img{
-          width:56px;
-          height:56px;
-          border-radius:50%;
+          width:64px;
+          height:64px;
+          border-radius:18px;
+          object-fit:cover;
+          object-position:center;
           flex-shrink:0;
         }
         .chat-main{
@@ -1877,8 +2081,8 @@ function App() {
         }
         .avatar-status{
           position:absolute;
-          right:1px;
-          bottom:1px;
+          right:2px;
+          bottom:2px;
           width:13px;
           height:13px;
           border-radius:50%;
@@ -1992,15 +2196,27 @@ function App() {
           padding-bottom:14px;
           border-bottom:1px solid rgba(82,131,176,.10)
         }
-        .message-header img{width:56px;height:56px;border-radius:50%}
+        .message-header img{
+          width:68px;
+          height:68px;
+          border-radius:18px;
+          object-fit:cover;
+          object-position:center;
+        }
         .message-header-line{
           display:flex;
           align-items:center;
           gap:8px;
           justify-content:space-between;
         }
+        .message-header-actions{
+          display:flex;
+          gap:8px;
+          flex-wrap:wrap;
+          margin-top:8px;
+        }
         .message-body{
-          padding:18px 6px 18px 0;
+          padding:18px 10px 18px 10px;
           overflow:auto;
           display:flex;
           flex-direction:column;
@@ -2011,8 +2227,6 @@ function App() {
             linear-gradient(180deg,#eef6fd 0%, #edf5fc 100%);
           border-radius:22px;
           margin-top:12px;
-          padding-left:10px;
-          padding-right:10px;
           scroll-behavior:smooth;
           -webkit-overflow-scrolling:touch;
           overscroll-behavior:contain;
@@ -2107,10 +2321,10 @@ function App() {
         .field-group,.help-grid,.info-list{display:grid;gap:14px}
         .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
         .profile-avatar{text-align:center}
-        .profile-avatar img{width:180px;height:180px;border-radius:50%;margin-bottom:14px}
+        .profile-avatar img{width:180px;height:180px;border-radius:50%;margin-bottom:14px;object-fit:cover}
         .profile-main-name{margin:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
         .profile-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:12px}
-        .profile-photo-grid img{width:100%;height:170px;border-radius:18px}
+        .profile-photo-grid img{width:100%;height:170px;border-radius:18px;object-fit:cover}
         .info-row{
           display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(82,131,176,.10)
         }
@@ -2179,37 +2393,36 @@ function App() {
           0%{transform:scale(.82) translateY(18px);opacity:0}
           100%{transform:scale(1) translateY(0);opacity:1}
         }
-        @keyframes filtersDrop{
-          0%{opacity:0;transform:translateY(-10px) scale(.98)}
-          100%{opacity:1;transform:translateY(0) scale(1)}
+        @keyframes filterRailSlide{
+          0%{opacity:0;transform:translateX(-16px) scale(.985)}
+          100%{opacity:1;transform:translateX(0) scale(1)}
+        }
+
+        @media (max-width:1280px){
+          .filters-rail-grid{
+            grid-template-columns:repeat(4,minmax(0,1fr));
+          }
+          .compact-actions{
+            grid-column:span 4;
+            justify-content:flex-end;
+            min-height:auto;
+          }
         }
 
         @media (max-width:1120px){
           .hero,.profile-layout,.settings-layout{grid-template-columns:1fr}
           .quick-grid{grid-template-columns:1fr}
-          .hero-mini-grid{
-            min-height:auto;
-          }
-          .filter-card{
-            grid-column:span 4;
-          }
-          .filter-card.range-card{
-            grid-column:span 6;
-          }
+          .hero-mini-grid{min-height:auto}
         }
 
         @media (max-width:980px){
-          .desktop-action-btn.skip{
-            left:72px;
+          .desktop-action-btn.skip{left:72px}
+          .desktop-action-btn.like{right:72px}
+          .filters-rail-grid{
+            grid-template-columns:repeat(3,minmax(0,1fr));
           }
-          .desktop-action-btn.like{
-            right:72px;
-          }
-          .filter-card{
-            grid-column:span 6;
-          }
-          .filter-card.range-card{
-            grid-column:span 12;
+          .compact-actions{
+            grid-column:span 3;
           }
         }
 
@@ -2227,65 +2440,45 @@ function App() {
             min-height:200px;
             border-radius:22px;
           }
-          .hero-mini-name{
-            font-size:18px;
+          .hero-mini-name{font-size:18px}
+          .hero-mini-bio{font-size:12px}
+          .profile-page-wrap{
+            max-width:100%;
+            height:min(82vh,760px);
+            border-radius:28px
           }
-          .hero-mini-bio{
-            font-size:12px;
-          }
-          .profile-page-wrap{max-width:100%;height:min(82vh,760px);border-radius:28px}
           .profile-hero-photo,.profile-photo-stack img{height:350px}
           .profile-title{font-size:30px}
           .info-grid{grid-template-columns:1fr}
 
-          .filters-popover{
-            top:60px;
-            left:0;
-            right:0;
-            width:100%;
-            padding:14px;
+          .filters-rail{
+            padding:12px;
             border-radius:22px;
           }
-          .filters-grid{
-            grid-template-columns:1fr;
+          .filters-rail-grid{
+            grid-template-columns:1fr 1fr;
             gap:10px;
           }
-          .filter-card,
-          .filter-card.range-card,
-          .filters-actions{
-            grid-column:span 1;
-          }
-          .filters-actions{
-            justify-content:stretch;
+          .compact-actions{
+            grid-column:span 2;
             display:grid;
             grid-template-columns:1fr 1fr;
           }
-          .filters-actions .primary-btn,
-          .filters-actions .secondary-btn{
-            width:100%;
-          }
 
-          .desktop-action-orbits{
-            left:0;
-            right:0;
-            bottom:max(14px, env(safe-area-inset-bottom));
+          .search-card-stage{
+            padding-bottom:110px;
+          }
+          .search-floating-actions{
+            bottom:max(6px, env(safe-area-inset-bottom));
           }
           .desktop-action-btn{
             width:80px;
             height:80px;
           }
-          .desktop-action-btn.skip{
-            left:42px;
-          }
-          .desktop-action-btn.like{
-            right:42px;
-          }
-          .action-icon-heart{
-            font-size:40px;
-          }
-          .action-icon-skip{
-            font-size:32px;
-          }
+          .desktop-action-btn.skip{left:32px}
+          .desktop-action-btn.like{right:32px}
+          .action-icon-heart{font-size:40px}
+          .action-icon-skip{font-size:32px}
 
           .two-col{grid-template-columns:1fr}
           .chat-item{
@@ -2293,8 +2486,14 @@ function App() {
             border-radius:18px;
           }
           .chat-item img{
-            width:52px;
-            height:52px;
+            width:56px;
+            height:56px;
+            border-radius:16px;
+          }
+          .message-header img{
+            width:60px;
+            height:60px;
+            border-radius:16px;
           }
           .item-title{font-size:14px}
           .item-sub{font-size:12px}
@@ -2333,11 +2532,27 @@ function App() {
             color:#fff
           }
 
-          .message-input-row{
-            flex-direction:column;
+          .message-input-row{flex-direction:column}
+          .bubble{max-width:86%}
+        }
+
+        @media (max-width:520px){
+          .filters-rail-grid{
+            grid-template-columns:1fr;
           }
-          .bubble{
-            max-width:86%;
+          .compact-actions{
+            grid-column:span 1;
+            grid-template-columns:1fr 1fr;
+          }
+          .search-toolbar{
+            align-items:flex-start;
+          }
+          .search-counter{
+            padding-top:8px;
+          }
+          .glass-filter-btn{
+            font-size:14px;
+            padding:11px 14px;
           }
         }
       `}</style>
@@ -2459,151 +2674,57 @@ function App() {
           <>
             <h2 className="section-title">{t.searchTitle}</h2>
 
-            <div className="search-toolbar">
-              <button
-                ref={filterButtonRef}
-                className={`glass-filter-btn ${showFilters ? "active" : ""}`}
-                onClick={() => setShowFilters((prev) => !prev)}
-              >
-                ⚙️ {t.filters}
-              </button>
-
-              <div className="muted">{filteredProfiles.length}</div>
-
-              {showFilters && (
-                <div className="filters-popover" ref={filterPopoverRef}>
-                  <FilterContent />
-                </div>
-              )}
-            </div>
-
             <section className="search-wrap">
+              <div className="search-head-area">
+                <div className="search-toolbar">
+                  <div className="search-toolbar-left">
+                    <button
+                      ref={filterButtonRef}
+                      className={`glass-filter-btn ${showFilters ? "active" : ""}`}
+                      onClick={() => setShowFilters((prev) => !prev)}
+                    >
+                      ⚙️ {t.filters}
+                    </button>
+                  </div>
+
+                  <div className="search-counter">{filteredProfiles.length}</div>
+                </div>
+
+                <div className="filters-inline-shell">
+                  {showFilters && (
+                    <div className="filters-rail" ref={filterRailRef}>
+                      <FilterContent />
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div className="panel">
                 {activeProfile ? (
                   <div className="search-stage">
                     <div className="deck-wrap">
-                      <div
-                        className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
-                        style={cardStyle}
-                        onTouchStart={onTouchStartCard}
-                        onTouchMove={onTouchMoveCard}
-                        onTouchEnd={onTouchEndCard}
-                      >
-                        <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
-                          {t.likeStamp}
-                        </div>
-                        <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
-                          {t.skipStamp}
-                        </div>
-
-                        <div ref={profilePageRef} className="profile-page-scroll">
-                          <img
-                            className="profile-hero-photo"
-                            src={activeProfile.photos[0]}
-                            alt={activeProfile.name}
-                          />
-
-                          <div className="profile-header">
-                            <h3 className="profile-title">
-                              {activeProfile.name}, {activeProfile.age} {activeProfile.zodiac}
-                              {activeProfile.verified && <Badge />}
-                              <span className="premium-pill">{t.premium}</span>
-                            </h3>
-                            <p className="profile-subtitle">
-                              {activeProfile.city}, {activeProfile.country} •{" "}
-                              {activeProfile.online ? t.online : t.offline}
-                            </p>
+                      <div className="search-card-stage">
+                        <div
+                          className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
+                          style={cardStyle}
+                          onTouchStart={onTouchStartCard}
+                          onTouchMove={onTouchMoveCard}
+                          onTouchEnd={onTouchEndCard}
+                        >
+                          <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
+                            {t.likeStamp}
+                          </div>
+                          <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
+                            {t.skipStamp}
                           </div>
 
-                          <div className="profile-section">
-                            <div className="info-grid">
-                              <div className="info-card">
-                                <div className="info-card-label">{t.location}</div>
-                                <div className="info-card-value">
-                                  {activeProfile.city}, {activeProfile.country}
-                                </div>
-                              </div>
-                              <div className="info-card">
-                                <div className="info-card-label">{t.lookingFor}</div>
-                                <div className="info-card-value">
-                                  {lang === "ru" ? activeProfile.lookingFor : activeProfile.lookingForEn}
-                                </div>
-                              </div>
-                              <div className="info-card">
-                                <div className="info-card-label">{t.height}</div>
-                                <div className="info-card-value">
-                                  {lang === "ru" ? activeProfile.height : activeProfile.heightEn}
-                                </div>
-                              </div>
-                              <div className="info-card">
-                                <div className="info-card-label">{t.relationshipStatus}</div>
-                                <div className="info-card-value">
-                                  {relationshipLabel(activeProfile)}
-                                </div>
-                              </div>
-                              <div className="info-card">
-                                <div className="info-card-label">{t.age}</div>
-                                <div className="info-card-value">
-                                  {activeProfile.age} {t.years}
-                                </div>
-                              </div>
-                              <div className="info-card">
-                                <div className="info-card-label">{t.zodiac}</div>
-                                <div className="info-card-value">{activeProfile.zodiac}</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="profile-section">
-                            <h4 className="section-heading">{t.about}</h4>
-                            <div className="bio-box">
-                              {lang === "ru" ? activeProfile.bio : activeProfile.bioEn}
-                            </div>
-                          </div>
-
-                          <div className="profile-section">
-                            <h4 className="section-heading">{t.interests}</h4>
-                            <div className="chip-row">
-                              {activeProfile.interests.map((it) => (
-                                <span className="interest" key={it}>
-                                  {it}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="profile-section">
-                            <div className="profile-photo-stack">
-                              {activeProfile.photos.map((photo, i) => (
-                                <img key={i} src={photo} alt={`${activeProfile.name}-${i + 1}`} />
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="profile-section">
-                            <div className="profile-footer-actions">
-                              <button
-                                className="danger-btn block"
-                                onClick={() => handleBlock(activeProfile.id)}
-                              >
-                                {blockedIds.includes(activeProfile.id) ? t.blocked : t.block}
-                              </button>
-
-                              <button
-                                className="danger-btn report"
-                                onClick={() => handleReport(activeProfile.id)}
-                              >
-                                {reportedIds.includes(activeProfile.id) ? t.reported : t.report}
-                              </button>
-                            </div>
-
-                            <div className="footer-hint">
-                              {t.footerHint} • {t.swipeHint}
-                            </div>
-                          </div>
+                          {renderProfileContent(activeProfile, {
+                            interactive: true,
+                            scrollRef: profilePageRef,
+                          })}
                         </div>
 
-                        <div className="desktop-action-orbits">
+                        <div className="search-floating-actions">
                           <button
                             className={`desktop-action-btn skip ${skipPulse ? "pop" : ""}`}
                             onClick={() => triggerSwipeOut("left", () => handleSkip(activeProfile))}
@@ -2611,6 +2732,7 @@ function App() {
                           >
                             <span className="action-icon-skip">✕</span>
                           </button>
+
                           <button
                             className={`desktop-action-btn like ${likePulse ? "pop" : ""}`}
                             onClick={() => triggerSwipeOut("right", () => handleLike(activeProfile))}
@@ -2692,7 +2814,7 @@ function App() {
                             >
                               <div className="chat-main">
                                 <div className="avatar-wrap">
-                                  <img src={profile.avatar} alt={profile.name} />
+                                  <img src={profile.photos[0]} alt={profile.name} />
                                   <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
                                 </div>
 
@@ -2747,7 +2869,7 @@ function App() {
 
                         <div className="message-header" style={{ marginTop: 14 }}>
                           <div className="avatar-wrap">
-                            <img src={selectedChatProfile.avatar} alt={selectedChatProfile.name} />
+                            <img src={selectedChatProfile.photos[0]} alt={selectedChatProfile.name} />
                             <span className={`avatar-status ${selectedChatProfile.online ? "" : "offline"}`} />
                           </div>
 
@@ -2763,6 +2885,15 @@ function App() {
                               {selectedChatProfile.online ? t.online : t.offline} •{" "}
                               {selectedChatProfile.city}
                             </p>
+
+                            <div className="message-header-actions">
+                              <button
+                                className="secondary-btn"
+                                onClick={() => openProfilePreview(selectedChatProfile.id)}
+                              >
+                                {t.openProfile}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2813,7 +2944,7 @@ function App() {
                       {listProfiles.map((profile) => (
                         <div key={profile.id} className="list-item">
                           <div className="avatar-wrap">
-                            <img src={profile.avatar} alt={profile.name} />
+                            <img src={profile.photos[0]} alt={profile.name} />
                             <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
                           </div>
 
@@ -2856,6 +2987,40 @@ function App() {
                     <p>{t.typeDialogText}</p>
                   </div>
                 )}
+              </div>
+            </section>
+          </>
+        )}
+
+        {tab === "profilePreview" && viewedProfile && (
+          <>
+            <h2 className="section-title">{t.profilePreviewTitle}</h2>
+
+            <div style={{ marginBottom: 16 }}>
+              <button
+                className="back-btn"
+                onClick={() => {
+                  setTab("messages");
+                  setChatScreen("chat");
+                }}
+              >
+                ← {t.backToMessages}
+              </button>
+            </div>
+
+            <section className="search-wrap">
+              <div className="panel">
+                <div className="deck-wrap">
+                  <div className="search-card-stage" style={{ paddingBottom: 0 }}>
+                    <div className="profile-page-wrap" style={{ transform: "none" }}>
+                      {renderProfileContent(viewedProfile, {
+                        interactive: false,
+                        previewOnly: true,
+                        scrollRef: profilePageRef,
+                      })}
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </>
@@ -3034,7 +3199,9 @@ function App() {
                       value={lang === "ru" ? profileDraft.bio : profileDraft.bioEn}
                       onChange={(e) =>
                         setProfileDraft((p) =>
-                          lang === "ru" ? { ...p, bio: e.target.value } : { ...p, bioEn: e.target.value }
+                          lang === "ru"
+                            ? { ...p, bio: e.target.value }
+                            : { ...p, bioEn: e.target.value }
                         )
                       }
                     />
@@ -3186,7 +3353,7 @@ function App() {
           {t.search}
         </button>
         <button
-          className={`phone-tab-btn ${tab === "messages" ? "active" : ""}`}
+          className={`phone-tab-btn ${tab === "messages" || tab === "profilePreview" ? "active" : ""}`}
           onClick={() => {
             setTab("messages");
             setChatScreen("list");
@@ -3228,7 +3395,7 @@ function App() {
             <div className="mutual-avatars">
               <img src={myProfile.photos[0]} alt={myProfile.name} />
               <div className="heart">♥</div>
-              <img src={matchedProfile.avatar} alt={matchedProfile.name} />
+              <img src={matchedProfile.photos[0]} alt={matchedProfile.name} />
             </div>
 
             <div className="mutual-actions" style={{ justifyContent: "center", position: "relative", zIndex: 2 }}>
