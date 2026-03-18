@@ -10,9 +10,9 @@ const tr = {
     settings: "Настройки",
     name: "Имя",
 
-    heroTitle: "Найди новые знакомства в Telegram",
+    heroTitle: "Знакомства нового формата в Telegram",
     heroText:
-      "Смотри полный профиль в вертикальном формате, листай фото и информацию, используй удобный поиск и общайся только после взаимной симпатии.",
+      "Полные профили, удобный поиск и общение только после взаимного лайка. Всё, как должно быть — без лишнего.",
     heroPrimary: "Начать поиск",
     heroSecondary: "Открыть сообщения",
 
@@ -22,7 +22,7 @@ const tr = {
     card2: "Удобный поиск",
     card2t: "Фильтры по стране, городу, возрасту, полу и дистанции.",
     card3: "Выбор в любой момент",
-    card3t: "Кнопки лайка и дизлайка закреплены внизу на протяжении всей анкеты.",
+    card3t: "Кнопки лайка и дизлайка закреплены в удобной зоне на протяжении всей анкеты.",
 
     searchTitle: "Поиск",
     filters: "Настройки поиска",
@@ -31,8 +31,6 @@ const tr = {
     all: "Все",
     country: "Страна",
     city: "Город",
-    ageFrom: "Возраст от",
-    ageTo: "Возраст до",
     ageRange: "Возраст",
     gender: "Пол",
     unit: "Единицы",
@@ -55,8 +53,6 @@ const tr = {
     messagePlaceholder: "Напиши сообщение...",
     send: "Отправить",
     noMessages: "Пока нет взаимных симпатий.",
-    openChat: "Открыть чат",
-    openProfile: "Открыть профиль",
     backToMessages: "Назад к сообщениям",
 
     msgMatches: "Диалоги",
@@ -81,6 +77,7 @@ const tr = {
     bio: "Информация о себе",
     photos: "Фотографии",
     profileSaved: "Профиль сохранён",
+    tapToOpen: "Нажми, чтобы открыть",
 
     settingsTitle: "Настройки",
     settingsText: "Управляй фильтрами поиска и параметрами профиля.",
@@ -92,7 +89,7 @@ const tr = {
     help2t: "Только после взаимной симпатии. Без мэтча чат недоступен.",
     help3: "Что можно увидеть в анкете?",
     help3t:
-      "Местоположение, кого ищет человек, рост, семейное положение, возраст, знак зодиака, увлечения и фото в развернутом виде.",
+      "Местоположение, кого ищет человек, рост, семейное положение, возраст, знак зодиака, интересы, привычки и фото в развернутом виде.",
 
     mutualTitle: "Взаимная симпатия!",
     mutualText: "Теперь вы можете начать общение.",
@@ -100,7 +97,6 @@ const tr = {
     continue: "Продолжить",
 
     years: "лет",
-    photosCount: "фото",
     premium: "PREMIUM",
 
     lookingFor: "Кого ищет",
@@ -112,12 +108,24 @@ const tr = {
     block: "Заблокировать",
     blocked: "Профиль заблокирован",
     reported: "Жалоба отправлена",
-    blockedShort: "Заблокирован",
-    reportedShort: "Отправлено",
     statusSingle: "Не женат / не замужем",
     statusDivorced: "В разводе",
     statusOpen: "Свободен(на)",
     statusComplicated: "Все сложно",
+    children: "Дети",
+    smoking: "Курение",
+    alcohol: "Алкоголь",
+    languages: "Языки",
+    education: "Образование",
+    job: "Работа",
+    lookingGender: "Ищу",
+    lookingAge: "Возраст партнёра",
+    datingType: "Формат знакомства",
+    quickAnswers: "Быстрые ответы",
+    idealDate: "Идеальное свидание",
+    favoriteMovie: "Любимый фильм",
+    importantInPerson: "Что важно в человеке",
+    favoriteWeekend: "Любимые выходные",
 
     footerHint: "Следующая анкета откроется только после лайка или дизлайка.",
     reportReason: "Жалоба отправлена. Профиль будет проверен.",
@@ -127,15 +135,25 @@ const tr = {
     backToChats: "Назад",
     delivered: "Доставлено",
     read: "Прочитано",
-    sentNow: "Сейчас",
     typeDialog: "Выбери диалог",
     typeDialogText: "Открой любой диалог из списка, чтобы начать общение.",
 
     likeStamp: "ЛАЙК",
     skipStamp: "НЕТ",
     swipeHint: "Свайп вправо — лайк, влево — дизлайк",
-    typing: "печатает...",
     profilePreviewTitle: "Профиль",
+
+    yes: "Да",
+    no: "Нет",
+    occasionally: "Иногда",
+    never: "Нет",
+    social: "Социально",
+    often: "Часто",
+
+    serious: "Серьёзные отношения",
+    friendship: "Дружба",
+    casual: "Лёгкое общение",
+    chemistry: "Химия и встречи",
   },
   en: {
     brand: "Telegram Dating",
@@ -146,9 +164,9 @@ const tr = {
     settings: "Settings",
     name: "Name",
 
-    heroTitle: "Find new connections in Telegram",
+    heroTitle: "A new dating format inside Telegram",
     heroText:
-      "Browse a full vertical profile, scroll through photos and information, use smart search and chat only after a mutual match.",
+      "Full profiles, smart search and communication only after a mutual like. Exactly how it should be — without the extra noise.",
     heroPrimary: "Start search",
     heroSecondary: "Open messages",
 
@@ -158,8 +176,7 @@ const tr = {
     card2: "Smart search",
     card2t: "Filters by country, city, age, gender and distance.",
     card3: "Choose anytime",
-    card3t:
-      "Like and dislike buttons stay fixed and visible during the whole profile view.",
+    card3t: "Like and dislike buttons stay fixed in a convenient visible area.",
 
     searchTitle: "Search",
     filters: "Search settings",
@@ -168,8 +185,6 @@ const tr = {
     all: "All",
     country: "Country",
     city: "City",
-    ageFrom: "Age from",
-    ageTo: "Age to",
     ageRange: "Age",
     gender: "Gender",
     unit: "Units",
@@ -192,8 +207,6 @@ const tr = {
     messagePlaceholder: "Write a message...",
     send: "Send",
     noMessages: "No mutual matches yet.",
-    openChat: "Open chat",
-    openProfile: "Open profile",
     backToMessages: "Back to messages",
 
     msgMatches: "Dialogs",
@@ -218,6 +231,7 @@ const tr = {
     bio: "About yourself",
     photos: "Photos",
     profileSaved: "Profile saved",
+    tapToOpen: "Tap to open",
 
     settingsTitle: "Settings",
     settingsText: "Manage search filters and profile preferences.",
@@ -229,7 +243,7 @@ const tr = {
     help2t: "Only after a mutual match. No chat is available before that.",
     help3: "What can I see in a profile?",
     help3t:
-      "Location, who the person is looking for, height, relationship status, age, zodiac sign, interests, and photos in a full expanded view.",
+      "Location, who the person is looking for, height, relationship status, age, zodiac sign, interests, habits and photos in a full expanded view.",
 
     mutualTitle: "It's a match!",
     mutualText: "Now you can start chatting.",
@@ -237,7 +251,6 @@ const tr = {
     continue: "Continue",
 
     years: "years",
-    photosCount: "photos",
     premium: "PREMIUM",
 
     lookingFor: "Looking for",
@@ -249,12 +262,24 @@ const tr = {
     block: "Block",
     blocked: "Profile blocked",
     reported: "Report sent",
-    blockedShort: "Blocked",
-    reportedShort: "Sent",
     statusSingle: "Single",
     statusDivorced: "Divorced",
     statusOpen: "Open to relationship",
     statusComplicated: "It's complicated",
+    children: "Children",
+    smoking: "Smoking",
+    alcohol: "Alcohol",
+    languages: "Languages",
+    education: "Education",
+    job: "Job",
+    lookingGender: "Looking for",
+    lookingAge: "Partner age",
+    datingType: "Dating type",
+    quickAnswers: "Quick answers",
+    idealDate: "Ideal date",
+    favoriteMovie: "Favorite movie",
+    importantInPerson: "What matters in a person",
+    favoriteWeekend: "Favorite weekend",
 
     footerHint: "The next profile opens only after like or dislike.",
     reportReason: "Report sent. The profile will be reviewed.",
@@ -264,15 +289,25 @@ const tr = {
     backToChats: "Back",
     delivered: "Delivered",
     read: "Read",
-    sentNow: "Now",
     typeDialog: "Choose a dialog",
     typeDialogText: "Open any dialog from the list to start chatting.",
 
     likeStamp: "LIKE",
     skipStamp: "NOPE",
     swipeHint: "Swipe right — like, left — dislike",
-    typing: "typing...",
     profilePreviewTitle: "Profile",
+
+    yes: "Yes",
+    no: "No",
+    occasionally: "Occasionally",
+    never: "Never",
+    social: "Socially",
+    often: "Often",
+
+    serious: "Serious relationship",
+    friendship: "Friendship",
+    casual: "Casual dating",
+    chemistry: "Chemistry & dates",
   },
 };
 
@@ -327,9 +362,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
+    lookingGender: "Мужчину",
+    lookingGenderEn: "Man",
+    lookingAge: "26–38",
+    datingType: "serious",
     height: "170 см",
     heightEn: `5'7"`,
     relationshipStatus: "statusSingle",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Иногда",
+    alcoholEn: "Occasionally",
+    languages: "Русский, English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Маркетинг",
+    jobEn: "Marketing",
     bio: "Люблю красивые места, музыку, кофе, поездки и лёгкое общение. Ценю стиль, хорошую энергетику и людей, с которыми интересно и легко.",
     bioEn: "I love beautiful places, music, coffee, trips and easy conversations. I appreciate style, good energy and people who are interesting and easy to be around.",
     interests: ["music", "travel", "coffee", "sunsets", "fashion"],
@@ -342,6 +392,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Ужин, прогулка и хорошая химия в разговоре.",
+      idealDateEn: "Dinner, a walk and great chemistry in conversation.",
+      favoriteMovie: "La La Land",
+      importantInPerson: "Искренность, чувство юмора и уверенность.",
+      importantInPersonEn: "Sincerity, humor and confidence.",
+      favoriteWeekend: "Небольшой road trip или красивое кафе у океана.",
+      favoriteWeekendEn: "A small road trip or a beautiful cafe by the ocean.",
+    },
     starterMessagesRu: ["Привет 😊 Рада взаимной симпатии.", "Как проходит твой день?"],
     starterMessagesEn: ["Hi 😊 Glad we matched.", "How is your day going?"],
   },
@@ -356,9 +415,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Общение и встречи",
     lookingForEn: "Dating and chemistry",
+    lookingGender: "Мужчину",
+    lookingGenderEn: "Man",
+    lookingAge: "24–36",
+    datingType: "chemistry",
     height: "168 см",
     heightEn: `5'6"`,
     relationshipStatus: "statusOpen",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "English, Español",
+    education: "Колледж",
+    educationEn: "College",
+    job: "Контент-креатор",
+    jobEn: "Content creator",
     bio: "Люблю прогулки у океана, кофе, вечерние огни и тёплые разговоры. Мне нравятся красивые детали и лёгкая романтика.",
     bioEn: "I love ocean walks, coffee, city lights and warm conversations. I enjoy beautiful details and soft romance.",
     interests: ["ocean", "coffee", "night walks", "beach", "photos"],
@@ -371,6 +445,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Море, закат и спонтанная поездка.",
+      idealDateEn: "Sea, sunset and a spontaneous drive.",
+      favoriteMovie: "Before Sunrise",
+      importantInPerson: "Лёгкость, внимание и настоящие эмоции.",
+      importantInPersonEn: "Ease, attention and real emotions.",
+      favoriteWeekend: "Пляж, музыка и поздний ужин.",
+      favoriteWeekendEn: "Beach, music and a late dinner.",
+    },
     starterMessagesRu: ["Очень приятно 😊", "Ты больше любишь город или природу?"],
     starterMessagesEn: ["Nice to meet you 😊", "Do you prefer the city or nature?"],
   },
@@ -385,9 +468,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
+    lookingGender: "Женщину",
+    lookingGenderEn: "Woman",
+    lookingAge: "24–33",
+    datingType: "serious",
     height: "183 см",
     heightEn: `6'0"`,
     relationshipStatus: "statusSingle",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Финансы",
+    jobEn: "Finance",
     bio: "Ценю юмор, спорт, хорошие фильмы и настоящие эмоции. Люблю уверенное, живое общение и людей с характером.",
     bioEn: "I value humor, sports, good movies and real emotions. I like confident, genuine communication and people with character.",
     interests: ["sport", "movies", "humor", "fitness", "city life"],
@@ -400,6 +498,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Бар с видом на город и много смеха.",
+      idealDateEn: "A rooftop bar and lots of laughter.",
+      favoriteMovie: "The Dark Knight",
+      importantInPerson: "Характер, искренность и энергия.",
+      importantInPersonEn: "Character, sincerity and energy.",
+      favoriteWeekend: "Тренировка, прогулка и хороший ужин.",
+      favoriteWeekendEn: "Workout, walk and a good dinner.",
+    },
     starterMessagesRu: ["Привет! Рад мэтчу.", "Чем любишь заниматься в свободное время?"],
     starterMessagesEn: ["Hi! Glad we matched.", "What do you like doing in your free time?"],
   },
@@ -414,9 +521,24 @@ const initialProfiles = [
     online: false,
     lookingFor: "Общение и свидания",
     lookingForEn: "Dating and connection",
+    lookingGender: "Женщину",
+    lookingGenderEn: "Woman",
+    lookingAge: "25–34",
+    datingType: "chemistry",
     height: "186 см",
     heightEn: `6'1"`,
     relationshipStatus: "statusDivorced",
+    children: "Да",
+    childrenEn: "Yes",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Иногда",
+    alcoholEn: "Occasionally",
+    languages: "English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Логистика",
+    jobEn: "Logistics",
     bio: "Люблю путешествия, спорт и спокойные разговоры без лишнего шума. Ценю искренность, надёжность и хорошую атмосферу.",
     bioEn: "I love travel, sports and calm conversations without extra noise. I appreciate sincerity, reliability and a good atmosphere.",
     interests: ["travel", "fitness", "weekends", "cars", "coffee"],
@@ -429,6 +551,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Спокойный вечер и хороший разговор.",
+      idealDateEn: "A calm evening and a good conversation.",
+      favoriteMovie: "Drive",
+      importantInPerson: "Надёжность и честность.",
+      importantInPersonEn: "Reliability and honesty.",
+      favoriteWeekend: "Спортзал и небольшой выезд за город.",
+      favoriteWeekendEn: "Gym and a small trip out of town.",
+    },
     starterMessagesRu: ["Привет 👋", "Какой у тебя идеальный выходной?"],
     starterMessagesEn: ["Hi 👋", "What does your perfect weekend look like?"],
   },
@@ -443,9 +574,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
+    lookingGender: "Мужчину",
+    lookingGenderEn: "Man",
+    lookingAge: "26–36",
+    datingType: "serious",
     height: "167 см",
     heightEn: `5'6"`,
     relationshipStatus: "statusSingle",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "English, Français",
+    education: "University",
+    educationEn: "University",
+    job: "Designer",
+    jobEn: "Designer",
     bio: "Люблю уютные места, прогулки, музыку и красивые фотографии. Легко иду на контакт, если чувствую хорошую энергию.",
     bioEn: "I love cozy places, walks, music and beautiful photos. I open up easily when I feel good energy.",
     interests: ["music", "walks", "art", "coffee", "travel"],
@@ -458,6 +604,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Небольшой ресторан и прогулка ночью.",
+      idealDateEn: "A small restaurant and a night walk.",
+      favoriteMovie: "Interstellar",
+      importantInPerson: "Доброта и вкус к жизни.",
+      importantInPersonEn: "Kindness and a taste for life.",
+      favoriteWeekend: "Кофе, галерея и ужин с музыкой.",
+      favoriteWeekendEn: "Coffee, a gallery and dinner with music.",
+    },
     starterMessagesRu: ["Привет ✨", "Что тебе ближе — спонтанность или план?"],
     starterMessagesEn: ["Hi ✨", "What do you prefer — spontaneity or planning?"],
   },
@@ -472,9 +627,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Лёгкое знакомство",
     lookingForEn: "Casual dating",
+    lookingGender: "Женщину",
+    lookingGenderEn: "Woman",
+    lookingAge: "23–31",
+    datingType: "casual",
     height: "185 см",
     heightEn: `6'1"`,
     relationshipStatus: "statusOpen",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Иногда",
+    smokingEn: "Occasionally",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "Deutsch, English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Product manager",
+    jobEn: "Product manager",
     bio: "Люблю путешествия, музыку, спорт и стильные места. Ценю лёгкость в общении и яркую химию между людьми.",
     bioEn: "I love travel, music, sports and stylish places. I appreciate ease in conversation and strong chemistry between people.",
     interests: ["travel", "music", "style", "fitness", "night city"],
@@ -487,6 +657,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Коктейли и красивый вечерний город.",
+      idealDateEn: "Cocktails and a beautiful night city.",
+      favoriteMovie: "Inception",
+      importantInPerson: "Харизма и лёгкость.",
+      importantInPersonEn: "Charisma and ease.",
+      favoriteWeekend: "Вылет в другой город на пару дней.",
+      favoriteWeekendEn: "Flying to another city for a couple of days.",
+    },
     starterMessagesRu: ["Рад знакомству.", "Какой город тебе нравится больше всего?"],
     starterMessagesEn: ["Nice to meet you.", "What city do you like the most?"],
   },
@@ -501,9 +680,24 @@ const initialProfiles = [
     online: false,
     lookingFor: "Общение и химия",
     lookingForEn: "Chemistry and connection",
+    lookingGender: "Мужчину",
+    lookingGenderEn: "Man",
+    lookingAge: "26–37",
+    datingType: "chemistry",
     height: "172 см",
     heightEn: `5'8"`,
     relationshipStatus: "statusOpen",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "Español, English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Event manager",
+    jobEn: "Event manager",
     bio: "Обожаю море, красивые вечера, танцы и вдохновляющих людей. Люблю, когда общение естественное и без напряжения.",
     bioEn: "I adore the sea, beautiful evenings, dancing and inspiring people. I love when conversation feels natural and relaxed.",
     interests: ["sea", "dance", "sunsets", "travel", "fashion"],
@@ -516,6 +710,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Танцы, ужин и смех.",
+      idealDateEn: "Dancing, dinner and laughter.",
+      favoriteMovie: "Midnight in Paris",
+      importantInPerson: "Энергия и вдохновение.",
+      importantInPersonEn: "Energy and inspiration.",
+      favoriteWeekend: "Море и друзья.",
+      favoriteWeekendEn: "Sea and friends.",
+    },
     starterMessagesRu: ["Привет 💫", "Любишь спонтанные поездки?"],
     starterMessagesEn: ["Hi 💫", "Do you like spontaneous trips?"],
   },
@@ -530,9 +733,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
+    lookingGender: "Женщину",
+    lookingGenderEn: "Woman",
+    lookingAge: "24–33",
+    datingType: "serious",
     height: "181 см",
     heightEn: `5'11"`,
     relationshipStatus: "statusComplicated",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Иногда",
+    alcoholEn: "Occasionally",
+    languages: "English",
+    education: "Higher education",
+    educationEn: "Higher education",
+    job: "Business development",
+    jobEn: "Business development",
     bio: "Люблю спокойную уверенность, хорошие разговоры и красивую городскую атмосферу. Ценю ум, вкус и чувство юмора.",
     bioEn: "I like calm confidence, good conversations and beautiful city atmosphere. I appreciate intelligence, taste and humor.",
     interests: ["city", "books", "coffee", "cinema", "business"],
@@ -545,6 +763,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Тихое красивое место и хороший диалог.",
+      idealDateEn: "A quiet beautiful place and a good dialogue.",
+      favoriteMovie: "Her",
+      importantInPerson: "Вкус, ум и чувство юмора.",
+      importantInPersonEn: "Taste, intelligence and humor.",
+      favoriteWeekend: "Книга, хороший кофе и прогулка.",
+      favoriteWeekendEn: "A book, good coffee and a walk.",
+    },
     starterMessagesRu: ["Привет.", "Как ты обычно проводишь вечер?"],
     starterMessagesEn: ["Hi.", "How do you usually spend your evening?"],
   },
@@ -559,9 +786,24 @@ const initialProfiles = [
     online: true,
     lookingFor: "Красивое знакомство",
     lookingForEn: "Meaningful dating",
+    lookingGender: "Мужчину",
+    lookingGenderEn: "Man",
+    lookingAge: "25–35",
+    datingType: "chemistry",
     height: "166 см",
     heightEn: `5'5"`,
     relationshipStatus: "statusSingle",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "Italiano, English",
+    education: "Fashion school",
+    educationEn: "Fashion school",
+    job: "Stylist",
+    jobEn: "Stylist",
     bio: "Люблю стиль, путешествия, вкусную еду и лёгкое живое общение. Мне нравятся уверенные и внимательные люди.",
     bioEn: "I love style, travel, good food and easy lively conversation. I like confident and attentive people.",
     interests: ["style", "food", "travel", "photos", "shopping"],
@@ -574,6 +816,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Красивый ресторан и вечерний город.",
+      idealDateEn: "A beautiful restaurant and the evening city.",
+      favoriteMovie: "The Devil Wears Prada",
+      importantInPerson: "Уверенность и внимание к деталям.",
+      importantInPersonEn: "Confidence and attention to detail.",
+      favoriteWeekend: "Поездка, покупки и ужин.",
+      favoriteWeekendEn: "A trip, shopping and dinner.",
+    },
     starterMessagesRu: ["Очень приятно 🌷", "Какой у тебя любимый город?"],
     starterMessagesEn: ["Nice to meet you 🌷", "What is your favorite city?"],
   },
@@ -588,9 +839,24 @@ const initialProfiles = [
     online: false,
     lookingFor: "Серьёзные отношения",
     lookingForEn: "Serious relationship",
+    lookingGender: "Женщину",
+    lookingGenderEn: "Woman",
+    lookingAge: "23–31",
+    datingType: "serious",
     height: "184 см",
     heightEn: `6'0"`,
     relationshipStatus: "statusSingle",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Социально",
+    alcoholEn: "Socially",
+    languages: "Français, English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Architecture",
+    jobEn: "Architecture",
     bio: "Люблю атмосферные места, искусство, поездки и интересные разговоры. Стараюсь жить со вкусом и без лишней суеты.",
     bioEn: "I love atmospheric places, art, trips and interesting conversations. I try to live with taste and without unnecessary rush.",
     interests: ["art", "travel", "wine", "architecture", "music"],
@@ -603,6 +869,15 @@ const initialProfiles = [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=90",
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90",
     ],
+    quickAnswers: {
+      idealDate: "Выставка и красивый вечерний город.",
+      idealDateEn: "An exhibition and a beautiful evening city.",
+      favoriteMovie: "The Grand Budapest Hotel",
+      importantInPerson: "Эстетика и глубина.",
+      importantInPersonEn: "Aesthetics and depth.",
+      favoriteWeekend: "Архитектура, кофе и прогулка.",
+      favoriteWeekendEn: "Architecture, coffee and a walk.",
+    },
     starterMessagesRu: ["Привет, рад знакомству.", "Что тебя вдохновляет?"],
     starterMessagesEn: ["Hi, nice to meet you.", "What inspires you?"],
   },
@@ -648,6 +923,57 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+function useEdgeScrollBridge(ref) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let touchStartY = 0;
+    let lastTouchY = 0;
+
+    const onWheel = (e) => {
+      const atTop = el.scrollTop <= 0;
+      const atBottom = Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight;
+      const goingDown = e.deltaY > 0;
+      const goingUp = e.deltaY < 0;
+
+      if ((atBottom && goingDown) || (atTop && goingUp)) {
+        window.scrollBy({ top: e.deltaY, behavior: "auto" });
+      }
+    };
+
+    const onTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+      lastTouchY = touchStartY;
+    };
+
+    const onTouchMove = (e) => {
+      const currentY = e.touches[0].clientY;
+      const delta = lastTouchY - currentY;
+      lastTouchY = currentY;
+
+      const atTop = el.scrollTop <= 0;
+      const atBottom = Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight;
+      const goingDown = delta > 0;
+      const goingUp = delta < 0;
+
+      if ((atBottom && goingDown) || (atTop && goingUp)) {
+        window.scrollBy({ top: delta, behavior: "auto" });
+      }
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: true });
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [ref]);
+}
+
 function App() {
   const [lang, setLang] = useState("ru");
   const t = tr[lang];
@@ -675,12 +1001,19 @@ function App() {
   const [swipeAnimating, setSwipeAnimating] = useState(false);
   const [matchBurst, setMatchBurst] = useState(false);
   const [viewedProfileId, setViewedProfileId] = useState(null);
+  const [photoModal, setPhotoModal] = useState(null);
+  const [pageStretch, setPageStretch] = useState(0);
 
   const touchStateRef = useRef({
     startX: 0,
     startY: 0,
     dragging: false,
     horizontal: false,
+  });
+
+  const overscrollTouchRef = useRef({
+    startY: 0,
+    lastY: 0,
   });
 
   const defaultFilterState = {
@@ -723,10 +1056,41 @@ function App() {
     country: "USA",
     zodiac: "♌",
     verified: true,
-    bio: "Люблю живое общение, красивые места, музыку и интересные знакомства.",
-    bioEn: "I love real conversations, beautiful places, music and interesting connections.",
+    bio: "Люблю живое общение, красивые места, музыку и интересные знакомства. Нравятся искренние люди, стильные места и лёгкая, уверенная энергия.",
+    bioEn:
+      "I love real conversations, beautiful places, music and interesting connections. I like sincere people, stylish places and easy confident energy.",
+    height: "183 см",
+    heightEn: `6'0"`,
+    relationshipStatus: "statusSingle",
+    children: "Нет",
+    childrenEn: "No",
+    smoking: "Нет",
+    smokingEn: "No",
+    alcohol: "Иногда",
+    alcoholEn: "Occasionally",
+    languages: "Русский, English",
+    education: "Высшее",
+    educationEn: "Higher education",
+    job: "Handyman / Furniture Assembly",
+    jobEn: "Handyman / Furniture Assembly",
+    lookingGender: "Женщину",
+    lookingGenderEn: "Woman",
+    lookingAge: "24–35",
+    datingType: "serious",
+    interests: ["music", "travel", "cars", "coffee", "gym", "business"],
+    quickAnswers: {
+      idealDate: "Красивое место, хороший разговор и лёгкая химия.",
+      idealDateEn: "A beautiful place, a good conversation and easy chemistry.",
+      favoriteMovie: "Rocky",
+      importantInPerson: "Искренность, уважение и чувство юмора.",
+      importantInPersonEn: "Sincerity, respect and a sense of humor.",
+      favoriteWeekend: "Небольшая поездка, кофе и спокойный вечер.",
+      favoriteWeekendEn: "A small trip, coffee and a calm evening.",
+    },
     photos: [
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=90",
     ],
   });
 
@@ -734,9 +1098,13 @@ function App() {
   const [profileDraft, setProfileDraft] = useState(myProfile);
 
   const profilePageRef = useRef(null);
+  const previewPageRef = useRef(null);
   const messageBodyRef = useRef(null);
   const filterButtonRef = useRef(null);
   const filterRailRef = useRef(null);
+
+  useEdgeScrollBridge(profilePageRef);
+  useEdgeScrollBridge(previewPageRef);
 
   const countries = useMemo(() => ["All", ...Object.keys(countriesMap)], []);
   const cityOptions = useMemo(() => {
@@ -772,6 +1140,9 @@ function App() {
   useEffect(() => {
     if (profilePageRef.current) {
       profilePageRef.current.scrollTop = 0;
+    }
+    if (previewPageRef.current) {
+      previewPageRef.current.scrollTop = 0;
     }
     setSwipeX(0);
     setSwipeAnimating(false);
@@ -821,6 +1192,64 @@ function App() {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [showFilters]);
+
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="viewport"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "viewport";
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute(
+      "content",
+      "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    );
+  }, []);
+
+  useEffect(() => {
+    const isMobile = () => window.innerWidth <= 760;
+
+    const handleTouchStart = (e) => {
+      if (!isMobile()) return;
+      const y = e.touches[0].clientY;
+      overscrollTouchRef.current.startY = y;
+      overscrollTouchRef.current.lastY = y;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isMobile()) return;
+
+      const currentY = e.touches[0].clientY;
+      const prevY = overscrollTouchRef.current.lastY;
+      overscrollTouchRef.current.lastY = currentY;
+      const delta = currentY - prevY;
+
+      const scrollTop = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollTop <= 0 && delta > 0) {
+        setPageStretch((prev) => clamp(prev + delta * 0.25, 0, 22));
+      } else if (scrollTop >= maxScroll - 1 && delta < 0) {
+        setPageStretch((prev) => clamp(prev + delta * 0.25, -22, 0));
+      } else if (pageStretch !== 0) {
+        setPageStretch((prev) => prev * 0.7);
+      }
+    };
+
+    const release = () => setPageStretch(0);
+
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", release, { passive: true });
+    window.addEventListener("touchcancel", release, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", release);
+      window.removeEventListener("touchcancel", release);
+    };
+  }, [pageStretch]);
 
   const ensureMessages = (profile) => {
     setMessages((prev) => {
@@ -990,6 +1419,8 @@ function App() {
   const relationshipLabel = (profile) =>
     t[profile.relationshipStatus] || profile.relationshipStatus;
 
+  const datingTypeLabel = (value) => t[value] || value;
+
   const listProfiles =
     messageView === "matches"
       ? profiles.filter((p) => matches.includes(p.id))
@@ -1068,18 +1499,179 @@ function App() {
     transition: swipeAnimating ? "transform .22s ease, box-shadow .22s ease" : "none",
   };
 
+  const renderProfileDetails = (profile) => (
+    <>
+      <div className="profile-section">
+        <div className="info-grid">
+          <div className="info-card">
+            <div className="info-card-label">{t.location}</div>
+            <div className="info-card-value">
+              {profile.city}, {profile.country}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.lookingFor}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.lookingFor : profile.lookingForEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.height}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.height : profile.heightEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.relationshipStatus}</div>
+            <div className="info-card-value">{relationshipLabel(profile)}</div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.age}</div>
+            <div className="info-card-value">
+              {profile.age} {t.years}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.zodiac}</div>
+            <div className="info-card-value">{profile.zodiac}</div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.children}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.children : profile.childrenEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.smoking}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.smoking : profile.smokingEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.alcohol}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.alcohol : profile.alcoholEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.languages}</div>
+            <div className="info-card-value">{profile.languages}</div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.education}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.education : profile.educationEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.job}</div>
+            <div className="info-card-value">{lang === "ru" ? profile.job : profile.jobEn}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="profile-section">
+        <h4 className="section-heading">{t.about}</h4>
+        <div className="bio-box">{lang === "ru" ? profile.bio : profile.bioEn}</div>
+      </div>
+
+      <div className="profile-section">
+        <h4 className="section-heading">{t.lookingFor}</h4>
+        <div className="info-grid">
+          <div className="info-card">
+            <div className="info-card-label">{t.lookingGender}</div>
+            <div className="info-card-value">
+              {lang === "ru" ? profile.lookingGender : profile.lookingGenderEn}
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.lookingAge}</div>
+            <div className="info-card-value">{profile.lookingAge}</div>
+          </div>
+          <div className="info-card">
+            <div className="info-card-label">{t.datingType}</div>
+            <div className="info-card-value">{datingTypeLabel(profile.datingType)}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="profile-section">
+        <h4 className="section-heading">{t.interests}</h4>
+        <div className="chip-row">
+          {profile.interests.map((it) => (
+            <span className="interest" key={it}>
+              {it}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {profile.quickAnswers && (
+        <div className="profile-section">
+          <h4 className="section-heading">{t.quickAnswers}</h4>
+          <div className="qa-grid">
+            <div className="qa-card">
+              <div className="qa-label">{t.idealDate}</div>
+              <div className="qa-value">
+                {lang === "ru"
+                  ? profile.quickAnswers.idealDate
+                  : profile.quickAnswers.idealDateEn || profile.quickAnswers.idealDate}
+              </div>
+            </div>
+            <div className="qa-card">
+              <div className="qa-label">{t.favoriteMovie}</div>
+              <div className="qa-value">{profile.quickAnswers.favoriteMovie}</div>
+            </div>
+            <div className="qa-card">
+              <div className="qa-label">{t.importantInPerson}</div>
+              <div className="qa-value">
+                {lang === "ru"
+                  ? profile.quickAnswers.importantInPerson
+                  : profile.quickAnswers.importantInPersonEn ||
+                    profile.quickAnswers.importantInPerson}
+              </div>
+            </div>
+            <div className="qa-card">
+              <div className="qa-label">{t.favoriteWeekend}</div>
+              <div className="qa-value">
+                {lang === "ru"
+                  ? profile.quickAnswers.favoriteWeekend
+                  : profile.quickAnswers.favoriteWeekendEn ||
+                    profile.quickAnswers.favoriteWeekend}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="profile-section">
+        <div className="profile-photo-stack">
+          {profile.photos.map((photo, i) => (
+            <img
+              key={i}
+              src={photo}
+              alt={`${profile.name}-${i + 1}`}
+              onClick={() => setPhotoModal(photo)}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+
   const renderProfileContent = (profile, options = {}) => {
     if (!profile) return null;
 
-    const {
-      interactive = false,
-      previewOnly = false,
-      scrollRef = null,
-    } = options;
+    const { interactive = false, previewOnly = false, scrollRef = null } = options;
 
     return (
       <div ref={scrollRef} className="profile-page-scroll premium-scroll">
-        <img className="profile-hero-photo" src={profile.photos[0]} alt={profile.name} />
+        <img
+          className="profile-hero-photo"
+          src={profile.photos[0]}
+          alt={profile.name}
+          onClick={() => setPhotoModal(profile.photos[0])}
+        />
 
         <div className="profile-header">
           <h3 className="profile-title">
@@ -1092,66 +1684,7 @@ function App() {
           </p>
         </div>
 
-        <div className="profile-section">
-          <div className="info-grid">
-            <div className="info-card">
-              <div className="info-card-label">{t.location}</div>
-              <div className="info-card-value">
-                {profile.city}, {profile.country}
-              </div>
-            </div>
-            <div className="info-card">
-              <div className="info-card-label">{t.lookingFor}</div>
-              <div className="info-card-value">
-                {lang === "ru" ? profile.lookingFor : profile.lookingForEn}
-              </div>
-            </div>
-            <div className="info-card">
-              <div className="info-card-label">{t.height}</div>
-              <div className="info-card-value">
-                {lang === "ru" ? profile.height : profile.heightEn}
-              </div>
-            </div>
-            <div className="info-card">
-              <div className="info-card-label">{t.relationshipStatus}</div>
-              <div className="info-card-value">{relationshipLabel(profile)}</div>
-            </div>
-            <div className="info-card">
-              <div className="info-card-label">{t.age}</div>
-              <div className="info-card-value">
-                {profile.age} {t.years}
-              </div>
-            </div>
-            <div className="info-card">
-              <div className="info-card-label">{t.zodiac}</div>
-              <div className="info-card-value">{profile.zodiac}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="profile-section">
-          <h4 className="section-heading">{t.about}</h4>
-          <div className="bio-box">{lang === "ru" ? profile.bio : profile.bioEn}</div>
-        </div>
-
-        <div className="profile-section">
-          <h4 className="section-heading">{t.interests}</h4>
-          <div className="chip-row">
-            {profile.interests.map((it) => (
-              <span className="interest" key={it}>
-                {it}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="profile-section">
-          <div className="profile-photo-stack">
-            {profile.photos.map((photo, i) => (
-              <img key={i} src={photo} alt={`${profile.name}-${i + 1}`} />
-            ))}
-          </div>
-        </div>
+        {renderProfileDetails(profile)}
 
         {interactive && (
           <div className="profile-section">
@@ -1320,12 +1853,14 @@ function App() {
     </div>
   );
 
+  const pageScale = 1 - Math.abs(pageStretch) * 0.0008;
+
   return (
     <div className="app-shell">
       <style>{`
         *{box-sizing:border-box}
         html,body,#root{
-          margin:0;padding:0;min-height:100%;
+          margin:0;padding:0;min-height:100%;width:100%;max-width:100%;
           font-family:Inter,Arial,sans-serif;
           background:
             radial-gradient(circle at top left, rgba(91,181,255,.10), transparent 25%),
@@ -1333,20 +1868,31 @@ function App() {
             linear-gradient(180deg,#f4f8fd 0%,#eef4fb 100%);
           color:#18222d;
           scroll-behavior:smooth;
+          overflow-x:hidden;
         }
         body{
           overflow-x:hidden;
-          overscroll-behavior-y:none;
+          overscroll-behavior-y:auto;
           -webkit-font-smoothing:antialiased;
           text-rendering:optimizeLegibility;
+          touch-action:pan-y;
         }
+        img{max-width:100%}
         button,input,select,textarea{font-family:inherit}
-        .app-shell{min-height:100vh}
+        textarea{resize:vertical}
+        .app-shell{min-height:100vh;overflow-x:hidden}
+        .page-stretch-shell{
+          transform:translateY(${pageStretch}px) scale(${pageScale});
+          transition:${pageStretch === 0 ? "transform .26s cubic-bezier(.2,.8,.2,1)" : "none"};
+          transform-origin:center top;
+          will-change:transform;
+        }
         .page{
           max-width:1380px;
           margin:0 auto;
           padding:18px 16px 110px;
           scroll-behavior:smooth;
+          overflow-x:hidden;
         }
         .page,
         .panel,
@@ -1356,7 +1902,7 @@ function App() {
         }
         .premium-scroll{
           -webkit-overflow-scrolling:touch;
-          overscroll-behavior:contain;
+          overscroll-behavior:auto;
         }
         .topbar,.panel{
           background:rgba(255,255,255,.84);
@@ -1410,7 +1956,6 @@ function App() {
         }
         .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
         .nav-btn{padding:12px 16px;font-size:14px}
-        .mobile-tabs{display:none !important}
         .panel{border-radius:28px;padding:22px}
         .hero{display:grid;grid-template-columns:1.02fr .98fr;gap:20px;margin-bottom:22px}
         .hero-title,.section-title{
@@ -1533,10 +2078,6 @@ function App() {
         }
         .glass-filter-btn:hover{
           transform:translateY(-2px);
-          box-shadow:
-            0 16px 34px rgba(31,76,122,.16),
-            inset 0 1px 0 rgba(255,255,255,.72),
-            inset 0 -1px 0 rgba(255,255,255,.16);
         }
         .glass-filter-btn.active{
           background:
@@ -1586,7 +2127,7 @@ function App() {
           box-shadow:inset 0 1px 0 rgba(255,255,255,.70);
         }
         .filter-card.compact{
-          min-height:72px;
+          min-height:68px;
         }
         .filter-card label{
           display:block;
@@ -1597,8 +2138,7 @@ function App() {
           text-transform:uppercase;
           letter-spacing:.06em;
         }
-        .filter-card select,
-        .filter-card input[type="number"]{
+        .filter-card select{
           width:100%;
           border:none;
           outline:none;
@@ -1610,21 +2150,21 @@ function App() {
           min-height:24px;
         }
         .slim-range{
-          padding-top:10px;
-          padding-bottom:10px;
+          padding-top:9px;
+          padding-bottom:9px;
         }
         .range-title-row{
           display:flex;
           align-items:center;
           justify-content:space-between;
           gap:8px;
-          margin-bottom:10px;
+          margin-bottom:8px;
         }
         .range-title-row label{
           margin:0;
         }
         .range-value{
-          font-size:13px;
+          font-size:12px;
           font-weight:900;
           color:#1a3854;
           white-space:nowrap;
@@ -1632,29 +2172,29 @@ function App() {
         .dual-range,
         .single-range{
           position:relative;
-          height:24px;
+          height:18px;
           display:flex;
           align-items:center;
         }
         .compact-range{
-          height:20px;
+          height:18px;
         }
         .dual-range-track,
         .single-range-track{
           position:absolute;
           left:0;
           right:0;
-          height:6px;
+          height:4px;
           border-radius:999px;
           background:#dfeaf5;
         }
         .dual-range-active,
         .single-range-active{
           position:absolute;
-          height:6px;
+          height:4px;
           border-radius:999px;
           background:linear-gradient(135deg,#33a8ff,#1882eb);
-          transition:left .06s linear, width .06s linear;
+          transition:left .04s linear, width .04s linear;
         }
         .single-range-active{
           left:0;
@@ -1674,39 +2214,34 @@ function App() {
         .single-range input[type="range"]::-webkit-slider-thumb{
           -webkit-appearance:none;
           appearance:none;
-          width:20px;
-          height:20px;
+          width:18px;
+          height:18px;
           border-radius:50%;
           background:#fff;
           border:2px solid #2f9cff;
-          box-shadow:0 4px 14px rgba(23,73,115,.16);
+          box-shadow:0 4px 12px rgba(23,73,115,.16);
           pointer-events:auto;
           cursor:pointer;
-          transition:transform .08s ease;
-        }
-        .dual-range input[type="range"]::-webkit-slider-thumb:active,
-        .single-range input[type="range"]::-webkit-slider-thumb:active{
-          transform:scale(1.06);
         }
         .dual-range input[type="range"]::-moz-range-thumb,
         .single-range input[type="range"]::-moz-range-thumb{
-          width:20px;
-          height:20px;
+          width:18px;
+          height:18px;
           border-radius:50%;
           background:#fff;
           border:2px solid #2f9cff;
-          box-shadow:0 4px 14px rgba(23,73,115,.16);
+          box-shadow:0 4px 12px rgba(23,73,115,.16);
           pointer-events:auto;
           cursor:pointer;
         }
         .dual-range input[type="range"]::-webkit-slider-runnable-track,
         .single-range input[type="range"]::-webkit-slider-runnable-track{
-          height:6px;
+          height:4px;
           background:transparent;
         }
         .dual-range input[type="range"]::-moz-range-track,
         .single-range input[type="range"]::-moz-range-track{
-          height:6px;
+          height:4px;
           background:transparent;
           border:none;
         }
@@ -1715,7 +2250,7 @@ function App() {
           align-items:center;
           justify-content:flex-end;
           gap:8px;
-          min-height:72px;
+          min-height:68px;
           padding-left:2px;
         }
         .compact-actions .primary-btn,
@@ -1736,7 +2271,7 @@ function App() {
           width:100%;
           max-width:560px;
           position:relative;
-          padding-bottom:118px;
+          padding-bottom:46px;
         }
         .profile-page-wrap{
           width:100%;
@@ -1756,11 +2291,11 @@ function App() {
         .profile-page-scroll{
           height:100%;
           overflow:auto;
-          padding-bottom:44px;
+          padding-bottom:140px;
           -ms-overflow-style:none;
           scrollbar-width:none;
           -webkit-overflow-scrolling:touch;
-          overscroll-behavior:contain;
+          overscroll-behavior:auto;
         }
         .profile-page-scroll::-webkit-scrollbar{display:none}
         .profile-hero-photo{
@@ -1768,6 +2303,7 @@ function App() {
           height:420px;
           object-fit:cover;
           display:block;
+          cursor:pointer;
         }
         .profile-header{
           padding:18px 18px 10px;
@@ -1847,6 +2383,31 @@ function App() {
           padding:9px 12px;border-radius:999px;background:#edf5fd;
           font-size:13px;font-weight:800;color:#446176
         }
+        .qa-grid{
+          display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:12px;
+        }
+        .qa-card{
+          background:#f6faff;
+          border-radius:20px;
+          padding:14px;
+          border:1px solid rgba(77,130,179,.08);
+        }
+        .qa-label{
+          font-size:12px;
+          font-weight:900;
+          color:#7c93a7;
+          margin-bottom:8px;
+          text-transform:uppercase;
+          letter-spacing:.04em;
+        }
+        .qa-value{
+          font-size:15px;
+          line-height:1.45;
+          color:#223849;
+          font-weight:800;
+        }
         .profile-photo-stack{
           display:grid;
           gap:14px;
@@ -1857,6 +2418,7 @@ function App() {
           display:block;
           object-fit:cover;
           border-radius:24px;
+          cursor:pointer;
         }
         .profile-footer-actions{
           display:grid;
@@ -1916,14 +2478,13 @@ function App() {
           position:absolute;
           left:0;
           right:0;
-          bottom:max(10px, env(safe-area-inset-bottom));
+          top:calc(min(84vh,820px) - 122px);
           z-index:80;
           pointer-events:none;
           min-height:100px;
         }
         .desktop-action-btn{
           position:absolute;
-          bottom:0;
           width:92px;
           height:92px;
           border-radius:50%;
@@ -1955,16 +2516,8 @@ function App() {
           background:linear-gradient(180deg, rgba(255,255,255,.56), rgba(255,255,255,.06));
           pointer-events:none;
         }
-        .desktop-action-btn::after{
-          content:"";
-          position:absolute;
-          inset:0;
-          border-radius:inherit;
-          background:radial-gradient(circle at 30% 25%, rgba(255,255,255,.30), transparent 42%);
-          pointer-events:none;
-        }
         .desktop-action-btn.skip{
-          left:88px;
+          left:94px;
           background:
             linear-gradient(180deg, rgba(255,255,255,.46), rgba(228,242,255,.16)),
             linear-gradient(135deg, rgba(58,141,255,.24), rgba(109,170,255,.14));
@@ -1972,7 +2525,7 @@ function App() {
           font-size:38px;
         }
         .desktop-action-btn.like{
-          right:88px;
+          right:94px;
           background:
             linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,233,238,.16)),
             linear-gradient(135deg, rgba(255,84,114,.24), rgba(255,143,170,.14));
@@ -1982,11 +2535,6 @@ function App() {
         }
         .desktop-action-btn:hover{
           transform:translateY(-4px) scale(1.04);
-          box-shadow:
-            0 24px 46px rgba(20,39,60,.22),
-            inset 0 1px 0 rgba(255,255,255,.58),
-            inset 0 -1px 0 rgba(255,255,255,.08),
-            0 0 0 4px rgba(255,255,255,.22);
         }
         .desktop-action-btn:active{transform:scale(.94)}
         .desktop-action-btn.pop{transform:scale(1.10)}
@@ -2029,7 +2577,7 @@ function App() {
         }
         .messages-outer,.profile-layout,.settings-layout{display:grid;gap:16px}
         .messages-outer{grid-template-columns:minmax(0,1fr);min-height:620px}
-        .profile-layout{grid-template-columns:320px minmax(0,1fr)}
+        .profile-layout{grid-template-columns:360px minmax(0,1fr)}
         .settings-layout{grid-template-columns:360px minmax(0,1fr)}
         .list-grid{display:grid;gap:10px}
         .list-item,.chat-item{
@@ -2041,7 +2589,8 @@ function App() {
           border-radius:18px;
           object-fit:cover;
           object-position:center;
-          flex-shrink:0
+          flex-shrink:0;
+          cursor:pointer;
         }
         .chat-item{
           cursor:pointer;
@@ -2067,6 +2616,7 @@ function App() {
           object-fit:cover;
           object-position:center;
           flex-shrink:0;
+          cursor:pointer;
         }
         .chat-main{
           flex:1;
@@ -2078,6 +2628,9 @@ function App() {
         .avatar-wrap{
           position:relative;
           flex-shrink:0;
+        }
+        .avatar-wrap.clickable{
+          cursor:pointer;
         }
         .avatar-status{
           position:absolute;
@@ -2197,23 +2750,18 @@ function App() {
           border-bottom:1px solid rgba(82,131,176,.10)
         }
         .message-header img{
-          width:68px;
-          height:68px;
+          width:72px;
+          height:72px;
           border-radius:18px;
           object-fit:cover;
           object-position:center;
+          cursor:pointer;
         }
         .message-header-line{
           display:flex;
           align-items:center;
           gap:8px;
           justify-content:space-between;
-        }
-        .message-header-actions{
-          display:flex;
-          gap:8px;
-          flex-wrap:wrap;
-          margin-top:8px;
         }
         .message-body{
           padding:18px 10px 18px 10px;
@@ -2321,15 +2869,58 @@ function App() {
         .field-group,.help-grid,.info-list{display:grid;gap:14px}
         .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
         .profile-avatar{text-align:center}
-        .profile-avatar img{width:180px;height:180px;border-radius:50%;margin-bottom:14px;object-fit:cover}
+        .profile-main-photo-wrap{
+          position:relative;
+          cursor:pointer;
+          width:min(100%,240px);
+          margin:0 auto 14px;
+        }
+        .profile-main-photo{
+          width:100%;
+          aspect-ratio:1 / 1;
+          border-radius:24px;
+          display:block;
+          object-fit:cover;
+          box-shadow:0 18px 34px rgba(20,39,60,.14);
+        }
+        .tap-badge{
+          position:absolute;
+          left:10px;
+          bottom:10px;
+          padding:6px 10px;
+          border-radius:999px;
+          background:rgba(18,32,46,.65);
+          color:#fff;
+          font-size:11px;
+          font-weight:800;
+          backdrop-filter:blur(8px);
+        }
         .profile-main-name{margin:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
         .profile-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:12px}
-        .profile-photo-grid img{width:100%;height:170px;border-radius:18px;object-fit:cover}
+        .profile-photo-grid img{
+          width:100%;
+          height:170px;
+          border-radius:18px;
+          object-fit:cover;
+          cursor:pointer;
+        }
+        .profile-block{
+          background:#f8fbff;
+          border-radius:24px;
+          padding:18px;
+          border:1px solid rgba(82,131,176,.08);
+        }
+        .profile-block h3{
+          margin:0 0 14px;
+          font-size:20px;
+        }
         .info-row{
           display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(82,131,176,.10)
         }
+        .info-row:last-child{border-bottom:none}
         .help-item{padding:18px;border-radius:20px;background:#f7fbff}
-        .mutual-modal{
+        .mutual-modal,
+        .photo-modal{
           position:fixed;inset:0;background:rgba(7,20,33,.45);display:flex;align-items:center;justify-content:center;
           padding:18px;z-index:100
         }
@@ -2337,6 +2928,38 @@ function App() {
           width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#33a8ff 0%,#1882eb 100%);
           color:#fff;box-shadow:0 24px 50px rgba(20,39,60,.32);text-align:center;position:relative;overflow:hidden;
           animation:matchPop .38s ease;
+        }
+        .photo-box{
+          width:min(900px,96vw);
+          max-height:92vh;
+          border-radius:28px;
+          overflow:hidden;
+          background:#fff;
+          box-shadow:0 24px 50px rgba(20,39,60,.32);
+          animation:matchPop .26s ease;
+          position:relative;
+        }
+        .photo-box img{
+          width:100%;
+          max-height:92vh;
+          object-fit:contain;
+          display:block;
+          background:#0d1722;
+        }
+        .photo-close{
+          position:absolute;
+          top:12px;
+          right:12px;
+          border:none;
+          width:42px;
+          height:42px;
+          border-radius:50%;
+          background:rgba(255,255,255,.86);
+          color:#173550;
+          font-size:20px;
+          font-weight:900;
+          cursor:pointer;
+          z-index:2;
         }
         .mutual-box::before,
         .mutual-box::after{
@@ -2403,7 +3026,7 @@ function App() {
             grid-template-columns:repeat(4,minmax(0,1fr));
           }
           .compact-actions{
-            grid-column:span 4;
+                        grid-column:span 4;
             justify-content:flex-end;
             min-height:auto;
           }
@@ -2449,7 +3072,8 @@ function App() {
           }
           .profile-hero-photo,.profile-photo-stack img{height:350px}
           .profile-title{font-size:30px}
-          .info-grid{grid-template-columns:1fr}
+          .info-grid,
+          .qa-grid{grid-template-columns:1fr}
 
           .filters-rail{
             padding:12px;
@@ -2466,17 +3090,17 @@ function App() {
           }
 
           .search-card-stage{
-            padding-bottom:110px;
+            padding-bottom:32px;
           }
           .search-floating-actions{
-            bottom:max(6px, env(safe-area-inset-bottom));
+            top:calc(min(82vh,760px) - 108px);
           }
           .desktop-action-btn{
-            width:80px;
-            height:80px;
+            width:78px;
+            height:78px;
           }
-          .desktop-action-btn.skip{left:32px}
-          .desktop-action-btn.like{right:32px}
+          .desktop-action-btn.skip{left:28px}
+          .desktop-action-btn.like{right:28px}
           .action-icon-heart{font-size:40px}
           .action-icon-skip{font-size:32px}
 
@@ -2491,8 +3115,8 @@ function App() {
             border-radius:16px;
           }
           .message-header img{
-            width:60px;
-            height:60px;
+            width:62px;
+            height:62px;
             border-radius:16px;
           }
           .item-title{font-size:14px}
@@ -2500,6 +3124,8 @@ function App() {
           .reply-badge{font-size:10px;padding:5px 9px}
           .delivery-mini{font-size:10px}
           .time-mini{font-size:11px}
+          .profile-layout,
+          .settings-layout{gap:14px}
 
           .phone-bottom-nav{
             position:fixed;
@@ -2554,795 +3180,1158 @@ function App() {
             font-size:14px;
             padding:11px 14px;
           }
+          .hero-mini-grid{
+            grid-template-columns:1fr 1fr;
+          }
+          .desktop-action-btn.skip{left:18px}
+          .desktop-action-btn.like{right:18px}
         }
       `}</style>
 
       {notice && <div className="notice">{notice}</div>}
 
-      <div className="page">
-        <header className="topbar">
-          <div className="brand-wrap">
-            <div className="brand">{t.brand}</div>
-            <div className="lang-switch">
-              <button
-                className={`chip-btn ${lang === "ru" ? "active" : ""}`}
-                onClick={() => setLang("ru")}
-              >
-                RU
-              </button>
-              <button
-                className={`chip-btn ${lang === "en" ? "active" : ""}`}
-                onClick={() => setLang("en")}
-              >
-                EN
-              </button>
+      <div className="page-stretch-shell">
+        <div className="page">
+          <header className="topbar">
+            <div className="brand-wrap">
+              <div className="brand">{t.brand}</div>
+              <div className="lang-switch">
+                <button
+                  className={`chip-btn ${lang === "ru" ? "active" : ""}`}
+                  onClick={() => setLang("ru")}
+                >
+                  RU
+                </button>
+                <button
+                  className={`chip-btn ${lang === "en" ? "active" : ""}`}
+                  onClick={() => setLang("en")}
+                >
+                  EN
+                </button>
+              </div>
             </div>
-          </div>
 
-          <nav className="nav">
-            <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
-              {t.home}
-            </button>
-            <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
-              {t.search}
-            </button>
-            <button
-              className={`nav-btn ${tab === "messages" ? "active" : ""}`}
-              onClick={() => {
-                setTab("messages");
-                setChatScreen("list");
-              }}
-            >
-              {t.messages}
-            </button>
-            <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
-              {t.profile}
-            </button>
-            <button
-              className={`nav-btn ${tab === "settings" ? "active" : ""}`}
-              onClick={() => setTab("settings")}
-            >
-              {t.settings}
-            </button>
-          </nav>
-        </header>
+            <nav className="nav">
+              <button className={`nav-btn ${tab === "home" ? "active" : ""}`} onClick={() => setTab("home")}>
+                {t.home}
+              </button>
+              <button className={`nav-btn ${tab === "search" ? "active" : ""}`} onClick={() => setTab("search")}>
+                {t.search}
+              </button>
+              <button
+                className={`nav-btn ${tab === "messages" || tab === "profilePreview" ? "active" : ""}`}
+                onClick={() => {
+                  setTab("messages");
+                  setChatScreen("list");
+                }}
+              >
+                {t.messages}
+              </button>
+              <button className={`nav-btn ${tab === "profile" ? "active" : ""}`} onClick={() => setTab("profile")}>
+                {t.profile}
+              </button>
+              <button
+                className={`nav-btn ${tab === "settings" ? "active" : ""}`}
+                onClick={() => setTab("settings")}
+              >
+                {t.settings}
+              </button>
+            </nav>
+          </header>
 
-        {tab === "home" && (
-          <>
-            <section className="hero">
-              <div className="panel">
-                <h1 className="hero-title">{t.heroTitle}</h1>
-                <p className="hero-text">{t.heroText}</p>
-                <div className="hero-actions">
-                  <button className="primary-btn" onClick={() => setTab("search")}>
-                    {t.heroPrimary}
-                  </button>
-                  <button
-                    className="secondary-btn"
-                    onClick={() => {
-                      setTab("messages");
-                      setChatScreen("list");
-                    }}
-                  >
-                    {t.heroSecondary}
-                  </button>
-                </div>
-              </div>
-
-              <div className="hero-mini-grid">
-                {heroPreviewProfiles.map((profile) => (
-                  <div className="hero-mini-card" key={profile.id}>
-                    <img src={profile.photos[0]} alt={profile.name} />
-                    <div className="hero-mini-overlay">
-                      <h3 className="hero-mini-name">
-                        {profile.name}, {profile.age} {profile.zodiac}
-                        {profile.verified && <Badge />}
-                      </h3>
-                      <p className="hero-mini-meta">
-                        {profile.city}, {profile.country}
-                      </p>
-                      <p className="hero-mini-bio">
-                        {lang === "ru" ? profile.bio : profile.bioEn}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="quick-grid">
-              <div className="panel">
-                <div className="quick-num">1</div>
-                <h3>{t.card1}</h3>
-                <p className="muted">{t.card1t}</p>
-              </div>
-              <div className="panel">
-                <div className="quick-num">2</div>
-                <h3>{t.card2}</h3>
-                <p className="muted">{t.card2t}</p>
-              </div>
-              <div className="panel">
-                <div className="quick-num">3</div>
-                <h3>{t.card3}</h3>
-                <p className="muted">{t.card3t}</p>
-              </div>
-            </section>
-          </>
-        )}
-
-        {tab === "search" && (
-          <>
-            <h2 className="section-title">{t.searchTitle}</h2>
-
-            <section className="search-wrap">
-              <div className="search-head-area">
-                <div className="search-toolbar">
-                  <div className="search-toolbar-left">
+          {tab === "home" && (
+            <>
+              <section className="hero">
+                <div className="panel">
+                  <h1 className="hero-title">{t.heroTitle}</h1>
+                  <p className="hero-text">{t.heroText}</p>
+                  <div className="hero-actions">
+                    <button className="primary-btn" onClick={() => setTab("search")}>
+                      {t.heroPrimary}
+                    </button>
                     <button
-                      ref={filterButtonRef}
-                      className={`glass-filter-btn ${showFilters ? "active" : ""}`}
-                      onClick={() => setShowFilters((prev) => !prev)}
+                      className="secondary-btn"
+                      onClick={() => {
+                        setTab("messages");
+                        setChatScreen("list");
+                      }}
                     >
-                      ⚙️ {t.filters}
+                      {t.heroSecondary}
                     </button>
                   </div>
-
-                  <div className="search-counter">{filteredProfiles.length}</div>
                 </div>
 
-                <div className="filters-inline-shell">
-                  {showFilters && (
-                    <div className="filters-rail" ref={filterRailRef}>
-                      <FilterContent />
+                <div className="hero-mini-grid">
+                  {heroPreviewProfiles.map((profile) => (
+                    <div className="hero-mini-card" key={profile.id}>
+                      <img src={profile.photos[0]} alt={profile.name} />
+                      <div className="hero-mini-overlay">
+                        <h3 className="hero-mini-name">
+                          {profile.name}, {profile.age} {profile.zodiac}
+                          {profile.verified && <Badge />}
+                        </h3>
+                        <p className="hero-mini-meta">
+                          {profile.city}, {profile.country}
+                        </p>
+                        <p className="hero-mini-bio">
+                          {lang === "ru" ? profile.bio : profile.bioEn}
+                        </p>
+                      </div>
                     </div>
-                  )}
+                  ))}
                 </div>
-              </div>
+              </section>
 
-              <div className="panel">
-                {activeProfile ? (
-                  <div className="search-stage">
-                    <div className="deck-wrap">
-                      <div className="search-card-stage">
-                        <div
-                          className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
-                          style={cardStyle}
-                          onTouchStart={onTouchStartCard}
-                          onTouchMove={onTouchMoveCard}
-                          onTouchEnd={onTouchEndCard}
-                        >
-                          <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
-                            {t.likeStamp}
-                          </div>
-                          <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
-                            {t.skipStamp}
-                          </div>
+              <section className="quick-grid">
+                <div className="panel">
+                  <div className="quick-num">1</div>
+                  <h3>{t.card1}</h3>
+                  <p className="muted">{t.card1t}</p>
+                </div>
+                <div className="panel">
+                  <div className="quick-num">2</div>
+                  <h3>{t.card2}</h3>
+                  <p className="muted">{t.card2t}</p>
+                </div>
+                <div className="panel">
+                  <div className="quick-num">3</div>
+                  <h3>{t.card3}</h3>
+                  <p className="muted">{t.card3t}</p>
+                </div>
+              </section>
+            </>
+          )}
 
-                          {renderProfileContent(activeProfile, {
-                            interactive: true,
-                            scrollRef: profilePageRef,
-                          })}
-                        </div>
+          {tab === "search" && (
+            <>
+              <h2 className="section-title">{t.searchTitle}</h2>
 
-                        <div className="search-floating-actions">
-                          <button
-                            className={`desktop-action-btn skip ${skipPulse ? "pop" : ""}`}
-                            onClick={() => triggerSwipeOut("left", () => handleSkip(activeProfile))}
-                            title="skip"
+              <section className="search-wrap">
+                <div className="search-head-area">
+                  <div className="search-toolbar">
+                    <div className="search-toolbar-left">
+                      <button
+                        ref={filterButtonRef}
+                        className={`glass-filter-btn ${showFilters ? "active" : ""}`}
+                        onClick={() => setShowFilters((prev) => !prev)}
+                      >
+                        ⚙️ {t.filters}
+                      </button>
+                    </div>
+
+                    <div className="search-counter">{filteredProfiles.length}</div>
+                  </div>
+
+                  <div className="filters-inline-shell">
+                    {showFilters && (
+                      <div className="filters-rail" ref={filterRailRef}>
+                        <FilterContent />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="panel">
+                  {activeProfile ? (
+                    <div className="search-stage">
+                      <div className="deck-wrap">
+                        <div className="search-card-stage">
+                          <div
+                            className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
+                            style={cardStyle}
+                            onTouchStart={onTouchStartCard}
+                            onTouchMove={onTouchMoveCard}
+                            onTouchEnd={onTouchEndCard}
                           >
-                            <span className="action-icon-skip">✕</span>
-                          </button>
+                            <div className={`swipe-badge like ${swipeStampClass === "like" ? "visible" : ""}`}>
+                              {t.likeStamp}
+                            </div>
+                            <div className={`swipe-badge skip ${swipeStampClass === "skip" ? "visible" : ""}`}>
+                              {t.skipStamp}
+                            </div>
 
-                          <button
-                            className={`desktop-action-btn like ${likePulse ? "pop" : ""}`}
-                            onClick={() => triggerSwipeOut("right", () => handleLike(activeProfile))}
-                            title="like"
-                          >
-                            <span className="action-icon-heart">❤</span>
-                          </button>
+                            {renderProfileContent(activeProfile, {
+                              interactive: true,
+                              scrollRef: profilePageRef,
+                            })}
+                          </div>
+
+                          <div className="search-floating-actions">
+                            <button
+                              className={`desktop-action-btn skip ${skipPulse ? "pop" : ""}`}
+                              onClick={() => triggerSwipeOut("left", () => handleSkip(activeProfile))}
+                              title="skip"
+                            >
+                              <span className="action-icon-skip">✕</span>
+                            </button>
+
+                            <button
+                              className={`desktop-action-btn like ${likePulse ? "pop" : ""}`}
+                              onClick={() => triggerSwipeOut("right", () => handleLike(activeProfile))}
+                              title="like"
+                            >
+                              <span className="action-icon-heart">❤</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="empty">
-                    <h3>{t.emptyDeck}</h3>
-                    <p>{t.emptyDeckText}</p>
-                    <button className="primary-btn" onClick={restartDeck}>
-                      {t.restart}
-                    </button>
-                  </div>
-                )}
+                  ) : (
+                    <div className="empty">
+                      <h3>{t.emptyDeck}</h3>
+                      <p>{t.emptyDeckText}</p>
+                      <button className="primary-btn" onClick={restartDeck}>
+                        {t.restart}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </>
+          )}
+
+          {tab === "messages" && (
+            <>
+              <h2 className="section-title">{t.messages}</h2>
+
+              <div className="segmented" style={{ marginBottom: 14 }}>
+                <button
+                  className={`chip-btn ${messageView === "matches" ? "active" : ""}`}
+                  onClick={() => {
+                    setMessageView("matches");
+                    setChatScreen("list");
+                  }}
+                >
+                  {t.msgMatches}
+                </button>
+                <button
+                  className={`chip-btn ${messageView === "liked" ? "active" : ""}`}
+                  onClick={() => {
+                    setMessageView("liked");
+                    setChatScreen("list");
+                  }}
+                >
+                  {t.msgLikedYou}
+                </button>
+                <button
+                  className={`chip-btn ${messageView === "guests" ? "active" : ""}`}
+                  onClick={() => {
+                    setMessageView("guests");
+                    setChatScreen("list");
+                  }}
+                >
+                  {t.msgGuests}
+                </button>
               </div>
-            </section>
-          </>
-        )}
 
-        {tab === "messages" && (
-          <>
-            <h2 className="section-title">{t.messages}</h2>
+              <section className="messages-outer">
+                <div className="panel">
+                  {messageView === "matches" ? (
+                    chatScreen === "list" ? (
+                      listProfiles.length ? (
+                        <div className="list-grid">
+                          {listProfiles.map((profile) => {
+                            const lastMsg = getLastMessage(profile.id);
+                            const isActive = selectedChatId === profile.id;
+                            const unread = needsMyReply(profile.id);
 
-            <div className="segmented" style={{ marginBottom: 14 }}>
-              <button
-                className={`chip-btn ${messageView === "matches" ? "active" : ""}`}
-                onClick={() => {
-                  setMessageView("matches");
-                  setChatScreen("list");
-                }}
-              >
-                {t.msgMatches}
-              </button>
-              <button
-                className={`chip-btn ${messageView === "liked" ? "active" : ""}`}
-                onClick={() => {
-                  setMessageView("liked");
-                  setChatScreen("list");
-                }}
-              >
-                {t.msgLikedYou}
-              </button>
-              <button
-                className={`chip-btn ${messageView === "guests" ? "active" : ""}`}
-                onClick={() => {
-                  setMessageView("guests");
-                  setChatScreen("list");
-                }}
-              >
-                {t.msgGuests}
-              </button>
-            </div>
-
-            <section className="messages-outer">
-              <div className="panel">
-                {messageView === "matches" ? (
-                  chatScreen === "list" ? (
-                    listProfiles.length ? (
-                      <div className="list-grid">
-                        {listProfiles.map((profile) => {
-                          const lastMsg = getLastMessage(profile.id);
-                          const isActive = selectedChatId === profile.id;
-                          const unread = needsMyReply(profile.id);
-
-                          return (
-                            <div
-                              key={profile.id}
-                              className={`chat-item ${isActive ? "active" : ""}`}
-                              onClick={() => {
-                                setSelectedChatId(profile.id);
-                                setChatScreen("chat");
-                              }}
-                            >
-                              <div className="chat-main">
-                                <div className="avatar-wrap">
-                                  <img src={profile.photos[0]} alt={profile.name} />
-                                  <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
-                                </div>
-
-                                <div className="chat-meta">
-                                  <div className="item-topline">
-                                    <div className="item-title">
-                                      <span className="dialog-icon">💬</span>
-                                      {profile.name}
-                                      {profile.verified && <Badge />}
-                                    </div>
+                            return (
+                              <div
+                                key={profile.id}
+                                className={`chat-item ${isActive ? "active" : ""}`}
+                                onClick={() => {
+                                  setSelectedChatId(profile.id);
+                                  setChatScreen("chat");
+                                }}
+                              >
+                                <div className="chat-main">
+                                  <div
+                                    className="avatar-wrap clickable"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      openProfilePreview(profile.id);
+                                    }}
+                                  >
+                                    <img src={profile.photos[0]} alt={profile.name} />
+                                    <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
                                   </div>
 
-                                  <p className="item-sub">
-                                    {unread && <span className="unread-dot" />}
-                                    <span className="item-sub-text">
-                                      {lastMsg
-                                        ? lang === "ru"
-                                          ? lastMsg.text
-                                          : lastMsg.textEn || lastMsg.text
-                                        : `${profile.city}, ${profile.country}`}
+                                  <div className="chat-meta">
+                                    <div className="item-topline">
+                                      <div className="item-title">
+                                        <span className="dialog-icon">💬</span>
+                                        {profile.name}
+                                        {profile.verified && <Badge />}
+                                      </div>
+                                    </div>
+
+                                    <p className="item-sub">
+                                      {unread && <span className="unread-dot" />}
+                                      <span className="item-sub-text">
+                                        {lastMsg
+                                          ? lang === "ru"
+                                            ? lastMsg.text
+                                            : lastMsg.textEn || lastMsg.text
+                                          : `${profile.city}, ${profile.country}`}
+                                      </span>
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="chat-right">
+                                  <span className="time-mini">{lastMsg?.time || "12:00"}</span>
+                                  {unread && <span className="reply-badge">{t.yourTurn}</span>}
+                                  {lastMsg?.from === "me" ? (
+                                    <span className="delivery-mini">
+                                      {lastMsg.status === "read" ? t.read : t.delivered}
                                     </span>
-                                  </p>
+                                  ) : (
+                                    <span className="delivery-mini">
+                                      {profile.online ? t.online : t.offline}
+                                    </span>
+                                  )}
                                 </div>
                               </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="empty">{t.noMessages}</div>
+                      )
+                    ) : selectedChatProfile && matches.includes(selectedChatProfile.id) ? (
+                      <div className="message-shell">
+                        <div>
+                          <button className="back-btn" onClick={() => setChatScreen("list")}>
+                            ← {t.backToChats}
+                          </button>
 
-                              <div className="chat-right">
-                                <span className="time-mini">{lastMsg?.time || "12:00"}</span>
-                                {unread && <span className="reply-badge">{t.yourTurn}</span>}
-                                {lastMsg?.from === "me" ? (
-                                  <span className="delivery-mini">
-                                    {lastMsg.status === "read" ? t.read : t.delivered}
-                                  </span>
-                                ) : (
-                                  <span className="delivery-mini">
-                                    {profile.online ? t.online : t.offline}
-                                  </span>
-                                )}
+                          <div className="message-header" style={{ marginTop: 14 }}>
+                            <div
+                              className="avatar-wrap clickable"
+                              onClick={() => openProfilePreview(selectedChatProfile.id)}
+                            >
+                              <img src={selectedChatProfile.photos[0]} alt={selectedChatProfile.name} />
+                              <span className={`avatar-status ${selectedChatProfile.online ? "" : "offline"}`} />
+                            </div>
+
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div className="message-header-line">
+                                <div className="item-title">
+                                  {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
+                                  {selectedChatProfile.zodiac}
+                                  {selectedChatProfile.verified && <Badge />}
+                                </div>
+                              </div>
+                              <p className="item-sub">
+                                {selectedChatProfile.online ? t.online : t.offline} •{" "}
+                                {selectedChatProfile.city}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="message-body" ref={messageBodyRef}>
+                          {(messages[selectedChatId] || []).map((msg, i) => (
+                            <div key={i} className={`message-row ${msg.from}`}>
+                              <div className={`bubble ${msg.from}`}>
+                                {lang === "ru" ? msg.text : msg.textEn || msg.text}
+                                <div className="bubble-meta">
+                                  <span>{msg.time || "12:00"}</span>
+                                  {msg.from === "me" && (
+                                    <span className={`bubble-checks ${msg.status}`}>
+                                      {getChecks(msg.status)}
+                                    </span>
+                                  )}
+                                </div>
                               </div>
                             </div>
-                          );
-                        })}
+                          ))}
+                        </div>
+
+                        <div className="message-input-row">
+                          <div className="message-input-shell">
+                            <span className="chat-action-icon">😊</span>
+                            <input
+                              value={chatDraft}
+                              onChange={(e) => setChatDraft(e.target.value)}
+                              placeholder={t.messagePlaceholder}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") sendMessage();
+                              }}
+                            />
+                            <span className="chat-action-icon">📎</span>
+                          </div>
+
+                          <button className="primary-btn" onClick={sendMessage}>
+                            {t.send}
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <div className="empty">{t.noMessages}</div>
                     )
-                  ) : selectedChatProfile && matches.includes(selectedChatProfile.id) ? (
-                    <div className="message-shell">
-                      <div>
-                        <button className="back-btn" onClick={() => setChatScreen("list")}>
-                          ← {t.backToChats}
-                        </button>
-
-                        <div className="message-header" style={{ marginTop: 14 }}>
-                          <div className="avatar-wrap">
-                            <img src={selectedChatProfile.photos[0]} alt={selectedChatProfile.name} />
-                            <span className={`avatar-status ${selectedChatProfile.online ? "" : "offline"}`} />
-                          </div>
-
-                          <div style={{ flex: 1, minWidth: 0 }}>
-                            <div className="message-header-line">
-                              <div className="item-title">
-                                {selectedChatProfile.name}, {selectedChatProfile.age}{" "}
-                                {selectedChatProfile.zodiac}
-                                {selectedChatProfile.verified && <Badge />}
-                              </div>
+                  ) : chatScreen === "list" ? (
+                    listProfiles.length ? (
+                      <div className="list-grid">
+                        {listProfiles.map((profile) => (
+                          <div key={profile.id} className="list-item">
+                            <div
+                              className="avatar-wrap clickable"
+                              onClick={() => {
+                                if (matches.includes(profile.id)) openProfilePreview(profile.id);
+                              }}
+                            >
+                              <img src={profile.photos[0]} alt={profile.name} />
+                              <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
                             </div>
-                            <p className="item-sub">
-                              {selectedChatProfile.online ? t.online : t.offline} •{" "}
-                              {selectedChatProfile.city}
-                            </p>
 
-                            <div className="message-header-actions">
+                            <div style={{ flex: 1 }}>
+                              <div className="item-title">
+                                <span className="dialog-icon">
+                                  {messageView === "liked" ? "♥" : "👁"}
+                                </span>
+                                {profile.name}, {profile.age} {profile.zodiac}
+                                {profile.verified && <Badge />}
+                              </div>
+                              <p className="item-sub">
+                                {profile.city}, {profile.country}
+                              </p>
+                            </div>
+                            {matches.includes(profile.id) ? (
+                              <button className="primary-btn" onClick={() => openChatFromProfile(profile.id)}>
+                                {t.startChat}
+                              </button>
+                            ) : (
                               <button
                                 className="secondary-btn"
-                                onClick={() => openProfilePreview(selectedChatProfile.id)}
+                                disabled
+                                style={{ opacity: 0.65, cursor: "default" }}
                               >
-                                {t.openProfile}
+                                🔒
                               </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="message-body" ref={messageBodyRef}>
-                        {(messages[selectedChatId] || []).map((msg, i) => (
-                          <div key={i} className={`message-row ${msg.from}`}>
-                            <div className={`bubble ${msg.from}`}>
-                              {lang === "ru" ? msg.text : msg.textEn || msg.text}
-                              <div className="bubble-meta">
-                                <span>{msg.time || "12:00"}</span>
-                                {msg.from === "me" && (
-                                  <span className={`bubble-checks ${msg.status}`}>
-                                    {getChecks(msg.status)}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
+                            )}
                           </div>
                         ))}
                       </div>
-
-                      <div className="message-input-row">
-                        <div className="message-input-shell">
-                          <span className="chat-action-icon">😊</span>
-                          <input
-                            value={chatDraft}
-                            onChange={(e) => setChatDraft(e.target.value)}
-                            placeholder={t.messagePlaceholder}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") sendMessage();
-                            }}
-                          />
-                          <span className="chat-action-icon">📎</span>
-                        </div>
-
-                        <button className="primary-btn" onClick={sendMessage}>
-                          {t.send}
-                        </button>
+                    ) : (
+                      <div className="empty">
+                        {messageView === "liked" ? t.noLikedYou : t.noGuests}
                       </div>
-                    </div>
-                  ) : (
-                    <div className="empty">{t.noMessages}</div>
-                  )
-                ) : chatScreen === "list" ? (
-                  listProfiles.length ? (
-                    <div className="list-grid">
-                      {listProfiles.map((profile) => (
-                        <div key={profile.id} className="list-item">
-                          <div className="avatar-wrap">
-                            <img src={profile.photos[0]} alt={profile.name} />
-                            <span className={`avatar-status ${profile.online ? "" : "offline"}`} />
-                          </div>
-
-                          <div style={{ flex: 1 }}>
-                            <div className="item-title">
-                              <span className="dialog-icon">
-                                {messageView === "liked" ? "♥" : "👁"}
-                              </span>
-                              {profile.name}, {profile.age} {profile.zodiac}
-                              {profile.verified && <Badge />}
-                            </div>
-                            <p className="item-sub">
-                              {profile.city}, {profile.country}
-                            </p>
-                          </div>
-                          {matches.includes(profile.id) ? (
-                            <button className="primary-btn" onClick={() => openChatFromProfile(profile.id)}>
-                              {t.openChat}
-                            </button>
-                          ) : (
-                            <button
-                              className="secondary-btn"
-                              disabled
-                              style={{ opacity: 0.65, cursor: "default" }}
-                            >
-                              🔒
-                            </button>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                    )
                   ) : (
                     <div className="empty">
-                      {messageView === "liked" ? t.noLikedYou : t.noGuests}
+                      <h3>{t.typeDialog}</h3>
+                      <p>{t.typeDialogText}</p>
                     </div>
-                  )
-                ) : (
-                  <div className="empty">
-                    <h3>{t.typeDialog}</h3>
-                    <p>{t.typeDialogText}</p>
-                  </div>
-                )}
+                  )}
+                </div>
+              </section>
+            </>
+          )}
+
+          {tab === "profilePreview" && viewedProfile && (
+            <>
+              <h2 className="section-title">{t.profilePreviewTitle}</h2>
+
+              <div style={{ marginBottom: 16 }}>
+                <button
+                  className="back-btn"
+                  onClick={() => {
+                    setTab("messages");
+                    setChatScreen("chat");
+                  }}
+                >
+                  ← {t.backToMessages}
+                </button>
               </div>
-            </section>
-          </>
-        )}
 
-        {tab === "profilePreview" && viewedProfile && (
-          <>
-            <h2 className="section-title">{t.profilePreviewTitle}</h2>
-
-            <div style={{ marginBottom: 16 }}>
-              <button
-                className="back-btn"
-                onClick={() => {
-                  setTab("messages");
-                  setChatScreen("chat");
-                }}
-              >
-                ← {t.backToMessages}
-              </button>
-            </div>
-
-            <section className="search-wrap">
-              <div className="panel">
-                <div className="deck-wrap">
-                  <div className="search-card-stage" style={{ paddingBottom: 0 }}>
-                    <div className="profile-page-wrap" style={{ transform: "none" }}>
-                      {renderProfileContent(viewedProfile, {
-                        interactive: false,
-                        previewOnly: true,
-                        scrollRef: profilePageRef,
-                      })}
+              <section className="search-wrap">
+                <div className="panel">
+                  <div className="deck-wrap">
+                    <div className="search-card-stage" style={{ paddingBottom: 0 }}>
+                      <div className="profile-page-wrap" style={{ transform: "none" }}>
+                        {renderProfileContent(viewedProfile, {
+                          interactive: false,
+                          previewOnly: true,
+                          scrollRef: previewPageRef,
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
-          </>
-        )}
+              </section>
+            </>
+          )}
 
-        {tab === "profile" && (
-          <>
-            <h2 className="section-title">{t.profileTitle}</h2>
+          {tab === "profile" && (
+            <>
+              <h2 className="section-title">{t.profileTitle}</h2>
 
-            <section className="profile-layout">
-              <div className="panel">
-                <div className="profile-avatar">
-                  <img src={myProfile.photos[0]} alt={myProfile.name} />
-                  <h3 className="profile-main-name">
-                    {myProfile.name}
-                    {myProfile.verified && <Badge />}
-                  </h3>
-                  <p className="muted" style={{ margin: "8px 0 10px" }}>
-                    {myProfile.age} • {myProfile.zodiac}
-                  </p>
-                  <p className="muted" style={{ marginBottom: 0 }}>
-                    {lang === "ru" ? myProfile.bio : myProfile.bioEn}
-                  </p>
-                </div>
-              </div>
+              <section className="profile-layout">
+                <div className="panel">
+                  <div className="profile-avatar">
+                    <div
+                      className="profile-main-photo-wrap"
+                      onClick={() => setPhotoModal(myProfile.photos[0])}
+                    >
+                      <img className="profile-main-photo" src={myProfile.photos[0]} alt={myProfile.name} />
+                      <div className="tap-badge">{t.tapToOpen}</div>
+                    </div>
 
-              <div className="panel">
-                <h3 style={{ marginTop: 0 }}>{t.about}</h3>
-
-                <div className="info-list">
-                  <div className="info-row">
-                    <strong>{t.age}</strong>
-                    <span>{myProfile.age}</span>
-                  </div>
-                  <div className="info-row">
-                    <strong>{t.cityLabel}</strong>
-                    <span>{myProfile.city}</span>
-                  </div>
-                  <div className="info-row">
-                    <strong>{t.countryLabel}</strong>
-                    <span>{myProfile.country}</span>
-                  </div>
-                  <div className="info-row">
-                    <strong>{t.zodiac}</strong>
-                    <span>{myProfile.zodiac}</span>
-                  </div>
-                  <div className="info-row">
-                    <strong>{t.verified}</strong>
-                    <span>{myProfile.verified ? t.verifiedYes : t.verifiedNo}</span>
+                    <h3 className="profile-main-name">
+                      {myProfile.name}
+                      {myProfile.verified && <Badge />}
+                    </h3>
+                    <p className="muted" style={{ margin: "8px 0 10px" }}>
+                      {myProfile.age} • {myProfile.zodiac}
+                    </p>
+                    <p className="muted" style={{ marginBottom: 0 }}>
+                      {lang === "ru" ? myProfile.bio : myProfile.bioEn}
+                    </p>
                   </div>
                 </div>
 
-                <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                  {!editProfile ? (
-                    <button className="primary-btn" onClick={() => setEditProfile(true)}>
-                      {t.editProfile}
-                    </button>
-                  ) : (
-                    <>
-                      <button className="primary-btn" onClick={saveProfile}>
-                        {t.saveProfile}
+                <div className="panel">
+                  <div style={{ marginTop: 0, display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 16 }}>
+                    {!editProfile ? (
+                      <button className="primary-btn" onClick={() => setEditProfile(true)}>
+                        {t.editProfile}
                       </button>
-                      <button
-                        className="secondary-btn"
-                        onClick={() => {
-                          setProfileDraft(myProfile);
-                          setEditProfile(false);
+                    ) : (
+                      <>
+                        <button className="primary-btn" onClick={saveProfile}>
+                          {t.saveProfile}
+                        </button>
+                        <button
+                          className="secondary-btn"
+                          onClick={() => {
+                            setProfileDraft(myProfile);
+                            setEditProfile(false);
+                          }}
+                        >
+                          {t.cancel}
+                        </button>
+                      </>
+                    )}
+
+                    {savedProfileLabel && (
+                      <div
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          padding: "10px 14px",
+                          borderRadius: 999,
+                          background: "rgba(70,199,121,0.12)",
+                          color: "#169453",
+                          fontWeight: 800,
                         }}
                       >
-                        {t.cancel}
-                      </button>
-                    </>
-                  )}
+                        {t.profileSaved}
+                      </div>
+                    )}
+                  </div>
 
-                  {savedProfileLabel && (
-                    <div
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        padding: "10px 14px",
-                        borderRadius: 999,
-                        background: "rgba(70,199,121,0.12)",
-                        color: "#169453",
-                        fontWeight: 800,
-                      }}
-                    >
-                      {t.profileSaved}
+                  <div className="profile-block" style={{ marginBottom: 16 }}>
+                    <h3>{t.about}</h3>
+                    <div className="info-list">
+                      <div className="info-row">
+                        <strong>{t.age}</strong>
+                        <span>{myProfile.age}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.cityLabel}</strong>
+                        <span>{myProfile.city}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.countryLabel}</strong>
+                        <span>{myProfile.country}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.zodiac}</strong>
+                        <span>{myProfile.zodiac}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.height}</strong>
+                        <span>{lang === "ru" ? myProfile.height : myProfile.heightEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.relationshipStatus}</strong>
+                        <span>{relationshipLabel(myProfile)}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.children}</strong>
+                        <span>{lang === "ru" ? myProfile.children : myProfile.childrenEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.smoking}</strong>
+                        <span>{lang === "ru" ? myProfile.smoking : myProfile.smokingEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.alcohol}</strong>
+                        <span>{lang === "ru" ? myProfile.alcohol : myProfile.alcoholEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.languages}</strong>
+                        <span>{myProfile.languages}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.education}</strong>
+                        <span>{lang === "ru" ? myProfile.education : myProfile.educationEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.job}</strong>
+                        <span>{lang === "ru" ? myProfile.job : myProfile.jobEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.verified}</strong>
+                        <span>{myProfile.verified ? t.verifiedYes : t.verifiedNo}</span>
+                      </div>
                     </div>
-                  )}
+                  </div>
+
+                  <div className="profile-block" style={{ marginBottom: 16 }}>
+                    <h3>{t.lookingFor}</h3>
+                    <div className="info-list">
+                      <div className="info-row">
+                        <strong>{t.lookingGender}</strong>
+                        <span>{lang === "ru" ? myProfile.lookingGender : myProfile.lookingGenderEn}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.lookingAge}</strong>
+                        <span>{myProfile.lookingAge}</span>
+                      </div>
+                      <div className="info-row">
+                        <strong>{t.datingType}</strong>
+                        <span>{datingTypeLabel(myProfile.datingType)}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="profile-block" style={{ marginBottom: 16 }}>
+                    <h3>{t.interests}</h3>
+                    <div className="chip-row">
+                      {myProfile.interests.map((item) => (
+                        <span className="interest" key={item}>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="profile-block" style={{ marginBottom: 16 }}>
+                    <h3>{t.quickAnswers}</h3>
+                    <div className="qa-grid">
+                      <div className="qa-card">
+                        <div className="qa-label">{t.idealDate}</div>
+                        <div className="qa-value">
+                          {lang === "ru"
+                            ? myProfile.quickAnswers.idealDate
+                            : myProfile.quickAnswers.idealDateEn}
+                        </div>
+                      </div>
+                      <div className="qa-card">
+                        <div className="qa-label">{t.favoriteMovie}</div>
+                        <div className="qa-value">{myProfile.quickAnswers.favoriteMovie}</div>
+                      </div>
+                      <div className="qa-card">
+                        <div className="qa-label">{t.importantInPerson}</div>
+                        <div className="qa-value">
+                          {lang === "ru"
+                            ? myProfile.quickAnswers.importantInPerson
+                            : myProfile.quickAnswers.importantInPersonEn}
+                        </div>
+                      </div>
+                      <div className="qa-card">
+                        <div className="qa-label">{t.favoriteWeekend}</div>
+                        <div className="qa-value">
+                          {lang === "ru"
+                            ? myProfile.quickAnswers.favoriteWeekend
+                            : myProfile.quickAnswers.favoriteWeekendEn}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="profile-block">
+                    <h3>{t.photos}</h3>
+                    <div className="profile-photo-grid">
+                      {myProfile.photos.map((photo, i) => (
+                        <img key={i} src={photo} alt={`profile-${i}`} onClick={() => setPhotoModal(photo)} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            {editProfile && (
-              <section className="panel" style={{ marginTop: 18 }}>
-                <h3 style={{ marginTop: 0 }}>{t.editProfile}</h3>
+              {editProfile && (
+                <section className="panel" style={{ marginTop: 18 }}>
+                  <h3 style={{ marginTop: 0 }}>{t.editProfile}</h3>
 
-                <div className="field-group">
-                  <div className="two-col">
-                    <div className="field">
-                      <label>{t.name}</label>
-                      <input
-                        value={profileDraft.name}
-                        onChange={(e) =>
-                          setProfileDraft((p) => ({ ...p, name: e.target.value }))
-                        }
-                      />
+                  <div className="field-group">
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.name}</label>
+                        <input
+                          value={profileDraft.name}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, name: e.target.value }))
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.age}</label>
+                        <input
+                          type="number"
+                          value={profileDraft.age}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, age: Number(e.target.value || 0) }))
+                          }
+                        />
+                      </div>
                     </div>
-                    <div className="field">
-                      <label>{t.age}</label>
-                      <input
-                        type="number"
-                        value={profileDraft.age}
-                        onChange={(e) =>
-                          setProfileDraft((p) => ({ ...p, age: Number(e.target.value || 0) }))
-                        }
-                      />
-                    </div>
-                  </div>
 
-                  <div className="two-col">
-                    <div className="field">
-                      <label>{t.cityLabel}</label>
-                      <input
-                        value={profileDraft.city}
-                        onChange={(e) =>
-                          setProfileDraft((p) => ({ ...p, city: e.target.value }))
-                        }
-                      />
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.cityLabel}</label>
+                        <input
+                          value={profileDraft.city}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, city: e.target.value }))
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.countryLabel}</label>
+                        <input
+                          value={profileDraft.country}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, country: e.target.value }))
+                          }
+                        />
+                      </div>
                     </div>
-                    <div className="field">
-                      <label>{t.countryLabel}</label>
-                      <input
-                        value={profileDraft.country}
-                        onChange={(e) =>
-                          setProfileDraft((p) => ({ ...p, country: e.target.value }))
-                        }
-                      />
-                    </div>
-                  </div>
 
-                  <div className="two-col">
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.zodiac}</label>
+                        <select
+                          value={profileDraft.zodiac}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, zodiac: e.target.value }))
+                          }
+                        >
+                          {zodiacOptions.map((z) => (
+                            <option key={z} value={z}>
+                              {z}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="field">
+                        <label>{t.height}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.height : profileDraft.heightEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, height: e.target.value }
+                                : { ...p, heightEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.relationshipStatus}</label>
+                        <select
+                          value={profileDraft.relationshipStatus}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, relationshipStatus: e.target.value }))
+                          }
+                        >
+                          <option value="statusSingle">{t.statusSingle}</option>
+                          <option value="statusDivorced">{t.statusDivorced}</option>
+                          <option value="statusOpen">{t.statusOpen}</option>
+                          <option value="statusComplicated">{t.statusComplicated}</option>
+                        </select>
+                      </div>
+                      <div className="field">
+                        <label>{t.verified}</label>
+                        <select
+                          value={profileDraft.verified ? "yes" : "no"}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, verified: e.target.value === "yes" }))
+                          }
+                        >
+                          <option value="yes">{t.yes}</option>
+                          <option value="no">{t.no}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.children}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.children : profileDraft.childrenEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, children: e.target.value }
+                                : { ...p, childrenEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.smoking}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.smoking : profileDraft.smokingEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, smoking: e.target.value }
+                                : { ...p, smokingEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.alcohol}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.alcohol : profileDraft.alcoholEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, alcohol: e.target.value }
+                                : { ...p, alcoholEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.languages}</label>
+                        <input
+                          value={profileDraft.languages}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, languages: e.target.value }))
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.education}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.education : profileDraft.educationEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, education: e.target.value }
+                                : { ...p, educationEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.job}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.job : profileDraft.jobEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, job: e.target.value }
+                                : { ...p, jobEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.lookingGender}</label>
+                        <input
+                          value={lang === "ru" ? profileDraft.lookingGender : profileDraft.lookingGenderEn}
+                          onChange={(e) =>
+                            setProfileDraft((p) =>
+                              lang === "ru"
+                                ? { ...p, lookingGender: e.target.value }
+                                : { ...p, lookingGenderEn: e.target.value }
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.lookingAge}</label>
+                        <input
+                          value={profileDraft.lookingAge}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({ ...p, lookingAge: e.target.value }))
+                          }
+                        />
+                      </div>
+                    </div>
+
                     <div className="field">
-                      <label>{t.zodiac}</label>
+                      <label>{t.datingType}</label>
                       <select
-                        value={profileDraft.zodiac}
+                        value={profileDraft.datingType}
                         onChange={(e) =>
-                          setProfileDraft((p) => ({ ...p, zodiac: e.target.value }))
+                          setProfileDraft((p) => ({ ...p, datingType: e.target.value }))
                         }
                       >
-                        {zodiacOptions.map((z) => (
-                          <option key={z} value={z}>
-                            {z}
+                        <option value="serious">{t.serious}</option>
+                        <option value="friendship">{t.friendship}</option>
+                        <option value="casual">{t.casual}</option>
+                        <option value="chemistry">{t.chemistry}</option>
+                      </select>
+                    </div>
+
+                    <div className="field">
+                      <label>{t.bio}</label>
+                      <textarea
+                        rows="4"
+                        value={lang === "ru" ? profileDraft.bio : profileDraft.bioEn}
+                        onChange={(e) =>
+                          setProfileDraft((p) =>
+                            lang === "ru"
+                              ? { ...p, bio: e.target.value }
+                              : { ...p, bioEn: e.target.value }
+                          )
+                        }
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label>{t.interests}</label>
+                      <input
+                        value={profileDraft.interests.join(", ")}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({
+                            ...p,
+                            interests: e.target.value
+                              .split(",")
+                              .map((item) => item.trim())
+                              .filter(Boolean),
+                          }))
+                        }
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label>{t.idealDate}</label>
+                      <input
+                        value={lang === "ru" ? profileDraft.quickAnswers.idealDate : profileDraft.quickAnswers.idealDateEn}
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({
+                            ...p,
+                            quickAnswers:
+                              lang === "ru"
+                                ? { ...p.quickAnswers, idealDate: e.target.value }
+                                : { ...p.quickAnswers, idealDateEn: e.target.value },
+                          }))
+                        }
+                      />
+                    </div>
+
+                    <div className="two-col">
+                      <div className="field">
+                        <label>{t.favoriteMovie}</label>
+                        <input
+                          value={profileDraft.quickAnswers.favoriteMovie}
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({
+                              ...p,
+                              quickAnswers: { ...p.quickAnswers, favoriteMovie: e.target.value },
+                            }))
+                          }
+                        />
+                      </div>
+                      <div className="field">
+                        <label>{t.importantInPerson}</label>
+                        <input
+                          value={
+                            lang === "ru"
+                              ? profileDraft.quickAnswers.importantInPerson
+                              : profileDraft.quickAnswers.importantInPersonEn
+                          }
+                          onChange={(e) =>
+                            setProfileDraft((p) => ({
+                              ...p,
+                              quickAnswers:
+                                lang === "ru"
+                                  ? { ...p.quickAnswers, importantInPerson: e.target.value }
+                                  : { ...p.quickAnswers, importantInPersonEn: e.target.value },
+                            }))
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <label>{t.favoriteWeekend}</label>
+                      <input
+                        value={
+                          lang === "ru"
+                            ? profileDraft.quickAnswers.favoriteWeekend
+                            : profileDraft.quickAnswers.favoriteWeekendEn
+                        }
+                        onChange={(e) =>
+                          setProfileDraft((p) => ({
+                            ...p,
+                            quickAnswers:
+                              lang === "ru"
+                                ? { ...p.quickAnswers, favoriteWeekend: e.target.value }
+                                : { ...p.quickAnswers, favoriteWeekendEn: e.target.value },
+                          }))
+                        }
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label>{t.addPhoto}</label>
+                      <input type="file" accept="image/*" multiple onChange={handleProfilePhotoUpload} />
+                    </div>
+                  </div>
+
+                  <h4 style={{ marginBottom: 10 }}>{t.photos}</h4>
+                  <div className="profile-photo-grid">
+                    {profileDraft.photos.map((photo, i) => (
+                      <img key={i} src={photo} alt={`profile-${i}`} onClick={() => setPhotoModal(photo)} />
+                    ))}
+                  </div>
+                </section>
+              )}
+            </>
+          )}
+
+          {tab === "settings" && (
+            <>
+              <h2 className="section-title">{t.settingsTitle}</h2>
+              <p className="section-subtitle">{t.settingsText}</p>
+
+              <section className="settings-layout">
+                <div className="panel">
+                  <div className="field-group">
+                    <div className="field">
+                      <label>{t.mode}</label>
+                      <select
+                        value={draftSettings.searchMode}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))
+                        }
+                      >
+                        <option value="nearby">{t.nearby}</option>
+                        <option value="all">{t.all}</option>
+                      </select>
+                    </div>
+
+                    <div className="field">
+                      <label>{t.gender}</label>
+                      <select
+                        value={draftSettings.gender}
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}
+                      >
+                        <option value="all">{t.all}</option>
+                        <option value="male">{t.men}</option>
+                        <option value="female">{t.women}</option>
+                      </select>
+                    </div>
+
+                    <div className="field">
+                      <label>{t.country}</label>
+                      <select
+                        value={draftSettings.country}
+                        onChange={(e) =>
+                          setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
+                        }
+                      >
+                        {countries.map((country) => (
+                          <option key={country} value={country}>
+                            {country === "All" ? t.allLocations : country}
                           </option>
                         ))}
                       </select>
                     </div>
+
                     <div className="field">
-                      <label>{t.verified}</label>
+                      <label>{t.city}</label>
                       <select
-                        value={profileDraft.verified ? "yes" : "no"}
-                        onChange={(e) =>
-                          setProfileDraft((p) => ({ ...p, verified: e.target.value === "yes" }))
-                        }
+                        value={draftSettings.city}
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}
                       >
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        {cityOptions.map((city) => (
+                          <option key={city} value={city}>
+                            {city === "All" ? t.allLocations : city}
+                          </option>
+                        ))}
                       </select>
                     </div>
-                  </div>
 
-                  <div className="field">
-                    <label>{t.bio}</label>
-                    <textarea
-                      rows="4"
-                      value={lang === "ru" ? profileDraft.bio : profileDraft.bioEn}
-                      onChange={(e) =>
-                        setProfileDraft((p) =>
-                          lang === "ru"
-                            ? { ...p, bio: e.target.value }
-                            : { ...p, bioEn: e.target.value }
-                        )
-                      }
-                    />
-                  </div>
+                    <div className="field">
+                      <label>{t.unit}</label>
+                      <select
+                        value={draftSettings.unit}
+                        onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}
+                      >
+                        <option value="mi">{t.miles}</option>
+                        <option value="km">{t.km}</option>
+                      </select>
+                    </div>
 
-                  <div className="field">
-                    <label>{t.addPhoto}</label>
-                    <input type="file" accept="image/*" multiple onChange={handleProfilePhotoUpload} />
+                    <div className="field">
+                      <label>{t.ageRange}</label>
+                      <div className="muted">
+                        {draftSettings.ageFrom} — {draftSettings.ageTo}
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <label>{t.distance}</label>
+                      <div className="muted">
+                        {draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}
+                      </div>
+                    </div>
+
+                    <div className="filter-actions">
+                      <button className="primary-btn" onClick={applyFilters}>
+                        {t.apply}
+                      </button>
+                      <button className="secondary-btn" onClick={resetFilters}>
+                        {t.reset}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                <h4 style={{ marginBottom: 10 }}>{t.photos}</h4>
-                <div className="profile-photo-grid">
-                  {profileDraft.photos.map((photo, i) => (
-                    <img key={i} src={photo} alt={`profile-${i}`} />
-                  ))}
+                <div className="panel">
+                  <h3 style={{ marginTop: 0 }}>{t.help}</h3>
+                  <div className="help-grid">
+                    <div className="help-item">
+                      <h3 style={{ marginTop: 0 }}>{t.help1}</h3>
+                      <p style={{ marginBottom: 0 }}>{t.help1t}</p>
+                    </div>
+                    <div className="help-item">
+                      <h3 style={{ marginTop: 0 }}>{t.help2}</h3>
+                      <p style={{ marginBottom: 0 }}>{t.help2t}</p>
+                    </div>
+                    <div className="help-item">
+                      <h3 style={{ marginTop: 0 }}>{t.help3}</h3>
+                      <p style={{ marginBottom: 0 }}>{t.help3t}</p>
+                    </div>
+                  </div>
                 </div>
               </section>
-            )}
-          </>
-        )}
-
-        {tab === "settings" && (
-          <>
-            <h2 className="section-title">{t.settingsTitle}</h2>
-            <p className="section-subtitle">{t.settingsText}</p>
-
-            <section className="settings-layout">
-              <div className="panel">
-                <div className="field-group">
-                  <div className="field">
-                    <label>{t.mode}</label>
-                    <select
-                      value={draftSettings.searchMode}
-                      onChange={(e) =>
-                        setDraftSettings((p) => ({ ...p, searchMode: e.target.value }))
-                      }
-                    >
-                      <option value="nearby">{t.nearby}</option>
-                      <option value="all">{t.all}</option>
-                    </select>
-                  </div>
-
-                  <div className="field">
-                    <label>{t.gender}</label>
-                    <select
-                      value={draftSettings.gender}
-                      onChange={(e) => setDraftSettings((p) => ({ ...p, gender: e.target.value }))}
-                    >
-                      <option value="all">{t.all}</option>
-                      <option value="male">{t.men}</option>
-                      <option value="female">{t.women}</option>
-                    </select>
-                  </div>
-
-                  <div className="field">
-                    <label>{t.country}</label>
-                    <select
-                      value={draftSettings.country}
-                      onChange={(e) =>
-                        setDraftSettings((p) => ({ ...p, country: e.target.value, city: "All" }))
-                      }
-                    >
-                      {countries.map((country) => (
-                        <option key={country} value={country}>
-                          {country === "All" ? t.allLocations : country}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="field">
-                    <label>{t.city}</label>
-                    <select
-                      value={draftSettings.city}
-                      onChange={(e) => setDraftSettings((p) => ({ ...p, city: e.target.value }))}
-                    >
-                      {cityOptions.map((city) => (
-                        <option key={city} value={city}>
-                          {city === "All" ? t.allLocations : city}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="field">
-                    <label>{t.unit}</label>
-                    <select
-                      value={draftSettings.unit}
-                      onChange={(e) => setDraftSettings((p) => ({ ...p, unit: e.target.value }))}
-                    >
-                      <option value="mi">{t.miles}</option>
-                      <option value="km">{t.km}</option>
-                    </select>
-                  </div>
-
-                  <div className="field">
-                    <label>{t.ageRange}</label>
-                    <div className="muted">
-                      {draftSettings.ageFrom} — {draftSettings.ageTo}
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <label>{t.distance}</label>
-                    <div className="muted">
-                      {draftSettings.maxDistance} {draftSettings.unit === "mi" ? t.miles : t.km}
-                    </div>
-                  </div>
-
-                  <div className="filter-actions">
-                    <button className="primary-btn" onClick={applyFilters}>
-                      {t.apply}
-                    </button>
-                    <button className="secondary-btn" onClick={resetFilters}>
-                      {t.reset}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="panel">
-                <h3 style={{ marginTop: 0 }}>{t.help}</h3>
-                <div className="help-grid">
-                  <div className="help-item">
-                    <h3 style={{ marginTop: 0 }}>{t.help1}</h3>
-                    <p style={{ marginBottom: 0 }}>{t.help1t}</p>
-                  </div>
-                  <div className="help-item">
-                    <h3 style={{ marginTop: 0 }}>{t.help2}</h3>
-                    <p style={{ marginBottom: 0 }}>{t.help2t}</p>
-                  </div>
-                  <div className="help-item">
-                    <h3 style={{ marginTop: 0 }}>{t.help3}</h3>
-                    <p style={{ marginBottom: 0 }}>{t.help3t}</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
 
       <div className="phone-bottom-nav">
@@ -3422,6 +4411,17 @@ function App() {
                 {t.startChat}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {photoModal && (
+        <div className="photo-modal" onClick={() => setPhotoModal(null)}>
+          <div className="photo-box" onClick={(e) => e.stopPropagation()}>
+            <button className="photo-close" onClick={() => setPhotoModal(null)}>
+              ×
+            </button>
+            <img src={photoModal} alt="full-view" />
           </div>
         </div>
       )}
