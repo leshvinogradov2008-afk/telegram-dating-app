@@ -13,8 +13,11 @@ const tr = {
     heroTitle: "Знакомства нового формата в Telegram",
     heroText:
       "Полные профили, удобный поиск и общение только после взаимного лайка. Всё, как должно быть — без лишнего.",
-    heroPrimary: "Начать поиск",
-    heroSecondary: "Открыть сообщения",
+    heroPrimary: "Регистрация",
+    heroSecondary: "Войти",
+    heroMiniTitle: "Живой интерфейс",
+    heroMiniText:
+      "Мягкие анимации, плавный просмотр профилей и быстрый отклик в стиле премиального приложения.",
 
     liveNow: "Сейчас в приложении",
     liveHint: "Живой интерфейс, мягкая анимация и быстрый отклик на каждом касании.",
@@ -24,7 +27,7 @@ const tr = {
     promo2: "Умный поиск",
     promo2t: "Фильтры по стране, городу, возрасту, полу и дистанции в премиальном формате.",
     promo3: "Быстрый мэтч",
-    promo3t: "Сразу видно лайк и дизлайк. Можно свайпать или нажимать кнопки в любой момент.",
+    promo3t: "Лайк и дизлайк всегда под рукой и не исчезают при просмотре анкеты.",
     promo4: "Живое общение",
     promo4t: "После взаимной симпатии открывается диалог и профиль становится доступен из сообщений.",
 
@@ -190,6 +193,15 @@ const tr = {
     premiumHints: "Премиум-штрихи",
     compactHelp: "FAQ",
     saveSettings: "Сохранить настройки",
+
+    themeMode: "Режим приложения",
+    lightMode: "Дневной",
+    darkMode: "Ночной",
+    logout: "Выйти из профиля",
+    openHelp: "Открыть помощь",
+    closeHelp: "Скрыть помощь",
+    profileActions: "Быстрые действия",
+    authHint: "Премиальный вход в приложение с живыми карточками и плавной анимацией.",
   },
   en: {
     brand: "Telegram Dating",
@@ -203,8 +215,11 @@ const tr = {
     heroTitle: "A new dating format inside Telegram",
     heroText:
       "Full profiles, smart search and communication only after a mutual like. Exactly how it should be — without the extra noise.",
-    heroPrimary: "Start search",
-    heroSecondary: "Open messages",
+    heroPrimary: "Sign up",
+    heroSecondary: "Log in",
+    heroMiniTitle: "Live interface",
+    heroMiniText:
+      "Soft motion, smooth profile browsing and quick response in a premium app style.",
 
     liveNow: "Live in app",
     liveHint: "Live UI, soft motion and fast response on every touch.",
@@ -214,7 +229,7 @@ const tr = {
     promo2: "Smart search",
     promo2t: "Country, city, age, gender and distance filters in a premium layout.",
     promo3: "Fast match",
-    promo3t: "Like and dislike are visible instantly. Swipe or tap anytime.",
+    promo3t: "Like and dislike are always available and do not disappear while browsing.",
     promo4: "Live messaging",
     promo4t: "After a mutual match the chat opens and profile becomes available from messages.",
 
@@ -380,6 +395,15 @@ const tr = {
     premiumHints: "Premium touches",
     compactHelp: "FAQ",
     saveSettings: "Save settings",
+
+    themeMode: "App mode",
+    lightMode: "Light",
+    darkMode: "Dark",
+    logout: "Log out",
+    openHelp: "Open help",
+    closeHelp: "Hide help",
+    profileActions: "Quick actions",
+    authHint: "Premium entrance to the app with live cards and smooth animations.",
   },
 };
 
@@ -882,12 +906,13 @@ function Badge() {
         width: 20,
         height: 20,
         borderRadius: "50%",
-        background: "#31a8ff",
+        background: "linear-gradient(135deg,#42b6ff,#1988f2)",
         color: "#fff",
         fontSize: 12,
         fontWeight: 900,
         marginLeft: 6,
         flexShrink: 0,
+        boxShadow: "0 6px 14px rgba(45,150,245,.25)",
       }}
     >
       ✓
@@ -982,6 +1007,7 @@ function App() {
   const [matchBurst, setMatchBurst] = useState(false);
   const [viewedProfileId, setViewedProfileId] = useState(null);
   const [photoModal, setPhotoModal] = useState(null);
+  const [showHelp, setShowHelp] = useState(false);
 
   const touchStateRef = useRef({ startX: 0, startY: 0, dragging: false, horizontal: false });
 
@@ -1007,6 +1033,7 @@ function App() {
     currentPassword: "",
     newPassword: "",
     rating: 5,
+    darkMode: false,
   });
 
   const [messages, setMessages] = useState({
@@ -1099,7 +1126,14 @@ function App() {
   const activeProfile = filteredProfiles[currentDeckIndex] || null;
   const selectedChatProfile = profiles.find((p) => p.id === selectedChatId) || null;
   const viewedProfile = profiles.find((p) => p.id === viewedProfileId) || null;
-  const heroPreviewProfiles = profiles.slice(0, 4);
+
+  const heroPreviewProfiles = useMemo(() => {
+    const extra = profiles.slice(0, 5).map((p, index) => ({
+      ...p,
+      id: `hero-${p.id}-${index}`,
+    }));
+    return [...profiles.slice(0, 5), ...extra].slice(0, 8);
+  }, [profiles]);
 
   useEffect(() => {
     if (currentDeckIndex >= filteredProfiles.length) setCurrentDeckIndex(0);
@@ -1355,12 +1389,11 @@ function App() {
     setDraftSettings((prev) => ({ ...prev, ageTo: nextMax }));
   };
 
+  const maxDistanceLimit = draftSettings.unit === "mi" ? 500 : 805;
   const ageRangeLeft = ((draftSettings.ageFrom - 18) / (60 - 18)) * 100;
   const ageRangeRight = ((draftSettings.ageTo - 18) / (60 - 18)) * 100;
-  const maxDistanceLimit = draftSettings.unit === "mi" ? 5000 : 8000;
   const distancePercent = ((draftSettings.maxDistance - 1) / (maxDistanceLimit - 1)) * 100;
 
-  const swipeStamp = swipeX > 40 ? t.likeStamp : swipeX < -40 ? t.skipStamp : "";
   const swipeStampClass = swipeX > 40 ? "like" : swipeX < -40 ? "skip" : "";
   const cardTransform = `translateX(${swipeX}px) rotate(${swipeX / 18}deg)`;
   const cardStyle = {
@@ -1370,8 +1403,8 @@ function App() {
 
   const renderProfileDetails = (profile) => (
     <>
-      <div className="profile-section">
-        <div className="info-grid">
+      <div className="profile-section compact-section">
+        <div className="info-grid compact-grid">
           <div className="info-card"><div className="info-card-label">{t.location}</div><div className="info-card-value">{profile.city}, {profile.country}</div></div>
           <div className="info-card"><div className="info-card-label">{t.lookingFor}</div><div className="info-card-value">{lang === "ru" ? profile.lookingFor : profile.lookingForEn}</div></div>
           <div className="info-card"><div className="info-card-label">{t.height}</div><div className="info-card-value">{lang === "ru" ? profile.height : profile.heightEn}</div></div>
@@ -1387,21 +1420,21 @@ function App() {
         </div>
       </div>
 
-      <div className="profile-section">
+      <div className="profile-section compact-section">
         <h4 className="section-heading">{t.about}</h4>
         <div className="bio-box">{lang === "ru" ? profile.bio : profile.bioEn}</div>
       </div>
 
-      <div className="profile-section">
+      <div className="profile-section compact-section">
         <h4 className="section-heading">{t.lookingFor}</h4>
-        <div className="info-grid">
+        <div className="info-grid compact-grid">
           <div className="info-card"><div className="info-card-label">{t.lookingGender}</div><div className="info-card-value">{lang === "ru" ? profile.lookingGender : profile.lookingGenderEn}</div></div>
           <div className="info-card"><div className="info-card-label">{t.lookingAge}</div><div className="info-card-value">{profile.lookingAge}</div></div>
           <div className="info-card"><div className="info-card-label">{t.datingType}</div><div className="info-card-value">{datingTypeLabel(profile.datingType)}</div></div>
         </div>
       </div>
 
-      <div className="profile-section">
+      <div className="profile-section compact-section">
         <h4 className="section-heading">{t.interests}</h4>
         <div className="chip-row">
           {profile.interests.map((it) => <span className="interest" key={it}>{it}</span>)}
@@ -1409,9 +1442,9 @@ function App() {
       </div>
 
       {profile.quickAnswers && (
-        <div className="profile-section">
+        <div className="profile-section compact-section">
           <h4 className="section-heading">{t.quickAnswers}</h4>
-          <div className="qa-grid">
+          <div className="qa-grid compact-grid">
             <div className="qa-card"><div className="qa-label">{t.idealDate}</div><div className="qa-value">{lang === "ru" ? profile.quickAnswers.idealDate : profile.quickAnswers.idealDateEn || profile.quickAnswers.idealDate}</div></div>
             <div className="qa-card"><div className="qa-label">{t.favoriteMovie}</div><div className="qa-value">{profile.quickAnswers.favoriteMovie}</div></div>
             <div className="qa-card"><div className="qa-label">{t.importantInPerson}</div><div className="qa-value">{lang === "ru" ? profile.quickAnswers.importantInPerson : profile.quickAnswers.importantInPersonEn || profile.quickAnswers.importantInPerson}</div></div>
@@ -1420,7 +1453,7 @@ function App() {
         </div>
       )}
 
-      <div className="profile-section">
+      <div className="profile-section compact-section">
         <div className="profile-photo-stack">
           {profile.photos.map((photo, i) => (
             <img key={i} src={photo} alt={`${profile.name}-${i + 1}`} onClick={() => setPhotoModal(photo)} />
@@ -1437,12 +1470,16 @@ function App() {
       <div ref={scrollRef} className="profile-page-scroll premium-scroll">
         <img className="profile-hero-photo" src={profile.photos[0]} alt={profile.name} onClick={() => setPhotoModal(profile.photos[0])} />
         <div className="profile-header">
-          <h3 className="profile-title">{profile.name}, {profile.age} {profile.zodiac}{profile.verified && <Badge />}{!previewOnly && <span className="premium-pill">{t.premium}</span>}</h3>
+          <h3 className="profile-title">
+            {profile.name}, {profile.age} {profile.zodiac}
+            {profile.verified && <Badge />}
+            {!previewOnly && <span className="premium-pill">{t.premium}</span>}
+          </h3>
           <p className="profile-subtitle">{profile.city}, {profile.country} • {profile.online ? t.online : t.offline}</p>
         </div>
         {renderProfileDetails(profile)}
         {interactive && (
-          <div className="profile-section">
+          <div className="profile-section compact-section">
             <div className="profile-footer-actions">
               <button className="danger-btn block" onClick={() => handleBlock(profile.id)}>{blockedIds.includes(profile.id) ? t.blocked : t.block}</button>
               <button className="danger-btn report" onClick={() => handleReport(profile.id)}>{reportedIds.includes(profile.id) ? t.reported : t.report}</button>
@@ -1523,8 +1560,8 @@ function App() {
               unit: e.target.value,
               maxDistance:
                 e.target.value === "mi"
-                  ? Math.min(p.maxDistance, 5000)
-                  : Math.min(Math.round(p.maxDistance * 1.60934), 8000),
+                  ? Math.min(p.maxDistance, 500)
+                  : Math.min(Math.round(p.maxDistance * 1.60934), 805),
             }))
           }
         >
@@ -1548,6 +1585,7 @@ function App() {
             }}
           />
           <input
+            className="dual-slider left"
             type="range"
             min="18"
             max="60"
@@ -1556,6 +1594,7 @@ function App() {
             onChange={(e) => handleDraftAgeMin(e.target.value)}
           />
           <input
+            className="dual-slider right"
             type="range"
             min="18"
             max="60"
@@ -1580,6 +1619,7 @@ function App() {
             style={{ width: `${Math.max(distancePercent, 2)}%` }}
           />
           <input
+            className="single-slider"
             type="range"
             min="1"
             max={maxDistanceLimit}
@@ -1621,17 +1661,62 @@ function App() {
   ];
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${settingsForm.darkMode ? "theme-dark" : "theme-light"}`}>
       <style>{`
         *{box-sizing:border-box}
-        html,body,#root{
-          margin:0;padding:0;min-height:100%;width:100%;max-width:100%;
-          font-family:Inter,Arial,sans-serif;
-          background:
+        :root{
+          --bg:
             radial-gradient(circle at top left, rgba(91,181,255,.10), transparent 25%),
             radial-gradient(circle at top right, rgba(255,126,166,.10), transparent 24%),
             linear-gradient(180deg,#f4f8fd 0%,#eef4fb 100%);
-          color:#18222d;
+          --text:#18222d;
+          --muted:#5d7387;
+          --panel:rgba(255,255,255,.82);
+          --panel-solid:#f8fbff;
+          --panel-border:rgba(255,255,255,.58);
+          --glass-shadow:0 18px 40px rgba(20,39,60,.10);
+          --card-border:rgba(82,131,176,.08);
+          --chip:#edf4fb;
+          --chip-text:#233747;
+          --chip-active-1:#38aaff;
+          --chip-active-2:#1988f2;
+          --track:#dfeaf5;
+          --surface:#f6faff;
+          --surface-2:#eef6ff;
+          --danger-pink:#fff1f4;
+          --danger-blue:#eef6ff;
+          --notice:#12202e;
+          --nav-glow:0 12px 26px rgba(38,144,243,.16);
+        }
+        .theme-dark{
+          --bg:
+            radial-gradient(circle at top left, rgba(37,115,202,.18), transparent 26%),
+            radial-gradient(circle at top right, rgba(85,123,255,.12), transparent 24%),
+            linear-gradient(180deg,#101822 0%,#0d141d 100%);
+          --text:#e7f2ff;
+          --muted:#8ca4bc;
+          --panel:rgba(18,28,40,.74);
+          --panel-solid:#13202e;
+          --panel-border:rgba(98,132,164,.18);
+          --glass-shadow:0 18px 46px rgba(0,0,0,.34);
+          --card-border:rgba(98,132,164,.16);
+          --chip:#182736;
+          --chip-text:#d9e9f7;
+          --chip-active-1:#299cff;
+          --chip-active-2:#1e7ef1;
+          --track:#2a3a4a;
+          --surface:#152230;
+          --surface-2:#172636;
+          --danger-pink:#2d1c27;
+          --danger-blue:#152535;
+          --notice:#09131c;
+          --nav-glow:0 14px 30px rgba(0,0,0,.35);
+        }
+        html,body,#root{
+          margin:0;padding:0;min-height:100%;width:100%;max-width:100%;
+          font-family:Inter,Arial,sans-serif;
+          background:var(--bg);
+          color:var(--text);
           overflow-x:hidden;
           scroll-behavior:smooth;
         }
@@ -1640,68 +1725,209 @@ function App() {
           text-rendering:optimizeLegibility;
           touch-action:manipulation;
           overflow-x:hidden;
+          color:var(--text);
+          background:var(--bg);
         }
         img{max-width:100%}
         button,input,select,textarea{font-family:inherit}
         textarea{resize:vertical}
-        .app-shell{min-height:100vh;overflow-x:hidden}
+        .app-shell{min-height:100vh;overflow-x:hidden;color:var(--text)}
         .page{
-          max-width:1380px;
+          max-width:1420px;
           margin:0 auto;
-          padding:14px 16px 110px;
+          padding:14px 16px 118px;
           overflow-x:hidden;
         }
         .premium-scroll{-webkit-overflow-scrolling:touch;overscroll-behavior:auto}
+        .topbar,.panel,.promo-card,.stat-card,.filters-rail,.glass-panel{
+          backdrop-filter:blur(20px);
+          -webkit-backdrop-filter:blur(20px);
+        }
         .topbar,.panel{
-          background:rgba(255,255,255,.84);
-          backdrop-filter:blur(18px);
-          box-shadow:0 12px 30px rgba(27,40,52,.08)
+          background:var(--panel);
+          box-shadow:var(--glass-shadow);
+          border:1px solid var(--panel-border);
         }
         .topbar{
           display:flex;justify-content:space-between;align-items:center;gap:14px;
-          padding:14px 18px;border-radius:24px;margin-bottom:14px
+          padding:14px 18px;border-radius:26px;margin-bottom:14px
         }
         .brand-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-        .brand{font-size:22px;font-weight:900;color:#2894f4;letter-spacing:-.03em}
-        .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions{display:flex;gap:10px;flex-wrap:wrap}
-        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.back-btn,.glass-filter-btn,.action-btn,.rate-chip{
-          border:none;cursor:pointer;transition:transform .12s ease, box-shadow .18s ease, background .2s ease;font-weight:800;
+        .brand{
+          font-size:22px;font-weight:900;letter-spacing:-.03em;
+          background:linear-gradient(135deg,#45baff,#1a86f1);
+          -webkit-background-clip:text;background-clip:text;color:transparent;
+        }
+        .lang-switch,.hero-actions,.filter-actions,.segmented,.mutual-actions,.quick-auth-row{display:flex;gap:10px;flex-wrap:wrap}
+        .chip-btn,.nav-btn,.primary-btn,.secondary-btn,.ghost-btn,.back-btn,.glass-filter-btn,.action-btn,.rate-chip,.phone-tab-btn,.logout-btn,.help-toggle-btn{
+          border:none;cursor:pointer;transition:transform .14s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease, color .22s ease;
+          font-weight:800;
           -webkit-tap-highlight-color:transparent;
           touch-action:manipulation;
         }
-        .chip-btn:active,.nav-btn:active,.primary-btn:active,.secondary-btn:active,.ghost-btn:active,.back-btn:active,.glass-filter-btn:active,.action-btn:active,.rate-chip:active{
+        .chip-btn:active,.nav-btn:active,.primary-btn:active,.secondary-btn:active,.ghost-btn:active,.back-btn:active,.glass-filter-btn:active,.action-btn:active,.rate-chip:active,.phone-tab-btn:active,.logout-btn:active,.help-toggle-btn:active{
           transform:scale(.965);
         }
-        .chip-btn,.nav-btn{
-          border-radius:999px;padding:10px 14px;background:#ebf2fa;color:#213546
+        .chip-btn,.nav-btn,.phone-tab-btn{
+          border-radius:999px;
+          padding:10px 14px;
+          color:var(--chip-text);
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.34)),
+            linear-gradient(135deg, rgba(71,165,255,.12), rgba(255,140,178,.08));
+          border:1px solid var(--panel-border);
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 8px 20px rgba(21,56,92,.08);
         }
-        .chip-btn.active,.nav-btn.active,.primary-btn{
-          background:linear-gradient(135deg,#33a8ff,#1882eb);
+        .theme-dark .chip-btn,.theme-dark .nav-btn,.theme-dark .phone-tab-btn{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+            linear-gradient(135deg, rgba(55,132,220,.18), rgba(120,164,255,.05));
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 10px 20px rgba(0,0,0,.20);
+        }
+        .chip-btn.active,.nav-btn.active,.primary-btn,.phone-tab-btn.active{
+          background:linear-gradient(135deg,var(--chip-active-1),var(--chip-active-2));
           color:#fff;
-          box-shadow:0 12px 22px rgba(38,144,243,.24)
+          box-shadow:var(--nav-glow);
         }
-        .primary-btn,.secondary-btn,.ghost-btn,.back-btn{
-          border-radius:16px;padding:13px 18px;font-size:14px
+        .primary-btn,.secondary-btn,.ghost-btn,.back-btn,.logout-btn,.help-toggle-btn{
+          border-radius:18px;
+          padding:13px 18px;
+          font-size:14px;
+          border:1px solid transparent;
         }
-        .secondary-btn{background:#edf4fb;color:#233747}
-        .ghost-btn{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)}
-        .back-btn{background:#edf4fb;color:#213546;display:inline-flex;align-items:center;gap:8px}
+        .primary-btn{
+          position:relative;
+          overflow:hidden;
+        }
+        .primary-btn::before{
+          content:"";
+          position:absolute;
+          inset:1px auto auto 10%;
+          width:60%;
+          height:18px;
+          border-radius:999px;
+          background:linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0));
+          pointer-events:none;
+        }
+        .secondary-btn,.back-btn,.help-toggle-btn{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.34)),
+            linear-gradient(135deg, rgba(71,165,255,.08), rgba(255,140,178,.05));
+          color:var(--chip-text);
+          border:1px solid var(--panel-border);
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 8px 18px rgba(21,56,92,.06);
+        }
+        .theme-dark .secondary-btn,.theme-dark .back-btn,.theme-dark .help-toggle-btn{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+            linear-gradient(135deg, rgba(55,132,220,.16), rgba(120,164,255,.05));
+        }
+        .ghost-btn{
+          background:rgba(255,255,255,.14);
+          color:#fff;
+          border:1px solid rgba(255,255,255,.28);
+        }
+        .logout-btn{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.34)),
+            linear-gradient(135deg, rgba(255,74,114,.10), rgba(255,130,162,.06));
+          color:#c74d70;
+          border:1px solid rgba(255,120,150,.14);
+        }
+        .theme-dark .logout-btn{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)),
+            linear-gradient(135deg, rgba(255,74,114,.12), rgba(255,130,162,.08));
+          color:#ff93af;
+        }
+        .back-btn{display:inline-flex;align-items:center;gap:8px}
         .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
         .nav-btn{padding:12px 16px;font-size:14px}
-        .panel{border-radius:28px;padding:18px}
+        .panel{border-radius:30px;padding:18px}
         .top-spaced{margin-top:4px}
-        .hero{display:grid;grid-template-columns:1.02fr .98fr;gap:18px;margin-bottom:18px}
+        .hero{
+          display:grid;
+          grid-template-columns:1fr;
+          gap:18px;
+          margin-bottom:18px
+        }
+        .hero-main-grid{
+          display:grid;
+          grid-template-columns:1fr 1.1fr;
+          gap:18px;
+          align-items:stretch;
+        }
         .hero-title,.section-title{margin:0 0 12px;font-size:clamp(34px,5vw,68px);line-height:.95;font-weight:900;letter-spacing:-1.6px}
-        .hero-text,.section-subtitle,.muted{font-size:17px;line-height:1.55;color:#5d7387}
-        .hero-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;min-height:480px}
+        .hero-text,.section-subtitle,.muted{font-size:16px;line-height:1.55;color:var(--muted)}
+        .hero-card{
+          position:relative;
+          overflow:hidden;
+          min-height:420px;
+          display:flex;
+          flex-direction:column;
+          justify-content:space-between;
+        }
+        .hero-card::before{
+          content:"";
+          position:absolute;
+          inset:-30% auto auto -10%;
+          width:360px;
+          height:360px;
+          border-radius:50%;
+          background:radial-gradient(circle, rgba(70,176,255,.22), transparent 60%);
+          pointer-events:none;
+        }
+        .hero-copy{
+          position:relative;
+          z-index:2;
+          max-width:720px;
+        }
+        .auth-hint{
+          margin:14px 0 0;
+          max-width:560px;
+        }
+        .quick-auth-row{margin-top:18px}
+        .hero-auth-btn{
+          min-width:148px;
+          animation:subtleFloat 4.2s ease-in-out infinite;
+        }
+        .hero-auth-btn:nth-child(2){animation-delay:.45s}
+        .hero-strip{
+          display:grid;
+          grid-template-columns:repeat(3,minmax(0,1fr));
+          gap:10px;
+          margin-top:18px;
+        }
+        .hero-strip-card{
+          padding:14px;
+          border-radius:22px;
+          background:rgba(255,255,255,.46);
+          border:1px solid var(--panel-border);
+          box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+        }
+        .theme-dark .hero-strip-card{background:rgba(255,255,255,.04)}
+        .hero-strip-card h4{margin:0 0 8px;font-size:15px}
+        .hero-strip-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+        .hero-mini-grid{
+          display:grid;
+          grid-template-columns:repeat(4,minmax(0,1fr));
+          gap:14px;
+          min-height:480px
+        }
         .hero-mini-card{
           position:relative;overflow:hidden;border-radius:28px;min-height:230px;
           box-shadow:0 22px 38px rgba(25,44,64,.12);background:#fff;
           transform:translateY(0);animation:floatCard 6s ease-in-out infinite;
+          border:1px solid var(--panel-border);
         }
+        .theme-dark .hero-mini-card{background:#111b26}
         .hero-mini-card:nth-child(2){animation-delay:.6s}
         .hero-mini-card:nth-child(3){animation-delay:1.2s}
         .hero-mini-card:nth-child(4){animation-delay:1.8s}
+        .hero-mini-card:nth-child(5){animation-delay:2.2s}
+        .hero-mini-card:nth-child(6){animation-delay:2.7s}
+        .hero-mini-card:nth-child(7){animation-delay:3.1s}
+        .hero-mini-card:nth-child(8){animation-delay:3.5s}
         .hero-mini-card img{width:100%;height:100%;object-fit:cover;display:block}
         .hero-mini-overlay{
           position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;color:#fff;
@@ -1731,13 +1957,20 @@ function App() {
             radial-gradient(circle at 20% 20%, rgba(51,168,255,.18), transparent 28%),
             radial-gradient(circle at 80% 0%, rgba(255,126,166,.14), transparent 28%),
             linear-gradient(180deg, rgba(255,255,255,.92), rgba(246,251,255,.88));
-          border:1px solid rgba(255,255,255,.58);
-          box-shadow:0 20px 40px rgba(20,39,60,.08), inset 0 1px 0 rgba(255,255,255,.8);
+          border:1px solid var(--panel-border);
+          box-shadow:var(--glass-shadow);
+        }
+        .theme-dark .promo-stage{
+          background:
+            radial-gradient(circle at 20% 20%, rgba(51,168,255,.16), transparent 28%),
+            radial-gradient(circle at 80% 0%, rgba(120,150,255,.12), transparent 28%),
+            linear-gradient(180deg, rgba(18,28,40,.92), rgba(15,23,34,.88));
         }
         .promo-badge{
           display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;
-          background:rgba(255,255,255,.72);font-size:13px;font-weight:900;color:#1882eb;border:1px solid rgba(255,255,255,.64)
+          background:rgba(255,255,255,.72);font-size:13px;font-weight:900;color:#1882eb;border:1px solid var(--panel-border)
         }
+        .theme-dark .promo-badge{background:rgba(255,255,255,.06)}
         .promo-grid{
           display:grid;
           grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1745,39 +1978,62 @@ function App() {
           margin-top:16px;
         }
         .promo-card{
-          padding:16px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.62);
-          backdrop-filter:blur(18px);box-shadow:0 12px 28px rgba(18,46,74,.06);animation:floatCard 5.6s ease-in-out infinite;
+          padding:16px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid var(--panel-border);
+          box-shadow:0 12px 28px rgba(18,46,74,.06);animation:floatCard 5.6s ease-in-out infinite;
         }
+        .theme-dark .promo-card{background:rgba(255,255,255,.04)}
         .promo-card:nth-child(2){animation-delay:.5s}
         .promo-card:nth-child(3){animation-delay:1s}
         .promo-card:nth-child(4){animation-delay:1.5s}
         .promo-card h4{margin:0 0 8px;font-size:18px}
-        .promo-card p{margin:0;color:#61778b;line-height:1.5}
-        .promo-stats{
-          display:grid;gap:12px;
-        }
+        .promo-card p{margin:0;color:var(--muted);line-height:1.5}
+        .promo-stats{display:grid;gap:12px}
         .stat-card{
-          padding:18px;border-radius:24px;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.62);
+          padding:18px;border-radius:24px;background:rgba(255,255,255,.82);border:1px solid var(--panel-border);
           box-shadow:0 12px 28px rgba(18,46,74,.06);
         }
+        .theme-dark .stat-card{background:rgba(255,255,255,.04)}
         .stat-num{font-size:34px;font-weight:900;line-height:1;color:#1882eb;margin-bottom:8px}
-        .stat-label{font-size:14px;color:#5c7286;font-weight:800;line-height:1.45}
+        .stat-label{font-size:14px;color:var(--muted);font-weight:800;line-height:1.45}
 
         .search-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
         .search-stage{width:100%;display:grid;gap:10px;align-items:start}
-        .search-head-area{display:grid;gap:8px;margin-bottom:2px}
+        .search-head-area{display:grid;gap:0;margin-bottom:2px}
         .search-toolbar{
-          position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;
+          position:relative;display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:18px;
         }
-        .search-toolbar-left{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}
+        .search-counter{
+          font-size:16px;font-weight:900;color:var(--muted);min-width:26px;text-align:right;padding-right:4px
+        }
+        .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:78vh}
+        .search-card-stage{width:100%;max-width:560px;position:relative;padding-bottom:20px}
+        .search-overlay-ui{
+          position:absolute;
+          top:10px;
+          left:10px;
+          right:10px;
+          z-index:110;
+          pointer-events:none;
+        }
+        .search-top-ui{
+          display:flex;
+          justify-content:space-between;
+          align-items:flex-start;
+          gap:12px;
+        }
+        .search-top-ui > *{pointer-events:auto}
         .glass-filter-btn{
-          display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;font-size:15px;color:#173550;
+          display:inline-flex;align-items:center;gap:10px;padding:11px 15px;border-radius:999px;font-size:14px;color:var(--text);
           background:
             linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.40)),
             linear-gradient(135deg, rgba(72,170,255,.16), rgba(255,120,170,.10));
-          backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-          border:1px solid rgba(255,255,255,.58);
+          border:1px solid var(--panel-border);
           box-shadow:0 12px 28px rgba(31,76,122,.12), inset 0 1px 0 rgba(255,255,255,.72), inset 0 -1px 0 rgba(255,255,255,.14);
+        }
+        .theme-dark .glass-filter-btn{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)),
+            linear-gradient(135deg, rgba(72,170,255,.18), rgba(120,164,255,.08));
         }
         .glass-filter-btn:hover{transform:translateY(-1px)}
         .glass-filter-btn.active{
@@ -1785,128 +2041,202 @@ function App() {
             linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.46)),
             linear-gradient(135deg, rgba(72,170,255,.24), rgba(255,120,170,.14));
         }
-        .search-counter{
-          font-size:18px;font-weight:900;color:#627b91;min-width:26px;text-align:right;padding-right:4px
+        .theme-dark .glass-filter-btn.active{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06)),
+            linear-gradient(135deg, rgba(72,170,255,.26), rgba(120,164,255,.10));
         }
-        .filters-inline-shell{position:relative;min-height:0}
+
+        .filters-inline-shell{position:absolute;top:52px;left:0;min-height:0;pointer-events:auto;z-index:120}
         .filters-rail{
-          width:100%;border-radius:24px;padding:12px 14px;
+          width:min(680px, calc(100vw - 48px));
+          border-radius:26px;
+          padding:12px 14px;
           background:
             linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.62)),
             linear-gradient(135deg, rgba(51,168,255,.08), rgba(255,126,166,.06));
-          backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-          border:1px solid rgba(255,255,255,.58);
-          box-shadow:0 16px 38px rgba(18,46,74,.12), inset 0 1px 0 rgba(255,255,255,.72);
-          animation:filterRailSlide .26s cubic-bezier(.2,.85,.2,1);
+          border:1px solid var(--panel-border);
+          box-shadow:0 20px 42px rgba(18,46,74,.18), inset 0 1px 0 rgba(255,255,255,.72);
+          animation:filterRailSlide .28s cubic-bezier(.2,.85,.2,1);
           transform-origin:left top;
         }
+        .theme-dark .filters-rail{
+          background:
+            linear-gradient(180deg, rgba(22,34,48,.92), rgba(18,28,40,.76)),
+            linear-gradient(135deg, rgba(51,168,255,.08), rgba(120,164,255,.06));
+        }
         .filters-rail-grid{
-          display:grid;grid-template-columns:1.1fr 1fr 1.15fr 1.15fr .8fr 1.6fr 1.6fr auto;gap:10px;align-items:end;
+          display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:10px;
+          align-items:end;
         }
         .filter-card{
-          min-width:0;padding:10px 12px;border-radius:18px;background:rgba(255,255,255,.78);
-          border:1px solid rgba(138,181,216,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.76);
+          min-width:0;padding:10px 12px;border-radius:20px;background:rgba(255,255,255,.78);
+          border:1px solid var(--card-border);box-shadow:inset 0 1px 0 rgba(255,255,255,.76);
         }
-        .filter-card.compact{min-height:68px}
+        .theme-dark .filter-card{background:rgba(255,255,255,.04)}
+        .filter-card.compact{min-height:70px}
         .filter-card label{
-          display:block;margin-bottom:7px;font-size:10px;font-weight:900;color:#7c94a9;text-transform:uppercase;letter-spacing:.06em
+          display:block;margin-bottom:7px;font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em
         }
         .filter-card select{
-          width:100%;border:none;outline:none;background:transparent;font-size:14px;font-weight:800;color:#18354f;padding:0;min-height:24px
+          width:100%;border:none;outline:none;background:transparent;font-size:14px;font-weight:800;color:var(--text);padding:0;min-height:24px
+        }
+        .theme-dark .filter-card select option{
+          background:#122030;color:#fff;
         }
         .slim-range{padding-top:9px;padding-bottom:9px}
-        .range-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+        .range-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
         .range-title-row label{margin:0}
-        .range-value{font-size:12px;font-weight:900;color:#1a3854;white-space:nowrap}
-        .dual-range,.single-range{position:relative;height:18px;display:flex;align-items:center}
+        .range-value{font-size:12px;font-weight:900;color:var(--text);white-space:nowrap}
+        .dual-range,.single-range{position:relative;height:26px;display:flex;align-items:center}
         .dual-range-track,.single-range-track{
-          position:absolute;left:0;right:0;height:4px;border-radius:999px;background:#dfeaf5
+          position:absolute;left:0;right:0;height:6px;border-radius:999px;background:var(--track)
         }
         .dual-range-active,.single-range-active{
-          position:absolute;height:4px;border-radius:999px;background:linear-gradient(135deg,#33a8ff,#1882eb)
+          position:absolute;height:6px;border-radius:999px;background:linear-gradient(135deg,#33a8ff,#1882eb)
         }
         .single-range-active{left:0}
-        .dual-range input[type="range"],.single-range input[type="range"]{
-          position:absolute;inset:0;width:100%;margin:0;background:transparent;-webkit-appearance:none;appearance:none;pointer-events:none
+        .dual-slider,.single-slider{
+          position:absolute;
+          inset:0;
+          width:100%;
+          margin:0;
+          background:transparent;
+          -webkit-appearance:none;
+          appearance:none;
+          pointer-events:auto;
+          z-index:2;
         }
-        .dual-range input[type="range"]::-webkit-slider-thumb,.single-range input[type="range"]::-webkit-slider-thumb{
-          -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #2f9cff;
-          box-shadow:0 4px 12px rgba(23,73,115,.16);pointer-events:auto;cursor:pointer
+        .dual-slider.left{z-index:3}
+        .dual-slider.right{z-index:4}
+        .dual-slider::-webkit-slider-thumb,.single-slider::-webkit-slider-thumb{
+          -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid #2f9cff;
+          box-shadow:0 4px 12px rgba(23,73,115,.16);cursor:pointer
         }
-        .dual-range input[type="range"]::-moz-range-thumb,.single-range input[type="range"]::-moz-range-thumb{
-          width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #2f9cff;box-shadow:0 4px 12px rgba(23,73,115,.16);pointer-events:auto;cursor:pointer
+        .dual-slider::-moz-range-thumb,.single-slider::-moz-range-thumb{
+          width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid #2f9cff;box-shadow:0 4px 12px rgba(23,73,115,.16);cursor:pointer
         }
-        .dual-range input[type="range"]::-webkit-slider-runnable-track,.single-range input[type="range"]::-webkit-slider-runnable-track{height:4px;background:transparent}
-        .dual-range input[type="range"]::-moz-range-track,.single-range input[type="range"]::-moz-range-track{height:4px;background:transparent;border:none}
-        .compact-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:68px;padding-left:2px}
+        .dual-slider::-webkit-slider-runnable-track,.single-slider::-webkit-slider-runnable-track{height:6px;background:transparent}
+        .dual-slider::-moz-range-track,.single-slider::-moz-range-track{height:6px;background:transparent;border:none}
+        .compact-actions{
+          display:flex;
+          align-items:center;
+          justify-content:flex-end;
+          gap:8px;
+          grid-column:span 2;
+          min-height:10px;
+          padding-left:2px
+        }
         .compact-actions .primary-btn,.compact-actions .secondary-btn{padding:11px 16px;border-radius:14px;font-size:13px;white-space:nowrap}
 
-        .deck-wrap{display:flex;justify-content:center;align-items:flex-start;min-height:76vh}
-        .search-card-stage{width:100%;max-width:560px;position:relative;padding-bottom:18px}
         .profile-page-wrap{
-          width:100%;height:min(84vh,820px);border-radius:34px;overflow:hidden;position:relative;background:#fff;
-          box-shadow:0 28px 56px rgba(20,39,60,.16);touch-action:pan-y;user-select:none;will-change:transform
+          width:100%;
+          height:min(84vh,840px);
+          border-radius:34px;
+          overflow:hidden;
+          position:relative;
+          background:var(--panel-solid);
+          box-shadow:0 28px 56px rgba(20,39,60,.16);
+          touch-action:pan-y;
+          user-select:none;
+          will-change:transform;
+          border:1px solid var(--panel-border);
         }
+        .theme-dark .profile-page-wrap{box-shadow:0 28px 56px rgba(0,0,0,.30)}
         .profile-page-wrap.is-dragging{box-shadow:0 38px 78px rgba(20,39,60,.24)}
         .profile-page-scroll{
-          height:100%;overflow:auto;padding-bottom:150px;-ms-overflow-style:none;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior:auto
+          height:100%;
+          overflow:auto;
+          padding-bottom:180px;
+          -ms-overflow-style:none;
+          scrollbar-width:none;
+          -webkit-overflow-scrolling:touch;
+          overscroll-behavior:auto
         }
         .profile-page-scroll::-webkit-scrollbar{display:none}
-        .profile-hero-photo{width:100%;height:420px;object-fit:cover;display:block;cursor:pointer}
-        .profile-header{padding:18px 18px 10px;background:#fff}
+        .profile-hero-photo{width:100%;height:450px;object-fit:cover;display:block;cursor:pointer}
+        .profile-header{padding:16px 16px 8px;background:var(--panel-solid)}
         .profile-title{
           margin:0;font-size:34px;line-height:1;font-weight:900;display:flex;align-items:center;flex-wrap:wrap;gap:6px
         }
-        .profile-subtitle{margin:10px 0 0;color:#6b7d8f;font-size:14px;font-weight:800}
+        .profile-subtitle{margin:10px 0 0;color:var(--muted);font-size:14px;font-weight:800}
         .premium-pill{
           display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,#33a8ff,#1882eb);
           color:#fff;font-size:11px;font-weight:900;margin-left:4px
         }
-        .profile-section{padding:0 18px 18px}
-        .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-        .info-card{background:#f6faff;border-radius:20px;padding:14px;border:1px solid rgba(77,130,179,.08)}
-        .info-card-label{
-          font-size:12px;font-weight:900;color:#7c93a7;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em
+        .profile-section{padding:0 16px 14px}
+        .compact-section{padding-bottom:12px}
+        .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+        .compact-grid{gap:10px}
+        .info-card,.qa-card{
+          background:var(--surface);
+          border-radius:18px;
+          padding:12px;
+          border:1px solid var(--card-border)
         }
-        .info-card-value{font-size:15px;font-weight:800;color:#213546;line-height:1.4}
-        .section-heading{margin:0 0 12px;font-size:18px;font-weight:900}
+        .info-card-label,.qa-label{
+          font-size:11px;font-weight:900;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em
+        }
+        .info-card-value,.qa-value{font-size:14px;font-weight:800;color:var(--text);line-height:1.45}
+        .section-heading{margin:0 0 10px;font-size:17px;font-weight:900}
         .bio-box{
-          background:#f6faff;border-radius:22px;padding:16px;color:#4f6578;line-height:1.6;border:1px solid rgba(77,130,179,.08)
+          background:var(--surface);
+          border-radius:18px;
+          padding:14px;
+          color:var(--muted);
+          line-height:1.6;
+          border:1px solid var(--card-border)
         }
         .chip-row{display:flex;gap:8px;flex-wrap:wrap}
-        .interest{padding:9px 12px;border-radius:999px;background:#edf5fd;font-size:13px;font-weight:800;color:#446176}
-        .qa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-        .qa-card{background:#f6faff;border-radius:20px;padding:14px;border:1px solid rgba(77,130,179,.08)}
-        .qa-label{
-          font-size:12px;font-weight:900;color:#7c93a7;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em
+        .interest{
+          padding:9px 12px;border-radius:999px;background:var(--surface-2);font-size:13px;font-weight:800;color:var(--text);border:1px solid var(--card-border)
         }
-        .qa-value{font-size:15px;line-height:1.45;color:#223849;font-weight:800}
-        .profile-photo-stack{display:grid;gap:14px}
-        .profile-photo-stack img{width:100%;height:420px;display:block;object-fit:cover;border-radius:24px;cursor:pointer}
+        .qa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+        .profile-photo-stack{display:grid;gap:12px}
+        .profile-photo-stack img{width:100%;height:380px;display:block;object-fit:cover;border-radius:22px;cursor:pointer}
         .profile-footer-actions{display:grid;gap:10px}
         .danger-btn{
-          border:none;padding:14px 16px;border-radius:18px;font-size:14px;font-weight:900;cursor:pointer;transition:.18s ease
+          border:none;padding:13px 16px;border-radius:18px;font-size:14px;font-weight:900;cursor:pointer;transition:.18s ease
         }
-        .danger-btn.report{background:#fff1f4;color:#d84f76}
-        .danger-btn.block{background:#eef6ff;color:#2b77cc}
+        .danger-btn.report{background:var(--danger-pink);color:#d84f76}
+        .danger-btn.block{background:var(--danger-blue);color:#2b77cc}
+        .theme-dark .danger-btn.report{color:#ff98b2}
+        .theme-dark .danger-btn.block{color:#7cc1ff}
         .danger-btn:hover{transform:translateY(-1px)}
 
         .swipe-badge{
-          position:absolute;top:24px;z-index:50;padding:10px 16px;border-radius:16px;font-size:26px;font-weight:1000;letter-spacing:.08em;border:3px solid currentColor;
+          position:absolute;top:82px;z-index:50;padding:10px 16px;border-radius:16px;font-size:24px;font-weight:1000;letter-spacing:.08em;border:3px solid currentColor;
           backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(255,255,255,.18);pointer-events:none;transform:rotate(-10deg);opacity:0;transition:.15s ease
         }
-        .swipe-badge.like{right:20px;color:#ff4d6d;transform:rotate(10deg)}
-        .swipe-badge.skip{left:20px;color:#3a8dff}
+        .swipe-badge.like{right:18px;color:#ff4d6d;transform:rotate(10deg)}
+        .swipe-badge.skip{left:18px;color:#3a8dff}
         .swipe-badge.visible{opacity:1}
 
         .search-floating-actions{
-          position:absolute;left:50%;transform:translateX(-50%);bottom:28px;z-index:90;pointer-events:none;display:flex;gap:18px;align-items:center;justify-content:center;
+          position:absolute;
+          left:50%;
+          transform:translateX(-50%);
+          top:290px;
+          z-index:115;
+          pointer-events:none;
+          display:flex;
+          gap:28px;
+          align-items:center;
+          justify-content:center;
+          width:min(280px,70%);
         }
+        .search-floating-actions > *{pointer-events:auto}
         .desktop-action-btn{
-          width:84px;height:84px;border-radius:50%;font-weight:900;pointer-events:auto;transition:transform .14s ease, box-shadow .18s ease;
+          width:82px;height:82px;border-radius:50%;font-weight:900;pointer-events:auto;transition:transform .14s ease, box-shadow .18s ease;
           backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1.5px solid rgba(255,255,255,.62);
           box-shadow:0 20px 38px rgba(20,39,60,.18), inset 0 1px 0 rgba(255,255,255,.56), inset 0 -1px 0 rgba(255,255,255,.08), 0 0 0 4px rgba(255,255,255,.18);
-          display:flex;align-items:center;justify-content:center;overflow:hidden;
+          display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
+        }
+        .theme-dark .desktop-action-btn{
+          border-color:rgba(255,255,255,.14);
+          box-shadow:0 18px 38px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 4px rgba(255,255,255,.02);
         }
         .desktop-action-btn::before{
           content:"";position:absolute;top:10px;left:14px;right:14px;height:24px;border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.56), rgba(255,255,255,.06));pointer-events:none;
@@ -1923,33 +2253,49 @@ function App() {
             linear-gradient(135deg, rgba(255,84,114,.24), rgba(255,143,170,.14));
           color:#ff4f71;font-size:44px;line-height:1;
         }
+        .theme-dark .desktop-action-btn.skip{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
+            linear-gradient(135deg, rgba(58,141,255,.30), rgba(109,170,255,.12));
+        }
+        .theme-dark .desktop-action-btn.like{
+          background:
+            linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
+            linear-gradient(135deg, rgba(255,84,114,.28), rgba(255,143,170,.12));
+        }
         .desktop-action-btn:hover{transform:translateY(-3px) scale(1.02)}
-        .desktop-action-btn:active{transform:scale(.95)}
+        .desktop-action
+        -btn:active{transform:scale(.95)}
         .desktop-action-btn.pop{transform:scale(1.08)}
-        .action-icon-heart{font-size:44px;color:#ff4f71;filter:drop-shadow(0 2px 10px rgba(255,79,113,.22));transform:translateY(1px)}
-        .action-icon-skip{font-size:36px;color:#2f85ff;filter:drop-shadow(0 2px 10px rgba(47,133,255,.20))}
-        .footer-hint{margin-top:16px;font-size:12px;color:#7b91a3;text-align:center;font-weight:700}
+        .action-icon-heart{font-size:42px;color:#ff4f71;filter:drop-shadow(0 2px 10px rgba(255,79,113,.22));transform:translateY(1px)}
+        .action-icon-skip{font-size:34px;color:#2f85ff;filter:drop-shadow(0 2px 10px rgba(47,133,255,.20))}
+        .footer-hint{margin-top:14px;font-size:12px;color:var(--muted);text-align:center;font-weight:700}
         .notice{
-          position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:120;background:rgba(18,32,46,.94);color:#fff;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:800;box-shadow:0 10px 26px rgba(18,32,46,.24)
+          position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:220;background:var(--notice);color:#fff;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:800;box-shadow:0 10px 26px rgba(18,32,46,.24)
         }
         .empty{
-          min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#587085;gap:10px
+          min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--muted);gap:10px
         }
 
         .section-bar{
           display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 10px;
         }
         .section-mini-title{
-          margin:0;font-size:18px;font-weight:900;color:#213546;
+          margin:0;font-size:18px;font-weight:900;color:var(--text);
         }
 
         .messages-outer,.profile-layout,.settings-layout{display:grid;gap:12px}
         .messages-outer{grid-template-columns:minmax(0,1fr);min-height:620px}
-        .profile-layout{grid-template-columns:350px minmax(0,1fr)}
-        .settings-layout{grid-template-columns:360px minmax(0,1fr)}
+        .profile-layout{grid-template-columns:310px minmax(0,1fr)}
+        .settings-layout{grid-template-columns:minmax(0,1fr);min-height:620px}
+        .settings-main-grid{
+          display:grid;
+          grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
+          gap:12px;
+        }
         .list-grid{display:grid;gap:10px}
         .list-item,.chat-item{
-          display:flex;align-items:center;gap:12px;padding:14px;border-radius:22px;background:#f8fbff
+          display:flex;align-items:center;gap:12px;padding:14px;border-radius:22px;background:var(--surface);border:1px solid var(--card-border)
         }
         .list-item img,.chat-item img,.message-header img{
           object-fit:cover;object-position:center;
@@ -1958,10 +2304,15 @@ function App() {
           width:62px;height:62px;border-radius:18px;flex-shrink:0;cursor:pointer;
         }
         .chat-item{
-          cursor:pointer;align-items:flex-start;justify-content:space-between;transition:.18s ease;border:1px solid transparent;background:#f6fbff;padding:12px 14px;
+          cursor:pointer;align-items:flex-start;justify-content:space-between;transition:.18s ease;background:var(--surface);padding:12px 14px;
         }
-        .chat-item:hover{transform:translateY(-1px);background:#f1f8ff}
-        .chat-item.active{background:linear-gradient(135deg,rgba(51,168,255,.12),rgba(31,147,255,.08));border:1px solid rgba(51,168,255,.14)}
+        .chat-item:hover{transform:translateY(-1px)}
+        .chat-item.active{
+          background:
+            linear-gradient(135deg,rgba(51,168,255,.12),rgba(31,147,255,.08)),
+            var(--surface);
+          border:1px solid rgba(51,168,255,.14)
+        }
         .chat-item img{width:64px;height:64px;border-radius:18px;flex-shrink:0;cursor:pointer}
         .chat-main{flex:1;min-width:0;display:flex;gap:12px;align-items:flex-start}
         .avatar-wrap{position:relative;flex-shrink:0}
@@ -1972,24 +2323,25 @@ function App() {
         .avatar-status.offline{background:#b8c4cf}
         .chat-meta{min-width:0;flex:1}
         .item-topline{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:4px}
-        .item-title{font-size:16px;font-weight:900;margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:0;min-width:0}
+        .item-title{font-size:16px;font-weight:900;margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:0;min-width:0;color:var(--text)}
         .item-sub{
-          font-size:13px;color:#628096;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:8px
+          font-size:13px;color:var(--muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:8px
         }
         .item-sub-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
         .chat-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-left:10px;flex-shrink:0}
-        .time-mini{font-size:12px;color:#7e94a8;font-weight:800;white-space:nowrap}
+        .time-mini{font-size:12px;color:var(--muted);font-weight:800;white-space:nowrap}
         .reply-badge{
           display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;background:rgba(51,168,255,.12);color:#1882eb;font-size:11px;font-weight:900;white-space:nowrap
         }
-        .delivery-mini{font-size:11px;color:#8ea1b1;font-weight:800;white-space:nowrap}
+        .delivery-mini{font-size:11px;color:var(--muted);font-weight:800;white-space:nowrap}
         .unread-dot{width:10px;height:10px;border-radius:50%;background:#1f9fff;flex-shrink:0;box-shadow:0 0 0 4px rgba(31,159,255,.10)}
         .dialog-icon{
           display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#e8f4ff;color:#1e92f0;font-size:11px;font-weight:900;flex-shrink:0;margin-right:6px
         }
+        .theme-dark .dialog-icon{background:#193248}
         .message-shell{display:grid;grid-template-rows:auto 1fr auto;min-height:620px}
         .message-header{
-          display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid rgba(82,131,176,.10)
+          display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--card-border)
         }
         .message-header img{width:72px;height:72px;border-radius:18px;cursor:pointer}
         .message-header-line{display:flex;align-items:center;gap:8px;justify-content:space-between}
@@ -1998,8 +2350,8 @@ function App() {
           background:
             radial-gradient(circle at 20% 20%, rgba(51,168,255,.06), transparent 18%),
             radial-gradient(circle at 80% 60%, rgba(51,168,255,.05), transparent 22%),
-            linear-gradient(180deg,#eef6fd 0%, #edf5fc 100%);
-          border-radius:22px;margin-top:10px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior:contain
+            linear-gradient(180deg,var(--surface-2) 0%, var(--surface) 100%);
+          border-radius:22px;margin-top:10px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;border:1px solid var(--card-border)
         }
         .message-row{display:flex;flex-direction:column;gap:4px}
         .message-row.me{align-items:flex-end}
@@ -2007,61 +2359,70 @@ function App() {
         .bubble{
           max-width:78%;padding:12px 14px 8px;border-radius:18px;font-size:15px;line-height:1.45;position:relative;box-shadow:0 4px 12px rgba(30,59,86,.06)
         }
-        .bubble.them{align-self:flex-start;background:#fff;color:#1b2f40;border-top-left-radius:8px}
+        .bubble.them{align-self:flex-start;background:var(--panel-solid);color:var(--text);border-top-left-radius:8px;border:1px solid var(--card-border)}
         .bubble.me{align-self:flex-end;background:linear-gradient(135deg,#d8efff,#c8e8ff);color:#14334a;border-top-right-radius:8px}
-        .bubble-meta{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:6px;font-size:11px;color:#7390a7;font-weight:800}
+        .theme-dark .bubble.me{background:linear-gradient(135deg,#1f7dd7,#229dff);color:#fff}
+        .bubble-meta{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:800}
         .bubble-checks.read{color:#1f9fff}
         .bubble-checks.delivered{color:#86a3b8}
-        .message-input-row{display:flex;gap:10px;padding-top:12px;border-top:1px solid rgba(82,131,176,.10)}
+        .message-input-row{display:flex;gap:10px;padding-top:12px;border-top:1px solid var(--card-border)}
         .message-input-shell{
-          display:flex;align-items:center;gap:10px;width:100%;background:#f3f9ff;border:1px solid rgba(82,131,176,.10);border-radius:20px;padding:8px 10px 8px 14px
+          display:flex;align-items:center;gap:10px;width:100%;background:var(--surface);border:1px solid var(--card-border);border-radius:20px;padding:8px 10px 8px 14px
         }
         .chat-action-icon{
           width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#e8f4ff;color:#1f93f1;font-size:16px;flex-shrink:0
         }
+        .theme-dark .chat-action-icon{background:#193248}
         .message-input-row input,.field input,.field select,.field textarea{
-          width:100%;border-radius:16px;border:1px solid rgba(95,80,110,.12);background:#fcfbfd;padding:14px 15px;font-size:15px;outline:none;font-family:inherit
+          width:100%;border-radius:16px;border:1px solid var(--card-border);background:var(--panel-solid);padding:14px 15px;font-size:15px;outline:none;font-family:inherit;color:var(--text)
+        }
+        .theme-dark .field input,.theme-dark .field select,.theme-dark .field textarea,.theme-dark .message-input-shell input{
+          color:var(--text);
         }
         .message-input-shell input{border:none !important;background:transparent !important;padding:8px 0 !important}
         .field{display:grid;gap:8px}
-        .field label{font-size:14px;font-weight:800;color:#4b6479}
-        .field-group,.help-grid,.info-list{display:grid;gap:14px}
+        .field label{font-size:14px;font-weight:800;color:var(--muted)}
+        .field-group,.help-grid,.info-list{display:grid;gap:12px}
         .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
         .profile-avatar{text-align:center}
-        .profile-main-photo-wrap{position:relative;cursor:pointer;width:min(100%,240px);margin:0 auto 14px}
+        .profile-main-photo-wrap{position:relative;cursor:pointer;width:min(100%,210px);margin:0 auto 14px}
         .profile-main-photo{width:100%;aspect-ratio:1 / 1;border-radius:24px;display:block;object-fit:cover;box-shadow:0 18px 34px rgba(20,39,60,.14)}
         .tap-badge{
           position:absolute;left:10px;bottom:10px;padding:6px 10px;border-radius:999px;background:rgba(18,32,46,.65);color:#fff;font-size:11px;font-weight:800;backdrop-filter:blur(8px)
-        }        .profile-main-name{margin:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
-        .profile-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:12px}
+        }
+        .profile-main-name{margin:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+        .profile-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px;margin-top:12px}
         .profile-photo-grid img{
-          width:100%;height:170px;border-radius:18px;object-fit:cover;cursor:pointer;
+          width:100%;height:158px;border-radius:18px;object-fit:cover;cursor:pointer;
         }
         .profile-block{
-          background:#f8fbff;border-radius:24px;padding:18px;border:1px solid rgba(82,131,176,.08)
+          background:var(--surface);border-radius:22px;padding:14px;border:1px solid var(--card-border)
         }
-        .profile-block h3{margin:0 0 14px;font-size:20px}
+        .profile-block h3{margin:0 0 12px;font-size:18px}
         .info-row{
-          display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(82,131,176,.10)
+          display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--card-border);align-items:flex-start
         }
+        .info-row strong{font-size:13px;max-width:46%;color:var(--muted)}
+        .info-row span{font-size:14px;text-align:right;color:var(--text)}
         .info-row:last-child{border-bottom:none}
 
-        .settings-stack{display:grid;gap:14px}
+        .settings-stack{display:grid;gap:12px}
         .settings-card{
-          background:#f8fbff;border-radius:24px;padding:18px;border:1px solid rgba(82,131,176,.08)
+          background:var(--surface);border-radius:24px;padding:16px;border:1px solid var(--card-border)
         }
-        .settings-card h3{margin:0 0 14px;font-size:20px}
+        .settings-card h3{margin:0 0 12px;font-size:18px}
         .toggle-row{
-          display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(82,131,176,.10)
+          display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--card-border)
         }
         .toggle-row:last-child{border-bottom:none}
         .toggle-meta{display:grid;gap:4px}
-        .toggle-title{font-size:15px;font-weight:900;color:#213546}
-        .toggle-text{font-size:13px;color:#688095;line-height:1.45}
+        .toggle-title{font-size:15px;font-weight:900;color:var(--text)}
+        .toggle-text{font-size:13px;color:var(--muted);line-height:1.45}
         .switch{
           position:relative;width:54px;height:32px;border-radius:999px;border:none;cursor:pointer;
           background:#dce9f5;transition:.2s ease;flex-shrink:0;
         }
+        .theme-dark .switch{background:#273847}
         .switch::after{
           content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;
           background:#fff;box-shadow:0 4px 12px rgba(20,39,60,.14);transition:.2s ease;
@@ -2071,27 +2432,31 @@ function App() {
           box-shadow:0 8px 18px rgba(38,144,243,.24);
         }
         .switch.on::after{left:26px}
-        .visibility-chips,.rate-row{
+        .visibility-chips,.rate-row,.theme-row,.settings-bottom-actions{
           display:flex;gap:10px;flex-wrap:wrap
         }
         .rate-chip{
-          padding:10px 14px;border-radius:16px;background:#edf4fb;color:#365268;font-size:14px;font-weight:900
+          padding:10px 14px;border-radius:16px;background:var(--chip);color:var(--chip-text);font-size:14px;font-weight:900;border:1px solid var(--panel-border)
         }
         .rate-chip.active{
           background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff;box-shadow:0 12px 22px rgba(38,144,243,.24)
         }
         .save-settings-row{
-          display:flex;justify-content:flex-end;margin-top:4px
+          display:flex;justify-content:flex-end;margin-top:2px
         }
 
+        .help-section{
+          display:grid;
+          gap:10px;
+        }
         .help-compact-grid{
           display:grid;gap:10px
         }
         .faq-item{
-          padding:14px 16px;border-radius:20px;background:#f7fbff;border:1px solid rgba(82,131,176,.08)
+          padding:14px 16px;border-radius:20px;background:var(--panel-solid);border:1px solid var(--card-border)
         }
         .faq-item summary{
-          list-style:none;cursor:pointer;font-size:15px;font-weight:900;color:#213546;display:flex;align-items:center;justify-content:space-between;gap:12px
+          list-style:none;cursor:pointer;font-size:15px;font-weight:900;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:12px
         }
         .faq-item summary::-webkit-details-marker{display:none}
         .faq-item summary::after{
@@ -2099,11 +2464,11 @@ function App() {
         }
         .faq-item[open] summary::after{content:"–"}
         .faq-item p{
-          margin:10px 0 0;color:#61778b;line-height:1.55;font-size:14px
+          margin:10px 0 0;color:var(--muted);line-height:1.55;font-size:14px
         }
 
         .mutual-modal,.photo-modal{
-          position:fixed;inset:0;background:rgba(7,20,33,.45);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100
+          position:fixed;inset:0;background:rgba(7,20,33,.45);display:flex;align-items:center;justify-content:center;padding:18px;z-index:200
         }
         .mutual-box{
           width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(135deg,#33a8ff 0%,#1882eb 100%);
@@ -2113,6 +2478,7 @@ function App() {
           width:min(900px,96vw);max-height:92vh;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 24px 50px rgba(20,39,60,.32);
           animation:matchPop .26s ease;position:relative;
         }
+        .theme-dark .photo-box{background:#0d1722}
         .photo-box img{
           width:100%;max-height:92vh;object-fit:contain;display:block;background:#0d1722;
         }
@@ -2166,20 +2532,27 @@ function App() {
           0%,100%{transform:translateY(0)}
           50%{transform:translateY(-6px)}
         }
+        @keyframes subtleFloat{
+          0%,100%{transform:translateY(0)}
+          50%{transform:translateY(-4px)}
+        }
 
         @media (max-width:1280px){
-          .filters-rail-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-          .compact-actions{grid-column:span 4;justify-content:flex-end;min-height:auto}
+          .hero-main-grid{grid-template-columns:1fr}
+          .hero-mini-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
         }
 
         @media (max-width:1120px){
-          .hero,.promo-showcase,.profile-layout,.settings-layout{grid-template-columns:1fr}
+          .promo-showcase,.profile-layout,.settings-main-grid{grid-template-columns:1fr}
           .hero-mini-grid{min-height:auto}
+          .settings-layout{grid-template-columns:1fr}
         }
 
         @media (max-width:980px){
-          .filters-rail-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-          .compact-actions{grid-column:span 3}
+          .hero-mini-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+          .filters-rail{
+            width:min(92vw,680px);
+          }
         }
 
         @media (max-width:760px){
@@ -2187,25 +2560,34 @@ function App() {
           .topbar{position:static;flex-direction:column;align-items:flex-start;padding:14px}
           .nav{display:none}
           .panel{padding:16px;border-radius:24px}
-          .hero{grid-template-columns:1fr}
+          .hero-main-grid{grid-template-columns:1fr}
+          .hero-strip{grid-template-columns:1fr}
           .hero-mini-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
           .hero-mini-card{min-height:200px;border-radius:22px}
           .hero-mini-name{font-size:18px}
           .hero-mini-bio{font-size:12px}
           .promo-stage{padding:18px;min-height:auto}
           .promo-grid{grid-template-columns:1fr}
-          .profile-page-wrap{max-width:100%;height:min(82vh,760px);border-radius:28px}
+          .profile-page-wrap{max-width:100%;height:min(84vh,760px);border-radius:28px}
           .profile-hero-photo,.profile-photo-stack img{height:350px}
-          .profile-title{font-size:30px}
-          .info-grid,.qa-grid{grid-template-columns:1fr}
+          .profile-title{font-size:28px}
+          .info-grid,.qa-grid,.compact-grid{grid-template-columns:1fr}
           .filters-rail{padding:12px;border-radius:22px}
-          .filters-rail-grid{grid-template-columns:1fr 1fr;gap:10px}
-          .compact-actions{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr}
+          .filters-rail-grid{grid-template-columns:1fr;gap:10px}
+          .compact-actions{grid-column:span 1;display:grid;grid-template-columns:1fr 1fr}
           .search-card-stage{padding-bottom:12px}
-          .search-floating-actions{bottom:18px;gap:14px}
-          .desktop-action-btn{width:76px;height:76px}
-          .action-icon-heart{font-size:38px}
-          .action-icon-skip{font-size:31px}
+          .search-overlay-ui{top:10px;left:8px;right:8px}
+          .filters-inline-shell{top:48px}
+          .search-floating-actions{
+            top:auto;
+            bottom:128px;
+            gap:16px;
+            width:min(240px,72%);
+          }
+          .desktop-action-btn{width:74px;height:74px}
+          .action-icon-heart{font-size:36px}
+          .action-icon-skip{font-size:29px}
+          .swipe-badge{top:72px;font-size:20px}
           .two-col{grid-template-columns:1fr}
           .chat-item{padding:12px;border-radius:18px}
           .chat-item img{width:56px;height:56px;border-radius:16px}
@@ -2215,26 +2597,27 @@ function App() {
           .reply-badge{font-size:10px;padding:5px 9px}
           .delivery-mini{font-size:10px}
           .time-mini{font-size:11px}
+          .profile-layout{grid-template-columns:1fr}
           .phone-bottom-nav{
             position:fixed;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:9px;border-radius:24px;
-            background:rgba(255,255,255,.94);backdrop-filter:blur(14px);box-shadow:0 16px 34px rgba(20,39,60,.12);z-index:80
+            background:var(--panel);box-shadow:var(--glass-shadow);z-index:180;border:1px solid var(--panel-border)
           }
           .phone-tab-btn{
-            border:none;background:transparent;padding:12px 4px;min-height:54px;border-radius:18px;font-size:12px;font-weight:900;color:#5b6e80;line-height:1.15
+            padding:12px 4px;min-height:54px;border-radius:18px;font-size:12px;font-weight:900;line-height:1.15
           }
-          .phone-tab-btn.active{background:linear-gradient(135deg,#33a8ff,#1882eb);color:#fff}
           .message-input-row{flex-direction:column}
           .bubble{max-width:86%}
         }
 
         @media (max-width:520px){
-          .filters-rail-grid{grid-template-columns:1fr}
-          .compact-actions{grid-column:span 1;grid-template-columns:1fr 1fr}
           .search-toolbar{align-items:flex-start}
           .search-counter{padding-top:8px}
-          .glass-filter-btn{font-size:14px;padding:11px 14px}
+          .glass-filter-btn{font-size:13px;padding:10px 13px}
           .hero-mini-grid{grid-template-columns:1fr 1fr}
           .promo-showcase{gap:12px}
+          .quick-auth-row{display:grid;grid-template-columns:1fr 1fr;width:100%}
+          .hero-auth-btn{width:100%}
+          .search-floating-actions{bottom:132px}
         }
       `}</style>
 
@@ -2282,122 +2665,133 @@ function App() {
         {tab === "home" && (
           <>
             <section className="hero">
-              <div className="panel">
-                <h1 className="hero-title">{t.heroTitle}</h1>
-                <p className="hero-text">{t.heroText}</p>
-                <div className="hero-actions">
-                  <button className="primary-btn" onClick={() => setTab("search")}>
-                    {t.heroPrimary}
-                  </button>
-                  <button
-                    className="secondary-btn"
-                    onClick={() => {
-                      setTab("messages");
-                      setChatScreen("list");
-                    }}
-                  >
-                    {t.heroSecondary}
-                  </button>
-                </div>
-              </div>
+              <div className="hero-main-grid">
+                <div className="panel hero-card">
+                  <div className="hero-copy">
+                    <h1 className="hero-title">{t.heroTitle}</h1>
+                    <p className="hero-text">{t.heroText}</p>
+                    <p className="muted auth-hint">{t.authHint}</p>
 
-              <div className="hero-mini-grid">
-                {heroPreviewProfiles.map((profile) => (
-                  <div className="hero-mini-card" key={profile.id}>
-                    <img src={profile.photos[0]} alt={profile.name} />
-                    <div className="hero-mini-overlay">
-                      <h3 className="hero-mini-name">
-                        {profile.name}, {profile.age} {profile.zodiac}
-                        {profile.verified && <Badge />}
-                      </h3>
-                      <p className="hero-mini-meta">
-                        {profile.city}, {profile.country}
-                      </p>
-                      <p className="hero-mini-bio">
-                        {lang === "ru" ? profile.bio : profile.bioEn}
-                      </p>
+                    <div className="quick-auth-row">
+                      <button className="primary-btn hero-auth-btn">{t.heroPrimary}</button>
+                      <button className="secondary-btn hero-auth-btn">{t.heroSecondary}</button>
+                    </div>
+
+                    <div className="hero-strip">
+                      <div className="hero-strip-card">
+                        <h4>{t.heroMiniTitle}</h4>
+                        <p>{t.heroMiniText}</p>
+                      </div>
+                      <div className="hero-strip-card">
+                        <h4>{t.promo2}</h4>
+                        <p>{t.promo2t}</p>
+                      </div>
+                      <div className="hero-strip-card">
+                        <h4>{t.promo3}</h4>
+                        <p>{t.promo3t}</p>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
 
-            <section className="promo-showcase">
-              <div className="promo-stage">
-                <span className="promo-badge">✨ {t.liveNow}</span>
-                <p className="muted" style={{ marginTop: 14, marginBottom: 0 }}>
-                  {t.liveHint}
-                </p>
-
-                <div className="promo-grid">
-                  <div className="promo-card">
-                    <h4>{t.promo1}</h4>
-                    <p>{t.promo1t}</p>
-                  </div>
-                  <div className="promo-card">
-                    <h4>{t.promo2}</h4>
-                    <p>{t.promo2t}</p>
-                  </div>
-                  <div className="promo-card">
-                    <h4>{t.promo3}</h4>
-                    <p>{t.promo3t}</p>
-                  </div>
-                  <div className="promo-card">
-                    <h4>{t.promo4}</h4>
-                    <p>{t.promo4t}</p>
-                  </div>
+                <div className="hero-mini-grid">
+                  {heroPreviewProfiles.map((profile) => (
+                    <div className="hero-mini-card" key={profile.id}>
+                      <img src={profile.photos[0]} alt={profile.name} />
+                      <div className="hero-mini-overlay">
+                        <h3 className="hero-mini-name">
+                          {profile.name}, {profile.age} {profile.zodiac}
+                          {profile.verified && <Badge />}
+                        </h3>
+                        <p className="hero-mini-meta">
+                          {profile.city}, {profile.country}
+                        </p>
+                        <p className="hero-mini-bio">
+                          {lang === "ru" ? profile.bio : profile.bioEn}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="promo-stats">
-                <div className="stat-card">
-                  <div className="stat-num">{profiles.length}</div>
-                  <div className="stat-label">{t.liveNow}</div>
+              <section className="promo-showcase">
+                <div className="promo-stage">
+                  <span className="promo-badge">✨ {t.liveNow}</span>
+                  <p className="muted" style={{ marginTop: 14, marginBottom: 0 }}>
+                    {t.liveHint}
+                  </p>
+
+                  <div className="promo-grid">
+                    <div className="promo-card">
+                      <h4>{t.promo1}</h4>
+                      <p>{t.promo1t}</p>
+                    </div>
+                    <div className="promo-card">
+                      <h4>{t.promo2}</h4>
+                      <p>{t.promo2t}</p>
+                    </div>
+                    <div className="promo-card">
+                      <h4>{t.promo3}</h4>
+                      <p>{t.promo3t}</p>
+                    </div>
+                    <div className="promo-card">
+                      <h4>{t.promo4}</h4>
+                      <p>{t.promo4t}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-num">{matches.length}</div>
-                  <div className="stat-label">{lang === "ru" ? "Открытые диалоги и взаимные симпатии" : "Open dialogs and mutual matches"}</div>
+
+                <div className="promo-stats">
+                  <div className="stat-card">
+                    <div className="stat-num">{profiles.length}</div>
+                    <div className="stat-label">{t.liveNow}</div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-num">{matches.length}</div>
+                    <div className="stat-label">{lang === "ru" ? "Открытые диалоги и взаимные симпатии" : "Open dialogs and mutual matches"}</div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-num">{likedYouIds.length + guestIds.length}</div>
+                    <div className="stat-label">{lang === "ru" ? "Гости, просмотры и новые реакции" : "Guests, views and new reactions"}</div>
+                  </div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-num">{likedYouIds.length + guestIds.length}</div>
-                  <div className="stat-label">{lang === "ru" ? "Гости, просмотры и новые реакции" : "Guests, views and new reactions"}</div>
-                </div>
-              </div>
+              </section>
             </section>
           </>
         )}
 
         {tab === "search" && (
           <section className="search-wrap top-spaced">
-            <div className="search-head-area">
-              <div className="search-toolbar">
-                <div className="search-toolbar-left">
-                  <button
-                    ref={filterButtonRef}
-                    className={`glass-filter-btn ${showFilters ? "active" : ""}`}
-                    onClick={() => setShowFilters((prev) => !prev)}
-                  >
-                    ⚙️ {t.filters}
-                  </button>
-                </div>
-
-                <div className="search-counter">{filteredProfiles.length}</div>
-              </div>
-
-              <div className="filters-inline-shell">
-                {showFilters && (
-                  <div className="filters-rail" ref={filterRailRef}>
-                    <FilterContent />
-                  </div>
-                )}
-              </div>
-            </div>
-
             <div className="panel">
               {activeProfile ? (
                 <div className="search-stage">
                   <div className="deck-wrap">
                     <div className="search-card-stage">
+                      <div className="search-overlay-ui">
+                        <div className="search-top-ui">
+                          <div style={{ position: "relative" }}>
+                            <button
+                              ref={filterButtonRef}
+                              className={`glass-filter-btn ${showFilters ? "active" : ""}`}
+                              onClick={() => setShowFilters((prev) => !prev)}
+                            >
+                              ⚙️ {t.filters}
+                            </button>
+
+                            <div className="filters-inline-shell">
+                              {showFilters && (
+                                <div className="filters-rail" ref={filterRailRef}>
+                                  <FilterContent />
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="search-counter">{filteredProfiles.length}</div>
+                        </div>
+                      </div>
+
                       <div
                         className={`profile-page-wrap ${Math.abs(swipeX) > 0 ? "is-dragging" : ""}`}
                         style={cardStyle}
@@ -2751,7 +3145,7 @@ function App() {
               </div>
 
               <div className="panel">
-                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 16 }}>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 14 }}>
                   {!editProfile ? (
                     <button className="primary-btn" onClick={() => setEditProfile(true)}>
                       {t.editProfile}
@@ -2790,7 +3184,7 @@ function App() {
                   )}
                 </div>
 
-                <div className="profile-block" style={{ marginBottom: 16 }}>
+                <div className="profile-block" style={{ marginBottom: 12 }}>
                   <h3>{t.about}</h3>
                   <div className="info-list">
                     <div className="info-row"><strong>{t.age}</strong><span>{myProfile.age}</span></div>
@@ -2809,7 +3203,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="profile-block" style={{ marginBottom: 16 }}>
+                <div className="profile-block" style={{ marginBottom: 12 }}>
                   <h3>{t.lookingFor}</h3>
                   <div className="info-list">
                     <div className="info-row"><strong>{t.lookingGender}</strong><span>{lang === "ru" ? myProfile.lookingGender : myProfile.lookingGenderEn}</span></div>
@@ -2818,7 +3212,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="profile-block" style={{ marginBottom: 16 }}>
+                <div className="profile-block" style={{ marginBottom: 12 }}>
                   <h3>{t.interests}</h3>
                   <div className="chip-row">
                     {myProfile.interests.map((item) => (
@@ -2829,7 +3223,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="profile-block" style={{ marginBottom: 16 }}>
+                <div className="profile-block" style={{ marginBottom: 12 }}>
                   <h3>{t.quickAnswers}</h3>
                   <div className="qa-grid">
                     <div className="qa-card">
@@ -3193,105 +3587,105 @@ function App() {
             </p>
 
             <section className="settings-layout">
-              <div className="panel">
-                <div className="settings-stack">
-                  <div className="settings-card">
-                    <h3>{t.account}</h3>
+              <div className="settings-main-grid">
+                <div className="panel">
+                  <div className="settings-stack">
+                    <div className="settings-card">
+                      <h3>{t.account}</h3>
 
-                    <div className="field-group">
-                      <div className="field">
-                        <label>{t.accountEmail}</label>
-                        <input
-                          value={settingsForm.email}
-                          onChange={(e) => setSettingsForm((p) => ({ ...p, email: e.target.value }))}
+                      <div className="field-group">
+                        <div className="field">
+                          <label>{t.accountEmail}</label>
+                          <input
+                            value={settingsForm.email}
+                            onChange={(e) => setSettingsForm((p) => ({ ...p, email: e.target.value }))}
+                          />
+                        </div>
+
+                        <div className="two-col">
+                          <div className="field">
+                            <label>{t.currentPassword}</label>
+                            <input
+                              type="password"
+                              value={settingsForm.currentPassword}
+                              onChange={(e) =>
+                                setSettingsForm((p) => ({ ...p, currentPassword: e.target.value }))
+                              }
+                            />
+                          </div>
+                          <div className="field">
+                            <label>{t.newPassword}</label>
+                            <input
+                              type="password"
+                              value={settingsForm.newPassword}
+                              onChange={(e) =>
+                                setSettingsForm((p) => ({ ...p, newPassword: e.target.value }))
+                              }
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="settings-card">
+                      <h3>{t.phoneNotifications}</h3>
+
+                      <div className="toggle-row">
+                        <div className="toggle-meta">
+                          <div className="toggle-title">{t.phoneNotifications}</div>
+                          <div className="toggle-text">
+                            {lang === "ru"
+                              ? "Push-уведомления о мэтчах, сообщениях и новых просмотрах."
+                              : "Push notifications for matches, messages and new views."}
+                          </div>
+                        </div>
+                        <button
+                          className={`switch ${settingsForm.phoneNotifications ? "on" : ""}`}
+                          onClick={() =>
+                            setSettingsForm((p) => ({ ...p, phoneNotifications: !p.phoneNotifications }))
+                          }
                         />
                       </div>
 
-                      <div className="two-col">
-                        <div className="field">
-                          <label>{t.currentPassword}</label>
-                          <input
-                            type="password"
-                            value={settingsForm.currentPassword}
-                            onChange={(e) =>
-                              setSettingsForm((p) => ({ ...p, currentPassword: e.target.value }))
-                            }
-                          />
+                      <div className="toggle-row">
+                        <div className="toggle-meta">
+                          <div className="toggle-title">{t.appNotifications}</div>
+                          <div className="toggle-text">
+                            {lang === "ru"
+                              ? "Уведомления внутри приложения и индикаторы активности."
+                              : "In-app notifications and activity indicators."}
+                          </div>
                         </div>
-                        <div className="field">
-                          <label>{t.newPassword}</label>
-                          <input
-                            type="password"
-                            value={settingsForm.newPassword}
-                            onChange={(e) =>
-                              setSettingsForm((p) => ({ ...p, newPassword: e.target.value }))
-                            }
-                          />
+                        <button
+                          className={`switch ${settingsForm.appNotifications ? "on" : ""}`}
+                          onClick={() =>
+                            setSettingsForm((p) => ({ ...p, appNotifications: !p.appNotifications }))
+                          }
+                        />
+                      </div>
+
+                      <div className="toggle-row">
+                        <div className="toggle-meta">
+                          <div className="toggle-title">{t.emailNotifications}</div>
+                          <div className="toggle-text">
+                            {lang === "ru"
+                              ? "Письма о важных событиях и обновлениях аккаунта."
+                              : "Emails about important events and account updates."}
+                          </div>
                         </div>
+                        <button
+                          className={`switch ${settingsForm.emailNotifications ? "on" : ""}`}
+                          onClick={() =>
+                            setSettingsForm((p) => ({ ...p, emailNotifications: !p.emailNotifications }))
+                          }
+                        />
                       </div>
                     </div>
-                  </div>
 
-                  <div className="settings-card">
-                    <h3>{t.phoneNotifications}</h3>
+                    <div className="settings-card">
+                      <h3>{t.appearance}</h3>
 
-                    <div className="toggle-row">
-                      <div className="toggle-meta">
-                        <div className="toggle-title">{t.phoneNotifications}</div>
-                        <div className="toggle-text">
-                          {lang === "ru"
-                            ? "Push-уведомления о мэтчах, сообщениях и новых просмотрах."
-                            : "Push notifications for matches, messages and new views."}
-                        </div>
-                      </div>
-                      <button
-                        className={`switch ${settingsForm.phoneNotifications ? "on" : ""}`}
-                        onClick={() =>
-                          setSettingsForm((p) => ({ ...p, phoneNotifications: !p.phoneNotifications }))
-                        }
-                      />
-                    </div>
-
-                    <div className="toggle-row">
-                      <div className="toggle-meta">
-                        <div className="toggle-title">{t.appNotifications}</div>
-                        <div className="toggle-text">
-                          {lang === "ru"
-                            ? "Уведомления внутри приложения и индикаторы активности."
-                            : "In-app notifications and activity indicators."}
-                        </div>
-                      </div>
-                      <button
-                        className={`switch ${settingsForm.appNotifications ? "on" : ""}`}
-                        onClick={() =>
-                          setSettingsForm((p) => ({ ...p, appNotifications: !p.appNotifications }))
-                        }
-                      />
-                    </div>
-
-                    <div className="toggle-row">
-                      <div className="toggle-meta">
-                        <div className="toggle-title">{t.emailNotifications}</div>
-                        <div className="toggle-text">
-                          {lang === "ru"
-                            ? "Письма о важных событиях и обновлениях аккаунта."
-                            : "Emails about important events and account updates."}
-                        </div>
-                      </div>
-                      <button
-                        className={`switch ${settingsForm.emailNotifications ? "on" : ""}`}
-                        onClick={() =>
-                          setSettingsForm((p) => ({ ...p, emailNotifications: !p.emailNotifications }))
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  <div className="settings-card">
-                    <h3>{t.appearance}</h3>
-
-                    <div className="toggle-row" style={{ borderBottom: "none", paddingBottom: 0 }}>
-                      <div className="toggle-meta">
+                      <div className="toggle-meta" style={{ marginBottom: 12 }}>
                         <div className="toggle-title">{t.appearance}</div>
                         <div className="toggle-text">
                           {lang === "ru"
@@ -3299,54 +3693,80 @@ function App() {
                             : "Choose whether your profile is shown in search."}
                         </div>
                       </div>
-                    </div>
 
-                    <div className="visibility-chips" style={{ marginTop: 12 }}>
-                      <button
-                        className={`chip-btn ${settingsForm.profileVisible ? "active" : ""}`}
-                        onClick={() => setSettingsForm((p) => ({ ...p, profileVisible: true }))}
-                      >
-                        {t.visible}
-                      </button>
-                      <button
-                        className={`chip-btn ${!settingsForm.profileVisible ? "active" : ""}`}
-                        onClick={() => setSettingsForm((p) => ({ ...p, profileVisible: false }))}
-                      >
-                        {t.hidden}
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="settings-card">
-                    <h3>{t.rateApp}</h3>
-                    <div className="rate-row">
-                      {[1, 2, 3, 4, 5].map((n) => (
+                      <div className="visibility-chips">
                         <button
-                          key={n}
-                          className={`rate-chip ${settingsForm.rating === n ? "active" : ""}`}
-                          onClick={() => setSettingsForm((p) => ({ ...p, rating: n }))}
+                          className={`chip-btn ${settingsForm.profileVisible ? "active" : ""}`}
+                          onClick={() => setSettingsForm((p) => ({ ...p, profileVisible: true }))}
                         >
-                          {n} ★
+                          {t.visible}
                         </button>
-                      ))}
-                    </div>
-                  </div>
+                        <button
+                          className={`chip-btn ${!settingsForm.profileVisible ? "active" : ""}`}
+                          onClick={() => setSettingsForm((p) => ({ ...p, profileVisible: false }))}
+                        >
+                          {t.hidden}
+                        </button>
+                      </div>
 
-                  <div className="save-settings-row">
-                    <button className="primary-btn">{t.saveSettings}</button>
+                      <div style={{ marginTop: 14 }}>
+                        <div className="toggle-title" style={{ marginBottom: 10 }}>{t.themeMode}</div>
+                        <div className="theme-row">
+                          <button
+                            className={`chip-btn ${!settingsForm.darkMode ? "active" : ""}`}
+                            onClick={() => setSettingsForm((p) => ({ ...p, darkMode: false }))}
+                          >
+                            ☀️ {t.lightMode}
+                          </button>
+                          <button
+                            className={`chip-btn ${settingsForm.darkMode ? "active" : ""}`}
+                            onClick={() => setSettingsForm((p) => ({ ...p, darkMode: true }))}
+                          >
+                            🌙 {t.darkMode}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="settings-card">
+                      <h3>{t.rateApp}</h3>
+                      <div className="rate-row">
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <button
+                            key={n}
+                            className={`rate-chip ${settingsForm.rating === n ? "active" : ""}`}
+                            onClick={() => setSettingsForm((p) => ({ ...p, rating: n }))}
+                          >
+                            {n} ★
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="settings-bottom-actions">
+                      <button className="primary-btn">{t.saveSettings}</button>
+                      <button className="logout-btn">{t.logout}</button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="panel">
-                <h3 style={{ marginTop: 0, marginBottom: 14 }}>{t.compactHelp}</h3>
-                <div className="help-compact-grid">
-                  {faqItems.map(([title, text], i) => (
-                    <details className="faq-item" key={i}>
-                      <summary>{title}</summary>
-                      <p>{text}</p>
-                    </details>
-                  ))}
+                <div className="panel">
+                  <div className="help-section">
+                    <button className="help-toggle-btn" onClick={() => setShowHelp((prev) => !prev)}>
+                      {showHelp ? t.closeHelp : t.openHelp}
+                    </button>
+
+                    {showHelp && (
+                      <div className="help-compact-grid">
+                        {faqItems.map(([title, text], i) => (
+                          <details className="faq-item" key={i}>
+                            <summary>{title}</summary>
+                            <p>{text}</p>
+                          </details>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </section>
